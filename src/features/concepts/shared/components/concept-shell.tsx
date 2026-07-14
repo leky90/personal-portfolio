@@ -13,7 +13,9 @@ interface ConceptShellProps {
  */
 export function ConceptShell({ concept, children }: ConceptShellProps) {
   return (
-    <div className="relative min-h-dvh bg-background text-foreground">
+    // KHÔNG đặt bg ở đây — canvas concept nằm fixed -z-10, một background đặc
+    // tại wrapper sẽ vẽ đè lên nó; nền tối đã có sẵn ở body.
+    <div className="relative min-h-dvh text-foreground">
       <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex items-start justify-between gap-4 p-4 sm:p-6">
         <div className="min-w-0">
           <Link

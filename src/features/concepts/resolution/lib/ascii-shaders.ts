@@ -30,8 +30,12 @@ export const ASCII_FRAGMENT_SHADER = /* glsl */ `
 
   varying vec2 vUv;
 
-  // Rec.709 luminance
-  float luminance(vec3 c) {
+  // GLSL3: tự khai báo output — three không cấp alias gl_FragColor ở mode này
+  out vec4 fragColor;
+
+  // Rec.709 luminance — tên riêng để không đụng luminance() trong prefix
+  // tonemapping mà three chèn sẵn vào fragment shader.
+  float lum709(vec3 c) {
     return dot(c, vec3(0.2126, 0.7152, 0.0722));
   }
 
@@ -48,7 +52,7 @@ export const ASCII_FRAGMENT_SHADER = /* glsl */ `
     vec2 cellCoord = floor(frag / cell);
     vec2 cellCenterUv = (cellCoord + 0.5) * cell / uResolution;
     vec3 src = texture2D(uSource, cellCenterUv).rgb;
-    float lum = luminance(src);
+    float lum = lum709(src);
 
     // Ordered dithering — ngưỡng Bayer 8×8 tuần hoàn theo cell
     int bx = int(mod(cellCoord.x, 8.0));
@@ -72,6 +76,6 @@ export const ASCII_FRAGMENT_SHADER = /* glsl */ `
     float reveal = smoothstep(0.6, 1.0, focusT);
     vec3 color = mix(asciiColor, smoothColor, reveal);
 
-    gl_FragColor = vec4(color, 1.0);
+    fragColor = vec4(color, 1.0);
   }
 `;
