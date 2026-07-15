@@ -19,6 +19,16 @@ describe("concepts registry", () => {
     expect(batch1.every((c) => c.status === "ready")).toBe(true);
   });
 
+  it("batch 2 (monolith, compiled-light) đã ready; living-topology còn planned", () => {
+    const batch2 = CONCEPTS.filter((c) => c.batch === 2);
+    expect(batch2.map((c) => c.id).sort()).toEqual([
+      "compiled-light",
+      "monolith",
+    ]);
+    expect(batch2.every((c) => c.status === "ready")).toBe(true);
+    expect(getConcept("living-topology").status).toBe("planned");
+  });
+
   it("mọi điểm số nằm trong thang 0-10, difficulty trong 1-5", () => {
     for (const c of CONCEPTS) {
       for (const score of Object.values(c.scores)) {

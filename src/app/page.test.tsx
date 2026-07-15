@@ -19,13 +19,15 @@ describe("Gallery trang chủ concept lab", () => {
       .map((link) => link.getAttribute("href"));
     expect(hrefs).toContain("/concepts/terrain");
     expect(hrefs).toContain("/concepts/resolution");
+    expect(hrefs).toContain("/concepts/monolith");
+    expect(hrefs).toContain("/concepts/compiled-light");
   });
 
-  it("concept planned không phải link, có nhãn batch sắp làm", () => {
+  it("concept planned (living-topology) không phải link, có nhãn sắp có", () => {
     render(<Home />);
     expect(
-      screen.queryByRole("link", { name: /Monolith/i }),
+      screen.queryByRole("link", { name: /Living Topology/i }),
     ).not.toBeInTheDocument();
-    expect(screen.getAllByText(/sắp có/i).length).toBeGreaterThanOrEqual(3);
+    expect(screen.getAllByText(/sắp có/i).length).toBeGreaterThanOrEqual(1);
   });
 });

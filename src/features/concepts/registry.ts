@@ -84,7 +84,7 @@ export const CONCEPTS: ConceptMeta[] = [
       "Cả site là một scene: khối điêu khắc chữ tên bạn matte-black kiểu tượng đài, scroll dolly camera xuyên qua các letterform — mỗi section một góc máy.",
     pitch:
       "The whole portfolio is one continuous scene: a monumental matte-black extruded typographic sculpture; scrolling dollies the camera along and through the letterforms.",
-    status: "planned",
+    status: "ready",
     batch: 2,
     difficulty: 4,
     effortDays: 6,
@@ -105,7 +105,7 @@ export const CONCEPTS: ConceptMeta[] = [
       "Dune-field FBM đơn sắc render qua pipeline ASCII/dither tự dựng — con trỏ là thấu kính 'decompile' glyph về bề mặt ánh sáng mượt bên dưới.",
     pitch:
       "A monochrome noise landscape rendered through a hand-built ASCII/dither post-pipeline — the cursor acts as a lens that 'decompiles' the glyphs back into smooth light.",
-    status: "planned",
+    status: "ready",
     batch: 2,
     difficulty: 3,
     effortDays: 5,

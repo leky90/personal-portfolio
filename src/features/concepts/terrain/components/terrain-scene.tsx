@@ -53,8 +53,9 @@ export function TerrainScene({ terrainState }: TerrainSceneProps) {
     };
   }, [geometry, material]);
 
-  // Preallocate — dùng lại mỗi frame, không new trong useFrame
-  const smoothProgress = useRef({ t: 0 });
+  // Preallocate — dùng lại mỗi frame, không new trong useFrame.
+  // Khởi tạo từ progress hiện tại để reload giữa trang không bay lại từ đầu.
+  const smoothProgress = useRef({ t: terrainState.progress });
   const cameraPos = useRef(new THREE.Vector3());
   const cameraTarget = useRef(new THREE.Vector3());
 
