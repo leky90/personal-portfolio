@@ -126,7 +126,7 @@ export const CONCEPTS: ConceptMeta[] = [
       "Mission-control map: network graph 3D data-driven của mọi hệ thống từng xây, packet pulse chạy qua kiến trúc 10 năm, hover là 'query' hệ thống.",
     pitch:
       "A quiet mission-control map: a real, data-driven 3D network graph of every system the engineer has built, with packets pulsing through a decade of architecture.",
-    status: "planned",
+    status: "ready",
     batch: 3,
     difficulty: 4,
     effortDays: 9,

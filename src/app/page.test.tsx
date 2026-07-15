@@ -21,13 +21,11 @@ describe("Gallery trang chủ concept lab", () => {
     expect(hrefs).toContain("/concepts/resolution");
     expect(hrefs).toContain("/concepts/monolith");
     expect(hrefs).toContain("/concepts/compiled-light");
+    expect(hrefs).toContain("/concepts/living-topology");
   });
 
-  it("concept planned (living-topology) không phải link, có nhãn sắp có", () => {
+  it("không còn concept nào ở trạng thái sắp có", () => {
     render(<Home />);
-    expect(
-      screen.queryByRole("link", { name: /Living Topology/i }),
-    ).not.toBeInTheDocument();
-    expect(screen.getAllByText(/sắp có/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.queryByText(/sắp có/i)).not.toBeInTheDocument();
   });
 });

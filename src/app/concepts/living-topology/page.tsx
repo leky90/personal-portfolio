@@ -1,0 +1,18 @@
+import type { Metadata } from "next";
+import { getConcept } from "@/features/concepts/registry";
+import { ConceptShell } from "@/features/concepts/shared/components/concept-shell";
+import { TopologyExperience } from "@/features/concepts/living-topology";
+
+export const metadata: Metadata = {
+  title: "Living Topology — 3D Concept",
+  description:
+    "Concept demo: bản đồ mission-control của 10 năm kiến trúc — network graph 3D data-driven, packet pulse chạy qua hệ thống, hover để query telemetry.",
+};
+
+export default function LivingTopologyConceptPage() {
+  return (
+    <ConceptShell concept={getConcept("living-topology")}>
+      <TopologyExperience />
+    </ConceptShell>
+  );
+}
