@@ -17,7 +17,7 @@ describe("ConceptShell", () => {
     expect(screen.getByText("8.7/10")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /concepts/i })).toHaveAttribute(
       "href",
-      "/",
+      "/lab",
     );
     expect(screen.getByText("noi dung demo")).toBeInTheDocument();
   });
