@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "3D Concept Lab — Portfolio Senior Software Engineer",
+  title: "Ky Le — Senior Software Engineer",
   description:
-    "Demo 5 concept 3D (Three.js / React Three Fiber) cho portfolio senior software engineer — review và chọn art direction.",
+    "Ten years of shipped systems, rendered as terrain — portfolio of a senior software engineer: platform rebuilds, data pipelines, and the decade behind them.",
 };
 
 export default function RootLayout({
@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html
       lang="vi"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">
         {children}

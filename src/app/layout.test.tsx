@@ -6,9 +6,10 @@ vi.mock("next/font/google", () => ({
 }));
 
 describe("RootLayout", () => {
-  it("khai báo metadata cho concept lab", async () => {
+  it("metadata là brand portfolio (tên + Senior Software Engineer)", async () => {
     const { metadata } = await import("@/app/layout");
-    expect(String(metadata.title)).toMatch(/concept lab/i);
+    expect(String(metadata.title)).toMatch(/Ky Le/);
+    expect(String(metadata.title)).toMatch(/Senior Software Engineer/i);
     expect(metadata.description).toBeTruthy();
   });
 });
