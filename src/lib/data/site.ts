@@ -11,6 +11,8 @@ export interface SocialLink {
 export interface SiteConfig {
   /** Tên hiển thị (hero + header + metadata) */
   name: string;
+  /** Canonical URL production — ⚠️ thay bằng domain thật trước khi deploy */
+  url: string;
   title: string;
   tagline: string;
   email: string;
@@ -22,6 +24,7 @@ export interface SiteConfig {
 
 export const SITE: SiteConfig = {
   name: "Ky Le",
+  url: "https://ldky90.dev",
   title: "Senior Software Engineer",
   tagline: "Ten years of shipped systems, rendered as terrain.",
   email: "ldky90@gmail.com",

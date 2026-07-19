@@ -8,6 +8,7 @@ import {
   getWritingPost,
   listWritingPosts,
 } from "@/lib/mdx";
+import { articleJsonLd, jsonLdScript } from "@/lib/json-ld";
 
 interface WritingPostPageProps {
   params: Promise<{ slug: string }>;
@@ -40,6 +41,12 @@ export default async function WritingPostPage({
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6 sm:py-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLdScript(articleJsonLd(post.meta)),
+        }}
+      />
       <Link
         href="/writing"
         className="inline-block rounded border border-neutral-800 bg-black/60 px-2 py-1 font-mono text-[11px] text-neutral-400 transition-colors hover:border-neutral-600 hover:text-neutral-100"

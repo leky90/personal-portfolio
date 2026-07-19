@@ -8,6 +8,7 @@ import { ProjectsSection } from "@/components/sections/projects-section";
 import { SkillsSection } from "@/components/sections/skills-section";
 import { WritingPreview } from "@/components/sections/writing-preview";
 import { ContactSection } from "@/components/sections/contact-section";
+import { jsonLdScript, personJsonLd } from "@/lib/json-ld";
 
 /**
  * Trang chủ portfolio — art direction: Ten Years of Terrain.
@@ -17,6 +18,10 @@ import { ContactSection } from "@/components/sections/contact-section";
 export default function Home() {
   return (
     <TerrainStage>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdScript(personJsonLd()) }}
+      />
       <SiteHeader />
       <main id="content">
         <Hero />

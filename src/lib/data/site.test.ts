@@ -8,6 +8,11 @@ describe("site config — nguồn sự thật cho brand/liên hệ", () => {
     expect(SITE.tagline.length).toBeGreaterThan(0);
   });
 
+  it("url canonical là https, không có trailing slash", () => {
+    expect(SITE.url).toMatch(/^https:\/\//);
+    expect(SITE.url.endsWith("/")).toBe(false);
+  });
+
   it("email hợp lệ, socials có url https", () => {
     expect(SITE.email).toMatch(/^[^@\s]+@[^@\s]+\.[^@\s]+$/);
     expect(SITE.socials.length).toBeGreaterThanOrEqual(2);

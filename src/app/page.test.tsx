@@ -50,6 +50,16 @@ describe("Trang chủ portfolio — Terrain art direction", () => {
     expect(hrefs).toContain("/lab");
   });
 
+  it("nhúng JSON-LD Person cho rich results", () => {
+    const { container } = render(<Home />);
+    const script = container.querySelector(
+      'script[type="application/ld+json"]',
+    );
+    expect(script).not.toBeNull();
+    expect(script!.textContent).toContain('"Person"');
+    expect(script!.textContent).toContain(SITE.name);
+  });
+
   it("section writing preview dẫn tới /writing", () => {
     render(<Home />);
     const hrefs = screen

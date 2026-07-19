@@ -44,6 +44,17 @@ describe("trang bài viết /writing/[slug]", () => {
     expect(metadata.description).toBe("Mô tả mẫu");
   });
 
+  it("nhúng JSON-LD Article", async () => {
+    const { container } = render(
+      await WritingPostPage({ params: params("bai-mau") }),
+    );
+    const script = container.querySelector(
+      'script[type="application/ld+json"]',
+    );
+    expect(script).not.toBeNull();
+    expect(script!.textContent).toContain('"Article"');
+  });
+
   it("render title, date, tags và body", async () => {
     render(await WritingPostPage({ params: params("bai-mau") }));
     expect(
