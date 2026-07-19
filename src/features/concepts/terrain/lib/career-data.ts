@@ -36,7 +36,7 @@ const ERA_SEEDS: EraSeed[] = [
     title: "First Production Systems",
     role: "Software Engineer",
     description:
-      "Những service production đầu tiên — học cách vận hành thứ mình viết, on-call và postmortem đầu đời.",
+      "First production services — learning to operate what I write: on-call, postmortems, and the humility that comes with both.",
     metric: "3 services · 99.5% uptime",
     peak: 0.5,
     timeU: 0.05,
@@ -47,7 +47,7 @@ const ERA_SEEDS: EraSeed[] = [
     title: "Scaling The Data Layer",
     role: "Senior Software Engineer",
     description:
-      "Tách monolith, dựng data pipeline và caching layer chịu tải gấp 20 lần — lần đầu làm chủ một mảng kiến trúc.",
+      "Split the monolith, built the data pipeline and caching layer that absorbed 20× traffic — first time owning an architectural domain.",
     metric: "20× traffic · p99 −64%",
     peak: 0.68,
     timeU: 0.25,
@@ -58,8 +58,8 @@ const ERA_SEEDS: EraSeed[] = [
     title: "The Platform Rebuild",
     role: "Staff Engineer · Tech Lead",
     description:
-      "Dẫn 12 kỹ sư rebuild toàn bộ platform trong 14 tháng — khối núi cao nhất của thập kỷ, và bài học lớn nhất về trade-off.",
-    metric: "12 engineers · 14 tháng · 40M req/day",
+      "Led 12 engineers through a 14-month platform rebuild — the decade's highest peak, and its biggest lesson in trade-offs.",
+    metric: "12 engineers · 14 months · 40M req/day",
     peak: 1,
     timeU: 0.55,
     side: "left",
@@ -69,8 +69,8 @@ const ERA_SEEDS: EraSeed[] = [
     title: "Principal Scope",
     role: "Principal Engineer",
     description:
-      "Chuyển trọng tâm sang leverage: platform tooling, mentoring và các quyết định kiến trúc sống lâu hơn một team.",
-    metric: "4 teams · 1 platform · 0 lần rewrite lại",
+      "Shifted to leverage: platform tooling, mentoring, and architecture decisions that outlive any single team.",
+    metric: "4 teams · 1 platform · 0 rewrites since",
     peak: 0.8,
     timeU: 0.85,
     side: "right",
