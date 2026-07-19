@@ -1,0 +1,33 @@
+{/* ⚠️ PLACEHOLDER case study — thay bằng câu chuyện thật. */}
+
+## The problem
+
+The company's first international expansion meant payments could no
+longer live in one region: latency, data residency, and a processor that
+failed in exactly one currency at exactly the worst hour.
+
+## Constraints
+
+- A duplicate charge is worse than a failed one. Always.
+- Two engineers, six months, and an audit at the end of it.
+
+## The approach
+
+Idempotency keys on every mutation, a reconciliation loop that treats
+the processor as untrusted input, and multi-region active-passive with
+explicit, rehearsed failover — boring, testable, auditable.
+
+```go
+// Every charge is retry-safe by construction.
+func (s *Service) Charge(ctx context.Context, req ChargeRequest) error {
+    return s.store.WithIdempotencyKey(ctx, req.Key, func(tx *Tx) error {
+        return s.processor.Submit(ctx, tx, req)
+    })
+}
+```
+
+## Outcome
+
+- 1.2M transactions/month at 99.99% uptime across two regions.
+- Reconciliation caught every processor discrepancy before finance did.
+- The on-call rotation slept: two pages in the final six months.

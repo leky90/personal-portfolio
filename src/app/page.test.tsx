@@ -49,4 +49,13 @@ describe("Trang chủ portfolio — Terrain art direction", () => {
       .map((link) => link.getAttribute("href"));
     expect(hrefs).toContain("/lab");
   });
+
+  it("section writing preview dẫn tới /writing", () => {
+    render(<Home />);
+    const hrefs = screen
+      .getAllByRole("link")
+      .map((link) => link.getAttribute("href"));
+    expect(hrefs).toContain("/writing");
+    expect(hrefs.some((href) => href?.startsWith("/writing/"))).toBe(true);
+  });
 });

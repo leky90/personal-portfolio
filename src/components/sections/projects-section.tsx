@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -38,6 +39,12 @@ export function ProjectsSection() {
               <p className="mt-3 font-mono text-[11px] text-[#ffb454]/80">
                 {project.metrics.join(" · ")}
               </p>
+              <Link
+                href={`/projects/${project.slug}`}
+                className="mt-3 inline-block font-mono text-[11px] text-neutral-300 underline-offset-4 transition-colors hover:text-[#ffb454] hover:underline"
+              >
+                Read case study →
+              </Link>
             </CardContent>
             <CardFooter className="flex flex-wrap gap-1.5">
               {project.stack.map((item) => (
@@ -53,9 +60,6 @@ export function ProjectsSection() {
           </Card>
         ))}
       </div>
-      <p className="mt-4 font-mono text-[11px] text-neutral-600">
-        Full case studies — coming with the writing section.
-      </p>
     </section>
   );
 }

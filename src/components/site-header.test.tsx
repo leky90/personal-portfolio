@@ -13,6 +13,7 @@ describe("SiteHeader", () => {
     for (const anchor of ["#experience", "#work", "#skills", "#contact"]) {
       expect(hrefs).toContain(anchor);
     }
+    expect(hrefs).toContain("/writing");
   });
 
   it("có skip-link tới nội dung chính cho keyboard", () => {

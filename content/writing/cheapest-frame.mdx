@@ -1,0 +1,37 @@
+---
+title: "The cheapest frame is the one you never render"
+description: "Demand-driven frameloops in React Three Fiber: how to make a 3D site idle at zero GPU without giving up motion."
+date: "2026-06-28"
+tags: ["react-three-fiber", "performance"]
+---
+
+{/* ⚠️ PLACEHOLDER — bài viết mẫu; chỉnh theo trải nghiệm thật của bạn. */}
+
+Most WebGL sites burn battery drawing the same pixels sixty times a
+second. React Three Fiber ships an alternative that almost nobody turns
+on: `frameloop="demand"`.
+
+## The contract
+
+With demand mode, the loop runs only when something calls
+`invalidate()`. The discipline is deciding *who* calls it:
+
+```tsx
+// Scroll and pointer are the only two sources of change here —
+// so they are the only two things that request frames.
+const onScroll = () => {
+  state.progress = readScroll();
+  state.invalidate?.();
+};
+```
+
+Ambient motion still works: a 30fps interval invalidates while the tab
+is visible, which is plenty for a breathing landscape and costs half of
+a naive 60fps loop.
+
+## The trap
+
+Damped animations need frames *after* the input stops. The pattern that
+works: inside `useFrame`, if the damped value has not reached its
+target, call `invalidate()` again. The loop self-extinguishes exactly
+when the motion settles — no timers, no leaks, no idle burn.

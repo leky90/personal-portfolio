@@ -19,4 +19,14 @@ describe("ProjectsSection", () => {
       expect(screen.getAllByText(item).length).toBeGreaterThanOrEqual(1);
     }
   });
+
+  it("mỗi card dẫn tới trang case study", () => {
+    render(<ProjectsSection />);
+    const hrefs = screen
+      .getAllByRole("link")
+      .map((link) => link.getAttribute("href"));
+    for (const project of PROJECTS) {
+      expect(hrefs).toContain(`/projects/${project.slug}`);
+    }
+  });
 });

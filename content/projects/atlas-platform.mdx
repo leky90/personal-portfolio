@@ -1,0 +1,52 @@
+{/* ⚠️ PLACEHOLDER case study — thay bằng câu chuyện thật, giữ cấu trúc
+    problem → constraints → approach → architecture → outcome. */}
+
+## The problem
+
+By 2021 the monolith that had carried the company for five years was the
+bottleneck for every team: a single deploy queue, a shared database with
+40+ implicit contracts, and p99 latency that doubled every quarter of
+growth. Six product teams shipped through one release train.
+
+## Constraints
+
+- Zero downtime — payments flowed through the same runtime.
+- No feature freeze longer than two weeks, ever.
+- The team that would run the platform was the team building it: twelve
+  engineers, four of whom had never operated a service in production.
+
+## The approach
+
+We refused the big-bang rewrite. Instead: put a gateway in front of the
+monolith first, move traffic one route at a time, and let every extracted
+service prove itself under real load before the next one started.
+
+```go
+// The strangler route table — boring on purpose.
+// Every migration was one line, one review, one rollback path.
+routes := gateway.Table{
+    "/v1/orders":   backend.Service("orders-svc"),
+    "/v1/payments": backend.Service("payments-svc"),
+    "/v1/*":        backend.Legacy(monolith), // shrinking every sprint
+}
+```
+
+## Architecture
+
+Envoy at the edge, gRPC between services, one Postgres per service with
+change-data-capture feeding the pipeline. The controversial call was
+keeping a shared identity service instead of per-service auth — it saved
+four months and nobody has regretted it.
+
+## Outcome
+
+- 40M requests/day through the gateway, p99 38ms (from 480ms).
+- Deploys went from one train per day to 30+ independent releases.
+- Zero rewrites since: the 2021 architecture absorbed three product
+  pivots without structural change.
+
+## What I would do differently
+
+Start the observability work two quarters earlier. We instrumented as we
+extracted; instrumenting *before* extracting would have cut the two
+scariest migrations in half.

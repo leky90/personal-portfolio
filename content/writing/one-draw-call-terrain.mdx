@@ -1,0 +1,39 @@
+---
+title: "A decade of career data in one draw call"
+description: "How the terrain behind this site works: a data texture baked from ten years of weekly output, displaced entirely in the vertex shader."
+date: "2026-07-16"
+tags: ["three.js", "webgl", "performance"]
+---
+
+{/* ⚠️ PLACEHOLDER — bài viết mẫu về chính portfolio này; chỉnh giọng/chi tiết theo ý bạn. */}
+
+The terrain on the home page is not a model. It is ten years of weekly
+activity — 522 samples — baked into a data texture, and a single
+`LineSegments` geometry that reads it in the vertex shader.
+
+## Why one draw call matters
+
+280 contour lines × 420 segments is ~118k vertices. Naively that is 280
+draw calls, and on a mid-range phone that is the difference between
+60fps and a slideshow. Merged into one indexed buffer, the whole
+centerpiece costs the GPU a single command:
+
+```ts
+const indices = new Uint32Array(lines * (samples - 1) * 2);
+// one segment per pair — no segment ever crosses between lines
+for (let line = 0; line < lines; line += 1) {
+  const row = line * samples;
+  for (let s = 0; s < samples - 1; s += 1) {
+    indices[k++] = row + s;
+    indices[k++] = row + s + 1;
+  }
+}
+```
+
+## The honest part
+
+`frameloop="demand"` means the scene renders only while you scroll or
+touch it. Stop, and the GPU draws nothing — you can verify that claim in
+devtools right now, on this page. That is the kind of performance
+statement a portfolio can make only when the 3D *is* the architecture,
+not a decoration on top of it.
