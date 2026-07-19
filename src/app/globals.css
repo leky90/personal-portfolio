@@ -146,4 +146,10 @@ body {
   html {
     @apply font-sans;
   }
+  /* Anchor nav cuộn mượt — tôn trọng prefers-reduced-motion */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
 }

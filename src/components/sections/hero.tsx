@@ -17,7 +17,7 @@ export function Hero() {
 
       {SITE.available && (
         <p className="mt-5 inline-flex w-fit items-center gap-2 rounded-full border border-neutral-800 bg-black/50 px-3 py-1 font-mono text-[11px] text-neutral-300 backdrop-blur">
-          <span className="inline-block size-1.5 animate-pulse rounded-full bg-[#4af2a1]" />
+          <span className="inline-block size-1.5 rounded-full bg-[#4af2a1] motion-safe:animate-pulse" />
           Open to new opportunities
         </p>
       )}
@@ -35,7 +35,7 @@ export function Hero() {
         </Button>
       </div>
 
-      <p className="mt-14 animate-pulse font-mono text-xs text-neutral-600">
+      <p className="mt-14 font-mono text-xs text-neutral-500 motion-safe:animate-pulse">
         ↓ scroll — each contour line below is one week of work
       </p>
     </section>
