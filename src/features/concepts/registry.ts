@@ -39,7 +39,7 @@ export const CONCEPTS: ConceptMeta[] = [
     rank: 1,
     title: "Ten Years of Terrain",
     tagline:
-      "10 năm sự nghiệp bake thành data texture, extrude thành địa hình ridgeline ~300 đường contour — cuộn timeline là camera bay qua 10 năm địa hình.",
+      "10 năm sự nghiệp bake thành data texture rồi extrude thành địa hình ridgeline ~300 đường contour. Cuộn timeline là camera bay qua 10 năm địa hình.",
     pitch:
       "A decade of real work encoded into a data texture and extruded into a monochrome ridgeline terrain; scrolling the timeline is a camera dolly across ten years of topography.",
     status: "ready",
@@ -60,7 +60,7 @@ export const CONCEPTS: ConceptMeta[] = [
     rank: 2,
     title: "Resolution",
     tagline:
-      "Một fragment shader (luminance → Bayer dither → glyph ASCII) là toàn bộ ngôn ngữ render của site; con trỏ là thấu kính lấy nét resolve ký tự về ảnh thật.",
+      "Một fragment shader (luminance, Bayer dither, glyph ASCII) là toàn bộ ngôn ngữ render của site. Con trỏ là thấu kính lấy nét resolve ký tự về ảnh thật.",
     pitch:
       "A single hand-written fragment shader — luminance → Bayer dither → monospace glyph atlas — becomes the site's entire rendering identity; hovering resolves coarse characters toward clarity.",
     status: "ready",
@@ -81,7 +81,7 @@ export const CONCEPTS: ConceptMeta[] = [
     rank: 3,
     title: "Monolith",
     tagline:
-      "Cả site là một scene: khối điêu khắc chữ tên bạn matte-black kiểu tượng đài, scroll dolly camera xuyên qua các letterform — mỗi section một góc máy.",
+      "Cả site là một scene: khối điêu khắc chữ tên bạn matte-black kiểu tượng đài. Scroll dolly camera xuyên qua các letterform, mỗi section một góc máy.",
     pitch:
       "The whole portfolio is one continuous scene: a monumental matte-black extruded typographic sculpture; scrolling dollies the camera along and through the letterforms.",
     status: "ready",
@@ -102,7 +102,7 @@ export const CONCEPTS: ConceptMeta[] = [
     rank: 4,
     title: "Compiled Light",
     tagline:
-      "Dune-field FBM đơn sắc render qua pipeline ASCII/dither tự dựng — con trỏ là thấu kính 'decompile' glyph về bề mặt ánh sáng mượt bên dưới.",
+      "Dune-field FBM đơn sắc render qua pipeline ASCII/dither tự dựng. Con trỏ là thấu kính 'decompile' glyph về bề mặt ánh sáng mượt bên dưới.",
     pitch:
       "A monochrome noise landscape rendered through a hand-built ASCII/dither post-pipeline — the cursor acts as a lens that 'decompiles' the glyphs back into smooth light.",
     status: "ready",
@@ -123,7 +123,7 @@ export const CONCEPTS: ConceptMeta[] = [
     rank: 5,
     title: "Living Topology",
     tagline:
-      "Mission-control map: network graph 3D data-driven của mọi hệ thống từng xây, packet pulse chạy qua kiến trúc 10 năm, hover là 'query' hệ thống.",
+      "Mission-control map: network graph 3D data-driven của mọi hệ thống từng xây. Packet pulse chạy qua kiến trúc 10 năm, hover là 'query' hệ thống.",
     pitch:
       "A quiet mission-control map: a real, data-driven 3D network graph of every system the engineer has built, with packets pulsing through a decade of architecture.",
     status: "ready",

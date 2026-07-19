@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: `%s · ${SITE.name}`,
   },
   description:
-    "Ten years of shipped systems, rendered as terrain — portfolio of a senior software engineer: platform rebuilds, data pipelines, and the decade behind them.",
+    "Ten years of shipped systems, rendered as terrain. Portfolio of a senior software engineer: platform rebuilds, data pipelines, and the decade behind them.",
   openGraph: {
     siteName: SITE.name,
     type: "website",

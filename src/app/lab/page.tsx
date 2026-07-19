@@ -1,145 +1,182 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ConceptSketch } from "@/components/lab/concept-sketch";
 import {
   CONCEPTS,
-  type ConceptId,
   type ConceptMeta,
 } from "@/features/concepts/registry";
 
 export const metadata: Metadata = {
-  title: "Concept Lab — 5 hướng 3D đã thử",
+  title: "Concept Lab",
   description:
-    "Kho lưu 5 concept 3D đã demo và chấm điểm trong quá trình chọn art direction cho portfolio — Terrain là hướng được chốt.",
+    "Kho lưu quá trình chọn art direction cho portfolio: 18 đề xuất, 3 giám khảo, 5 demo. Terrain là hướng được chốt.",
 };
 
-// Tailwind cần class literal để compile — map accent tĩnh theo concept id.
-const ACCENT_CLASSES: Record<ConceptId, { border: string; text: string }> = {
-  terrain: {
-    border: "hover:border-[#ffb454]/60",
-    text: "text-[#ffb454]",
-  },
-  resolution: {
-    border: "hover:border-[#b4ff39]/60",
-    text: "text-[#b4ff39]",
-  },
-  monolith: {
-    border: "hover:border-[#ff4d4d]/60",
-    text: "text-[#ff4d4d]",
-  },
-  "compiled-light": {
-    border: "hover:border-[#e8e3d5]/60",
-    text: "text-[#e8e3d5]",
-  },
-  "living-topology": {
-    border: "hover:border-[#4af2a1]/60",
-    text: "text-[#4af2a1]",
-  },
-};
+/**
+ * Trang review concept theo ngôn ngữ editorial-tech / Neo-Swiss:
+ * index dạng bảng biên tập với numeral lớn, sketch generative per-concept,
+ * hairline phân hàng, một accent hổ phách duy nhất, góc vuông toàn trang.
+ */
 
-/** Concept đã được chốt làm art direction của portfolio. */
-const CHOSEN_ID: ConceptId = "terrain";
-
-interface ScoreChipProps {
-  label: string;
-  value: number;
-}
-
-function ScoreChip({ label, value }: ScoreChipProps) {
-  return (
-    <span className="rounded border border-neutral-800 px-1.5 py-0.5 font-mono text-[10px] text-neutral-400">
-      {label} <span className="text-neutral-200">{value.toFixed(1)}</span>
-    </span>
-  );
-}
-
-interface ConceptCardProps {
-  concept: ConceptMeta;
-}
-
-function ConceptCard({ concept }: ConceptCardProps) {
-  const accent = ACCENT_CLASSES[concept.id];
-  const isChosen = concept.id === CHOSEN_ID;
+function ConceptRow({ concept }: { concept: ConceptMeta }) {
+  const isChosen = concept.id === "terrain";
 
   return (
     <Link
       href={`/concepts/${concept.id}`}
-      className={`block rounded-lg border bg-neutral-950/60 p-4 transition-colors sm:p-5 ${
-        isChosen
-          ? "border-[#ffb454]/50"
-          : "border-neutral-800/80"
-      } ${accent.border} hover:bg-neutral-900/60`}
+      className="group grid grid-cols-1 gap-x-8 gap-y-4 py-8 sm:grid-cols-12 sm:items-center"
     >
-      <div className="flex items-baseline justify-between gap-3">
-        <div className="flex min-w-0 items-baseline gap-3">
-          <span className={`font-mono text-sm ${accent.text}`}>
-            {String(concept.rank).padStart(2, "0")}
-          </span>
-          <span className="truncate text-base font-medium text-neutral-100 sm:text-lg">
-            {concept.title}
-          </span>
+      <p className="font-mono text-2xl text-neutral-600 tabular-nums transition-colors group-hover:text-neutral-300 sm:col-span-1">
+        {String(concept.rank).padStart(2, "0")}
+      </p>
+
+      <div
+        className={`border border-neutral-800 bg-neutral-950 p-3 transition-all group-hover:border-neutral-600 group-hover:shadow-[6px_6px_0_0_#262626] sm:col-span-3 ${
+          isChosen ? "text-[#ffb454]" : "text-neutral-400"
+        }`}
+      >
+        <div className="aspect-[5/3]">
+          <ConceptSketch id={concept.id} />
         </div>
+      </div>
+
+      <div className="sm:col-span-5">
+        <h2 className="text-xl font-semibold tracking-tight text-neutral-100 transition-colors group-hover:text-[#ffb454] sm:text-2xl">
+          {concept.title}
+        </h2>
+        <p className="mt-2 max-w-md text-sm leading-relaxed text-neutral-400">
+          {concept.tagline}
+        </p>
+        <p className="mt-3 font-mono text-[11px] text-neutral-500">
+          khó {concept.difficulty}/5 · ~{concept.effortDays} ngày build
+        </p>
+      </div>
+
+      <div className="font-mono text-[11px] leading-relaxed text-neutral-500 tabular-nums sm:col-span-2">
+        <p className="text-2xl text-neutral-100">
+          {concept.scores.overall.toFixed(1)}
+        </p>
+        <p>senior {concept.scores.seniorSignal.toFixed(1)}</p>
+        <p>khả thi {concept.scores.feasibility.toFixed(1)}</p>
+        <p>perf {concept.scores.performance.toFixed(1)}</p>
+      </div>
+
+      <div className="sm:col-span-1 sm:justify-self-end">
         {isChosen ? (
-          <span className="shrink-0 rounded bg-[#ffb454]/15 px-2 py-0.5 font-mono text-[10px] tracking-wider text-[#ffb454] uppercase">
-            ★ đã chốt
+          <span className="inline-block -rotate-3 border-2 border-[#ffb454] px-2 py-1 font-mono text-[10px] font-semibold tracking-widest text-[#ffb454] uppercase">
+            đã chốt
           </span>
         ) : (
-          <span className="shrink-0 rounded bg-neutral-900 px-2 py-0.5 font-mono text-[10px] tracking-wider text-neutral-300 uppercase">
-            xem demo →
+          <span className="inline-block border border-neutral-800 px-2 py-1 font-mono text-[10px] tracking-widest text-neutral-600 uppercase">
+            lưu trữ
           </span>
         )}
-      </div>
-      <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-neutral-400">
-        {concept.tagline}
-      </p>
-      <div className="mt-3 flex flex-wrap items-center gap-1.5">
-        <ScoreChip label="overall" value={concept.scores.overall} />
-        <ScoreChip label="senior" value={concept.scores.seniorSignal} />
-        <ScoreChip label="feas" value={concept.scores.feasibility} />
-        <ScoreChip label="perf" value={concept.scores.performance} />
-        <span className="ml-auto font-mono text-[10px] text-neutral-600">
-          khó {concept.difficulty}/5 · ~{concept.effortDays} ngày
-        </span>
       </div>
     </Link>
   );
 }
 
+const MATRIX_COLUMNS = [
+  { key: "overall", label: "Overall" },
+  { key: "originality", label: "Original" },
+  { key: "seniorSignal", label: "Senior" },
+  { key: "feasibility", label: "Khả thi" },
+  { key: "performance", label: "Perf" },
+] as const;
+
 export default function ConceptLabPage() {
   const sorted = [...CONCEPTS].sort((a, b) => a.rank - b.rank);
 
   return (
-    <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-10 sm:px-6 sm:py-16">
-      <header>
-        <Link
-          href="/"
-          className="inline-block rounded border border-neutral-800 bg-black/60 px-2 py-1 font-mono text-[11px] text-neutral-400 transition-colors hover:border-neutral-600 hover:text-neutral-100"
-        >
-          ← portfolio
-        </Link>
-        <p className="mt-6 font-mono text-[11px] tracking-[0.3em] text-neutral-500 uppercase">
-          3D Concept Lab — kho lưu trữ
-        </p>
-        <h1 className="mt-3 text-2xl font-semibold tracking-tight text-neutral-50 sm:text-3xl">
-          5 hướng đã thử trước khi chốt Terrain
+    <main className="mx-auto w-full max-w-6xl px-4 pb-24 sm:px-6">
+      <header className="border-b border-neutral-800 pt-8 pb-12 sm:pt-10">
+        <div className="flex items-start justify-between gap-4">
+          <Link
+            href="/"
+            className="border border-neutral-800 px-2 py-1 font-mono text-[11px] text-neutral-400 transition-colors hover:border-neutral-500 hover:text-neutral-100"
+          >
+            ← portfolio
+          </Link>
+          <div className="text-right font-mono text-[11px] leading-relaxed text-neutral-500 tabular-nums">
+            <p>18 đề xuất</p>
+            <p>3 giám khảo</p>
+            <p>5 demo chạy được</p>
+          </div>
+        </div>
+        <h1 className="mt-12 text-5xl font-semibold tracking-tighter text-neutral-50 sm:text-7xl">
+          Concept Lab
         </h1>
-        <p className="mt-3 max-w-xl text-sm leading-relaxed text-neutral-400">
-          18 đề xuất → hội đồng 3 giám khảo → 5 demo chạy được. Terrain thắng
-          và trở thành art direction của portfolio; 4 hướng còn lại giữ ở đây
-          để tham khảo.
+        <p className="mt-5 max-w-xl text-sm leading-relaxed text-neutral-400">
+          Nhật ký chọn art direction cho portfolio. Terrain thắng và đang chạy
+          ở trang chủ; bốn hướng còn lại lưu tại đây để đối chiếu.
         </p>
       </header>
 
-      <section aria-label="Danh sách concept" className="mt-8 flex flex-col gap-3 sm:mt-10">
+      <section
+        aria-label="Danh sách concept"
+        className="divide-y divide-neutral-800 border-b border-neutral-800"
+      >
         {sorted.map((concept) => (
-          <ConceptCard key={concept.id} concept={concept} />
+          <ConceptRow key={concept.id} concept={concept} />
         ))}
       </section>
 
-      <footer className="mt-10 border-t border-neutral-900 pt-4">
-        <p className="font-mono text-[10px] leading-relaxed text-neutral-600">
-          Nguồn điểm: docs/plans/2026-07-14-portfolio-3d-design.md
+      <section className="mt-16">
+        <h2 className="text-xl font-semibold tracking-tight text-neutral-100">
+          Ma trận điểm
+        </h2>
+        <p className="mt-2 max-w-lg text-sm leading-relaxed text-neutral-400">
+          Trung bình từ ba giám khảo mô phỏng: hiring manager, chuyên gia hiệu
+          năng đồ họa và giám khảo Awwwards.
         </p>
-      </footer>
+        <div className="mt-6 overflow-x-auto">
+          <table className="w-full min-w-[560px] border-collapse font-mono text-xs tabular-nums">
+            <thead>
+              <tr className="border-b border-neutral-700 text-left text-[10px] tracking-wider text-neutral-500 uppercase">
+                <th className="py-2 pr-4 font-normal">Concept</th>
+                {MATRIX_COLUMNS.map((column) => (
+                  <th key={column.key} className="py-2 pr-4 font-normal">
+                    {column.label}
+                  </th>
+                ))}
+                <th className="py-2 pr-4 font-normal">Khó</th>
+                <th className="py-2 font-normal">Ngày</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-neutral-800/70">
+              {sorted.map((concept) => {
+                const isChosen = concept.id === "terrain";
+                return (
+                  <tr
+                    key={concept.id}
+                    className={isChosen ? "text-[#ffb454]" : "text-neutral-300"}
+                  >
+                    <td className="py-2.5 pr-4 font-sans text-sm">
+                      {concept.title}
+                      {isChosen && " ★"}
+                    </td>
+                    {MATRIX_COLUMNS.map((column) => (
+                      <td
+                        key={column.key}
+                        className={`py-2.5 pr-4 ${
+                          column.key === "overall" ? "font-semibold" : ""
+                        }`}
+                      >
+                        {concept.scores[column.key].toFixed(1)}
+                      </td>
+                    ))}
+                    <td className="py-2.5 pr-4">{concept.difficulty}/5</td>
+                    <td className="py-2.5">~{concept.effortDays}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-4 font-mono text-[11px] text-neutral-500">
+          Nguồn: docs/plans/2026-07-14-portfolio-3d-design.md
+        </p>
+      </section>
     </main>
   );
 }
