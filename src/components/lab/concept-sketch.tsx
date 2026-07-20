@@ -446,6 +446,114 @@ function MaintenanceArchaeologyMarks() {
   );
 }
 
+/** Request Lifecycle: waterfall Jaeger 6 span + packet trên route. */
+function RequestLifecycleMarks() {
+  const spans = [
+    { start: 0, duration: 24 },
+    { start: 24, duration: 9 },
+    { start: 33, duration: 58 },
+    { start: 91, duration: 31 },
+    { start: 122, duration: 43 },
+    { start: 165, duration: 22 },
+  ];
+  const total = 187;
+  const left = 16;
+  const right = W - 16;
+  const bars = spans.map((span, index) => ({
+    x: left + (span.start / total) * (right - left),
+    w: Math.max((span.duration / total) * (right - left), 3),
+    y: 14 + index * 12,
+    o: index === 3 ? 0.9 : 0.4 + index * 0.07,
+  }));
+  const packetX = left + 0.62 * (right - left);
+  return (
+    <>
+      {bars.map((bar) => (
+        <g key={bar.y}>
+          <line
+            x1={left}
+            y1={bar.y + 2.5}
+            x2={right}
+            y2={bar.y + 2.5}
+            stroke="currentColor"
+            strokeWidth={0.3}
+            opacity={0.12}
+          />
+          <rect
+            x={bar.x}
+            y={bar.y}
+            width={bar.w}
+            height={5}
+            fill="currentColor"
+            opacity={bar.o}
+          />
+        </g>
+      ))}
+      <polyline
+        points={`${left},104 ${left + 40},100 ${left + 80},106 ${left + 120},101 ${right},104`}
+        stroke="currentColor"
+        strokeWidth={0.9}
+        opacity={0.45}
+      />
+      <circle cx={packetX} cy={102.6} r={6} fill="currentColor" opacity={0.22} />
+      <circle cx={packetX} cy={102.6} r={2.8} fill="currentColor" opacity={0.95} />
+    </>
+  );
+}
+
+/** Cost of Change: tháp truss 10 tầng + bóng counterfactual nghiêng dần. */
+function CostOfChangeMarks() {
+  const floors = 10;
+  const floorH = 9.4;
+  const baseY = 110;
+  const towerX = 74;
+  const width = 40;
+  const refactors = new Set([3, 6, 8]);
+  const elements: React.ReactElement[] = [];
+  for (let f = 0; f < floors; f += 1) {
+    const y1 = baseY - f * floorH;
+    const y0 = y1 - floorH;
+    const heightFrac = (f + 1) / floors;
+    const ghostLean = heightFrac * heightFrac * 26;
+    const strainOpacity = 0.85 - f * 0.055;
+    const zig = f % 2 === 0;
+    elements.push(
+      <g key={`floor-${f}`}>
+        {/* Tháp thật: 2 cột + dầm + chéo zigzag */}
+        <line x1={towerX} y1={y0} x2={towerX} y2={y1} stroke="currentColor" strokeWidth={1.1} opacity={strainOpacity} />
+        <line x1={towerX + width} y1={y0} x2={towerX + width} y2={y1} stroke="currentColor" strokeWidth={1.1} opacity={strainOpacity} />
+        <line x1={towerX} y1={y0} x2={towerX + width} y2={y0} stroke="currentColor" strokeWidth={0.7} opacity={strainOpacity * 0.8} />
+        <line
+          x1={zig ? towerX : towerX + width}
+          y1={y1}
+          x2={zig ? towerX + width : towerX}
+          y2={y0}
+          stroke="currentColor"
+          strokeWidth={refactors.has(f) ? 1.2 : 0.55}
+          opacity={refactors.has(f) ? 0.95 : strainOpacity * 0.7}
+        />
+        {/* Bóng counterfactual: cột phải nghiêng dần, nét đứt */}
+        <line
+          x1={towerX + width + 14 + ghostLean * 0.3}
+          y1={y1}
+          x2={towerX + width + 14 + ghostLean}
+          y2={y0}
+          stroke="currentColor"
+          strokeWidth={0.7}
+          strokeDasharray="2 2.4"
+          opacity={0.3}
+        />
+      </g>,
+    );
+  }
+  return (
+    <>
+      <line x1={12} y1={baseY} x2={W - 12} y2={baseY} stroke="currentColor" strokeWidth={0.8} opacity={0.5} />
+      {elements}
+    </>
+  );
+}
+
 /** Placeholder cho concept chưa build demo: lưới chấm mờ, trạng thái chờ. */
 function PendingMarks() {
   const dots: { x: number; y: number }[] = [];
@@ -480,6 +588,8 @@ const MARKS: Partial<Record<ConceptId, () => React.ReactElement>> = {
   "monolith-to-mesh": MonolithToMeshMarks,
   "incident-black-box": IncidentBlackBoxMarks,
   "maintenance-archaeology": MaintenanceArchaeologyMarks,
+  "request-lifecycle": RequestLifecycleMarks,
+  "cost-of-change": CostOfChangeMarks,
 };
 
 interface ConceptSketchProps {

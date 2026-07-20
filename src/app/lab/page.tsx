@@ -6,10 +6,13 @@ import {
   type ConceptMeta,
 } from "@/features/concepts/registry";
 
+const READY_COUNT = CONCEPTS.filter(
+  (concept) => concept.status === "ready",
+).length;
+
 export const metadata: Metadata = {
   title: "Concept Lab",
-  description:
-    "Kho lưu quá trình chọn art direction cho portfolio: 26 concept từ hai vòng đề xuất, chấm mù trên cùng một thang điểm, 5 demo chạy được. Terrain là hướng được chốt.",
+  description: `Kho lưu quá trình chọn art direction cho portfolio: ${CONCEPTS.length} concept từ hai vòng đề xuất, chấm mù trên cùng một thang điểm, ${READY_COUNT} demo chạy được. Terrain là hướng được chốt.`,
 };
 
 /**
@@ -113,9 +116,9 @@ export default function ConceptLabPage() {
             ← portfolio
           </Link>
           <div className="text-right font-mono text-[11px] leading-relaxed text-neutral-500 tabular-nums">
-            <p>26 concept</p>
+            <p>{CONCEPTS.length} concept</p>
             <p>3 giám khảo chấm mù</p>
-            <p>5 demo chạy được</p>
+            <p>{READY_COUNT} demo chạy được</p>
           </div>
         </div>
         <h1 className="mt-12 text-5xl font-semibold tracking-tighter text-neutral-50 sm:text-7xl">

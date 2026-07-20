@@ -37,6 +37,12 @@ describe("Gallery concept lab tại /lab", () => {
     }
   });
 
+  it("masthead đếm demo chạy được từ registry, không hardcode", () => {
+    render(<ConceptLabPage />);
+    const ready = CONCEPTS.filter((c) => c.status === "ready").length;
+    expect(screen.getByText(`${ready} demo chạy được`)).toBeInTheDocument();
+  });
+
   it("có link quay về trang chủ portfolio", () => {
     render(<ConceptLabPage />);
     const home = screen

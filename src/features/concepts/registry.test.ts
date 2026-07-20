@@ -11,6 +11,8 @@ const READY_IDS = [
   "monolith-to-mesh",
   "incident-black-box",
   "maintenance-archaeology",
+  "request-lifecycle",
+  "cost-of-change",
 ].sort();
 
 describe("concepts registry — bảng xếp hạng thống nhất 26 concept", () => {
@@ -31,10 +33,10 @@ describe("concepts registry — bảng xếp hạng thống nhất 26 concept", 
     }
   });
 
-  it("đúng 9 concept đã build ở trạng thái ready, còn lại planned", () => {
+  it("đúng 11 concept đã build ở trạng thái ready, còn lại planned", () => {
     const ready = CONCEPTS.filter((c) => c.status === "ready").map((c) => c.id);
     expect(ready.sort()).toEqual(READY_IDS);
-    expect(CONCEPTS.filter((c) => c.status === "planned")).toHaveLength(17);
+    expect(CONCEPTS.filter((c) => c.status === "planned")).toHaveLength(15);
   });
 
   it("nguồn gốc: 18 concept vòng 1, 8 concept vòng bổ sung", () => {

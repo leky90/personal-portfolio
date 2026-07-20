@@ -141,7 +141,7 @@ export const CONCEPTS: ConceptMeta[] = [
       "Cả trang web là một request duy nhất được trace từ đầu đến cuối. Bạn cuộn trang, gói tin đi qua edge, service mesh, hàng đợi và database, và mỗi chặng kể một phần câu chuyện nghề của tôi.",
     pitch:
       "The whole portfolio is one distributed trace: scrolling drives a luminous packet from edge to database and back, and every section of the page is a live span in the waterfall.",
-    status: "planned",
+    status: "ready",
     origin: "v1",
     difficulty: 4,
     effortDays: 10,
@@ -156,7 +156,7 @@ export const CONCEPTS: ConceptMeta[] = [
       "Nợ kỹ thuật hiện hình thành ứng suất vật lý: mỗi năm code là một tầng chịu lực, mỗi lần refactor là một lần kết cấu được giải phóng. Giữ để xem dòng thời gian giả định nếu khoản nợ đó không bao giờ được trả.",
     pitch:
       "A decade of one codebase rendered as a load-bearing truss tower that visibly strains under each year of shipped features and springs back at each refactor the engineer led, with a press-and-hold counterfactual revealing the timeline where the debt was never paid.",
-    status: "planned",
+    status: "ready",
     origin: "v2",
     difficulty: 3,
     effortDays: 11,

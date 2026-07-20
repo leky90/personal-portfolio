@@ -30,4 +30,15 @@ describe("ConceptSketch — mini data-viz generative cho từng concept", () => 
     const b = render(<ConceptSketch id="living-topology" />);
     expect(b.container.innerHTML).not.toBe(terrain);
   });
+
+  it("concept ready batch 6 có variant riêng, không dùng placeholder chờ", () => {
+    const pending = render(<ConceptSketch id="daily-driver" />);
+    const placeholder = pending.container.innerHTML;
+    pending.unmount();
+    for (const id of ["request-lifecycle", "cost-of-change"] as const) {
+      const { container, unmount } = render(<ConceptSketch id={id} />);
+      expect(container.innerHTML).not.toBe(placeholder);
+      unmount();
+    }
+  });
 });
