@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import ResolutionConceptPage, {
   metadata,
@@ -16,8 +17,15 @@ describe("trang /concepts/resolution", () => {
 
   it("render ConceptShell với thông tin concept resolution từ registry", () => {
     render(<ResolutionConceptPage />);
-    expect(screen.getByText(/02 · Resolution/)).toBeInTheDocument();
-    expect(screen.getByText("7.7/10")).toBeInTheDocument();
+    const concept = getConcept("resolution");
+    expect(
+      screen.getByText(
+        `${String(concept.rank).padStart(2, "0")} · ${concept.title}`,
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(`${concept.scores.overall.toFixed(1)}/10`),
+    ).toBeInTheDocument();
   });
 
   it("mount ResolutionExperience bên trong shell", () => {

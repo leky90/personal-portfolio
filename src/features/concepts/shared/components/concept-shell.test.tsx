@@ -11,10 +11,15 @@ describe("ConceptShell", () => {
       </ConceptShell>,
     );
 
+    const concept = getConcept("terrain");
     expect(
-      screen.getByRole("heading", { name: /01 · Ten Years of Terrain/i }),
+      screen.getByRole("heading", {
+        name: `${String(concept.rank).padStart(2, "0")} · ${concept.title}`,
+      }),
     ).toBeInTheDocument();
-    expect(screen.getByText("8.7/10")).toBeInTheDocument();
+    expect(
+      screen.getByText(`${concept.scores.overall.toFixed(1)}/10`),
+    ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /concepts/i })).toHaveAttribute(
       "href",
       "/lab",

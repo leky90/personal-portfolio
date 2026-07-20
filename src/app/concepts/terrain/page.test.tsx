@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import TerrainConceptPage, { metadata } from "@/app/concepts/terrain/page";
 
@@ -14,8 +15,15 @@ describe("trang /concepts/terrain", () => {
 
   it("render ConceptShell với thông tin concept terrain từ registry", () => {
     render(<TerrainConceptPage />);
-    expect(screen.getByText(/01 · Ten Years of Terrain/)).toBeInTheDocument();
-    expect(screen.getByText("8.7/10")).toBeInTheDocument();
+    const concept = getConcept("terrain");
+    expect(
+      screen.getByText(
+        `${String(concept.rank).padStart(2, "0")} · ${concept.title}`,
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(`${concept.scores.overall.toFixed(1)}/10`),
+    ).toBeInTheDocument();
   });
 
   it("mount TerrainExperience bên trong shell", () => {

@@ -1,39 +1,44 @@
 import { describe, expect, it } from "vitest";
 import { CONCEPTS, getConcept } from "@/features/concepts/registry";
 
-describe("concepts registry", () => {
-  it("chứa đúng 5 concept, rank 1..5 không trùng", () => {
-    expect(CONCEPTS).toHaveLength(5);
-    const ranks = CONCEPTS.map((c) => c.rank).sort();
-    expect(ranks).toEqual([1, 2, 3, 4, 5]);
+const READY_IDS = [
+  "terrain",
+  "resolution",
+  "monolith",
+  "compiled-light",
+  "living-topology",
+].sort();
+
+describe("concepts registry — bảng xếp hạng thống nhất 26 concept", () => {
+  it("chứa đúng 26 concept, id không trùng", () => {
+    expect(CONCEPTS).toHaveLength(26);
+    expect(new Set(CONCEPTS.map((c) => c.id)).size).toBe(26);
   });
 
-  it("id không trùng nhau", () => {
-    const ids = CONCEPTS.map((c) => c.id);
-    expect(new Set(ids).size).toBe(ids.length);
+  it("rank là 1..26 không trùng và khớp thứ tự điểm overall giảm dần", () => {
+    const ranks = CONCEPTS.map((c) => c.rank).sort((a, b) => a - b);
+    expect(ranks).toEqual(Array.from({ length: 26 }, (_, i) => i + 1));
+
+    const byRank = [...CONCEPTS].sort((a, b) => a.rank - b.rank);
+    for (let i = 1; i < byRank.length; i += 1) {
+      expect(byRank[i].scores.overall).toBeLessThanOrEqual(
+        byRank[i - 1].scores.overall,
+      );
+    }
   });
 
-  it("batch 1 có đúng 2 concept ở trạng thái ready (terrain, resolution)", () => {
-    const batch1 = CONCEPTS.filter((c) => c.batch === 1);
-    expect(batch1.map((c) => c.id).sort()).toEqual(["resolution", "terrain"]);
-    expect(batch1.every((c) => c.status === "ready")).toBe(true);
+  it("đúng 5 concept đã build ở trạng thái ready, còn lại planned", () => {
+    const ready = CONCEPTS.filter((c) => c.status === "ready").map((c) => c.id);
+    expect(ready.sort()).toEqual(READY_IDS);
+    expect(CONCEPTS.filter((c) => c.status === "planned")).toHaveLength(21);
   });
 
-  it("batch 2 (monolith, compiled-light) đã ready", () => {
-    const batch2 = CONCEPTS.filter((c) => c.batch === 2);
-    expect(batch2.map((c) => c.id).sort()).toEqual([
-      "compiled-light",
-      "monolith",
-    ]);
-    expect(batch2.every((c) => c.status === "ready")).toBe(true);
+  it("nguồn gốc: 18 concept vòng 1, 8 concept vòng bổ sung", () => {
+    expect(CONCEPTS.filter((c) => c.origin === "v1")).toHaveLength(18);
+    expect(CONCEPTS.filter((c) => c.origin === "v2")).toHaveLength(8);
   });
 
-  it("batch 3 hoàn tất: cả 5 concept đều ready", () => {
-    expect(getConcept("living-topology").status).toBe("ready");
-    expect(CONCEPTS.every((c) => c.status === "ready")).toBe(true);
-  });
-
-  it("mọi điểm số nằm trong thang 0-10, difficulty trong 1-5", () => {
+  it("điểm trong thang 0-10, difficulty 1-5, accent là hex", () => {
     for (const c of CONCEPTS) {
       for (const score of Object.values(c.scores)) {
         expect(score).toBeGreaterThanOrEqual(0);
@@ -45,12 +50,16 @@ describe("concepts registry", () => {
     }
   });
 
-  it("getConcept trả về đúng concept theo id", () => {
-    expect(getConcept("terrain").rank).toBe(1);
-    expect(getConcept("resolution").scores.overall).toBeCloseTo(7.7);
+  it("tagline và pitch không chứa em-dash (quy tắc thiết kế trang lab)", () => {
+    for (const c of CONCEPTS) {
+      expect(c.tagline).not.toContain("—");
+      expect(c.pitch).not.toContain("—");
+    }
   });
 
-  it("getConcept ném lỗi với id không tồn tại", () => {
+  it("getConcept trả đúng concept và ném lỗi với id lạ", () => {
+    expect(getConcept("terrain").status).toBe("ready");
+    expect(getConcept("decision-diff").origin).toBe("v2");
     // @ts-expect-error — cố tình truyền id sai để test guard runtime
     expect(() => getConcept("khong-ton-tai")).toThrow();
   });

@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import CompiledLightConceptPage, {
   metadata,
@@ -15,8 +16,15 @@ describe("trang /concepts/compiled-light", () => {
 
   it("render ConceptShell với thông tin concept từ registry", () => {
     render(<CompiledLightConceptPage />);
-    expect(screen.getByText(/04 · Compiled Light/)).toBeInTheDocument();
-    expect(screen.getByText("7.3/10")).toBeInTheDocument();
+    const concept = getConcept("compiled-light");
+    expect(
+      screen.getByText(
+        `${String(concept.rank).padStart(2, "0")} · ${concept.title}`,
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(`${concept.scores.overall.toFixed(1)}/10`),
+    ).toBeInTheDocument();
   });
 
   it("mount CompiledExperience bên trong shell", () => {

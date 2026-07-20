@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import MonolithConceptPage, {
   metadata,
@@ -15,8 +16,15 @@ describe("trang /concepts/monolith", () => {
 
   it("render ConceptShell với thông tin concept từ registry", () => {
     render(<MonolithConceptPage />);
-    expect(screen.getByText(/03 · Monolith/)).toBeInTheDocument();
-    expect(screen.getByText("7.7/10")).toBeInTheDocument();
+    const concept = getConcept("monolith");
+    expect(
+      screen.getByText(
+        `${String(concept.rank).padStart(2, "0")} · ${concept.title}`,
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(`${concept.scores.overall.toFixed(1)}/10`),
+    ).toBeInTheDocument();
   });
 
   it("mount MonolithExperience bên trong shell", () => {

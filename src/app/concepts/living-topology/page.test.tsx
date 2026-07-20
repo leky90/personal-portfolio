@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import LivingTopologyConceptPage, {
   metadata,
@@ -15,8 +16,15 @@ describe("trang /concepts/living-topology", () => {
 
   it("render ConceptShell với thông tin concept từ registry", () => {
     render(<LivingTopologyConceptPage />);
-    expect(screen.getByText(/05 · Living Topology/)).toBeInTheDocument();
-    expect(screen.getByText("7.3/10")).toBeInTheDocument();
+    const concept = getConcept("living-topology");
+    expect(
+      screen.getByText(
+        `${String(concept.rank).padStart(2, "0")} · ${concept.title}`,
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(`${concept.scores.overall.toFixed(1)}/10`),
+    ).toBeInTheDocument();
   });
 
   it("mount TopologyExperience bên trong shell", () => {
