@@ -228,6 +228,113 @@ function TopologyMarks() {
   );
 }
 
+/** Decision Diff: rail đã đi (liền) + tương lai (đứt) + nhánh ma rẽ nhánh. */
+function DecisionDiffMarks() {
+  const trunkSolid = "0,70 30,68 55,72 80,66";
+  const trunkDashed = "80,66 105,70 130,64 155,68 200,62";
+  const ghosts = [
+    { points: "55,72 70,56 88,44 104,38", fork: [55, 72] },
+    { points: "130,64 146,80 164,92 180,98", fork: [130, 64] },
+  ];
+  return (
+    <>
+      <polyline
+        points={trunkSolid}
+        stroke="currentColor"
+        strokeWidth={2.2}
+        opacity={0.95}
+      />
+      <polyline
+        points={trunkDashed}
+        stroke="currentColor"
+        strokeWidth={1.4}
+        strokeDasharray="4 3"
+        opacity={0.4}
+      />
+      {ghosts.map((ghost) => (
+        <g key={ghost.points}>
+          <polyline
+            points={ghost.points}
+            stroke="currentColor"
+            strokeWidth={1}
+            strokeDasharray="2.5 2.5"
+            opacity={0.35}
+          />
+          <circle
+            cx={ghost.fork[0]}
+            cy={ghost.fork[1]}
+            r={2.6}
+            fill="currentColor"
+            opacity={0.9}
+          />
+        </g>
+      ))}
+    </>
+  );
+}
+
+/** Monolith to Mesh: slab kerf-cut bên trái, mesh node + filament bên phải. */
+function MonolithToMeshMarks() {
+  const rand = mulberry32(31);
+  const slab: { x: number; y: number; w: number; h: number }[] = [];
+  const cuts = [0, 14, 30, 48, 62];
+  const rows = [22, 44, 70, 98];
+  for (let r = 0; r < rows.length - 1; r += 1) {
+    for (let c = 0; c < cuts.length - 1; c += 1) {
+      slab.push({
+        x: 14 + cuts[c],
+        y: rows[r],
+        w: cuts[c + 1] - cuts[c] - 2,
+        h: rows[r + 1] - rows[r] - 2,
+      });
+    }
+  }
+  const nodes: [number, number][] = [];
+  for (let i = 0; i < 10; i += 1) {
+    nodes.push([118 + rand() * 70, 20 + rand() * 82]);
+  }
+  return (
+    <>
+      {slab.map((cell) => (
+        <rect
+          key={`${cell.x}-${cell.y}`}
+          x={cell.x}
+          y={cell.y}
+          width={cell.w}
+          height={cell.h}
+          fill="currentColor"
+          opacity={0.28}
+          stroke="currentColor"
+          strokeWidth={0.6}
+        />
+      ))}
+      {nodes.map(([x, y], index) => (
+        <g key={`${x.toFixed(1)}-${y.toFixed(1)}`}>
+          {index > 0 && (
+            <line
+              x1={nodes[index - 1][0]}
+              y1={nodes[index - 1][1]}
+              x2={x}
+              y2={y}
+              stroke="currentColor"
+              strokeWidth={0.7}
+              opacity={0.3}
+            />
+          )}
+          <rect
+            x={x - 3}
+            y={y - 3}
+            width={6}
+            height={6}
+            fill="currentColor"
+            opacity={0.8}
+          />
+        </g>
+      ))}
+    </>
+  );
+}
+
 /** Placeholder cho concept chưa build demo: lưới chấm mờ, trạng thái chờ. */
 function PendingMarks() {
   const dots: { x: number; y: number }[] = [];
@@ -258,6 +365,8 @@ const MARKS: Partial<Record<ConceptId, () => React.ReactElement>> = {
   monolith: MonolithMarks,
   "compiled-light": CompiledLightMarks,
   "living-topology": TopologyMarks,
+  "decision-diff": DecisionDiffMarks,
+  "monolith-to-mesh": MonolithToMeshMarks,
 };
 
 interface ConceptSketchProps {

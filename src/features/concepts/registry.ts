@@ -66,7 +66,7 @@ export const CONCEPTS: ConceptMeta[] = [
       "Mười năm quyết định kiến trúc nén thành một đường ray 3D: mỗi ngã rẽ là một diff sống, nhánh đã chọn đông đặc màu xanh, nhánh không đi treo lơ lửng dạng nét đứt đỏ kèm chi phí ước tính. Chạm vào bóng ma để nhìn thấy tương lai đã không xảy ra.",
     pitch:
       "A decade of architecture decisions compiled into a walkable 3D rail: at every fork the chosen path solidifies in diff-green while the road not taken hangs beside it as a dashed red ghost you can materialize, estimated cost and all.",
-    status: "planned",
+    status: "ready",
     origin: "v2",
     difficulty: 4,
     effortDays: 7,
@@ -81,7 +81,7 @@ export const CONCEPTS: ConceptMeta[] = [
       "Khối kiến trúc nguyên khối bị cắt thành từng service mang tên thật, tách rời rồi tự đan lại thành service mesh khi bạn cuộn qua 10 năm quyết định kiến trúc. Có cả lần tách sai phải gộp ngược lại, vì lộ trình kiến trúc thật không bao giờ là chuyện thắng lợi một chiều.",
     pitch:
       "A graphite monolith kerf-cut into ~40 named services fractures apart and reweaves into a pulsing service mesh as you scroll a decade of real architecture decisions, including the premature split that visibly drifts back and fuses again.",
-    status: "planned",
+    status: "ready",
     origin: "v2",
     difficulty: 4,
     effortDays: 7,

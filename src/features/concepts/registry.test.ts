@@ -7,6 +7,8 @@ const READY_IDS = [
   "monolith",
   "compiled-light",
   "living-topology",
+  "decision-diff",
+  "monolith-to-mesh",
 ].sort();
 
 describe("concepts registry — bảng xếp hạng thống nhất 26 concept", () => {
@@ -27,10 +29,10 @@ describe("concepts registry — bảng xếp hạng thống nhất 26 concept", 
     }
   });
 
-  it("đúng 5 concept đã build ở trạng thái ready, còn lại planned", () => {
+  it("đúng 7 concept đã build ở trạng thái ready, còn lại planned", () => {
     const ready = CONCEPTS.filter((c) => c.status === "ready").map((c) => c.id);
     expect(ready.sort()).toEqual(READY_IDS);
-    expect(CONCEPTS.filter((c) => c.status === "planned")).toHaveLength(21);
+    expect(CONCEPTS.filter((c) => c.status === "planned")).toHaveLength(19);
   });
 
   it("nguồn gốc: 18 concept vòng 1, 8 concept vòng bổ sung", () => {
