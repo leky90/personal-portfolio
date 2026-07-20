@@ -15,6 +15,8 @@ const READY_IDS = [
   "cost-of-change",
   "daily-driver",
   "constraint-prism",
+  "leverage-engine",
+  "gravity-toybox",
 ].sort();
 
 describe("concepts registry — bảng xếp hạng thống nhất 26 concept", () => {
@@ -35,10 +37,10 @@ describe("concepts registry — bảng xếp hạng thống nhất 26 concept", 
     }
   });
 
-  it("đúng 13 concept đã build ở trạng thái ready, còn lại planned", () => {
+  it("đúng 15 concept đã build ở trạng thái ready, còn lại planned", () => {
     const ready = CONCEPTS.filter((c) => c.status === "ready").map((c) => c.id);
     expect(ready.sort()).toEqual(READY_IDS);
-    expect(CONCEPTS.filter((c) => c.status === "planned")).toHaveLength(13);
+    expect(CONCEPTS.filter((c) => c.status === "planned")).toHaveLength(11);
   });
 
   it("nguồn gốc: 18 concept vòng 1, 8 concept vòng bổ sung", () => {

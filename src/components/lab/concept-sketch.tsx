@@ -661,6 +661,154 @@ function ConstraintPrismMarks() {
   );
 }
 
+/** Leverage Engine: hộp số patent-plate, crank to bên trái nhân qua chuỗi nhỏ dần. */
+function LeverageEngineMarks() {
+  const gears = [
+    { x: 46, y: 60, r: 27, teeth: 24, accent: true },
+    { x: 88, y: 34, r: 13, teeth: 12 },
+    { x: 88, y: 34, r: 19, teeth: 18, ghost: true },
+    { x: 122, y: 26, r: 7, teeth: 8 },
+    { x: 92, y: 82, r: 10, teeth: 10 },
+    { x: 92, y: 82, r: 17, teeth: 16, ghost: true },
+    { x: 126, y: 90, r: 6.5, teeth: 8 },
+    { x: 158, y: 58, r: 8.5, teeth: 9 },
+  ];
+  return (
+    <>
+      {gears.map((gear) => {
+        const ticks = Array.from({ length: gear.teeth }, (_, tooth) => {
+          const angle = (tooth / gear.teeth) * Math.PI * 2;
+          return (
+            <line
+              key={tooth}
+              x1={gear.x + Math.cos(angle) * gear.r}
+              y1={gear.y + Math.sin(angle) * gear.r}
+              x2={gear.x + Math.cos(angle) * (gear.r + 3)}
+              y2={gear.y + Math.sin(angle) * (gear.r + 3)}
+              stroke="currentColor"
+              strokeWidth={0.7}
+              opacity={gear.ghost ? 0.25 : 0.6}
+            />
+          );
+        });
+        return (
+          <g key={`${gear.x}-${gear.y}-${gear.r}`}>
+            <circle
+              cx={gear.x}
+              cy={gear.y}
+              r={gear.r}
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={gear.accent ? 1.5 : 0.9}
+              opacity={gear.ghost ? 0.3 : gear.accent ? 0.95 : 0.65}
+              strokeDasharray={gear.ghost ? "2 2" : undefined}
+            />
+            <circle
+              cx={gear.x}
+              cy={gear.y}
+              r={1.6}
+              fill="currentColor"
+              opacity={0.8}
+            />
+            {ticks}
+            {gear.accent ? (
+              <circle
+                cx={gear.x + gear.r * 0.62}
+                cy={gear.y}
+                r={3.2}
+                fill="currentColor"
+                opacity={0.95}
+              />
+            ) : null}
+          </g>
+        );
+      })}
+      <text
+        x={158}
+        y={44}
+        fontSize={7}
+        fontFamily="monospace"
+        fill="currentColor"
+        opacity={0.7}
+      >
+        ×60
+      </text>
+    </>
+  );
+}
+
+/** Weight of Experience: đống đĩa tạ nặng giữa nhẹ rìa + hai đĩa đang rơi. */
+function GravityToyboxMarks() {
+  const resting = [
+    { x: 100, r: 26, h: 9 },
+    { x: 62, r: 20, h: 7.5 },
+    { x: 138, r: 18, h: 7 },
+    { x: 36, r: 12, h: 5.5 },
+    { x: 164, r: 11, h: 5 },
+    { x: 82, r: 15, h: 6, stack: 1 },
+    { x: 122, r: 13, h: 5.5, stack: 1 },
+    { x: 102, r: 9, h: 4.5, stack: 2 },
+  ];
+  const groundY = 102;
+  const falling = [
+    { x: 74, y: 26, r: 8 },
+    { x: 140, y: 40, r: 6 },
+  ];
+  return (
+    <>
+      <line
+        x1={10}
+        y1={groundY}
+        x2={W - 10}
+        y2={groundY}
+        stroke="currentColor"
+        strokeWidth={0.9}
+        opacity={0.5}
+      />
+      {resting.map((disc) => {
+        const y = groundY - disc.h / 2 - (disc.stack ?? 0) * 9;
+        return (
+          <ellipse
+            key={`${disc.x}-${disc.r}`}
+            cx={disc.x}
+            cy={y}
+            rx={disc.r}
+            ry={disc.h / 2}
+            fill="currentColor"
+            opacity={0.28 + disc.r * 0.02}
+            stroke="currentColor"
+            strokeWidth={0.7}
+          />
+        );
+      })}
+      {falling.map((disc) => (
+        <g key={`fall-${disc.x}`}>
+          <ellipse
+            cx={disc.x}
+            cy={disc.y}
+            rx={disc.r}
+            ry={disc.r * 0.42}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={1}
+            opacity={0.85}
+          />
+          <line
+            x1={disc.x}
+            y1={disc.y - 16}
+            x2={disc.x}
+            y2={disc.y - 7}
+            stroke="currentColor"
+            strokeWidth={0.7}
+            strokeDasharray="2 2.6"
+            opacity={0.5}
+          />
+        </g>
+      ))}
+    </>
+  );
+}
+
 /** Placeholder cho concept chưa build demo: lưới chấm mờ, trạng thái chờ. */
 function PendingMarks() {
   const dots: { x: number; y: number }[] = [];
@@ -699,6 +847,8 @@ const MARKS: Partial<Record<ConceptId, () => React.ReactElement>> = {
   "cost-of-change": CostOfChangeMarks,
   "daily-driver": DailyDriverMarks,
   "constraint-prism": ConstraintPrismMarks,
+  "leverage-engine": LeverageEngineMarks,
+  "gravity-toybox": GravityToyboxMarks,
 };
 
 interface ConceptSketchProps {

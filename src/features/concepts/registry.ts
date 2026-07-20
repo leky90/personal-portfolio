@@ -201,7 +201,7 @@ export const CONCEPTS: ConceptMeta[] = [
       "Quay tay quay một vòng, cả đội tăng tốc bốn mươi bảy vòng. Mỗi bánh răng là một công cụ hoặc một người được kèm cặp, và tỷ số truyền lấy từ số liệu đo được thật, không phải con số trang trí.",
     pitch:
       "A kinematically correct, patent-plate gear train where one crank of senior effort visibly multiplies into dozens of team-velocity revolutions, and every gear is a real tool, doc, or mentee with a measured ratio.",
-    status: "planned",
+    status: "ready",
     origin: "v2",
     difficulty: 3,
     effortDays: 10,
@@ -231,7 +231,7 @@ export const CONCEPTS: ConceptMeta[] = [
       "Kinh nghiệm ở đây có khối lượng thật: mỗi công nghệ nặng đúng bằng số năm tôi đã dùng nó. Hãy kéo và ném thử để cảm nhận sự khác biệt giữa 9 năm và 1 năm.",
     pitch:
       "A rigid-body hero where the engineer's name crashes in and every tech token carries physical mass equal to years of experience, so flicking TypeScript (9 yrs) literally feels heavier than flicking a 1-yr framework.",
-    status: "planned",
+    status: "ready",
     origin: "v1",
     difficulty: 4,
     effortDays: 9,

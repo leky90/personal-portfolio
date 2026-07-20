@@ -43,10 +43,21 @@ describe("ConceptSketch — mini data-viz generative cho từng concept", () => 
   });
 
   it("concept ready batch 7 có variant riêng, không dùng placeholder chờ", () => {
-    const pending = render(<ConceptSketch id="leverage-engine" />);
+    const pending = render(<ConceptSketch id="dependency-constellation" />);
     const placeholder = pending.container.innerHTML;
     pending.unmount();
     for (const id of ["daily-driver", "constraint-prism"] as const) {
+      const { container, unmount } = render(<ConceptSketch id={id} />);
+      expect(container.innerHTML).not.toBe(placeholder);
+      unmount();
+    }
+  });
+
+  it("concept ready batch 8 có variant riêng, không dùng placeholder chờ", () => {
+    const pending = render(<ConceptSketch id="dependency-constellation" />);
+    const placeholder = pending.container.innerHTML;
+    pending.unmount();
+    for (const id of ["leverage-engine", "gravity-toybox"] as const) {
       const { container, unmount } = render(<ConceptSketch id={id} />);
       expect(container.innerHTML).not.toBe(placeholder);
       unmount();
