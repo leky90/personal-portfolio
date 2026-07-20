@@ -9,7 +9,7 @@ import {
 export const metadata: Metadata = {
   title: "Concept Lab",
   description:
-    "Kho lưu quá trình chọn art direction cho portfolio: 18 đề xuất, 3 giám khảo, 5 demo. Terrain là hướng được chốt.",
+    "Kho lưu quá trình chọn art direction cho portfolio: 26 concept từ hai vòng đề xuất, chấm mù trên cùng một thang điểm, 5 demo chạy được. Terrain là hướng được chốt.",
 };
 
 /**
@@ -20,12 +20,10 @@ export const metadata: Metadata = {
 
 function ConceptRow({ concept }: { concept: ConceptMeta }) {
   const isChosen = concept.id === "terrain";
+  const isReady = concept.status === "ready";
 
-  return (
-    <Link
-      href={`/concepts/${concept.id}`}
-      className="group grid grid-cols-1 gap-x-8 gap-y-4 py-8 sm:grid-cols-12 sm:items-center"
-    >
+  const rowBody = (
+    <>
       <p className="font-mono text-2xl text-neutral-600 tabular-nums transition-colors group-hover:text-neutral-300 sm:col-span-1">
         {String(concept.rank).padStart(2, "0")}
       </p>
@@ -66,12 +64,29 @@ function ConceptRow({ concept }: { concept: ConceptMeta }) {
           <span className="inline-block -rotate-3 border-2 border-[#ffb454] px-2 py-1 font-mono text-[10px] font-semibold tracking-widest text-[#ffb454] uppercase">
             đã chốt
           </span>
+        ) : isReady ? (
+          <span className="inline-block border border-neutral-800 px-2 py-1 font-mono text-[10px] tracking-widest text-neutral-400 uppercase">
+            đã build
+          </span>
         ) : (
-          <span className="inline-block border border-neutral-800 px-2 py-1 font-mono text-[10px] tracking-widest text-neutral-600 uppercase">
-            lưu trữ
+          <span className="inline-block border border-dashed border-neutral-800 px-2 py-1 font-mono text-[10px] tracking-widest text-neutral-600 uppercase">
+            chờ build
           </span>
         )}
       </div>
+    </>
+  );
+
+  const rowClasses =
+    "group grid grid-cols-1 gap-x-8 gap-y-4 py-8 sm:grid-cols-12 sm:items-center";
+
+  if (!isReady) {
+    return <div className={`${rowClasses} opacity-75`}>{rowBody}</div>;
+  }
+
+  return (
+    <Link href={`/concepts/${concept.id}`} className={rowClasses}>
+      {rowBody}
     </Link>
   );
 }
@@ -98,8 +113,8 @@ export default function ConceptLabPage() {
             ← portfolio
           </Link>
           <div className="text-right font-mono text-[11px] leading-relaxed text-neutral-500 tabular-nums">
-            <p>18 đề xuất</p>
-            <p>3 giám khảo</p>
+            <p>26 concept</p>
+            <p>3 giám khảo chấm mù</p>
             <p>5 demo chạy được</p>
           </div>
         </div>
@@ -107,8 +122,10 @@ export default function ConceptLabPage() {
           Concept Lab
         </h1>
         <p className="mt-5 max-w-xl text-sm leading-relaxed text-neutral-400">
-          Nhật ký chọn art direction cho portfolio. Terrain thắng và đang chạy
-          ở trang chủ; bốn hướng còn lại lưu tại đây để đối chiếu.
+          Nhật ký chọn art direction cho portfolio. Terrain đang chạy ở trang
+          chủ; bảng dưới là 26 concept từ hai vòng đề xuất, chấm lại trên cùng
+          một thang điểm ngày 20/07. Các concept chờ build sẽ được bổ sung demo
+          lần lượt theo thứ hạng.
         </p>
       </header>
 

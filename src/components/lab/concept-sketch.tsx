@@ -228,7 +228,31 @@ function TopologyMarks() {
   );
 }
 
-const MARKS: Record<ConceptId, () => React.ReactElement> = {
+/** Placeholder cho concept chưa build demo: lưới chấm mờ, trạng thái chờ. */
+function PendingMarks() {
+  const dots: { x: number; y: number }[] = [];
+  for (let row = 0; row < 6; row += 1) {
+    for (let col = 0; col < 10; col += 1) {
+      dots.push({ x: 14 + col * 19, y: 15 + row * 18 });
+    }
+  }
+  return (
+    <>
+      {dots.map((dot) => (
+        <circle
+          key={`${dot.x}-${dot.y}`}
+          cx={dot.x}
+          cy={dot.y}
+          r={1}
+          fill="currentColor"
+          opacity={0.25}
+        />
+      ))}
+    </>
+  );
+}
+
+const MARKS: Partial<Record<ConceptId, () => React.ReactElement>> = {
   terrain: TerrainMarks,
   resolution: ResolutionMarks,
   monolith: MonolithMarks,
@@ -241,7 +265,7 @@ interface ConceptSketchProps {
 }
 
 export function ConceptSketch({ id }: ConceptSketchProps) {
-  const Marks = MARKS[id];
+  const Marks = MARKS[id] ?? PendingMarks;
   return (
     <svg
       viewBox={`0 0 ${W} ${H}`}

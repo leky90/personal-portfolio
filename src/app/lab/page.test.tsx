@@ -1,42 +1,40 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import ConceptLabPage, { metadata } from "@/app/lab/page";
+import { CONCEPTS } from "@/features/concepts/registry";
 
 describe("Gallery concept lab tại /lab", () => {
   it("khai báo metadata riêng cho lab", () => {
     expect(String(metadata.title)).toMatch(/concept lab/i);
   });
 
-  it("hiển thị đủ 5 concept từ registry (heading trong index)", () => {
+  it("hiển thị toàn bộ concept trong registry (heading trong index)", () => {
     render(<ConceptLabPage />);
-    for (const title of [
-      "Ten Years of Terrain",
-      "Resolution",
-      "Monolith",
-      "Compiled Light",
-      "Living Topology",
-    ]) {
+    for (const concept of CONCEPTS) {
       expect(
-        screen.getByRole("heading", { name: title }),
+        screen.getByRole("heading", { name: concept.title }),
       ).toBeInTheDocument();
     }
   });
 
-  it("mọi concept đều có link demo, terrain đánh dấu ĐÃ CHỐT", () => {
+  it("concept ready có link demo; concept planned KHÔNG phải link", () => {
     render(<ConceptLabPage />);
     const hrefs = screen
       .getAllByRole("link")
       .map((link) => link.getAttribute("href"));
-    for (const id of [
-      "terrain",
-      "resolution",
-      "monolith",
-      "compiled-light",
-      "living-topology",
-    ]) {
-      expect(hrefs).toContain(`/concepts/${id}`);
+    for (const concept of CONCEPTS) {
+      if (concept.status === "ready") {
+        expect(hrefs).toContain(`/concepts/${concept.id}`);
+      } else {
+        expect(hrefs).not.toContain(`/concepts/${concept.id}`);
+      }
     }
     expect(screen.getByText(/đã chốt/i)).toBeInTheDocument();
+    if (CONCEPTS.some((c) => c.status === "planned")) {
+      expect(screen.getAllByText(/chờ build/i).length).toBe(
+        CONCEPTS.filter((c) => c.status === "planned").length,
+      );
+    }
   });
 
   it("có link quay về trang chủ portfolio", () => {
@@ -47,17 +45,17 @@ describe("Gallery concept lab tại /lab", () => {
     expect(home).toBeDefined();
   });
 
-  it("mỗi concept có sketch SVG generative riêng", () => {
+  it("mỗi concept có một sketch SVG (variant riêng hoặc placeholder)", () => {
     const { container } = render(<ConceptLabPage />);
-    expect(container.querySelectorAll("svg[aria-hidden]").length).toBe(5);
+    expect(container.querySelectorAll("svg[aria-hidden]").length).toBe(
+      CONCEPTS.length,
+    );
   });
 
-  it("có ma trận điểm dạng bảng để đối chiếu 5 concept", () => {
+  it("ma trận điểm có đủ một hàng cho mỗi concept + header", () => {
     render(<ConceptLabPage />);
-    const table = screen.getByRole("table");
-    expect(table).toBeInTheDocument();
-    // 5 hàng concept + header
-    expect(screen.getAllByRole("row").length).toBe(6);
+    expect(screen.getByRole("table")).toBeInTheDocument();
+    expect(screen.getAllByRole("row").length).toBe(CONCEPTS.length + 1);
   });
 
   it("không có em-dash trong bất kỳ chuỗi hiển thị nào", () => {
