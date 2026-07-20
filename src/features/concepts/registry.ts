@@ -171,7 +171,7 @@ export const CONCEPTS: ConceptMeta[] = [
       "Bàn phím cơ 3D mà bạn gõ được thật: mỗi phím bấm vật lý nhấn xuống đúng keycap và điều hướng cả trang web. Công cụ tôi dùng mỗi ngày trở thành giao diện của chính portfolio này.",
     pitch:
       "A procedurally-built 3D mechanical keyboard you can actually type on: every physical keystroke depresses the matching keycap and feeds a terminal-style command line that navigates the whole site.",
-    status: "planned",
+    status: "ready",
     origin: "v1",
     difficulty: 3,
     effortDays: 12,
@@ -186,7 +186,7 @@ export const CONCEPTS: ConceptMeta[] = [
       "Ràng buộc không phải rào cản, mà là lăng kính hội tụ ý tưởng thành thiết kế. Bật tắt từng ràng buộc để thấy cùng một ý tưởng khúc xạ thành một kiến trúc khác.",
     pitch:
       "Engineering constraints rendered as optics: five labeled glass planes bend a raw idea beam into a system design, and toggling any constraint live re-refracts the beam into a different, honestly simpler architecture.",
-    status: "planned",
+    status: "ready",
     origin: "v2",
     difficulty: 4,
     effortDays: 12,

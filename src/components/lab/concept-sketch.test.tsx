@@ -32,10 +32,21 @@ describe("ConceptSketch — mini data-viz generative cho từng concept", () => 
   });
 
   it("concept ready batch 6 có variant riêng, không dùng placeholder chờ", () => {
-    const pending = render(<ConceptSketch id="daily-driver" />);
+    const pending = render(<ConceptSketch id="leverage-engine" />);
     const placeholder = pending.container.innerHTML;
     pending.unmount();
     for (const id of ["request-lifecycle", "cost-of-change"] as const) {
+      const { container, unmount } = render(<ConceptSketch id={id} />);
+      expect(container.innerHTML).not.toBe(placeholder);
+      unmount();
+    }
+  });
+
+  it("concept ready batch 7 có variant riêng, không dùng placeholder chờ", () => {
+    const pending = render(<ConceptSketch id="leverage-engine" />);
+    const placeholder = pending.container.innerHTML;
+    pending.unmount();
+    for (const id of ["daily-driver", "constraint-prism"] as const) {
       const { container, unmount } = render(<ConceptSketch id={id} />);
       expect(container.innerHTML).not.toBe(placeholder);
       unmount();

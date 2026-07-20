@@ -554,6 +554,113 @@ function CostOfChangeMarks() {
   );
 }
 
+/** Daily Driver: bàn phím 60% top-down, 5 phím lệnh accent, 1 phím đang nhấn. */
+function DailyDriverMarks() {
+  const rowOffsets = [0, 0.5, 0.75, 1.25, 0];
+  const rowKeys = [14, 14, 13, 12, 8];
+  const cell = 12.6;
+  const startY = 26;
+  const accents = new Set(["1-2", "2-1", "2-9", "3-3", "1-4"]);
+  const pressed = "1-2";
+  const keys: { x: number; y: number; w: number; id: string }[] = [];
+  rowKeys.forEach((count, row) => {
+    const isBottom = row === 4;
+    for (let col = 0; col < count; col += 1) {
+      const wide = isBottom && col === 3;
+      keys.push({
+        id: `${row}-${col}`,
+        x: 12 + (col + rowOffsets[row]) * cell + (isBottom ? col * 6 : 0),
+        y: startY + row * 14.5,
+        w: wide ? cell * 3.6 : cell - 2.6,
+      });
+    }
+  });
+  return (
+    <>
+      <rect
+        x={7}
+        y={startY - 6}
+        width={186}
+        height={5 * 14.5 + 8}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={0.9}
+        opacity={0.5}
+      />
+      {keys.map((key) => {
+        const isAccent = accents.has(key.id);
+        const isPressed = key.id === pressed;
+        return (
+          <rect
+            key={key.id}
+            x={key.x}
+            y={isPressed ? key.y + 1.6 : key.y}
+            width={key.w}
+            height={10}
+            fill={isAccent ? "currentColor" : "none"}
+            stroke="currentColor"
+            strokeWidth={isPressed ? 1.2 : 0.6}
+            opacity={isAccent ? 0.9 : isPressed ? 0.95 : 0.35}
+          />
+        );
+      })}
+    </>
+  );
+}
+
+/** Constraint Prism: tia gập qua 5 wedge rồi toả thành phổ 6 tia. */
+function ConstraintPrismMarks() {
+  const wedgeXs = [64, 78, 92, 106, 120];
+  const deflections = [-7, 6, -5, 7, -4.5];
+  const beam: string[] = [`6,60`, `48,60`];
+  let y = 60;
+  wedgeXs.forEach((x, index) => {
+    y += deflections[index];
+    beam.push(`${x},${y.toFixed(1)}`);
+  });
+  const exitY = y;
+  beam.push(`150,${exitY.toFixed(1)}`);
+  const rays = Array.from({ length: 6 }, (_, index) => {
+    const t = (index - 2.5) / 2.5;
+    return { y2: exitY + t * 26, o: 0.85 - Math.abs(t) * 0.35 };
+  });
+  return (
+    <>
+      {wedgeXs.map((x, index) => (
+        <line
+          key={x}
+          x1={x + (index % 2 === 0 ? 3 : -3)}
+          y1={26}
+          x2={x - (index % 2 === 0 ? 3 : -3)}
+          y2={94}
+          stroke="currentColor"
+          strokeWidth={2.4}
+          opacity={0.3}
+        />
+      ))}
+      <polyline
+        points={beam.join(" ")}
+        stroke="currentColor"
+        strokeWidth={1.6}
+        opacity={0.95}
+      />
+      {rays.map((ray) => (
+        <line
+          key={ray.y2}
+          x1={150}
+          y1={exitY}
+          x2={192}
+          y2={ray.y2}
+          stroke="currentColor"
+          strokeWidth={0.8}
+          opacity={ray.o}
+        />
+      ))}
+      <circle cx={6} cy={60} r={2.4} fill="currentColor" opacity={0.95} />
+    </>
+  );
+}
+
 /** Placeholder cho concept chưa build demo: lưới chấm mờ, trạng thái chờ. */
 function PendingMarks() {
   const dots: { x: number; y: number }[] = [];
@@ -590,6 +697,8 @@ const MARKS: Partial<Record<ConceptId, () => React.ReactElement>> = {
   "maintenance-archaeology": MaintenanceArchaeologyMarks,
   "request-lifecycle": RequestLifecycleMarks,
   "cost-of-change": CostOfChangeMarks,
+  "daily-driver": DailyDriverMarks,
+  "constraint-prism": ConstraintPrismMarks,
 };
 
 interface ConceptSketchProps {
