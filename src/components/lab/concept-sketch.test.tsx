@@ -65,10 +65,21 @@ describe("ConceptSketch — mini data-viz generative cho từng concept", () => 
   });
 
   it("concept ready batch 9 có variant riêng, không dùng placeholder chờ", () => {
-    const pending = render(<ConceptSketch id="glyph-field" />);
+    const pending = render(<ConceptSketch id="commit-skyline" />);
     const placeholder = pending.container.innerHTML;
     pending.unmount();
     for (const id of ["dependency-constellation", "knowledge-relay"] as const) {
+      const { container, unmount } = render(<ConceptSketch id={id} />);
+      expect(container.innerHTML).not.toBe(placeholder);
+      unmount();
+    }
+  });
+
+  it("concept ready batch 10 có variant riêng, không dùng placeholder chờ", () => {
+    const pending = render(<ConceptSketch id="commit-skyline" />);
+    const placeholder = pending.container.innerHTML;
+    pending.unmount();
+    for (const id of ["full-stack-strata", "glyph-field"] as const) {
       const { container, unmount } = render(<ConceptSketch id={id} />);
       expect(container.innerHTML).not.toBe(placeholder);
       unmount();

@@ -291,7 +291,7 @@ export const CONCEPTS: ConceptMeta[] = [
       "Lát cắt của hòn đảo nổi chính là stack: thành phố sản phẩm trên bề mặt, tầng dịch vụ phát sáng ở giữa, và lớp đá dữ liệu kết tinh dưới đáy. Cuộn để khoan sâu qua từng tầng, chạm để bắn một request xuyên suốt cả hệ thống.",
     pitch:
       "A floating island's cutaway IS the stack: scroll drills from the product city on the surface through the glowing services seam into crystalline database bedrock, and every tap fires a visible request trace through all three layers.",
-    status: "planned",
+    status: "ready",
     origin: "v1",
     difficulty: 4,
     effortDays: 11,
@@ -306,7 +306,7 @@ export const CONCEPTS: ConceptMeta[] = [
       "Tên tôi là 40 nghìn hạt glyph sống trong một draw call duy nhất. Cuộn trang, cả hệ chữ tan ra rồi tự xếp lại thành từng tiêu đề bạn đang đọc.",
     pitch:
       "The engineer's name and every section heading are a single 40k-particle GPU field that dissolves and re-forms as you scroll, one draw call carrying the entire site's typography.",
-    status: "planned",
+    status: "ready",
     origin: "v1",
     difficulty: 3,
     effortDays: 7,

@@ -931,6 +931,139 @@ function KnowledgeRelayMarks() {
   );
 }
 
+/** Full-Stack Strata: lát cắt đảo 3 tầng + packet xuyên tầng. */
+function FullStackStrataMarks() {
+  const buildings = [
+    { x: 68, w: 5, h: 9 },
+    { x: 78, w: 6, h: 14 },
+    { x: 90, w: 5, h: 7 },
+    { x: 99, w: 7, h: 12 },
+    { x: 112, w: 5, h: 10 },
+    { x: 121, w: 6, h: 6 },
+  ];
+  const crystals = [
+    { x: 82, y: 84 },
+    { x: 96, y: 90 },
+    { x: 112, y: 86 },
+    { x: 124, y: 92 },
+  ];
+  return (
+    <>
+      {/* 3 tầng đảo: mặt cát, seam sáng, đá nền thuôn */}
+      <polygon
+        points="52,38 148,38 144,52 56,52"
+        fill="currentColor"
+        opacity={0.35}
+        stroke="currentColor"
+        strokeWidth={0.7}
+      />
+      <rect
+        x={56}
+        y={52}
+        width={88}
+        height={7}
+        fill="currentColor"
+        opacity={0.85}
+      />
+      <polygon
+        points="58,59 142,59 118,102 84,102"
+        fill="currentColor"
+        opacity={0.22}
+        stroke="currentColor"
+        strokeWidth={0.7}
+      />
+      {buildings.map((building) => (
+        <rect
+          key={building.x}
+          x={building.x}
+          y={38 - building.h}
+          width={building.w}
+          height={building.h}
+          fill="currentColor"
+          opacity={0.6}
+        />
+      ))}
+      {crystals.map((crystal) => (
+        <polygon
+          key={crystal.x}
+          points={`${crystal.x},${crystal.y - 5} ${crystal.x + 3.4},${crystal.y} ${crystal.x},${crystal.y + 5} ${crystal.x - 3.4},${crystal.y}`}
+          fill="currentColor"
+          opacity={0.7}
+        />
+      ))}
+      {/* Trace packet xuyên tầng */}
+      <line
+        x1={102}
+        y1={20}
+        x2={102}
+        y2={88}
+        stroke="currentColor"
+        strokeWidth={0.8}
+        strokeDasharray="2.5 2.5"
+        opacity={0.6}
+      />
+      <circle cx={102} cy={55.5} r={3} fill="currentColor" opacity={0.95} />
+    </>
+  );
+}
+
+/** Glyph Field: chữ KY từ dot-matrix, hạt transit bay tản sang phải. */
+function GlyphFieldMarks() {
+  const K = ["10001", "10010", "10100", "11000", "10100", "10010", "10001"];
+  const Y = ["10001", "01010", "00100", "00100", "00100", "00100", "00100"];
+  const rand = mulberry32(17);
+  const dots: { x: number; y: number; o: number }[] = [];
+  const cell = 6.4;
+  const baseY = 34;
+  [K, Y].forEach((matrix, letterIndex) => {
+    const baseX = 30 + letterIndex * 46;
+    matrix.forEach((row, rowIndex) => {
+      [...row].forEach((filled, colIndex) => {
+        if (filled === "1") {
+          dots.push({
+            x: baseX + colIndex * cell,
+            y: baseY + rowIndex * cell,
+            o: 0.9,
+          });
+        }
+      });
+    });
+  });
+  const transit: { x: number; y: number; r: number; o: number }[] = [];
+  for (let i = 0; i < 26; i += 1) {
+    transit.push({
+      x: 118 + rand() * 74,
+      y: 26 + rand() * 68,
+      r: 0.8 + rand() * 1.3,
+      o: 0.15 + rand() * 0.45,
+    });
+  }
+  return (
+    <>
+      {dots.map((dot) => (
+        <circle
+          key={`${dot.x}-${dot.y}`}
+          cx={dot.x}
+          cy={dot.y}
+          r={2}
+          fill="currentColor"
+          opacity={dot.o}
+        />
+      ))}
+      {transit.map((dot) => (
+        <circle
+          key={`t-${dot.x.toFixed(1)}-${dot.y.toFixed(1)}`}
+          cx={dot.x}
+          cy={dot.y}
+          r={dot.r}
+          fill="currentColor"
+          opacity={dot.o}
+        />
+      ))}
+    </>
+  );
+}
+
 /** Placeholder cho concept chưa build demo: lưới chấm mờ, trạng thái chờ. */
 function PendingMarks() {
   const dots: { x: number; y: number }[] = [];
@@ -973,6 +1106,8 @@ const MARKS: Partial<Record<ConceptId, () => React.ReactElement>> = {
   "gravity-toybox": GravityToyboxMarks,
   "dependency-constellation": DependencyConstellationMarks,
   "knowledge-relay": KnowledgeRelayMarks,
+  "full-stack-strata": FullStackStrataMarks,
+  "glyph-field": GlyphFieldMarks,
 };
 
 interface ConceptSketchProps {

@@ -19,6 +19,8 @@ const READY_IDS = [
   "gravity-toybox",
   "dependency-constellation",
   "knowledge-relay",
+  "full-stack-strata",
+  "glyph-field",
 ].sort();
 
 describe("concepts registry — bảng xếp hạng thống nhất 26 concept", () => {
@@ -39,10 +41,10 @@ describe("concepts registry — bảng xếp hạng thống nhất 26 concept", 
     }
   });
 
-  it("đúng 17 concept đã build ở trạng thái ready, còn lại planned", () => {
+  it("đúng 19 concept đã build ở trạng thái ready, còn lại planned", () => {
     const ready = CONCEPTS.filter((c) => c.status === "ready").map((c) => c.id);
     expect(ready.sort()).toEqual(READY_IDS);
-    expect(CONCEPTS.filter((c) => c.status === "planned")).toHaveLength(9);
+    expect(CONCEPTS.filter((c) => c.status === "planned")).toHaveLength(7);
   });
 
   it("nguồn gốc: 18 concept vòng 1, 8 concept vòng bổ sung", () => {
