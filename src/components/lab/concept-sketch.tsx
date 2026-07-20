@@ -809,6 +809,128 @@ function GravityToyboxMarks() {
   );
 }
 
+/** Dependency Constellation: 3 vành sao đồng tâm + một query pnpm-why đang sáng. */
+function DependencyConstellationMarks() {
+  const cx = 100;
+  const cy = 60;
+  const rings = [
+    { r: 14, count: 5, size: 2.6 },
+    { r: 30, count: 10, size: 1.9 },
+    { r: 47, count: 12, size: 1.4 },
+  ];
+  const nodes: { x: number; y: number; size: number; ring: number; i: number }[] = [];
+  rings.forEach((ring, ringIndex) => {
+    for (let i = 0; i < ring.count; i += 1) {
+      const angle = (i / ring.count) * Math.PI * 2 + ringIndex * 0.7;
+      nodes.push({
+        x: cx + Math.cos(angle) * ring.r * 1.7,
+        y: cy + Math.sin(angle) * ring.r * 0.82,
+        size: ring.size,
+        ring: ringIndex,
+        i,
+      });
+    }
+  });
+  const lit = [
+    nodes.find((n) => n.ring === 2 && n.i === 3)!,
+    nodes.find((n) => n.ring === 1 && n.i === 2)!,
+    nodes.find((n) => n.ring === 1 && n.i === 6)!,
+    nodes.find((n) => n.ring === 0 && n.i === 1)!,
+  ];
+  return (
+    <>
+      {[0, 1, 2].map((ringIndex) => (
+        <ellipse
+          key={ringIndex}
+          cx={cx}
+          cy={cy}
+          rx={rings[ringIndex].r * 1.7}
+          ry={rings[ringIndex].r * 0.82}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={0.4}
+          opacity={0.18}
+        />
+      ))}
+      <polyline
+        points={`${lit[0].x},${lit[0].y} ${lit[1].x},${lit[1].y} ${lit[3].x},${lit[3].y}`}
+        stroke="currentColor"
+        strokeWidth={1.1}
+        opacity={0.9}
+      />
+      <line
+        x1={lit[0].x}
+        y1={lit[0].y}
+        x2={lit[2].x}
+        y2={lit[2].y}
+        stroke="currentColor"
+        strokeWidth={1.1}
+        opacity={0.9}
+      />
+      {nodes.map((node) => {
+        const isLit = lit.includes(node);
+        return (
+          <circle
+            key={`${node.ring}-${node.i}`}
+            cx={node.x}
+            cy={node.y}
+            r={isLit ? node.size + 1 : node.size}
+            fill="currentColor"
+            opacity={isLit ? 0.95 : 0.35}
+          />
+        );
+      })}
+    </>
+  );
+}
+
+/** Knowledge Relay: biểu đồ Marey — lane chết dần, gậy vẫn chạy tiếp. */
+function KnowledgeRelayMarks() {
+  const lanes = [
+    { y: 26, x0: 14, x1: 96 },
+    { y: 40, x0: 30, x1: 118 },
+    { y: 54, x0: 58, x1: 142 },
+    { y: 68, x0: 76, x1: 164 },
+    { y: 82, x0: 104, x1: 178 },
+    { y: 96, x0: 132, x1: 188 },
+  ];
+  const baton1 = "14,26 60,26 74,40 100,40 112,54 134,54 148,68 160,68 172,82 186,82";
+  const baton2 = "30,40 58,40 76,54 98,54 116,68 140,68 156,82 170,82 180,96 188,96";
+  return (
+    <>
+      {lanes.map((lane, index) => (
+        <line
+          key={lane.y}
+          x1={lane.x0}
+          y1={lane.y}
+          x2={lane.x1}
+          y2={lane.y}
+          stroke="currentColor"
+          strokeWidth={1.6}
+          opacity={index < 3 ? 0.22 : 0.5}
+        />
+      ))}
+      <polyline
+        points={baton1}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={1.2}
+        opacity={0.9}
+      />
+      <polyline
+        points={baton2}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={0.9}
+        strokeDasharray="3 2.4"
+        opacity={0.6}
+      />
+      <circle cx={186} cy={82} r={3} fill="currentColor" opacity={0.95} />
+      <circle cx={188} cy={96} r={2.2} fill="currentColor" opacity={0.7} />
+    </>
+  );
+}
+
 /** Placeholder cho concept chưa build demo: lưới chấm mờ, trạng thái chờ. */
 function PendingMarks() {
   const dots: { x: number; y: number }[] = [];
@@ -849,6 +971,8 @@ const MARKS: Partial<Record<ConceptId, () => React.ReactElement>> = {
   "constraint-prism": ConstraintPrismMarks,
   "leverage-engine": LeverageEngineMarks,
   "gravity-toybox": GravityToyboxMarks,
+  "dependency-constellation": DependencyConstellationMarks,
+  "knowledge-relay": KnowledgeRelayMarks,
 };
 
 interface ConceptSketchProps {

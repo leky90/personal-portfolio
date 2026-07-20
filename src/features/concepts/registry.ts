@@ -261,7 +261,7 @@ export const CONCEPTS: ConceptMeta[] = [
       "Mười năm sự nghiệp được phân giải thành một chòm sao phụ thuộc. Chạm vào một kỹ năng để thấy mọi dự án từng kéo nó vào, theo đúng những liên kết thật.",
     pitch:
       "A senior career rendered as a fully resolved dependency graph: hover any skill and watch every project that ever pulled it in light up along its real edges, like running pnpm-why on ten years of work.",
-    status: "planned",
+    status: "ready",
     origin: "v1",
     difficulty: 3,
     effortDays: 7,
@@ -276,7 +276,7 @@ export const CONCEPTS: ConceptMeta[] = [
       "Mười năm truyền nghề vẽ thành sơ đồ relay 3D: mỗi practice là một cây gậy phát sáng được trao qua các team lane theo dòng thời gian. Dự án có thể đóng lại nhưng gậy vẫn chạy tiếp, vì thứ senior để lại sống lâu hơn codebase.",
     pitch:
       "A decade of mentorship drawn as a 3D Marey-style relay timetable: practices forged as glowing batons that keep passing between team lanes even after each project's lane goes dark, proving that what a senior teaches outlives what he ships.",
-    status: "planned",
+    status: "ready",
     origin: "v2",
     difficulty: 4,
     effortDays: 9.5,
