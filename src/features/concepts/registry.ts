@@ -96,7 +96,7 @@ export const CONCEPTS: ConceptMeta[] = [
       "Tua lại một sự cố production như đọc hộp đen máy bay: từng tín hiệu, từng cảnh báo, từng quyết định lần lượt đi qua vạch đọc theo cuộn băng thời gian. Mười năm trực chiến được kể lại bằng một bản postmortem không đổ lỗi.",
     pitch:
       "A real SEV-1 replayed as a physical flight-recorder tape: scroll scrubs glowing telemetry through a fixed playhead as alerts fire, decisions land, and the ending pulls back into the hindsight postmortem view where the whole incident's shape is visible at once.",
-    status: "planned",
+    status: "ready",
     origin: "v2",
     difficulty: 3,
     effortDays: 9,
@@ -126,7 +126,7 @@ export const CONCEPTS: ConceptMeta[] = [
       "Codebase lâu năm là một di chỉ khảo cổ, mỗi lớp trầm tích là một thời kỳ kiến trúc. Cuộn để đào sâu xuống mười năm, chạm vào từng mảnh module để định tuổi bằng chính lịch sử git và đọc ghi chú của những người bảo trì đi trước.",
     pitch:
       "A decade-old codebase excavated as a stratigraphic trench wall: scrolling descends through sediment layers of architectural eras while a carbon-dating probe reads the real git-history age of half-buried module artifacts and surfaces field notes from past maintainers.",
-    status: "planned",
+    status: "ready",
     origin: "v2",
     difficulty: 3,
     effortDays: 12,

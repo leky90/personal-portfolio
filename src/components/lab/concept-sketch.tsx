@@ -335,6 +335,117 @@ function MonolithToMeshMarks() {
   );
 }
 
+/** Incident Black Box: băng telemetry qua vạch đọc, pin sự kiện đứng trên mép. */
+function IncidentBlackBoxMarks() {
+  const rand = mulberry32(43);
+  const trace: string[] = [];
+  for (let x = 0; x <= W; x += 6) {
+    const t = x / W;
+    const sev = Math.min(
+      Math.max((t - 0.3) / 0.12, 0),
+      Math.max(1 - (t - 0.55) / 0.3, 0),
+    );
+    const clamped = Math.min(1, Math.max(0, sev));
+    trace.push(`${x},${(78 - clamped * 34 - rand() * 3).toFixed(1)}`);
+  }
+  const pins = [0.16, 0.33, 0.44, 0.55, 0.72, 0.95];
+  return (
+    <>
+      <rect x={0} y={34} width={W} height={62} fill="currentColor" opacity={0.08} />
+      <polyline
+        points={trace.join(" ")}
+        stroke="currentColor"
+        strokeWidth={1.4}
+        opacity={0.85}
+      />
+      {pins.map((t) => (
+        <g key={t}>
+          <line
+            x1={t * W}
+            y1={30}
+            x2={t * W}
+            y2={38}
+            stroke="currentColor"
+            strokeWidth={1.2}
+            opacity={0.7}
+          />
+          <circle cx={t * W} cy={27} r={2} fill="currentColor" opacity={0.85} />
+        </g>
+      ))}
+      <line
+        x1={W / 2}
+        y1={16}
+        x2={W / 2}
+        y2={104}
+        stroke="currentColor"
+        strokeWidth={1.6}
+        opacity={0.95}
+      />
+    </>
+  );
+}
+
+/** Maintenance Archaeology: địa tầng band ngang + mảnh module chôn trong vách. */
+function MaintenanceArchaeologyMarks() {
+  const rand = mulberry32(53);
+  const bands = [
+    { y: 8, h: 18, o: 0.12 },
+    { y: 27, h: 22, o: 0.2 },
+    { y: 50, h: 26, o: 0.3 },
+    { y: 77, h: 22, o: 0.42 },
+    { y: 100, h: 14, o: 0.55 },
+  ];
+  const shards: { x: number; y: number; r: number }[] = [];
+  bands.forEach((band) => {
+    for (let i = 0; i < 5; i += 1) {
+      shards.push({
+        x: 12 + rand() * 176,
+        y: band.y + 3 + rand() * (band.h - 6),
+        r: 2 + rand() * 2.4,
+      });
+    }
+  });
+  return (
+    <>
+      {bands.map((band) => (
+        <rect
+          key={band.y}
+          x={4}
+          y={band.y}
+          width={W - 8}
+          height={band.h}
+          fill="currentColor"
+          opacity={band.o * 0.5}
+        />
+      ))}
+      {bands.slice(1).map((band) => (
+        <line
+          key={`seam-${band.y}`}
+          x1={4}
+          y1={band.y}
+          x2={W - 4}
+          y2={band.y}
+          stroke="currentColor"
+          strokeWidth={0.8}
+          opacity={0.5}
+        />
+      ))}
+      {shards.map((shard) => (
+        <rect
+          key={`${shard.x.toFixed(1)}-${shard.y.toFixed(1)}`}
+          x={shard.x}
+          y={shard.y}
+          width={shard.r * 2}
+          height={shard.r * 1.5}
+          transform={`rotate(${(shard.x * 7) % 40} ${shard.x} ${shard.y})`}
+          fill="currentColor"
+          opacity={0.75}
+        />
+      ))}
+    </>
+  );
+}
+
 /** Placeholder cho concept chưa build demo: lưới chấm mờ, trạng thái chờ. */
 function PendingMarks() {
   const dots: { x: number; y: number }[] = [];
@@ -367,6 +478,8 @@ const MARKS: Partial<Record<ConceptId, () => React.ReactElement>> = {
   "living-topology": TopologyMarks,
   "decision-diff": DecisionDiffMarks,
   "monolith-to-mesh": MonolithToMeshMarks,
+  "incident-black-box": IncidentBlackBoxMarks,
+  "maintenance-archaeology": MaintenanceArchaeologyMarks,
 };
 
 interface ConceptSketchProps {
