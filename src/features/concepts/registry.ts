@@ -366,7 +366,7 @@ export const CONCEPTS: ConceptMeta[] = [
       "Mỗi ô kính là một thế giới thu nhỏ của một sản phẩm đã ra mắt. Chạm vào lớp kính để bước hẳn vào bên trong và xem nó được xây nên như thế nào.",
     pitch:
       "A museum vitrine where every glass cell holds a live micro-diorama of a real shipped project, and clicking carries the camera through the glass into that project's world via portal rendering.",
-    status: "planned",
+    status: "ready",
     origin: "v1",
     difficulty: 4,
     effortDays: 14,
@@ -396,7 +396,7 @@ export const CONCEPTS: ConceptMeta[] = [
       "Dưới lớp ký tự phosphor là một khối kim loại được tiện chính xác. Con trỏ của bạn là thấu kính, nhìn kỹ ở đâu thì sự thật hiện ra ở đó.",
     pitch:
       "One precision-machined 3D object lives beneath a hand-written ASCII/CRT post shader, and your cursor is an optical lens that resolves phosphor glyphs into the clean PBR render wherever you look closely.",
-    status: "planned",
+    status: "ready",
     origin: "v1",
     difficulty: 3,
     effortDays: 8,

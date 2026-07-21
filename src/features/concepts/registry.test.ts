@@ -23,6 +23,8 @@ const READY_IDS = [
   "glyph-field",
   "desk-version-controlled",
   "commit-skyline",
+  "cabinet-of-shipped-worlds",
+  "phosphor-lens",
 ].sort();
 
 describe("concepts registry — bảng xếp hạng thống nhất 26 concept", () => {
@@ -43,10 +45,10 @@ describe("concepts registry — bảng xếp hạng thống nhất 26 concept", 
     }
   });
 
-  it("đúng 21 concept đã build ở trạng thái ready, còn lại planned", () => {
+  it("đúng 23 concept đã build ở trạng thái ready, còn lại planned", () => {
     const ready = CONCEPTS.filter((c) => c.status === "ready").map((c) => c.id);
     expect(ready.sort()).toEqual(READY_IDS);
-    expect(CONCEPTS.filter((c) => c.status === "planned")).toHaveLength(5);
+    expect(CONCEPTS.filter((c) => c.status === "planned")).toHaveLength(3);
   });
 
   it("nguồn gốc: 18 concept vòng 1, 8 concept vòng bổ sung", () => {

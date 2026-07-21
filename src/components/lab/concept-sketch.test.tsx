@@ -87,10 +87,21 @@ describe("ConceptSketch — mini data-viz generative cho từng concept", () => 
   });
 
   it("concept ready batch 11 có variant riêng, không dùng placeholder chờ", () => {
-    const pending = render(<ConceptSketch id="phosphor-lens" />);
+    const pending = render(<ConceptSketch id="ten-year-galaxy" />);
     const placeholder = pending.container.innerHTML;
     pending.unmount();
     for (const id of ["desk-version-controlled", "commit-skyline"] as const) {
+      const { container, unmount } = render(<ConceptSketch id={id} />);
+      expect(container.innerHTML).not.toBe(placeholder);
+      unmount();
+    }
+  });
+
+  it("concept ready batch 12 có variant riêng, không dùng placeholder chờ", () => {
+    const pending = render(<ConceptSketch id="ten-year-galaxy" />);
+    const placeholder = pending.container.innerHTML;
+    pending.unmount();
+    for (const id of ["cabinet-of-shipped-worlds", "phosphor-lens"] as const) {
       const { container, unmount } = render(<ConceptSketch id={id} />);
       expect(container.innerHTML).not.toBe(placeholder);
       unmount();

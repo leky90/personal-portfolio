@@ -1194,6 +1194,139 @@ function CommitSkylineMarks() {
   );
 }
 
+/** Cabinet of Shipped Worlds: tủ kính 4×2, hàng trên có diorama, hàng dưới phủ sương. */
+function CabinetMarks() {
+  const cellW = 42;
+  const cellH = 38;
+  const x0 = 16;
+  const y0 = 18;
+  const cells: React.ReactElement[] = [];
+  for (let col = 0; col < 4; col += 1) {
+    for (let row = 0; row < 2; row += 1) {
+      const x = x0 + col * cellW;
+      const y = y0 + row * cellH;
+      const live = row === 0;
+      const hovered = col === 1 && row === 0;
+      cells.push(
+        <g key={`${col}-${row}`}>
+          <rect
+            x={x}
+            y={y}
+            width={cellW - 6}
+            height={cellH - 6}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={hovered ? 1.4 : 0.8}
+            opacity={hovered ? 0.95 : 0.5}
+          />
+          {live ? (
+            <>
+              {col === 0 && (
+                <>
+                  <circle cx={x + 12} cy={y + 22} r={3} fill="currentColor" opacity={0.8} />
+                  <circle cx={x + 20} cy={y + 22} r={3} fill="currentColor" opacity={0.6} />
+                  <circle cx={x + 28} cy={y + 22} r={3} fill="currentColor" opacity={0.4} />
+                </>
+              )}
+              {col === 1 && (
+                <>
+                  <line x1={x + 26} y1={y + 8} x2={x + 26} y2={y + 26} stroke="currentColor" strokeWidth={1} opacity={0.85} />
+                  <line x1={x + 10} y1={y + 12} x2={x + 26} y2={y + 12} stroke="currentColor" strokeWidth={1} opacity={0.85} />
+                  <rect x={x + 8} y={y + 20} width={8} height={6} fill="currentColor" opacity={0.7} />
+                </>
+              )}
+              {col === 2 && (
+                <>
+                  <line x1={x + 8} y1={y + 12} x2={x + 24} y2={y + 12} stroke="currentColor" strokeWidth={1.4} opacity={0.7} />
+                  <line x1={x + 8} y1={y + 18} x2={x + 20} y2={y + 18} stroke="currentColor" strokeWidth={1.4} opacity={0.5} />
+                  <line x1={x + 8} y1={y + 24} x2={x + 27} y2={y + 24} stroke="currentColor" strokeWidth={1.4} opacity={0.6} />
+                </>
+              )}
+              {col === 3 && (
+                <>
+                  <circle cx={x + 18} cy={y + 18} r={7} fill="none" stroke="currentColor" strokeWidth={1} opacity={0.7} />
+                  <line x1={x + 18} y1={y + 11} x2={x + 18} y2={y + 4} stroke="currentColor" strokeWidth={1} opacity={0.85} />
+                </>
+              )}
+            </>
+          ) : (
+            [0, 1, 2, 3].map((i) => (
+              <line
+                key={i}
+                x1={x + 4 + i * 9}
+                y1={y + 4}
+                x2={x + 4 + i * 9 - 6}
+                y2={y + cellH - 10}
+                stroke="currentColor"
+                strokeWidth={2.4}
+                opacity={0.12}
+              />
+            ))
+          )}
+        </g>,
+      );
+    }
+  }
+  return <>{cells}</>;
+}
+
+/** Phosphor Lens: rừng glyph chấm với một vòng thấu kính lộ profile tiện. */
+function PhosphorLensMarks() {
+  const rand = mulberry32(23);
+  const lensX = 118;
+  const lensY = 58;
+  const lensR = 30;
+  const glyphs: { x: number; y: number; tall: boolean }[] = [];
+  for (let i = 0; i < 210; i += 1) {
+    const x = 10 + rand() * 180;
+    const y = 14 + rand() * 92;
+    if (Math.hypot(x - lensX, y - lensY) > lensR + 2) {
+      glyphs.push({ x, y, tall: rand() > 0.6 });
+    }
+  }
+  return (
+    <>
+      {glyphs.map((glyph) => (
+        <rect
+          key={`${glyph.x.toFixed(1)}-${glyph.y.toFixed(1)}`}
+          x={glyph.x}
+          y={glyph.y}
+          width={1.6}
+          height={glyph.tall ? 4 : 1.6}
+          fill="currentColor"
+          opacity={0.4}
+        />
+      ))}
+      <circle
+        cx={lensX}
+        cy={lensY}
+        r={lensR}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={1.4}
+        opacity={0.9}
+      />
+      {/* Profile khối tiện lộ trong thấu kính */}
+      <polyline
+        points={`${lensX - 8},${lensY + 20} ${lensX - 8},${lensY + 4} ${lensX - 13},${lensY} ${lensX - 8},${lensY - 4} ${lensX - 8},${lensY - 12} ${lensX - 4},${lensY - 18} ${lensX + 4},${lensY - 18} ${lensX + 8},${lensY - 12} ${lensX + 8},${lensY - 4} ${lensX + 13},${lensY} ${lensX + 8},${lensY + 4} ${lensX + 8},${lensY + 20}`}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={1.2}
+        opacity={0.95}
+      />
+      <line
+        x1={lensX - 14}
+        y1={lensY + 20}
+        x2={lensX + 14}
+        y2={lensY + 20}
+        stroke="currentColor"
+        strokeWidth={1}
+        opacity={0.7}
+      />
+    </>
+  );
+}
+
 /** Placeholder cho concept chưa build demo: lưới chấm mờ, trạng thái chờ. */
 function PendingMarks() {
   const dots: { x: number; y: number }[] = [];
@@ -1240,6 +1373,8 @@ const MARKS: Partial<Record<ConceptId, () => React.ReactElement>> = {
   "glyph-field": GlyphFieldMarks,
   "desk-version-controlled": DeskVersionControlledMarks,
   "commit-skyline": CommitSkylineMarks,
+  "cabinet-of-shipped-worlds": CabinetMarks,
+  "phosphor-lens": PhosphorLensMarks,
 };
 
 interface ConceptSketchProps {
