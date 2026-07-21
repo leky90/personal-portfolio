@@ -1327,6 +1327,126 @@ function PhosphorLensMarks() {
   );
 }
 
+/** Signal From Noise: nửa trái nhiễu rải rác, nửa phải kết tinh thành lưới. */
+function SignalFromNoiseMarks() {
+  const rand = mulberry32(31);
+  const noise: { x: number; y: number; r: number }[] = [];
+  for (let i = 0; i < 70; i += 1) {
+    noise.push({
+      x: 8 + rand() * 88,
+      y: 12 + rand() * 96,
+      r: 0.9 + rand() * 1.2,
+    });
+  }
+  const lattice: { x: number; y: number }[] = [];
+  for (let row = 0; row < 5; row += 1) {
+    for (let col = 0; col < 6; col += 1) {
+      lattice.push({ x: 112 + col * 15, y: 24 + row * 18 });
+    }
+  }
+  return (
+    <>
+      {noise.map((dot) => (
+        <circle
+          key={`n-${dot.x.toFixed(1)}-${dot.y.toFixed(1)}`}
+          cx={dot.x}
+          cy={dot.y}
+          r={dot.r}
+          fill="currentColor"
+          opacity={0.25}
+        />
+      ))}
+      {lattice.map((dot, index) => (
+        <circle
+          key={`l-${dot.x}-${dot.y}`}
+          cx={dot.x}
+          cy={dot.y}
+          r={1.8}
+          fill="currentColor"
+          opacity={0.55 + (index % 5) * 0.08}
+        />
+      ))}
+      {lattice.slice(0, 24).map((dot, index) =>
+        index % 6 < 5 ? (
+          <line
+            key={`e-${dot.x}-${dot.y}`}
+            x1={dot.x}
+            y1={dot.y}
+            x2={dot.x + 15}
+            y2={dot.y}
+            stroke="currentColor"
+            strokeWidth={0.5}
+            opacity={0.35}
+          />
+        ) : null,
+      )}
+      <line
+        x1={102}
+        y1={10}
+        x2={102}
+        y2={110}
+        stroke="currentColor"
+        strokeWidth={0.6}
+        strokeDasharray="3 3"
+        opacity={0.4}
+      />
+    </>
+  );
+}
+
+/** The Credential: thẻ đeo nghiêng trên dây, foil stripe + vạch tên. */
+function LanyardBadgeMarks() {
+  return (
+    <>
+      {/* Dây đeo hình chữ V */}
+      <polyline
+        points="78,6 96,42 118,6"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={1.6}
+        opacity={0.55}
+      />
+      <circle cx={96} cy={44} r={2.6} fill="currentColor" opacity={0.8} />
+      {/* Thẻ nghiêng nhẹ */}
+      <g transform="rotate(-8 96 78)">
+        <rect
+          x={68}
+          y={50}
+          width={56}
+          height={62}
+          rx={4}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={1.3}
+          opacity={0.9}
+        />
+        <rect x={72} y={56} width={48} height={10} fill="currentColor" opacity={0.75} />
+        <rect x={74} y={76} width={40} height={5} fill="currentColor" opacity={0.55} />
+        <rect x={74} y={86} width={30} height={4} fill="currentColor" opacity={0.35} />
+        <rect x={74} y={98} width={44} height={7} fill="currentColor" opacity={0.2} />
+      </g>
+      {/* Mũi tên pull-to-enter */}
+      <line
+        x1={150}
+        y1={62}
+        x2={150}
+        y2={96}
+        stroke="currentColor"
+        strokeWidth={1}
+        strokeDasharray="3 2.6"
+        opacity={0.6}
+      />
+      <polyline
+        points="144,90 150,98 156,90"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={1}
+        opacity={0.6}
+      />
+    </>
+  );
+}
+
 /** Placeholder cho concept chưa build demo: lưới chấm mờ, trạng thái chờ. */
 function PendingMarks() {
   const dots: { x: number; y: number }[] = [];
@@ -1375,6 +1495,8 @@ const MARKS: Partial<Record<ConceptId, () => React.ReactElement>> = {
   "commit-skyline": CommitSkylineMarks,
   "cabinet-of-shipped-worlds": CabinetMarks,
   "phosphor-lens": PhosphorLensMarks,
+  "signal-from-noise": SignalFromNoiseMarks,
+  "lanyard-badge": LanyardBadgeMarks,
 };
 
 interface ConceptSketchProps {

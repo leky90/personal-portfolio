@@ -107,4 +107,15 @@ describe("ConceptSketch — mini data-viz generative cho từng concept", () => 
       unmount();
     }
   });
+
+  it("concept ready batch 13 có variant riêng, không dùng placeholder chờ", () => {
+    const pending = render(<ConceptSketch id="ten-year-galaxy" />);
+    const placeholder = pending.container.innerHTML;
+    pending.unmount();
+    for (const id of ["signal-from-noise", "lanyard-badge"] as const) {
+      const { container, unmount } = render(<ConceptSketch id={id} />);
+      expect(container.innerHTML).not.toBe(placeholder);
+      unmount();
+    }
+  });
 });

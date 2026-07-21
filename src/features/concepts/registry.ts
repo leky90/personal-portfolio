@@ -411,7 +411,7 @@ export const CONCEPTS: ConceptMeta[] = [
       "Tín hiệu giữa nhiễu. Mười năm biến hỗn độn thành những hệ thống vận hành chính xác.",
     pitch:
       "One persistent GPGPU particle field that repeatedly collapses chaos into precise, data-driven engineered forms; the visitor's first scroll literally reenacts ten years of turning noise into systems.",
-    status: "planned",
+    status: "ready",
     origin: "v1",
     difficulty: 4,
     effortDays: 11,
@@ -426,7 +426,7 @@ export const CONCEPTS: ConceptMeta[] = [
       "Tấm thẻ kỹ sư treo trên dây đeo thật sự cầm được, kéo được, búng được. Mười năm kinh nghiệm in thành dữ liệu sống ngay trên thẻ, kéo thẻ xuống để bước vào.",
     pitch:
       "A physically simulated conference badge on a lanyard that you grab, flick, flip and finally pull down to enter the site; every line printed on the card is real, build-time engineer data.",
-    status: "planned",
+    status: "ready",
     origin: "v1",
     difficulty: 3,
     effortDays: 9,
