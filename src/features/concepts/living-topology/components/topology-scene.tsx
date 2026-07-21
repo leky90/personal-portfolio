@@ -4,7 +4,6 @@ import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useFrame, useThree, type ThreeEvent } from "@react-three/fiber";
 import { easing } from "maath";
-import { SYSTEMS } from "@/features/concepts/living-topology/lib/systems-data";
 import { buildTopologyGraph } from "@/features/concepts/living-topology/lib/topology-graph";
 import {
   advancePacket,

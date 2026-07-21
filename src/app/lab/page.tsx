@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+import type { PageMetadata } from "@/lib/page-meta";
+import { Link } from "react-router";
 import { ConceptSketch } from "@/components/lab/concept-sketch";
 import {
   CONCEPTS,
@@ -10,7 +10,7 @@ const READY_COUNT = CONCEPTS.filter(
   (concept) => concept.status === "ready",
 ).length;
 
-export const metadata: Metadata = {
+export const metadata: PageMetadata = {
   title: "Concept Lab",
   description: `Kho lưu quá trình chọn art direction cho portfolio: ${CONCEPTS.length} concept từ hai vòng đề xuất, chấm mù trên cùng một thang điểm, ${READY_COUNT} demo chạy được. Terrain là hướng được chốt.`,
 };
@@ -88,7 +88,7 @@ function ConceptRow({ concept }: { concept: ConceptMeta }) {
   }
 
   return (
-    <Link href={`/concepts/${concept.id}`} className={rowClasses}>
+    <Link to={`/concepts/${concept.id}`} className={rowClasses}>
       {rowBody}
     </Link>
   );
@@ -110,7 +110,7 @@ export default function ConceptLabPage() {
       <header className="border-b border-neutral-800 pt-8 pb-12 sm:pt-10">
         <div className="flex items-start justify-between gap-4">
           <Link
-            href="/"
+            to="/"
             className="border border-neutral-800 px-2 py-1 font-mono text-[11px] text-neutral-400 transition-colors hover:border-neutral-500 hover:text-neutral-100"
           >
             ← portfolio

@@ -1,20 +1,13 @@
 "use client";
 
-import dynamic from "next/dynamic";
+import { Suspense, lazy } from "react";
 import { ScenePoster } from "@/features/concepts/shared/components/scene-poster";
 import { usePrefersReducedMotion } from "@/features/concepts/shared/hooks/use-prefers-reduced-motion";
 import type { KeyboardCanvasProps } from "@/features/concepts/daily-driver/components/keyboard-canvas";
 
 // Điểm bundle-split duy nhất của three.js cho concept daily-driver.
-const KeyboardCanvasLazy = dynamic(
-  () =>
-    import(
-      "@/features/concepts/daily-driver/components/keyboard-canvas"
-    ).then((mod) => mod.KeyboardCanvas),
-  {
-    ssr: false,
-    loading: () => <ScenePoster note="Đang lube switch…" />,
-  },
+const KeyboardCanvasLazy = lazy(() =>
+  import("@/features/concepts/daily-driver/components/keyboard-canvas").then((mod) => ({ default: mod.KeyboardCanvas })),
 );
 
 /** Rẽ nhánh reduced-motion TRƯỚC khi chạm chunk three.js. */
@@ -26,7 +19,9 @@ export function KeyboardCanvasLoader(props: KeyboardCanvasProps) {
       {prefersReduced ? (
         <ScenePoster note="Bản tĩnh — thiết bị đang bật giảm chuyển động, bàn phím hiển thị dạng poster; lệnh vẫn gõ được ở prompt." />
       ) : (
-        <KeyboardCanvasLazy {...props} />
+        <Suspense fallback={<ScenePoster note="Đang lube switch…" />}>
+          <KeyboardCanvasLazy {...props} />
+        </Suspense>
       )}
     </div>
   );

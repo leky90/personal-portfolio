@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import DecisionDiffConceptPage, {
@@ -15,7 +16,7 @@ describe("trang /concepts/decision-diff", () => {
   });
 
   it("render ConceptShell với rank + điểm từ registry", () => {
-    render(<DecisionDiffConceptPage />);
+    render(<MemoryRouter><DecisionDiffConceptPage /></MemoryRouter>);
     const concept = getConcept("decision-diff");
     expect(
       screen.getByText(
@@ -28,7 +29,7 @@ describe("trang /concepts/decision-diff", () => {
   });
 
   it("mount DecisionExperience bên trong shell", () => {
-    render(<DecisionDiffConceptPage />);
+    render(<MemoryRouter><DecisionDiffConceptPage /></MemoryRouter>);
     expect(screen.getByTestId("decision-experience")).toBeInTheDocument();
   });
 });

@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import ConstraintPrismConceptPage, {
@@ -15,7 +16,7 @@ describe("trang /concepts/constraint-prism", () => {
   });
 
   it("render ConceptShell với rank + điểm từ registry", () => {
-    render(<ConstraintPrismConceptPage />);
+    render(<MemoryRouter><ConstraintPrismConceptPage /></MemoryRouter>);
     const concept = getConcept("constraint-prism");
     expect(
       screen.getByText(
@@ -28,7 +29,7 @@ describe("trang /concepts/constraint-prism", () => {
   });
 
   it("mount PrismExperience bên trong shell", () => {
-    render(<ConstraintPrismConceptPage />);
+    render(<MemoryRouter><ConstraintPrismConceptPage /></MemoryRouter>);
     expect(screen.getByTestId("prism-experience")).toBeInTheDocument();
   });
 });

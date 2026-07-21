@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import CabinetConceptPage, {
@@ -15,7 +16,7 @@ describe("trang /concepts/cabinet-of-shipped-worlds", () => {
   });
 
   it("render ConceptShell với rank + điểm từ registry", () => {
-    render(<CabinetConceptPage />);
+    render(<MemoryRouter><CabinetConceptPage /></MemoryRouter>);
     const concept = getConcept("cabinet-of-shipped-worlds");
     expect(
       screen.getByText(
@@ -28,7 +29,7 @@ describe("trang /concepts/cabinet-of-shipped-worlds", () => {
   });
 
   it("mount CabinetExperience bên trong shell", () => {
-    render(<CabinetConceptPage />);
+    render(<MemoryRouter><CabinetConceptPage /></MemoryRouter>);
     expect(screen.getByTestId("cabinet-experience")).toBeInTheDocument();
   });
 });

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
+import { useLayoutEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useFrame, useThree, type ThreeEvent } from "@react-three/fiber";
 import { easing } from "maath";

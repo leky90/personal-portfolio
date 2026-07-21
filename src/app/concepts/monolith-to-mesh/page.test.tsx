@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import MonolithToMeshConceptPage, {
@@ -15,7 +16,7 @@ describe("trang /concepts/monolith-to-mesh", () => {
   });
 
   it("render ConceptShell với rank + điểm từ registry", () => {
-    render(<MonolithToMeshConceptPage />);
+    render(<MemoryRouter><MonolithToMeshConceptPage /></MemoryRouter>);
     const concept = getConcept("monolith-to-mesh");
     expect(
       screen.getByText(
@@ -28,7 +29,7 @@ describe("trang /concepts/monolith-to-mesh", () => {
   });
 
   it("mount MeshExperience bên trong shell", () => {
-    render(<MonolithToMeshConceptPage />);
+    render(<MemoryRouter><MonolithToMeshConceptPage /></MemoryRouter>);
     expect(screen.getByTestId("mesh-experience")).toBeInTheDocument();
   });
 });

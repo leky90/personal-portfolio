@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import ResolutionConceptPage, {
@@ -16,7 +17,7 @@ describe("trang /concepts/resolution", () => {
   });
 
   it("render ConceptShell với thông tin concept resolution từ registry", () => {
-    render(<ResolutionConceptPage />);
+    render(<MemoryRouter><ResolutionConceptPage /></MemoryRouter>);
     const concept = getConcept("resolution");
     expect(
       screen.getByText(
@@ -29,7 +30,7 @@ describe("trang /concepts/resolution", () => {
   });
 
   it("mount ResolutionExperience bên trong shell", () => {
-    render(<ResolutionConceptPage />);
+    render(<MemoryRouter><ResolutionConceptPage /></MemoryRouter>);
     expect(screen.getByTestId("resolution-experience")).toBeInTheDocument();
   });
 });

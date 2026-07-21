@@ -1,50 +1,31 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { notFound } from "next/navigation";
+import { Link, useParams } from "react-router";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { NotFoundPage } from "@/app/not-found-page";
 import { PROJECTS } from "@/lib/data/projects";
-import {
-  compileMdxBody,
-  getProjectStudySource,
-  listProjectStudySlugs,
-} from "@/lib/mdx";
+import { getProjectStudy } from "@/lib/mdx";
 import { SITE } from "@/lib/data/site";
+import { PageMeta } from "@/lib/page-meta";
 
-interface CaseStudyPageProps {
-  params: Promise<{ slug: string }>;
-}
-
-export async function generateStaticParams() {
-  return listProjectStudySlugs().map((slug) => ({ slug }));
-}
-
-export async function generateMetadata({
-  params,
-}: CaseStudyPageProps): Promise<Metadata> {
-  const { slug } = await params;
+export default function ProjectCaseStudyPage() {
+  const { slug } = useParams();
   const project = PROJECTS.find((p) => p.slug === slug);
-  return {
-    title: project ? `${project.title} — Case Study` : "Case Study",
-    description: project?.summary,
-  };
-}
-
-export default async function ProjectCaseStudyPage({
-  params,
-}: CaseStudyPageProps) {
-  const { slug } = await params;
-  const project = PROJECTS.find((p) => p.slug === slug);
-  const source = getProjectStudySource(slug);
-  if (!project || !source) {
-    notFound();
+  const study = slug ? getProjectStudy(slug) : null;
+  if (!project || !study) {
+    return <NotFoundPage />;
   }
-  const body = await compileMdxBody(source);
+  const { Body } = study;
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6 sm:py-24">
+      <PageMeta
+        meta={{
+          title: `${project.title} — Case Study`,
+          description: project.summary,
+        }}
+      />
       <Link
-        href="/#work"
+        to="/#work"
         className="inline-block rounded border border-neutral-800 bg-black/60 px-2 py-1 font-mono text-[11px] text-neutral-400 transition-colors hover:border-neutral-600 hover:text-neutral-100"
       >
         ← work
@@ -79,7 +60,7 @@ export default async function ProjectCaseStudyPage({
       <Separator className="my-10 bg-neutral-900" />
 
       <article className="prose prose-invert prose-neutral max-w-none prose-headings:tracking-tight prose-a:text-[#ffb454] prose-code:font-mono prose-pre:border prose-pre:border-neutral-900 prose-pre:bg-neutral-950">
-        {body}
+        <Body />
       </article>
 
       <Separator className="my-10 bg-neutral-900" />

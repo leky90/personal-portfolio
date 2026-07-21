@@ -1,20 +1,13 @@
 "use client";
 
-import dynamic from "next/dynamic";
+import { Suspense, lazy } from "react";
 import { ScenePoster } from "@/features/concepts/shared/components/scene-poster";
 import { usePrefersReducedMotion } from "@/features/concepts/shared/hooks/use-prefers-reduced-motion";
 import type { DigCanvasProps } from "@/features/concepts/maintenance-archaeology/components/dig-canvas";
 
 // Điểm bundle-split duy nhất của three.js cho concept maintenance-archaeology.
-const DigCanvasLazy = dynamic(
-  () =>
-    import(
-      "@/features/concepts/maintenance-archaeology/components/dig-canvas"
-    ).then((mod) => mod.DigCanvas),
-  {
-    ssr: false,
-    loading: () => <ScenePoster note="Đang căng dây trắc địa…" />,
-  },
+const DigCanvasLazy = lazy(() =>
+  import("@/features/concepts/maintenance-archaeology/components/dig-canvas").then((mod) => ({ default: mod.DigCanvas })),
 );
 
 /** Rẽ nhánh reduced-motion TRƯỚC khi chạm chunk three.js. */
@@ -26,7 +19,9 @@ export function DigCanvasLoader(props: DigCanvasProps) {
       {prefersReduced ? (
         <ScenePoster note="Bản tĩnh — thiết bị đang bật giảm chuyển động, hố khai quật hiển thị dạng poster." />
       ) : (
-        <DigCanvasLazy {...props} />
+        <Suspense fallback={<ScenePoster note="Đang căng dây trắc địa…" />}>
+          <DigCanvasLazy {...props} />
+        </Suspense>
       )}
     </div>
   );

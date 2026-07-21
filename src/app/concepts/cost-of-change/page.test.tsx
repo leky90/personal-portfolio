@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import CostOfChangeConceptPage, {
@@ -15,7 +16,7 @@ describe("trang /concepts/cost-of-change", () => {
   });
 
   it("render ConceptShell với rank + điểm từ registry", () => {
-    render(<CostOfChangeConceptPage />);
+    render(<MemoryRouter><CostOfChangeConceptPage /></MemoryRouter>);
     const concept = getConcept("cost-of-change");
     expect(
       screen.getByText(
@@ -28,7 +29,7 @@ describe("trang /concepts/cost-of-change", () => {
   });
 
   it("mount ChangeExperience bên trong shell", () => {
-    render(<CostOfChangeConceptPage />);
+    render(<MemoryRouter><CostOfChangeConceptPage /></MemoryRouter>);
     expect(screen.getByTestId("change-experience")).toBeInTheDocument();
   });
 });

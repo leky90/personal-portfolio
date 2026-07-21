@@ -24,7 +24,8 @@ export interface SiteConfig {
 
 export const SITE: SiteConfig = {
   name: "Ky Le",
-  url: "https://ldky90.dev",
+  // GH Pages project site; đổi về domain riêng khi gắn custom domain
+  url: "https://ldky90.github.io/personal-portfolio",
   title: "Senior Software Engineer",
   tagline: "Ten years of shipped systems, rendered as terrain.",
   email: "ldky90@gmail.com",

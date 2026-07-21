@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
-  getProjectStudySource,
+  getProjectStudy,
   getWritingPost,
   listProjectStudySlugs,
   listWritingPosts,
@@ -36,7 +36,7 @@ describe("writing frontmatter schema (Zod)", () => {
   });
 });
 
-describe("listWritingPosts — đọc content/writing", () => {
+describe("listWritingPosts — glob content/writing qua @mdx-js/rollup", () => {
   it("có ≥ 2 bài, slug duy nhất, sắp xếp mới nhất trước", () => {
     const posts = listWritingPosts();
     expect(posts.length).toBeGreaterThanOrEqual(2);
@@ -46,26 +46,25 @@ describe("listWritingPosts — đọc content/writing", () => {
     }
   });
 
-  it("getWritingPost trả meta + source; slug lạ → null", () => {
+  it("getWritingPost trả meta + Body component; slug lạ → null", () => {
     const [first] = listWritingPosts();
     const post = getWritingPost(first.slug);
     expect(post).not.toBeNull();
     expect(post!.meta.title).toBe(first.title);
-    expect(post!.source.length).toBeGreaterThan(100);
+    expect(typeof post!.Body).toBe("function");
     expect(getWritingPost("khong-ton-tai")).toBeNull();
   });
 });
 
 describe("case studies — mỗi project trong data đều có bài MDX", () => {
-  it("slug khớp 1-1 với PROJECTS", () => {
+  it("slug khớp 1-1 với PROJECTS, mỗi bài là một component", () => {
     const slugs = listProjectStudySlugs().sort();
     expect(slugs).toEqual(PROJECTS.map((p) => p.slug).sort());
-  });
-
-  it("getProjectStudySource trả prose; slug lạ → null", () => {
-    const source = getProjectStudySource(PROJECTS[0].slug);
-    expect(source).not.toBeNull();
-    expect(source!).toContain("## ");
-    expect(getProjectStudySource("khong-ton-tai")).toBeNull();
+    for (const slug of slugs) {
+      const study = getProjectStudy(slug);
+      expect(study).not.toBeNull();
+      expect(typeof study!.Body).toBe("function");
+    }
+    expect(getProjectStudy("khong-ton-tai")).toBeNull();
   });
 });

@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import CompiledLightConceptPage, {
@@ -15,7 +16,7 @@ describe("trang /concepts/compiled-light", () => {
   });
 
   it("render ConceptShell với thông tin concept từ registry", () => {
-    render(<CompiledLightConceptPage />);
+    render(<MemoryRouter><CompiledLightConceptPage /></MemoryRouter>);
     const concept = getConcept("compiled-light");
     expect(
       screen.getByText(
@@ -28,7 +29,7 @@ describe("trang /concepts/compiled-light", () => {
   });
 
   it("mount CompiledExperience bên trong shell", () => {
-    render(<CompiledLightConceptPage />);
+    render(<MemoryRouter><CompiledLightConceptPage /></MemoryRouter>);
     expect(screen.getByTestId("compiled-experience")).toBeInTheDocument();
   });
 });

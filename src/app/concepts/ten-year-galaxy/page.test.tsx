@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import TenYearGalaxyConceptPage, {
@@ -15,7 +16,7 @@ describe("trang /concepts/ten-year-galaxy", () => {
   });
 
   it("render ConceptShell với rank + điểm từ registry", () => {
-    render(<TenYearGalaxyConceptPage />);
+    render(<MemoryRouter><TenYearGalaxyConceptPage /></MemoryRouter>);
     const concept = getConcept("ten-year-galaxy");
     expect(
       screen.getByText(
@@ -28,7 +29,7 @@ describe("trang /concepts/ten-year-galaxy", () => {
   });
 
   it("mount GalaxyExperience bên trong shell", () => {
-    render(<TenYearGalaxyConceptPage />);
+    render(<MemoryRouter><TenYearGalaxyConceptPage /></MemoryRouter>);
     expect(screen.getByTestId("galaxy-experience")).toBeInTheDocument();
   });
 });

@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import KnowledgeRelayConceptPage, {
@@ -15,7 +16,7 @@ describe("trang /concepts/knowledge-relay", () => {
   });
 
   it("render ConceptShell với rank + điểm từ registry", () => {
-    render(<KnowledgeRelayConceptPage />);
+    render(<MemoryRouter><KnowledgeRelayConceptPage /></MemoryRouter>);
     const concept = getConcept("knowledge-relay");
     expect(
       screen.getByText(
@@ -28,7 +29,7 @@ describe("trang /concepts/knowledge-relay", () => {
   });
 
   it("mount RelayExperience bên trong shell", () => {
-    render(<KnowledgeRelayConceptPage />);
+    render(<MemoryRouter><KnowledgeRelayConceptPage /></MemoryRouter>);
     expect(screen.getByTestId("relay-experience")).toBeInTheDocument();
   });
 });

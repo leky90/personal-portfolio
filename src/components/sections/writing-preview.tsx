@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "react-router";
 import { listWritingPosts } from "@/lib/mdx";
 
 export function WritingPreview() {
@@ -11,7 +11,7 @@ export function WritingPreview() {
           Writing
         </h2>
         <Link
-          href="/writing"
+          to="/writing"
           className="font-mono text-[11px] text-neutral-400 underline-offset-4 transition-colors hover:text-[#ffb454] hover:underline"
         >
           All posts →
@@ -21,7 +21,7 @@ export function WritingPreview() {
         {posts.map((post) => (
           <li key={post.slug}>
             <Link
-              href={`/writing/${post.slug}`}
+              to={`/writing/${post.slug}`}
               className="group block rounded-lg border border-neutral-900 bg-neutral-950/70 p-4 backdrop-blur-sm transition-colors hover:border-neutral-700"
             >
               <p className="font-mono text-[11px] text-neutral-500">

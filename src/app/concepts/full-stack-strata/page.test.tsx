@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import FullStackStrataConceptPage, {
@@ -15,7 +16,7 @@ describe("trang /concepts/full-stack-strata", () => {
   });
 
   it("render ConceptShell với rank + điểm từ registry", () => {
-    render(<FullStackStrataConceptPage />);
+    render(<MemoryRouter><FullStackStrataConceptPage /></MemoryRouter>);
     const concept = getConcept("full-stack-strata");
     expect(
       screen.getByText(
@@ -28,7 +29,7 @@ describe("trang /concepts/full-stack-strata", () => {
   });
 
   it("mount IslandExperience bên trong shell", () => {
-    render(<FullStackStrataConceptPage />);
+    render(<MemoryRouter><FullStackStrataConceptPage /></MemoryRouter>);
     expect(screen.getByTestId("island-experience")).toBeInTheDocument();
   });
 });

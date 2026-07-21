@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import CommitSkylineConceptPage, {
@@ -15,7 +16,7 @@ describe("trang /concepts/commit-skyline", () => {
   });
 
   it("render ConceptShell với rank + điểm từ registry", () => {
-    render(<CommitSkylineConceptPage />);
+    render(<MemoryRouter><CommitSkylineConceptPage /></MemoryRouter>);
     const concept = getConcept("commit-skyline");
     expect(
       screen.getByText(
@@ -28,7 +29,7 @@ describe("trang /concepts/commit-skyline", () => {
   });
 
   it("mount SkylineExperience bên trong shell", () => {
-    render(<CommitSkylineConceptPage />);
+    render(<MemoryRouter><CommitSkylineConceptPage /></MemoryRouter>);
     expect(screen.getByTestId("skyline-experience")).toBeInTheDocument();
   });
 });

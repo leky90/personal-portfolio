@@ -1,20 +1,13 @@
 "use client";
 
-import dynamic from "next/dynamic";
+import { Suspense, lazy } from "react";
 import { ScenePoster } from "@/features/concepts/shared/components/scene-poster";
 import { usePrefersReducedMotion } from "@/features/concepts/shared/hooks/use-prefers-reduced-motion";
 import type { GalaxyCanvasProps } from "@/features/concepts/ten-year-galaxy/components/galaxy-canvas";
 
 // Điểm bundle-split duy nhất của three.js cho concept ten-year-galaxy.
-const GalaxyCanvasLazy = dynamic(
-  () =>
-    import(
-      "@/features/concepts/ten-year-galaxy/components/galaxy-canvas"
-    ).then((mod) => mod.GalaxyCanvas),
-  {
-    ssr: false,
-    loading: () => <ScenePoster note="Đang gom bụi sao 520 tuần…" />,
-  },
+const GalaxyCanvasLazy = lazy(() =>
+  import("@/features/concepts/ten-year-galaxy/components/galaxy-canvas").then((mod) => ({ default: mod.GalaxyCanvas })),
 );
 
 /** Rẽ nhánh reduced-motion TRƯỚC khi chạm chunk three.js. */
@@ -26,7 +19,9 @@ export function GalaxyCanvasLoader(props: GalaxyCanvasProps) {
       {prefersReduced ? (
         <ScenePoster note="Bản tĩnh — thiết bị đang bật giảm chuyển động; thiên hà hiển thị ở khung đã hoàn chỉnh (uProgress = 1), không twinkle." />
       ) : (
-        <GalaxyCanvasLazy {...props} />
+        <Suspense fallback={<ScenePoster note="Đang gom bụi sao 520 tuần…" />}>
+          <GalaxyCanvasLazy {...props} />
+        </Suspense>
       )}
     </div>
   );

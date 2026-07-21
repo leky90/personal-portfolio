@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { describe, expect, it } from "vitest";
 import ConceptLabPage, { metadata } from "@/app/lab/page";
 import { CONCEPTS } from "@/features/concepts/registry";
@@ -9,7 +10,7 @@ describe("Gallery concept lab tại /lab", () => {
   });
 
   it("hiển thị toàn bộ concept trong registry (heading trong index)", () => {
-    render(<ConceptLabPage />);
+    render(<MemoryRouter><ConceptLabPage /></MemoryRouter>);
     for (const concept of CONCEPTS) {
       expect(
         screen.getByRole("heading", { name: concept.title }),
@@ -18,7 +19,7 @@ describe("Gallery concept lab tại /lab", () => {
   });
 
   it("concept ready có link demo; concept planned KHÔNG phải link", () => {
-    render(<ConceptLabPage />);
+    render(<MemoryRouter><ConceptLabPage /></MemoryRouter>);
     const hrefs = screen
       .getAllByRole("link")
       .map((link) => link.getAttribute("href"));
@@ -38,13 +39,13 @@ describe("Gallery concept lab tại /lab", () => {
   });
 
   it("masthead đếm demo chạy được từ registry, không hardcode", () => {
-    render(<ConceptLabPage />);
+    render(<MemoryRouter><ConceptLabPage /></MemoryRouter>);
     const ready = CONCEPTS.filter((c) => c.status === "ready").length;
     expect(screen.getByText(`${ready} demo chạy được`)).toBeInTheDocument();
   });
 
   it("có link quay về trang chủ portfolio", () => {
-    render(<ConceptLabPage />);
+    render(<MemoryRouter><ConceptLabPage /></MemoryRouter>);
     const home = screen
       .getAllByRole("link")
       .find((link) => link.getAttribute("href") === "/");
@@ -52,20 +53,20 @@ describe("Gallery concept lab tại /lab", () => {
   });
 
   it("mỗi concept có một sketch SVG (variant riêng hoặc placeholder)", () => {
-    const { container } = render(<ConceptLabPage />);
+    const { container } = render(<MemoryRouter><ConceptLabPage /></MemoryRouter>);
     expect(container.querySelectorAll("svg[aria-hidden]").length).toBe(
       CONCEPTS.length,
     );
   });
 
   it("ma trận điểm có đủ một hàng cho mỗi concept + header", () => {
-    render(<ConceptLabPage />);
+    render(<MemoryRouter><ConceptLabPage /></MemoryRouter>);
     expect(screen.getByRole("table")).toBeInTheDocument();
     expect(screen.getAllByRole("row").length).toBe(CONCEPTS.length + 1);
   });
 
   it("không có em-dash trong bất kỳ chuỗi hiển thị nào", () => {
-    const { container } = render(<ConceptLabPage />);
+    const { container } = render(<MemoryRouter><ConceptLabPage /></MemoryRouter>);
     expect(container.textContent).not.toContain("—");
   });
 });

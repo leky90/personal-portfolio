@@ -1,20 +1,13 @@
 "use client";
 
-import dynamic from "next/dynamic";
+import { Suspense, lazy } from "react";
 import { ScenePoster } from "@/features/concepts/shared/components/scene-poster";
 import { usePrefersReducedMotion } from "@/features/concepts/shared/hooks/use-prefers-reduced-motion";
 import type { NoiseCanvasProps } from "@/features/concepts/signal-from-noise/components/noise-canvas";
 
 // Điểm bundle-split duy nhất của three.js cho concept signal-from-noise.
-const NoiseCanvasLazy = dynamic(
-  () =>
-    import(
-      "@/features/concepts/signal-from-noise/components/noise-canvas"
-    ).then((mod) => mod.NoiseCanvas),
-  {
-    ssr: false,
-    loading: () => <ScenePoster note="Đang gom nhiễu lạnh…" />,
-  },
+const NoiseCanvasLazy = lazy(() =>
+  import("@/features/concepts/signal-from-noise/components/noise-canvas").then((mod) => ({ default: mod.NoiseCanvas })),
 );
 
 /** Rẽ nhánh reduced-motion TRƯỚC khi chạm chunk three.js. */
@@ -26,7 +19,9 @@ export function NoiseCanvasLoader(props: NoiseCanvasProps) {
       {prefersReduced ? (
         <ScenePoster note="Bản tĩnh — thiết bị đang bật giảm chuyển động; các form hiển thị ở trạng thái đã kết tinh, không chaos interlude." />
       ) : (
-        <NoiseCanvasLazy {...props} />
+        <Suspense fallback={<ScenePoster note="Đang gom nhiễu lạnh…" />}>
+          <NoiseCanvasLazy {...props} />
+        </Suspense>
       )}
     </div>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
+import { useLayoutEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useFrame, useThree, type ThreeEvent } from "@react-three/fiber";
 import {
@@ -105,7 +105,7 @@ export function ToyboxScene({ toyboxState }: ToyboxSceneProps) {
     });
     if (tokens.instanceColor) tokens.instanceColor.needsUpdate = true;
     resetRun();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [greys]);
 
   const writeToken = (index: number, x: number, y: number, z: number) => {
@@ -179,9 +179,9 @@ export function ToyboxScene({ toyboxState }: ToyboxSceneProps) {
         let vy = velocities.current[i * 3 + 1];
         let vz = velocities.current[i * 3 + 2];
         vy -= GRAVITY * dt;
-        let nx = px + vx * dt;
+        const nx = px + vx * dt;
         let ny = py + vy * dt;
-        let nz = pz + vz * dt;
+        const nz = pz + vz * dt;
         const floorY = skill.rest[1];
         if (ny <= floorY) {
           ny = floorY;

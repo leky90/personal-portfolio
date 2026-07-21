@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo } from "react";
 import * as THREE from "three";
 import { createPortal, useFrame, useThree } from "@react-three/fiber";
 import { useFBO } from "@react-three/drei";

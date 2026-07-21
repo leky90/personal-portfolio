@@ -18,7 +18,6 @@ interface RelaySceneProps {
 
 const LANE_ALIVE = new THREE.Color("#8b96a5");
 const LANE_DEAD = new THREE.Color("#3a4048");
-const BATON_COLOR = "#34d399";
 
 /**
  * Marey timetable 3D: 6 lane kệ theo z, thời gian dọc x. TẤT CẢ hành

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "react-router";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -40,7 +40,7 @@ export function ProjectsSection() {
                 {project.metrics.join(" · ")}
               </p>
               <Link
-                href={`/projects/${project.slug}`}
+                to={`/projects/${project.slug}`}
                 className="mt-3 inline-block font-mono text-[11px] text-neutral-300 underline-offset-4 transition-colors hover:text-[#ffb454] hover:underline"
               >
                 Read case study →

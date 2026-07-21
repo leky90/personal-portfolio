@@ -1,20 +1,13 @@
 "use client";
 
-import dynamic from "next/dynamic";
+import { Suspense, lazy } from "react";
 import { ScenePoster } from "@/features/concepts/shared/components/scene-poster";
 import { usePrefersReducedMotion } from "@/features/concepts/shared/hooks/use-prefers-reduced-motion";
 import type { CompiledCanvasProps } from "@/features/concepts/compiled-light/components/compiled-canvas";
 
 // Điểm bundle-split duy nhất của three.js cho concept compiled-light.
-const CompiledCanvasLazy = dynamic(
-  () =>
-    import(
-      "@/features/concepts/compiled-light/components/compiled-canvas"
-    ).then((mod) => mod.CompiledCanvas),
-  {
-    ssr: false,
-    loading: () => <ScenePoster note="Đang compile pipeline ánh sáng…" />,
-  },
+const CompiledCanvasLazy = lazy(() =>
+  import("@/features/concepts/compiled-light/components/compiled-canvas").then((mod) => ({ default: mod.CompiledCanvas })),
 );
 
 /** Rẽ nhánh reduced-motion TRƯỚC khi chạm chunk three.js. */
@@ -26,7 +19,9 @@ export function CompiledCanvasLoader(props: CompiledCanvasProps) {
       {prefersReduced ? (
         <ScenePoster note="Bản tĩnh — thiết bị đang bật giảm chuyển động, dune-field hiển thị dạng poster." />
       ) : (
-        <CompiledCanvasLazy {...props} />
+        <Suspense fallback={<ScenePoster note="Đang compile pipeline ánh sáng…" />}>
+          <CompiledCanvasLazy {...props} />
+        </Suspense>
       )}
     </div>
   );

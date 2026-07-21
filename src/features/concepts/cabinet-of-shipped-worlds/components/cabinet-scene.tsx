@@ -94,7 +94,7 @@ export function CabinetScene({ cabinetState }: CabinetSceneProps) {
       mesh.setMatrixAt(index, tmpMatrix.current);
     });
     mesh.instanceMatrix.needsUpdate = true;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [mullions]);
 
   useFrame((root, delta) => {

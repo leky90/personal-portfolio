@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "react-router";
 import type { ConceptMeta } from "@/features/concepts/registry";
 
 interface ConceptShellProps {
@@ -19,7 +19,7 @@ export function ConceptShell({ concept, children }: ConceptShellProps) {
       <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex items-start justify-between gap-4 p-4 sm:p-6">
         <div className="min-w-0">
           <Link
-            href="/lab"
+            to="/lab"
             className="pointer-events-auto inline-block rounded border border-neutral-800 bg-black/60 px-2 py-1 font-mono text-[11px] text-neutral-400 backdrop-blur transition-colors hover:border-neutral-600 hover:text-neutral-100"
           >
             ← concepts

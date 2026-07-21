@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "react-router";
 import { SITE } from "@/lib/data/site";
 
 const NAV_ITEMS = [
@@ -21,7 +21,7 @@ export function SiteHeader() {
       </a>
       <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
         <Link
-          href="/"
+          to="/"
           className="rounded bg-black/40 px-2 py-1 font-mono text-sm tracking-wide text-neutral-100 backdrop-blur transition-colors hover:text-[#ffb454]"
         >
           {SITE.name}

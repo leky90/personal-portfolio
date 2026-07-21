@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import GlyphFieldConceptPage, {
@@ -15,7 +16,7 @@ describe("trang /concepts/glyph-field", () => {
   });
 
   it("render ConceptShell với rank + điểm từ registry", () => {
-    render(<GlyphFieldConceptPage />);
+    render(<MemoryRouter><GlyphFieldConceptPage /></MemoryRouter>);
     const concept = getConcept("glyph-field");
     expect(
       screen.getByText(
@@ -28,7 +29,7 @@ describe("trang /concepts/glyph-field", () => {
   });
 
   it("mount GlyphExperience bên trong shell", () => {
-    render(<GlyphFieldConceptPage />);
+    render(<MemoryRouter><GlyphFieldConceptPage /></MemoryRouter>);
     expect(screen.getByTestId("glyph-experience")).toBeInTheDocument();
   });
 });

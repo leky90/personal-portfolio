@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import RequestLifecycleConceptPage, {
@@ -15,7 +16,7 @@ describe("trang /concepts/request-lifecycle", () => {
   });
 
   it("render ConceptShell với rank + điểm từ registry", () => {
-    render(<RequestLifecycleConceptPage />);
+    render(<MemoryRouter><RequestLifecycleConceptPage /></MemoryRouter>);
     const concept = getConcept("request-lifecycle");
     expect(
       screen.getByText(
@@ -28,7 +29,7 @@ describe("trang /concepts/request-lifecycle", () => {
   });
 
   it("mount TraceExperience bên trong shell", () => {
-    render(<RequestLifecycleConceptPage />);
+    render(<MemoryRouter><RequestLifecycleConceptPage /></MemoryRouter>);
     expect(screen.getByTestId("trace-experience")).toBeInTheDocument();
   });
 });

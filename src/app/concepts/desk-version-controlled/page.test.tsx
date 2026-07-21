@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import DeskVersionControlledConceptPage, {
@@ -15,7 +16,7 @@ describe("trang /concepts/desk-version-controlled", () => {
   });
 
   it("render ConceptShell với rank + điểm từ registry", () => {
-    render(<DeskVersionControlledConceptPage />);
+    render(<MemoryRouter><DeskVersionControlledConceptPage /></MemoryRouter>);
     const concept = getConcept("desk-version-controlled");
     expect(
       screen.getByText(
@@ -28,7 +29,7 @@ describe("trang /concepts/desk-version-controlled", () => {
   });
 
   it("mount DeskExperience bên trong shell", () => {
-    render(<DeskVersionControlledConceptPage />);
+    render(<MemoryRouter><DeskVersionControlledConceptPage /></MemoryRouter>);
     expect(screen.getByTestId("desk-experience")).toBeInTheDocument();
   });
 });

@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { describe, expect, it, vi } from "vitest";
 import Home from "@/app/page";
 import { SITE } from "@/lib/data/site";
@@ -14,33 +15,33 @@ vi.mock("@/components/three/terrain-stage", () => ({
 
 describe("Trang chủ portfolio — Terrain art direction", () => {
   it("bọc toàn bộ nội dung trong TerrainStage duy nhất", () => {
-    render(<Home />);
+    render(<MemoryRouter><Home /></MemoryRouter>);
     expect(screen.getAllByTestId("terrain-stage")).toHaveLength(1);
   });
 
   it("hero là h1 tên thật từ site config", () => {
-    render(<Home />);
+    render(<MemoryRouter><Home /></MemoryRouter>);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       SITE.name,
     );
   });
 
   it("đủ các section chính theo thứ tự hành trình", () => {
-    render(<Home />);
+    render(<MemoryRouter><Home /></MemoryRouter>);
     for (const id of ["about", "experience", "work", "skills", "contact"]) {
       expect(document.getElementById(id)).not.toBeNull();
     }
   });
 
   it("4 era card gắn data-era-index cho camera terrain", () => {
-    const { container } = render(<Home />);
+    const { container } = render(<MemoryRouter><Home /></MemoryRouter>);
     expect(container.querySelectorAll("[data-era-index]")).toHaveLength(
       EXPERIENCE.length,
     );
   });
 
   it("đủ 3 project và footer có link /lab", () => {
-    render(<Home />);
+    render(<MemoryRouter><Home /></MemoryRouter>);
     for (const project of PROJECTS) {
       expect(screen.getByText(project.title)).toBeInTheDocument();
     }
@@ -51,7 +52,7 @@ describe("Trang chủ portfolio — Terrain art direction", () => {
   });
 
   it("nhúng JSON-LD Person cho rich results", () => {
-    const { container } = render(<Home />);
+    const { container } = render(<MemoryRouter><Home /></MemoryRouter>);
     const script = container.querySelector(
       'script[type="application/ld+json"]',
     );
@@ -61,7 +62,7 @@ describe("Trang chủ portfolio — Terrain art direction", () => {
   });
 
   it("section writing preview dẫn tới /writing", () => {
-    render(<Home />);
+    render(<MemoryRouter><Home /></MemoryRouter>);
     const hrefs = screen
       .getAllByRole("link")
       .map((link) => link.getAttribute("href"));

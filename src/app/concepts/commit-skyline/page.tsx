@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+import type { PageMetadata } from "@/lib/page-meta";
 import { getConcept } from "@/features/concepts/registry";
 import { ConceptShell } from "@/features/concepts/shared/components/concept-shell";
 import { SkylineExperience } from "@/features/concepts/commit-skyline";
 
-export const metadata: Metadata = {
+export const metadata: PageMetadata = {
   title: "Commit Skyline — 3D Concept",
   description:
     "Concept demo: 3650 ngày commit dựng thành thành phố đêm trong sương. Cuộn để bay dọc đại lộ thập kỷ, mỗi block một năm; tháp beacon xanh đánh dấu những ngày đổi nghĩa sự nghiệp.",

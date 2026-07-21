@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import IncidentBlackBoxConceptPage, {
@@ -15,7 +16,7 @@ describe("trang /concepts/incident-black-box", () => {
   });
 
   it("render ConceptShell với rank + điểm từ registry", () => {
-    render(<IncidentBlackBoxConceptPage />);
+    render(<MemoryRouter><IncidentBlackBoxConceptPage /></MemoryRouter>);
     const concept = getConcept("incident-black-box");
     expect(
       screen.getByText(
@@ -28,7 +29,7 @@ describe("trang /concepts/incident-black-box", () => {
   });
 
   it("mount BlackBoxExperience bên trong shell", () => {
-    render(<IncidentBlackBoxConceptPage />);
+    render(<MemoryRouter><IncidentBlackBoxConceptPage /></MemoryRouter>);
     expect(screen.getByTestId("black-box-experience")).toBeInTheDocument();
   });
 });

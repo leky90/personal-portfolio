@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import LanyardBadgeConceptPage, {
@@ -15,7 +16,7 @@ describe("trang /concepts/lanyard-badge", () => {
   });
 
   it("render ConceptShell với rank + điểm từ registry", () => {
-    render(<LanyardBadgeConceptPage />);
+    render(<MemoryRouter><LanyardBadgeConceptPage /></MemoryRouter>);
     const concept = getConcept("lanyard-badge");
     expect(
       screen.getByText(
@@ -28,7 +29,7 @@ describe("trang /concepts/lanyard-badge", () => {
   });
 
   it("mount BadgeExperience bên trong shell", () => {
-    render(<LanyardBadgeConceptPage />);
+    render(<MemoryRouter><LanyardBadgeConceptPage /></MemoryRouter>);
     expect(screen.getByTestId("badge-experience")).toBeInTheDocument();
   });
 });

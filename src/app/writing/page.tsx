@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+import type { PageMetadata } from "@/lib/page-meta";
+import { Link } from "react-router";
 import { Badge } from "@/components/ui/badge";
 import { listWritingPosts } from "@/lib/mdx";
 
-export const metadata: Metadata = {
+export const metadata: PageMetadata = {
   title: "Writing — Ky Le",
   description:
     "Notes on systems, WebGL and the engineering behind this site.",
@@ -15,7 +15,7 @@ export default function WritingIndexPage() {
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6 sm:py-24">
       <Link
-        href="/"
+        to="/"
         className="inline-block rounded border border-neutral-800 bg-black/60 px-2 py-1 font-mono text-[11px] text-neutral-400 transition-colors hover:border-neutral-600 hover:text-neutral-100"
       >
         ← portfolio
@@ -31,7 +31,7 @@ export default function WritingIndexPage() {
       <ul className="mt-10 space-y-8">
         {posts.map((post) => (
           <li key={post.slug}>
-            <Link href={`/writing/${post.slug}`} className="group block">
+            <Link to={`/writing/${post.slug}`} className="group block">
               <p className="font-mono text-[11px] text-neutral-500">
                 {post.date}
               </p>

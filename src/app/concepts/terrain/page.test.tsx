@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import TerrainConceptPage, { metadata } from "@/app/concepts/terrain/page";
@@ -14,7 +15,7 @@ describe("trang /concepts/terrain", () => {
   });
 
   it("render ConceptShell với thông tin concept terrain từ registry", () => {
-    render(<TerrainConceptPage />);
+    render(<MemoryRouter><TerrainConceptPage /></MemoryRouter>);
     const concept = getConcept("terrain");
     expect(
       screen.getByText(
@@ -27,7 +28,7 @@ describe("trang /concepts/terrain", () => {
   });
 
   it("mount TerrainExperience bên trong shell", () => {
-    render(<TerrainConceptPage />);
+    render(<MemoryRouter><TerrainConceptPage /></MemoryRouter>);
     expect(screen.getByTestId("terrain-experience")).toBeInTheDocument();
   });
 });

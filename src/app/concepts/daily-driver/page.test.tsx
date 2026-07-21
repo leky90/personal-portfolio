@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import DailyDriverConceptPage, {
@@ -15,7 +16,7 @@ describe("trang /concepts/daily-driver", () => {
   });
 
   it("render ConceptShell với rank + điểm từ registry", () => {
-    render(<DailyDriverConceptPage />);
+    render(<MemoryRouter><DailyDriverConceptPage /></MemoryRouter>);
     const concept = getConcept("daily-driver");
     expect(
       screen.getByText(
@@ -28,7 +29,7 @@ describe("trang /concepts/daily-driver", () => {
   });
 
   it("mount DriverExperience bên trong shell", () => {
-    render(<DailyDriverConceptPage />);
+    render(<MemoryRouter><DailyDriverConceptPage /></MemoryRouter>);
     expect(screen.getByTestId("driver-experience")).toBeInTheDocument();
   });
 });

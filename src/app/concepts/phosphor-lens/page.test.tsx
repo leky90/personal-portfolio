@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import PhosphorLensConceptPage, {
@@ -15,7 +16,7 @@ describe("trang /concepts/phosphor-lens", () => {
   });
 
   it("render ConceptShell với rank + điểm từ registry", () => {
-    render(<PhosphorLensConceptPage />);
+    render(<MemoryRouter><PhosphorLensConceptPage /></MemoryRouter>);
     const concept = getConcept("phosphor-lens");
     expect(
       screen.getByText(
@@ -28,7 +29,7 @@ describe("trang /concepts/phosphor-lens", () => {
   });
 
   it("mount LensExperience bên trong shell", () => {
-    render(<PhosphorLensConceptPage />);
+    render(<MemoryRouter><PhosphorLensConceptPage /></MemoryRouter>);
     expect(screen.getByTestId("lens-experience")).toBeInTheDocument();
   });
 });

@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import SignalFromNoiseConceptPage, {
@@ -15,7 +16,7 @@ describe("trang /concepts/signal-from-noise", () => {
   });
 
   it("render ConceptShell với rank + điểm từ registry", () => {
-    render(<SignalFromNoiseConceptPage />);
+    render(<MemoryRouter><SignalFromNoiseConceptPage /></MemoryRouter>);
     const concept = getConcept("signal-from-noise");
     expect(
       screen.getByText(
@@ -28,7 +29,7 @@ describe("trang /concepts/signal-from-noise", () => {
   });
 
   it("mount NoiseExperience bên trong shell", () => {
-    render(<SignalFromNoiseConceptPage />);
+    render(<MemoryRouter><SignalFromNoiseConceptPage /></MemoryRouter>);
     expect(screen.getByTestId("noise-experience")).toBeInTheDocument();
   });
 });

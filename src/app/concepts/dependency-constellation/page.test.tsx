@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import DependencyConstellationConceptPage, {
@@ -17,7 +18,7 @@ describe("trang /concepts/dependency-constellation", () => {
   });
 
   it("render ConceptShell với rank + điểm từ registry", () => {
-    render(<DependencyConstellationConceptPage />);
+    render(<MemoryRouter><DependencyConstellationConceptPage /></MemoryRouter>);
     const concept = getConcept("dependency-constellation");
     expect(
       screen.getByText(
@@ -30,7 +31,7 @@ describe("trang /concepts/dependency-constellation", () => {
   });
 
   it("mount ConstellationExperience bên trong shell", () => {
-    render(<DependencyConstellationConceptPage />);
+    render(<MemoryRouter><DependencyConstellationConceptPage /></MemoryRouter>);
     expect(screen.getByTestId("constellation-experience")).toBeInTheDocument();
   });
 });

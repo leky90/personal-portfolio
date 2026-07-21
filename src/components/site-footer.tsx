@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "react-router";
 import { SITE } from "@/lib/data/site";
 
 export function SiteFooter() {
@@ -12,7 +12,7 @@ export function SiteFooter() {
           The terrain is one draw call, frameloop=&ldquo;demand&rdquo; — the
           GPU sleeps when you stop scrolling ·{" "}
           <Link
-            href="/lab"
+            to="/lab"
             className="underline underline-offset-2 transition-colors hover:text-neutral-300"
           >
             concept lab

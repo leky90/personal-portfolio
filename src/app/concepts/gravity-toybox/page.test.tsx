@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import GravityToyboxConceptPage, {
@@ -15,7 +16,7 @@ describe("trang /concepts/gravity-toybox", () => {
   });
 
   it("render ConceptShell với rank + điểm từ registry", () => {
-    render(<GravityToyboxConceptPage />);
+    render(<MemoryRouter><GravityToyboxConceptPage /></MemoryRouter>);
     const concept = getConcept("gravity-toybox");
     expect(
       screen.getByText(
@@ -28,7 +29,7 @@ describe("trang /concepts/gravity-toybox", () => {
   });
 
   it("mount ToyboxExperience bên trong shell", () => {
-    render(<GravityToyboxConceptPage />);
+    render(<MemoryRouter><GravityToyboxConceptPage /></MemoryRouter>);
     expect(screen.getByTestId("toybox-experience")).toBeInTheDocument();
   });
 });

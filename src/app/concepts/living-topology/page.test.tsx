@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import LivingTopologyConceptPage, {
@@ -15,7 +16,7 @@ describe("trang /concepts/living-topology", () => {
   });
 
   it("render ConceptShell với thông tin concept từ registry", () => {
-    render(<LivingTopologyConceptPage />);
+    render(<MemoryRouter><LivingTopologyConceptPage /></MemoryRouter>);
     const concept = getConcept("living-topology");
     expect(
       screen.getByText(
@@ -28,7 +29,7 @@ describe("trang /concepts/living-topology", () => {
   });
 
   it("mount TopologyExperience bên trong shell", () => {
-    render(<LivingTopologyConceptPage />);
+    render(<MemoryRouter><LivingTopologyConceptPage /></MemoryRouter>);
     expect(screen.getByTestId("topology-experience")).toBeInTheDocument();
   });
 });

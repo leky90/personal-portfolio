@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { describe, expect, it } from "vitest";
 import { ConceptShell } from "@/features/concepts/shared/components/concept-shell";
 import { getConcept } from "@/features/concepts/registry";
@@ -6,9 +7,11 @@ import { getConcept } from "@/features/concepts/registry";
 describe("ConceptShell", () => {
   it("hiển thị rank + tên concept, điểm overall và link về gallery", () => {
     render(
-      <ConceptShell concept={getConcept("terrain")}>
-        <p>noi dung demo</p>
-      </ConceptShell>,
+      <MemoryRouter>
+        <ConceptShell concept={getConcept("terrain")}>
+          <p>noi dung demo</p>
+        </ConceptShell>
+      </MemoryRouter>,
     );
 
     const concept = getConcept("terrain");

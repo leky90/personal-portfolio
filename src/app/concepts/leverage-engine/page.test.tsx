@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { getConcept } from "@/features/concepts/registry";
 import { describe, expect, it, vi } from "vitest";
 import LeverageEngineConceptPage, {
@@ -15,7 +16,7 @@ describe("trang /concepts/leverage-engine", () => {
   });
 
   it("render ConceptShell với rank + điểm từ registry", () => {
-    render(<LeverageEngineConceptPage />);
+    render(<MemoryRouter><LeverageEngineConceptPage /></MemoryRouter>);
     const concept = getConcept("leverage-engine");
     expect(
       screen.getByText(
@@ -28,7 +29,7 @@ describe("trang /concepts/leverage-engine", () => {
   });
 
   it("mount EngineExperience bên trong shell", () => {
-    render(<LeverageEngineConceptPage />);
+    render(<MemoryRouter><LeverageEngineConceptPage /></MemoryRouter>);
     expect(screen.getByTestId("engine-experience")).toBeInTheDocument();
   });
 });

@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+import type { PageMetadata } from "@/lib/page-meta";
 import { getConcept } from "@/features/concepts/registry";
 import { ConceptShell } from "@/features/concepts/shared/components/concept-shell";
 import { BadgeExperience } from "@/features/concepts/lanyard-badge";
 
-export const metadata: Metadata = {
+export const metadata: PageMetadata = {
   title: "The Credential — 3D Concept",
   description:
     "Concept demo: tấm thẻ kỹ sư treo dây đeo cầm được thật — nắm kéo, búng, double-click lật xem spec sheet; kéo thẻ xuống rồi thả để bước vào site.",

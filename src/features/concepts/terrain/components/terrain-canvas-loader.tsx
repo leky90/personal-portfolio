@@ -1,20 +1,13 @@
 "use client";
 
-import dynamic from "next/dynamic";
+import { Suspense, lazy } from "react";
 import { ScenePoster } from "@/features/concepts/shared/components/scene-poster";
 import { usePrefersReducedMotion } from "@/features/concepts/shared/hooks/use-prefers-reduced-motion";
 import type { TerrainCanvasProps } from "@/features/concepts/terrain/components/terrain-canvas";
 
 // Điểm bundle-split duy nhất của three.js cho concept terrain.
-const TerrainCanvasLazy = dynamic(
-  () =>
-    import("@/features/concepts/terrain/components/terrain-canvas").then(
-      (mod) => mod.TerrainCanvas,
-    ),
-  {
-    ssr: false,
-    loading: () => <ScenePoster note="Đang bake 10 năm địa hình…" />,
-  },
+const TerrainCanvasLazy = lazy(() =>
+  import("@/features/concepts/terrain/components/terrain-canvas").then((mod) => ({ default: mod.TerrainCanvas })),
 );
 
 /**
@@ -29,7 +22,9 @@ export function TerrainCanvasLoader(props: TerrainCanvasProps) {
       {prefersReduced ? (
         <ScenePoster note="Bản tĩnh — thiết bị đang bật giảm chuyển động, địa hình hiển thị dạng poster." />
       ) : (
-        <TerrainCanvasLazy {...props} />
+        <Suspense fallback={<ScenePoster note="Đang bake 10 năm địa hình…" />}>
+          <TerrainCanvasLazy {...props} />
+        </Suspense>
       )}
     </div>
   );

@@ -1,20 +1,13 @@
 "use client";
 
-import dynamic from "next/dynamic";
+import { Suspense, lazy } from "react";
 import { ScenePoster } from "@/features/concepts/shared/components/scene-poster";
 import { usePrefersReducedMotion } from "@/features/concepts/shared/hooks/use-prefers-reduced-motion";
 import type { ResolutionCanvasProps } from "@/features/concepts/resolution/components/resolution-canvas";
 
 // Điểm bundle-split duy nhất của three.js — chỉ tải khi thật sự render canvas.
-const ResolutionCanvasLazy = dynamic(
-  () =>
-    import("@/features/concepts/resolution/components/resolution-canvas").then(
-      (mod) => mod.ResolutionCanvas,
-    ),
-  {
-    ssr: false,
-    loading: () => <ScenePoster note="Đang tải pipeline ASCII…" />,
-  },
+const ResolutionCanvasLazy = lazy(() =>
+  import("@/features/concepts/resolution/components/resolution-canvas").then((mod) => ({ default: mod.ResolutionCanvas })),
 );
 
 /**
@@ -29,7 +22,9 @@ export function ResolutionCanvasLoader(props: ResolutionCanvasProps) {
       {prefersReduced ? (
         <ScenePoster note="Bản tĩnh — thiết bị đang bật giảm chuyển động, pipeline ASCII hiển thị dạng poster." />
       ) : (
-        <ResolutionCanvasLazy {...props} />
+        <Suspense fallback={<ScenePoster note="Đang tải pipeline ASCII…" />}>
+          <ResolutionCanvasLazy {...props} />
+        </Suspense>
       )}
     </div>
   );
