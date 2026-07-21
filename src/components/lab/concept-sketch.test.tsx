@@ -118,4 +118,13 @@ describe("ConceptSketch — mini data-viz generative cho từng concept", () => 
       unmount();
     }
   });
+
+  it("concept cuối cùng ten-year-galaxy có variant riêng — 26/26 phủ kín", () => {
+    const galaxy = render(<ConceptSketch id="ten-year-galaxy" />);
+    const galaxyMarkup = galaxy.container.innerHTML;
+    galaxy.unmount();
+    expect(galaxyMarkup).toContain("circle");
+    const other = render(<ConceptSketch id="lanyard-badge" />);
+    expect(other.container.innerHTML).not.toBe(galaxyMarkup);
+  });
 });

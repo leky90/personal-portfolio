@@ -1447,6 +1447,52 @@ function LanyardBadgeMarks() {
   );
 }
 
+/** Ten-Year Galaxy: xoắn ốc 4 cánh tay, sao dày dần ra rìa + frontier sáng. */
+function TenYearGalaxyMarks() {
+  const rand = mulberry32(43);
+  const cx = 100;
+  const cy = 60;
+  const dots: { x: number; y: number; r: number; o: number }[] = [];
+  for (let i = 0; i < 240; i += 1) {
+    const birth = rand();
+    const arm = i % 4;
+    const radius = Math.pow(birth, 0.72) * 52 + 3;
+    const angle =
+      birth * 2.1 * Math.PI * 2 +
+      arm * (Math.PI / 2) +
+      (rand() - 0.5) * 0.4;
+    dots.push({
+      x: cx + Math.cos(angle) * radius * 1.55,
+      y: cy + Math.sin(angle) * radius * 0.78,
+      r: 0.7 + birth * 1.3,
+      o: 0.25 + birth * 0.65,
+    });
+  }
+  return (
+    <>
+      {dots.map((dot) => (
+        <circle
+          key={`${dot.x.toFixed(2)}-${dot.y.toFixed(2)}`}
+          cx={dot.x}
+          cy={dot.y}
+          r={dot.r}
+          fill="currentColor"
+          opacity={dot.o}
+        />
+      ))}
+      <circle cx={cx} cy={cy} r={3.4} fill="currentColor" opacity={0.95} />
+      {/* Frontier: cung sáng nơi sao đang hình thành */}
+      <path
+        d={`M ${cx + 40} ${cy - 26} A 48 26 0 0 1 ${cx + 52} ${cy + 14}`}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={1.4}
+        opacity={0.7}
+      />
+    </>
+  );
+}
+
 /** Placeholder cho concept chưa build demo: lưới chấm mờ, trạng thái chờ. */
 function PendingMarks() {
   const dots: { x: number; y: number }[] = [];
@@ -1497,6 +1543,7 @@ const MARKS: Partial<Record<ConceptId, () => React.ReactElement>> = {
   "phosphor-lens": PhosphorLensMarks,
   "signal-from-noise": SignalFromNoiseMarks,
   "lanyard-badge": LanyardBadgeMarks,
+  "ten-year-galaxy": TenYearGalaxyMarks,
 };
 
 interface ConceptSketchProps {

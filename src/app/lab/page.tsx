@@ -127,8 +127,8 @@ export default function ConceptLabPage() {
         <p className="mt-5 max-w-xl text-sm leading-relaxed text-neutral-400">
           Nhật ký chọn art direction cho portfolio. Terrain đang chạy ở trang
           chủ; bảng dưới là 26 concept từ hai vòng đề xuất, chấm lại trên cùng
-          một thang điểm ngày 20/07. Các demo còn thiếu sẽ được bổ sung lần
-          lượt theo thứ hạng.
+          một thang điểm ngày 20/07. Toàn bộ 26 demo đã build xong và click
+          vào được từng cái.
         </p>
       </header>
 

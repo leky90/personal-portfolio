@@ -441,7 +441,7 @@ export const CONCEPTS: ConceptMeta[] = [
       "Mười năm viết code kết tinh thành một dải ngân hà: mỗi tuần làm việc là một ngôi sao, mỗi chặng nghề là một cánh tay xoắn ốc. Cuộn trang để xem thiên hà tự lắp ráp theo đúng dòng thời gian sự nghiệp.",
     pitch:
       "A decade of shipped work assembles into a data-driven spiral galaxy: every working week becomes a star cluster, every career era a spiral arm, and scroll is the arrow of time.",
-    status: "planned",
+    status: "ready",
     origin: "v1",
     difficulty: 3,
     effortDays: 8,
