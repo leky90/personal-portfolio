@@ -24,15 +24,15 @@ export interface SiteConfig {
 
 export const SITE: SiteConfig = {
   name: "Ky Le",
-  // GH Pages project site; đổi về domain riêng khi gắn custom domain
-  url: "https://ldky90.github.io/personal-portfolio",
+  // GH Pages project site của tài khoản leky90; đổi khi gắn custom domain
+  url: "https://leky90.github.io/personal-portfolio",
   title: "Senior Software Engineer",
   tagline: "Ten years of shipped systems, rendered as terrain.",
   email: "ldky90@gmail.com",
   location: "Ho Chi Minh City · UTC+7",
   available: true,
   socials: [
-    { label: "GitHub", href: "https://github.com/ldky90" },
+    { label: "GitHub", href: "https://github.com/leky90" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/ldky90" },
   ],
 };
