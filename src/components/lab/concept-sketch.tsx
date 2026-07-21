@@ -1064,6 +1064,136 @@ function GlyphFieldMarks() {
   );
 }
 
+/** Desk, Version-Controlled: bàn isometric + nhánh git, đồ cũ nét đứt đã remove. */
+function DeskVersionControlledMarks() {
+  const alive = [
+    { x: 84, y: 40, w: 34, h: 20 },
+    { x: 66, y: 58, w: 26, h: 6 },
+    { x: 128, y: 52, w: 10, h: 14 },
+  ];
+  const removed = [
+    { x: 46, y: 48, w: 18, h: 13 },
+    { x: 122, y: 30, w: 14, h: 10 },
+  ];
+  const nodes = [24, 52, 80, 108, 136, 164];
+  return (
+    <>
+      {/* Mặt bàn isometric */}
+      <polygon
+        points="30,78 100,62 170,78 100,94"
+        fill="currentColor"
+        opacity={0.3}
+        stroke="currentColor"
+        strokeWidth={0.8}
+      />
+      {alive.map((object) => (
+        <rect
+          key={`${object.x}-${object.y}`}
+          x={object.x}
+          y={object.y}
+          width={object.w}
+          height={object.h}
+          fill="currentColor"
+          opacity={0.7}
+        />
+      ))}
+      {removed.map((object) => (
+        <rect
+          key={`${object.x}-${object.y}`}
+          x={object.x}
+          y={object.y}
+          width={object.w}
+          height={object.h}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={0.8}
+          strokeDasharray="2.4 2.2"
+          opacity={0.35}
+        />
+      ))}
+      {/* Nhánh git dọc đáy */}
+      <line
+        x1={16}
+        y1={106}
+        x2={184}
+        y2={106}
+        stroke="currentColor"
+        strokeWidth={1}
+        opacity={0.6}
+      />
+      {nodes.map((x, index) => (
+        <circle
+          key={x}
+          cx={x}
+          cy={106}
+          r={index === nodes.length - 1 ? 3.2 : 2.2}
+          fill="currentColor"
+          opacity={index === nodes.length - 1 ? 0.95 : 0.55}
+        />
+      ))}
+    </>
+  );
+}
+
+/** Commit Skyline: 10 block năm bar-city, landmark cao với beacon. */
+function CommitSkylineMarks() {
+  const rand = mulberry32(29);
+  const groundY = 100;
+  const bars: { x: number; h: number }[] = [];
+  for (let block = 0; block < 10; block += 1) {
+    for (let i = 0; i < 5; i += 1) {
+      bars.push({
+        x: 12 + block * 18 + i * 2.9,
+        h: 4 + rand() * 26 * (0.5 + block * 0.06),
+      });
+    }
+  }
+  const landmarks = [bars[17], bars[38]];
+  return (
+    <>
+      <line
+        x1={8}
+        y1={groundY}
+        x2={W - 8}
+        y2={groundY}
+        stroke="currentColor"
+        strokeWidth={0.8}
+        opacity={0.5}
+      />
+      {bars.map((bar) => (
+        <rect
+          key={bar.x}
+          x={bar.x}
+          y={groundY - bar.h}
+          width={2.1}
+          height={bar.h}
+          fill="currentColor"
+          opacity={0.28 + (bar.h / 34) * 0.5}
+        />
+      ))}
+      {landmarks.map((bar) => (
+        <g key={`lm-${bar.x}`}>
+          <rect
+            x={bar.x - 0.4}
+            y={groundY - bar.h - 16}
+            width={3}
+            height={bar.h + 16}
+            fill="currentColor"
+            opacity={0.9}
+          />
+          <circle
+            cx={bar.x + 1.1}
+            cy={groundY - bar.h - 19}
+            r={2.2}
+            fill="currentColor"
+            opacity={0.95}
+          />
+        </g>
+      ))}
+    </>
+  );
+}
+
 /** Placeholder cho concept chưa build demo: lưới chấm mờ, trạng thái chờ. */
 function PendingMarks() {
   const dots: { x: number; y: number }[] = [];
@@ -1108,6 +1238,8 @@ const MARKS: Partial<Record<ConceptId, () => React.ReactElement>> = {
   "knowledge-relay": KnowledgeRelayMarks,
   "full-stack-strata": FullStackStrataMarks,
   "glyph-field": GlyphFieldMarks,
+  "desk-version-controlled": DeskVersionControlledMarks,
+  "commit-skyline": CommitSkylineMarks,
 };
 
 interface ConceptSketchProps {

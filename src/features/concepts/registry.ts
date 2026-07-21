@@ -336,7 +336,7 @@ export const CONCEPTS: ConceptMeta[] = [
       "Mười năm sự nghiệp gói trong một chiếc bàn làm việc. Cuộn trang để xem từng commit biến góc bàn junior 2016 thành workstation senior 2026, nơi trưởng thành nghĩa là bớt đi chứ không phải thêm vào.",
     pitch:
       "An isometric desk diorama that scrubs through ten years of commit history as you scroll: every career step is a conventional commit, and seniority visibly reads as a refactor toward less clutter, not more gear.",
-    status: "planned",
+    status: "ready",
     origin: "v1",
     difficulty: 3,
     effortDays: 11,
@@ -351,7 +351,7 @@ export const CONCEPTS: ConceptMeta[] = [
       "Mười năm commit dựng thành một thành phố về đêm. Cuộn trang để bay dọc đại lộ thời gian, mỗi tòa nhà là một ngày viết code.",
     pitch:
       "Ten years of real GitHub contribution data extruded into a fog-drenched instanced night city, and scrolling flies the camera down the decade boulevard one year-block at a time.",
-    status: "planned",
+    status: "ready",
     origin: "v1",
     difficulty: 3,
     effortDays: 10,
