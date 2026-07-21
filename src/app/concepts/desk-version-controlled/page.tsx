@@ -1,0 +1,18 @@
+import type { Metadata } from "next";
+import { getConcept } from "@/features/concepts/registry";
+import { ConceptShell } from "@/features/concepts/shared/components/concept-shell";
+import { DeskExperience } from "@/features/concepts/desk-version-controlled";
+
+export const metadata: Metadata = {
+  title: "Desk, Version-Controlled — 3D Concept",
+  description:
+    "Concept demo: mười năm sự nghiệp là git log của một chiếc bàn. Cuộn để scrub từng commit từ góc bàn junior 2016 tới workstation senior 2026 — trưởng thành đọc được bằng số đồ bị remove.",
+};
+
+export default function DeskVersionControlledConceptPage() {
+  return (
+    <ConceptShell concept={getConcept("desk-version-controlled")}>
+      <DeskExperience />
+    </ConceptShell>
+  );
+}
