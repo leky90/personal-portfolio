@@ -1,6 +1,6 @@
 /**
  * Bản đồ những hệ thống mình thật sự đã dựng, từ site WordPress freelance ở
- * Huế (2012) tới dApp DeFi/RWA của Treehouse hôm nay — nguồn sự thật duy nhất
+ * Huế (2014) tới dApp DeFi/RWA của Treehouse hôm nay — nguồn sự thật duy nhất
  * cho graph. Trường `year` là mốc của chặng nghề mà hệ thống thuộc về (trục x
  * = trục thời gian), không phải ngày launch chính xác của từng dự án.
  */
@@ -15,8 +15,8 @@ export interface SystemNode {
 }
 
 export const SYSTEMS: SystemNode[] = [
-  // 2012–2016 · freelance ở Huế (Freelancer.com từ 11/07/2012)
-  { id: "wp-client-sites", name: "Site khách WordPress", stack: "PHP · WordPress", metric: "Freelancer 4.9/5 · 125 review", year: 2012 },
+  // 2014–2016 · freelance ở Huế (tài khoản Freelancer.com mở 11/07/2012 thời sinh viên)
+  { id: "wp-client-sites", name: "Site khách WordPress", stack: "PHP · WordPress", metric: "Freelancer 4.9/5 · 125 review", year: 2014 },
   { id: "static-frontends", name: "Frontend tĩnh cho khách", stack: "HTML · CSS · JS · jQuery", metric: "cross-browser · responsive mobile", year: 2014 },
 
   // 2017–2018 · Synova Solutions, TP.HCM — full-stack PHP end-to-end

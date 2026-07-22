@@ -60,7 +60,7 @@ describe("galaxy-data — mỗi tuần làm việc một cụm sao, 4 cánh tay 
     }
   });
 
-  it("10 supernova milestone: birth hợp lệ, label + story đầy đủ", () => {
+  it("10 supernova milestone: birth hợp lệ tăng dần, label + story đầy đủ", () => {
     expect(SUPERNOVAE).toHaveLength(10);
     for (const supernova of SUPERNOVAE) {
       expect(supernova.birth).toBeGreaterThanOrEqual(0);
@@ -68,12 +68,15 @@ describe("galaxy-data — mỗi tuần làm việc một cụm sao, 4 cánh tay 
       expect(supernova.label.length).toBeGreaterThan(0);
       expect(supernova.story.length).toBeGreaterThan(0);
     }
+    for (let i = 1; i < SUPERNOVAE.length; i += 1) {
+      expect(SUPERNOVAE[i].birth).toBeGreaterThan(SUPERNOVAE[i - 1].birth);
+    }
   });
 
-  it("galaxyYearAt: 0 → 2012 (job đầu tiên), 1 → 2026", () => {
-    expect(galaxyYearAt(0)).toBe(2012);
+  it("galaxyYearAt: 0 → 2014 (bắt đầu đi làm), 1 → 2026", () => {
+    expect(galaxyYearAt(0)).toBe(2014);
     expect(galaxyYearAt(1)).toBe(2026);
-    expect(galaxyYearAt(0.5)).toBeGreaterThanOrEqual(2018);
-    expect(galaxyYearAt(0.5)).toBeLessThanOrEqual(2020);
+    expect(galaxyYearAt(0.5)).toBeGreaterThanOrEqual(2019);
+    expect(galaxyYearAt(0.5)).toBeLessThanOrEqual(2021);
   });
 });

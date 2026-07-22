@@ -23,8 +23,8 @@ describe("change-state — cầu nối DOM ↔ canvas", () => {
     expect(yearFromProgress(1.4)).toBe(10);
   });
 
-  it("yearLabel tra bảng mốc thật: 0 → 2012, 10 → 2026", () => {
-    expect(yearLabel(0)).toBe(2012);
+  it("yearLabel tra bảng mốc thật: 0 → 2014, 10 → 2026", () => {
+    expect(yearLabel(0)).toBe(2014);
     expect(yearLabel(4.7)).toBe(YEAR_LABELS[4]);
     expect(yearLabel(10)).toBe(2026);
     for (let step = 1; step <= 10; step += 1) {

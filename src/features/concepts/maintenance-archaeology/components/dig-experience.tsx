@@ -14,8 +14,8 @@ import {
 const FIND_HUD_DEFAULT =
   "Rê mũi probe lên một mảnh module để carbon-date bằng lịch sử git";
 
-/** Mốc thước độ sâu, khớp biên các stratum: mặt đất 2026, đá gốc 2012. */
-const RULER_YEARS = [2026, 2024, 2021, 2019, 2017, 2012];
+/** Mốc thước độ sâu, khớp biên các stratum: mặt đất 2026, đá gốc 2014. */
+const RULER_YEARS = [2026, 2024, 2021, 2019, 2017, 2014];
 
 /**
  * Layout DOM: hero + 5 stake tag stratum + thước độ sâu (năm lùi dần) +
@@ -103,7 +103,7 @@ export function DigExperience() {
       {/* HERO */}
       <section className="mx-auto flex min-h-dvh w-full max-w-5xl flex-col justify-center px-4 pt-20 sm:px-6">
         <p className="font-mono text-[11px] tracking-[0.3em] text-[#d97b53] uppercase">
-          Di chỉ khai quật · 14 năm nghề, 2012 tới 2026
+          Di chỉ khai quật · 12 năm nghề, 2014 tới 2026
         </p>
         <h2 className="mt-4 max-w-2xl text-4xl font-semibold tracking-tight text-neutral-50 sm:text-6xl">
           MAINTENANCE ARCHAEOLOGY
@@ -117,7 +117,7 @@ export function DigExperience() {
           carbon-date.
         </p>
         <p className="mt-8 font-mono text-xs text-neutral-500 motion-safe:animate-pulse">
-          ↓ đào: mặt đất là 2026, đá gốc là 2012
+          ↓ đào: mặt đất là 2026, đá gốc là 2014
         </p>
       </section>
 
@@ -154,7 +154,7 @@ export function DigExperience() {
           <p className="mt-3 text-sm leading-relaxed text-neutral-400">
             Metaphor chính là tuyên bố seniority: đọc hệ thống cũ là kỹ năng
             đắt nhất. Năm tháng và stack của 5 stratum lấy từ lịch sử làm việc
-            thật (2012 tới 2026); riêng các mảnh module chôn trong vách vẫn là
+            thật (2014 tới 2026); riêng các mảnh module chôn trong vách vẫn là
             dataset seeded để render, bản chính thức sẽ bake từ `git log
             --numstat` lúc build (độ dày stratum = churn thật, tuổi mảnh =
             first/last commit). Kỹ thuật: vách hố

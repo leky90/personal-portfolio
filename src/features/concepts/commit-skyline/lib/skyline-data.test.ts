@@ -10,7 +10,7 @@ import {
   dayInfo,
 } from "@/features/concepts/commit-skyline/lib/skyline-data";
 
-describe("skyline-data — 15 năm commit (2012 → 2026) dựng thành phố đêm", () => {
+describe("skyline-data — 13 block năm commit (2014 → 2026) dựng thành phố đêm", () => {
   it("dayCommits deterministic, nằm trong [0,12]", () => {
     for (const day of [0, 100, 999, 2500, DAY_COUNT - 1]) {
       const commits = dayCommits(day);
@@ -21,7 +21,7 @@ describe("skyline-data — 15 năm commit (2012 → 2026) dựng thành phố đ
     }
   });
 
-  it("cuối tuần thưa hơn ngày thường (trung bình toàn 15 năm)", () => {
+  it("cuối tuần thưa hơn ngày thường (trung bình toàn 13 block năm)", () => {
     let weekendSum = 0;
     let weekendCount = 0;
     let weekdaySum = 0;
@@ -42,7 +42,9 @@ describe("skyline-data — 15 năm commit (2012 → 2026) dựng thành phố đ
 
   it("buildSkyline: đủ DAY_COUNT toà, cao theo commit, x tiến theo năm", () => {
     const skyline = buildSkyline();
+    expect(YEAR_COUNT).toBe(13);
     expect(DAY_COUNT).toBe(YEAR_COUNT * 365);
+    expect(DAY_COUNT).toBe(4745);
     expect(skyline).toHaveLength(DAY_COUNT);
     for (const building of [skyline[0], skyline[1200], skyline[DAY_COUNT - 1]]) {
       expect(building.height).toBeGreaterThan(0);
@@ -65,9 +67,9 @@ describe("skyline-data — 15 năm commit (2012 → 2026) dựng thành phố đ
     }
   });
 
-  it("landmark xếp theo thời gian, trải từ 2012 tới 2026", () => {
+  it("landmark xếp theo thời gian, trải từ 2014 tới 2026", () => {
     const years = LANDMARKS.map((l) => dayInfo(l.dayIndex).year);
-    expect(years[0]).toBe(2012);
+    expect(years[0]).toBe(2014);
     expect(years.at(-1)).toBe(2026);
     for (let i = 1; i < LANDMARKS.length; i += 1) {
       expect(LANDMARKS[i].dayIndex).toBeGreaterThan(LANDMARKS[i - 1].dayIndex);
@@ -78,10 +80,10 @@ describe("skyline-data — 15 năm commit (2012 → 2026) dựng thành phố đ
     expect(years).toContain(2021);
   });
 
-  it("dayInfo: ngày 0 là đầu 2012, năm tăng mỗi 365 ngày", () => {
-    expect(START_YEAR).toBe(2012);
-    expect(dayInfo(0)).toEqual({ year: 2012, week: 0, weekday: 0 });
-    expect(dayInfo(365).year).toBe(2013);
+  it("dayInfo: ngày 0 là đầu 2014, năm tăng mỗi 365 ngày", () => {
+    expect(START_YEAR).toBe(2014);
+    expect(dayInfo(0)).toEqual({ year: 2014, week: 0, weekday: 0 });
+    expect(dayInfo(365).year).toBe(2015);
     expect(dayInfo(DAY_COUNT - 1).year).toBe(2026);
     expect(dayInfo(10).week).toBe(1);
   });

@@ -3,7 +3,7 @@ import { SITE } from "@/lib/data/site";
 
 /**
  * Cuối hành trình: sau ridge cuối, địa hình phẳng thành đường chân trời —
- * dấu chấm hết thị giác của 14 năm, và lời mời cho chặng tiếp theo.
+ * dấu chấm hết thị giác của 12 năm, và lời mời cho chặng tiếp theo.
  */
 export function ContactSection() {
   return (

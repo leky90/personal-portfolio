@@ -8,8 +8,8 @@
 export const BADGE_FRONT = {
   name: "KY LE DINH",
   title: "SENIOR SOFTWARE ENGINEER · FRONTEND LEAD",
-  /** Nhận job freelance đầu tiên trên Freelancer.com từ 11/07/2012 */
-  est: "EST. 2012",
+  /** Mốc 2014: tốt nghiệp ĐH Khoa học Huế, bắt đầu đi làm (tài khoản Freelancer mở 2012 thời sinh viên). */
+  est: "EST. 2014",
 };
 
 /**

@@ -15,6 +15,12 @@ describe("trang /concepts/desk-version-controlled", () => {
     expect(metadata.title).toBe("Desk, Version-Controlled — 3D Concept");
   });
 
+  it("metadata description neo mốc 2014 và mười hai năm, không còn 2012/mười bốn", () => {
+    expect(metadata.description).toMatch(/mười hai năm/);
+    expect(metadata.description).toMatch(/2014/);
+    expect(metadata.description).not.toMatch(/2012|mười bốn/);
+  });
+
   it("render ConceptShell với rank + điểm từ registry", () => {
     render(<MemoryRouter><DeskVersionControlledConceptPage /></MemoryRouter>);
     const concept = getConcept("desk-version-controlled");

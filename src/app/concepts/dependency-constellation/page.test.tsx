@@ -17,6 +17,11 @@ describe("trang /concepts/dependency-constellation", () => {
     expect(metadata.title).toBe("Dependency Constellation — 3D Concept");
   });
 
+  it("metadata description neo đúng 12 năm sự nghiệp (2014 → 2026)", () => {
+    expect(metadata.description).toContain("12 năm sự nghiệp (2014 → 2026)");
+    expect(metadata.description).not.toMatch(/2012|14 năm/);
+  });
+
   it("render ConceptShell với rank + điểm từ registry", () => {
     render(<MemoryRouter><DependencyConstellationConceptPage /></MemoryRouter>);
     const concept = getConcept("dependency-constellation");

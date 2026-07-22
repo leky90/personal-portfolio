@@ -19,9 +19,9 @@ describe("DeskExperience — layout DOM của trang concept", () => {
     ).toBeInTheDocument();
   });
 
-  it("year ticker mặc định đứng ở 2012", () => {
+  it("year ticker mặc định đứng ở 2014", () => {
     render(<DeskExperience />);
-    expect(screen.getByTestId("desk-year").textContent).toBe("2012");
+    expect(screen.getByTestId("desk-year").textContent).toBe("2014");
   });
 
   it("commit line HUD mặc định là một conventional commit", () => {

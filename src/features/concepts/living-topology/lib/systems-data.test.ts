@@ -11,12 +11,12 @@ describe("dữ liệu hệ thống — 12+ năm nghề, từ WordPress tới dAp
     expect(new Set(SYSTEMS.map((s) => s.id)).size).toBe(SYSTEMS.length);
   });
 
-  it("mỗi hệ thống đủ name / stack / metric, năm trong 2012..2026", () => {
+  it("mỗi hệ thống đủ name / stack / metric, năm trong 2014..2026", () => {
     for (const system of SYSTEMS) {
       expect(system.name.length).toBeGreaterThan(0);
       expect(system.stack.length).toBeGreaterThan(0);
       expect(system.metric.length).toBeGreaterThan(0);
-      expect(system.year).toBeGreaterThanOrEqual(2012);
+      expect(system.year).toBeGreaterThanOrEqual(2014);
       expect(system.year).toBeLessThanOrEqual(2026);
     }
   });

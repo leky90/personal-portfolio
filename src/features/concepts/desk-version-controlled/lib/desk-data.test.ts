@@ -7,7 +7,7 @@ import {
   yearAt,
 } from "@/features/concepts/desk-version-controlled/lib/desk-data";
 
-describe("desk-data — mười bốn năm sự nghiệp là lịch sử commit của một chiếc bàn", () => {
+describe("desk-data — mười hai năm sự nghiệp là lịch sử commit của một chiếc bàn", () => {
   it("mọi object có id riêng, birth/death hợp lệ trong [0,1]", () => {
     expect(DESK_OBJECTS.length).toBeGreaterThanOrEqual(14);
     expect(new Set(DESK_OBJECTS.map((o) => o.id)).size).toBe(
@@ -29,9 +29,9 @@ describe("desk-data — mười bốn năm sự nghiệp là lịch sử commit 
     expect(aliveCount(0.99)).toBeLessThan(aliveCount(0.5));
   });
 
-  it("4 era với mốc t tăng dần: 2012 freelance → 2021 lead Treehouse", () => {
+  it("4 era với mốc t tăng dần: 2014 freelance → 2021 lead Treehouse", () => {
     expect(ERAS).toHaveLength(4);
-    expect(ERAS.map((era) => era.year)).toEqual([2012, 2017, 2019, 2021]);
+    expect(ERAS.map((era) => era.year)).toEqual([2014, 2017, 2019, 2021]);
     for (let i = 1; i < ERAS.length; i += 1) {
       expect(ERAS[i].t).toBeGreaterThan(ERAS[i - 1].t);
     }
@@ -53,12 +53,12 @@ describe("desk-data — mười bốn năm sự nghiệp là lịch sử commit 
     expect(late).not.toBe(latestCommit(0.05));
   });
 
-  it("yearAt: 0 → 2012, 1 → 2026, giữa chừng nằm trong khoảng", () => {
-    expect(yearAt(0)).toBe(2012);
+  it("yearAt: 0 → 2014, 1 → 2026, giữa chừng nằm trong khoảng", () => {
+    expect(yearAt(0)).toBe(2014);
     expect(yearAt(1)).toBe(2026);
     const mid = yearAt(0.5);
-    expect(mid).toBeGreaterThanOrEqual(2018);
-    expect(mid).toBeLessThanOrEqual(2020);
+    expect(mid).toBeGreaterThanOrEqual(2019);
+    expect(mid).toBeLessThanOrEqual(2021);
   });
 
   it("mốc t của mỗi era khớp đúng năm nó đại diện", () => {

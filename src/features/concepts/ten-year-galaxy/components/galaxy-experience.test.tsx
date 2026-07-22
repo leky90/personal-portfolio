@@ -12,15 +12,15 @@ vi.mock(
 );
 
 describe("GalaxyExperience — layout DOM của trang concept", () => {
-  it("hero hiển thị headline FOURTEEN-YEAR GALAXY", () => {
+  it("hero hiển thị headline TWELVE-YEAR GALAXY", () => {
     render(<GalaxyExperience />);
-    expect(screen.getByText(/FOURTEEN-YEAR GALAXY/i)).toBeInTheDocument();
+    expect(screen.getByText(/TWELVE-YEAR GALAXY/i)).toBeInTheDocument();
   });
 
-  it("ticker năm mặc định đứng ở 2012, aria-live", () => {
+  it("ticker năm mặc định đứng ở 2014, aria-live", () => {
     render(<GalaxyExperience />);
     const ticker = screen.getByTestId("galaxy-year");
-    expect(ticker.textContent).toMatch(/2012/);
+    expect(ticker.textContent).toMatch(/2014/);
     expect(ticker.getAttribute("aria-live")).toBe("polite");
   });
 

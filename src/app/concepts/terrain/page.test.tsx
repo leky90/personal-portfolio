@@ -11,7 +11,7 @@ vi.mock("@/features/concepts/terrain", () => ({
 
 describe("trang /concepts/terrain", () => {
   it("khai báo metadata title đúng chuẩn concept", () => {
-    expect(metadata.title).toBe("Fourteen Years of Terrain — 3D Concept");
+    expect(metadata.title).toBe("Twelve Years of Terrain — 3D Concept");
   });
 
   it("render ConceptShell với thông tin concept terrain từ registry", () => {

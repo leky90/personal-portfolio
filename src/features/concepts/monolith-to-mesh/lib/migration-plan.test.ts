@@ -4,7 +4,7 @@ import {
   SERVICES,
 } from "@/features/concepts/monolith-to-mesh/lib/migration-plan";
 
-describe("migration plan — lịch sử tách service 14 năm nghề", () => {
+describe("migration plan — lịch sử tách service 12 năm nghề", () => {
   it("có ≥ 30 service, id không trùng", () => {
     expect(SERVICES.length).toBeGreaterThanOrEqual(30);
     expect(new Set(SERVICES.map((s) => s.id)).size).toBe(SERVICES.length);

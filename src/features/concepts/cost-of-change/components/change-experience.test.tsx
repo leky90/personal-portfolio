@@ -42,9 +42,9 @@ describe("ChangeExperience — layout DOM của trang concept", () => {
     );
   });
 
-  it("HUD mặc định hiện năm 2012 và mời cuộn", () => {
+  it("HUD mặc định hiện năm 2014 và mời cuộn", () => {
     render(<ChangeExperience />);
-    expect(screen.getByTestId("change-hud").textContent).toMatch(/2012/);
+    expect(screen.getByTestId("change-hud").textContent).toMatch(/2014/);
   });
 
   it("core idea nhắc nợ kỹ thuật, instanced và draw call", () => {

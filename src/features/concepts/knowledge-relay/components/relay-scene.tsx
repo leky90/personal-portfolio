@@ -182,7 +182,7 @@ export function RelayScene({ relayState }: RelaySceneProps) {
       batons.instanceMatrix.needsUpdate = true;
     }
 
-    // Camera: 2012 nhìn xiên thấp → 2026 nhìn tổng quan từ trên
+    // Camera: 2014 nhìn xiên thấp → 2026 nhìn tổng quan từ trên
     const p = (year - RELAY_YEAR_MIN) / RELAY_YEAR_SPAN;
     camera.position.set(
       -3 + p * 5.5,

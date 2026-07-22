@@ -8,13 +8,24 @@ import {
   resolvePaths,
 } from "@/features/concepts/dependency-constellation/lib/constellation-data";
 
-describe("constellation-data — đồ thị phụ thuộc 14 năm đã resolve sẵn", () => {
+describe("constellation-data — đồ thị phụ thuộc 12 năm đã resolve sẵn", () => {
   it("27 node (5 role + 10 project + 12 skill), id không trùng", () => {
     expect(NODES).toHaveLength(27);
     expect(new Set(NODES.map((n) => n.id)).size).toBe(27);
     expect(NODES.filter((n) => n.kind === "role")).toHaveLength(5);
     expect(NODES.filter((n) => n.kind === "project")).toHaveLength(10);
     expect(NODES.filter((n) => n.kind === "skill")).toHaveLength(12);
+  });
+
+  it("mốc năm: nghề bắt đầu 2014, không node nào sớm hơn", () => {
+    const freelance = NODES.find((n) => n.id === "r-freelance");
+    expect(freelance?.year).toBe(2014);
+    expect(Math.min(...NODES.map((n) => n.year))).toBe(2014);
+    // Các mốc chặng còn lại giữ nguyên theo hồ sơ thật.
+    expect(NODES.find((n) => n.id === "r-fullstack")?.year).toBe(2017);
+    expect(NODES.find((n) => n.id === "r-swe")?.year).toBe(2019);
+    expect(NODES.find((n) => n.id === "r-senior")?.year).toBe(2021);
+    expect(NODES.find((n) => n.id === "r-lead")?.year).toBe(2021);
   });
 
   it("mọi cạnh đều trỏ tới node có thật, không cạnh trùng", () => {

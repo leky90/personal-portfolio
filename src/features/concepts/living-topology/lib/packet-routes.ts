@@ -53,7 +53,7 @@ export function buildPacketRoutes(
     const points = new Float32Array(walk.length * 3);
     const segmentEnds = new Float32Array(walk.length);
     let total = 0;
-    let year = 2012;
+    let year = 2014;
     for (let i = 0; i < walk.length; i += 1) {
       const node = walk[i];
       points[i * 3] = graph.positions[node * 3];

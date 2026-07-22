@@ -35,7 +35,7 @@ export const LAYERS: IslandLayer[] = [
     label: "đá nền dữ liệu",
     yTop: -0.2,
     yBottom: -1.6,
-    note: "Tinh thể dữ liệu kết tủa từ 2012 tới nay: schema MongoDB/Postgres/MySQL, index, backup, và dưới cùng là state on-chain không ai sửa được. Mọi thứ phía trên có thể đập đi xây lại; tầng này thì không được phép sai.",
+    note: "Tinh thể dữ liệu kết tủa từ 2014 tới nay: schema MongoDB/Postgres/MySQL, index, backup, và dưới cùng là state on-chain không ai sửa được. Mọi thứ phía trên có thể đập đi xây lại; tầng này thì không được phép sai.",
   },
 ];
 

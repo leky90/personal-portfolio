@@ -16,7 +16,7 @@ import {
 } from "@/features/concepts/cost-of-change/lib/change-state";
 
 /**
- * Layout DOM: hero blueprint + 10 thẻ chặng nghề (2012→2025) + thẻ 2026
+ * Layout DOM: hero blueprint + 10 thẻ chặng nghề (2014→2025) + thẻ 2026
  * + HUD nợ tích luỹ + toggle counterfactual. Cuộn scrub mốc 0→10; toggle
  * blend sang timeline chưa từng dọn nợ (tháp đỏ, nghiêng, rung).
  */
@@ -91,7 +91,7 @@ export function ChangeExperience() {
           data-testid="change-hud"
           className="line-clamp-2 font-mono text-[11px] text-neutral-400"
         >
-          năm 2012 · tầng 0/{FLOOR_COUNT} · nợ tích luỹ 0.0 · cuộn để xây
+          năm 2014 · tầng 0/{FLOOR_COUNT} · nợ tích luỹ 0.0 · cuộn để xây
         </p>
       </div>
 
@@ -116,20 +116,20 @@ export function ChangeExperience() {
       {/* HERO */}
       <section className="mx-auto flex min-h-dvh w-full max-w-5xl flex-col justify-center px-4 pt-20 sm:px-6">
         <p className="font-mono text-[11px] tracking-[0.3em] text-[#f2c94c] uppercase">
-          Mười bốn năm nghề · nợ kỹ thuật là ứng suất vật lý
+          Mười hai năm nghề · nợ kỹ thuật là ứng suất vật lý
         </p>
         <h2 className="mt-4 max-w-2xl text-4xl font-semibold tracking-tight text-neutral-50 sm:text-6xl">
           COST OF CHANGE
         </h2>
         <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400">
-          Sổ cái thật của tôi từ 2012 tới nay, nén vào mười tầng: mỗi chặng
+          Sổ cái thật của tôi từ 2014 tới nay, nén vào mười tầng: mỗi chặng
           ship sản phẩm là một tầng chất lên tháp truss, ứng suất dồn xuống
           móng cho tới khi một lần dọn nợ giải phóng kết cấu. Cuộn để xây
           hết mười tầng, và bấm nút bên dưới để xem dòng thời gian giả định
           nơi ba lần dọn nợ đó không bao giờ xảy ra.
         </p>
         <p className="mt-8 font-mono text-xs text-neutral-500 motion-safe:animate-pulse">
-          ↓ cuộn: đổ móng năm 2012
+          ↓ cuộn: đổ móng năm 2014
         </p>
       </section>
 
@@ -190,7 +190,7 @@ export function ChangeExperience() {
           </h4>
           <p className="mt-3 text-sm leading-relaxed text-neutral-400">
             Nợ kỹ thuật thường vô hình với người ngoài nghề; demo này cho
-            nó một cơ thể chịu lực. Sổ cái là mười bốn năm nghề thật nén
+            nó một cơ thể chịu lực. Sổ cái là mười hai năm nghề thật nén
             vào mười tầng, hai đường cong nợ (thật / giả định) precompute
             từ sổ cái lúc build, runtime không mô phỏng gì.
             Kỹ thuật: 120 thanh + 44 khớp gói trong đúng 2 instanced draw

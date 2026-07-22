@@ -1447,7 +1447,7 @@ function LanyardBadgeMarks() {
   );
 }
 
-/** Fourteen-Year Galaxy: xoắn ốc 4 cánh tay, sao dày dần ra rìa + frontier sáng. */
+/** Twelve-Year Galaxy: xoắn ốc 4 cánh tay, sao dày dần ra rìa + frontier sáng. */
 function TenYearGalaxyMarks() {
   const rand = mulberry32(43);
   const cx = 100;

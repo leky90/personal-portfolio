@@ -5,7 +5,7 @@ import {
   buildDig,
 } from "@/features/concepts/maintenance-archaeology/lib/strata-data";
 
-describe("strata + artifacts — địa tầng codebase 10 năm", () => {
+describe("strata + artifacts — địa tầng codebase 12 năm (2014 → 2026)", () => {
   it("5 stratum từ mới (trên) đến cũ (dưới), độ dày dương và tổng = 1", () => {
     expect(STRATA).toHaveLength(5);
     for (let i = 1; i < STRATA.length; i += 1) {
@@ -17,6 +17,17 @@ describe("strata + artifacts — địa tầng codebase 10 năm", () => {
       expect(s.thickness).toBeGreaterThan(0);
       expect(s.label.length).toBeGreaterThan(0);
       expect(s.note).not.toContain("—");
+    }
+  });
+
+  it("mốc thời gian thật: mặt đất 2026, đá gốc freelance 2014-2016 và nhắc tốt nghiệp 2014", () => {
+    expect(STRATA[0].toYear).toBe(2026);
+    const bedrock = STRATA[STRATA.length - 1];
+    expect(bedrock.fromYear).toBe(2014);
+    expect(bedrock.toYear).toBe(2016);
+    expect(bedrock.note).toContain("2014");
+    for (const s of STRATA) {
+      expect(s.note).not.toContain("2012");
     }
   });
 

@@ -23,7 +23,7 @@ interface EraStop {
 
 const ERA_STOPS: EraStop[] = [
   {
-    year: "2012",
+    year: "2014",
     title: "Freelance ở Huế",
     copy: "Bắt đầu bằng PHP và WordPress: dựng rồi nuôi site cho khách trên Freelancer.com, lo cross-browser và responsive mobile. Hai cụm xa nhất bên trái là chỗ mọi thứ về sau mọc lên.",
     side: "left",
@@ -152,7 +152,7 @@ export function TopologyExperience() {
       {/* HERO */}
       <section className="mx-auto flex min-h-dvh w-full max-w-5xl flex-col justify-center px-4 pt-20 sm:px-6">
         <p className="font-mono text-[11px] tracking-[0.3em] text-neutral-500 uppercase">
-          Mission control · 2012—2026
+          Mission control · 2014—2026
         </p>
         <h2 className="mt-4 max-w-2xl text-4xl font-semibold tracking-tight text-neutral-50 sm:text-6xl">
           LIVING TOPOLOGY
@@ -164,7 +164,7 @@ export function TopologyExperience() {
           hơn 12 năm nghề — rê chuột lên node để query một hệ thống.
         </p>
         <p className="mt-8 animate-pulse font-mono text-xs text-neutral-600">
-          ↓ cuộn: 2012, những site WordPress đầu tiên
+          ↓ cuộn: 2014, những site WordPress đầu tiên
         </p>
       </section>
 

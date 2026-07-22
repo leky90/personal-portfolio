@@ -20,7 +20,7 @@ interface Chapter {
 
 const CHAPTERS: Chapter[] = [
   {
-    year: "2012",
+    year: "2014",
     title: "Một khối, một người",
     copy: "Nghề bắt đầu bằng freelance ở Huế: PHP, WordPress, HTML và CSS nằm gọn trong một khối. Một codebase, một database, một lần upload. Với một người làm hết, đó là kiến trúc đúng.",
     side: "left",
@@ -53,7 +53,7 @@ const CHAPTERS: Chapter[] = [
 
 /**
  * Layout DOM: hero + 5 chương theo bốn chặng nghề + era stepper (anchor a11y)
- * + HUD ADR whisper. Cuộn cả trang là timeline 2012→2026 của transformation.
+ * + HUD ADR whisper. Cuộn cả trang là timeline 2014→2026 của transformation.
  */
 export function MeshExperience() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -148,13 +148,13 @@ export function MeshExperience() {
       {/* HERO */}
       <section className="mx-auto flex min-h-dvh w-full max-w-5xl flex-col justify-center px-4 pt-20 sm:px-6">
         <p className="font-mono text-[11px] tracking-[0.3em] text-[#6ce0ff] uppercase">
-          Mười bốn năm kiến trúc · 36 services
+          Mười hai năm kiến trúc · 36 services
         </p>
         <h2 className="mt-4 max-w-2xl text-4xl font-semibold tracking-tight text-neutral-50 sm:text-6xl">
           MONOLITH TO MESH
         </h2>
         <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400">
-          Khối graphite phía sau là hệ thống năm 2012: một mình, một codebase
+          Khối graphite phía sau là hệ thống năm 2014: một mình, một codebase
           PHP. Cuộn để xem nó bị kerf-cut thành 36 service theo đúng thứ tự
           lịch sử, từ catalog và checkout thời eCommerce tới wallet, staking
           và price feed thời DeFi, đan lại thành mesh, và một lần duy nhất:

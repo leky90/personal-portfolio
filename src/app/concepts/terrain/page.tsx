@@ -4,9 +4,9 @@ import { ConceptShell } from "@/features/concepts/shared/components/concept-shel
 import { TerrainExperience } from "@/features/concepts/terrain";
 
 export const metadata: PageMetadata = {
-  title: "Fourteen Years of Terrain — 3D Concept",
+  title: "Twelve Years of Terrain — 3D Concept",
   description:
-    "Concept demo: 14 năm sự nghiệp bake thành data texture, extrude thành địa hình ridgeline — cuộn timeline là camera bay qua 14 năm địa hình.",
+    "Concept demo: 12 năm sự nghiệp bake thành data texture, extrude thành địa hình ridgeline — cuộn timeline là camera bay qua 12 năm địa hình.",
 };
 
 export default function TerrainConceptPage() {

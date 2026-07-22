@@ -15,6 +15,11 @@ describe("trang /concepts/maintenance-archaeology", () => {
     expect(metadata.title).toBe("Maintenance Archaeology — 3D Concept");
   });
 
+  it("metadata description neo đúng 12 năm nghề (2014 tới 2026)", () => {
+    expect(metadata.description).toContain("12 năm nghề (2014 tới 2026)");
+    expect(metadata.description).not.toContain("2012");
+  });
+
   it("render ConceptShell với rank + điểm từ registry", () => {
     render(<MemoryRouter><MaintenanceArchaeologyConceptPage /></MemoryRouter>);
     const concept = getConcept("maintenance-archaeology");

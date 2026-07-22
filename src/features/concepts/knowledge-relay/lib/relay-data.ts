@@ -1,8 +1,8 @@
 /**
  * Biểu đồ relay kiểu Marey dựng trên hồ sơ nghề thật: 6 lane là bốn
- * chặng làm việc (freelance Huế 2012–2016 · Synova 2017–2018 · TESO
+ * chặng làm việc (freelance Huế 2014–2016 · Synova 2017–2018 · TESO
  * 2019–2021 · Treehouse 2021–nay) tách thành các nhóm cộng tác, xếp kệ
- * theo z; thời gian 2012→2026 chạy dọc x. 5 practice thật là gậy phát
+ * theo z; thời gian 2014→2026 chạy dọc x. 5 practice thật là gậy phát
  * sáng được trao qua các lane; lane tắt khi rời chỗ đó, gậy vẫn chạy
  * tiếp — đó là toàn bộ beat cảm xúc. Mọi hình học suy từ dữ liệu thuần.
  *
@@ -23,7 +23,7 @@ export const LANES: RelayLane[] = [
   {
     id: "l-freelance",
     label: "khách freelance · Huế (Freelancer.com)",
-    startYear: 2012,
+    startYear: 2014,
     endYear: 2017,
     y: 0,
     z: 0,
@@ -93,10 +93,10 @@ export const BATONS: Baton[] = [
     id: "b-legacy",
     label: "LEGACY-RESCUE",
     dash: "solid",
-    forgedYear: 2012,
+    forgedYear: 2014,
     note: "Gậy đầu tiên, rèn từ những site khách phải nhận lại và giữ cho chạy: WordPress và PHP thời freelance, rồi Drupal/Magento/OpenCart ở Synova, rồi chủ trì tối ưu và bảo trì codebase legacy ở TESO. Đọc code người khác trước khi viết code mình — thói quen đó theo tôi tới tận stack Treehouse.",
     passes: [
-      { laneId: "l-freelance", fromYear: 2012, toYear: 2017 },
+      { laneId: "l-freelance", fromYear: 2014, toYear: 2017 },
       { laneId: "l-synova", fromYear: 2017, toYear: 2019 },
       { laneId: "l-teso", fromYear: 2019, toYear: 2021 },
       { laneId: "l-treehouse", fromYear: 2021, toYear: 2026 },
@@ -149,13 +149,13 @@ export const BATONS: Baton[] = [
   },
 ];
 
-export const RELAY_YEAR_MIN = 2012;
+export const RELAY_YEAR_MIN = 2014;
 export const RELAY_YEAR_MAX = 2026;
 export const RELAY_YEAR_SPAN = RELAY_YEAR_MAX - RELAY_YEAR_MIN;
 
 const X_SPAN = 1.05;
 
-/** Trục thời gian: 2012 → -7.35, 2019 → 0, 2026 → +7.35. */
+/** Trục thời gian: 2014 → -6.3, 2020 → 0, 2026 → +6.3. */
 export function xForYear(year: number): number {
   return (year - (RELAY_YEAR_MIN + RELAY_YEAR_MAX) / 2) * X_SPAN;
 }

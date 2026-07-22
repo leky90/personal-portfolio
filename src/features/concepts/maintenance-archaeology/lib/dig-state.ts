@@ -1,6 +1,6 @@
 /** State chia sẻ DOM ↔ canvas của maintenance-archaeology (mutable ref). */
 export interface DigState {
-  /** Tiến độ cuộn [0,1] — độ sâu đào: 0 = mặt đất 2026, 1 = đá gốc 2016 */
+  /** Tiến độ cuộn [0,1] — độ sâu đào: 0 = mặt đất 2026, 1 = đá gốc 2014 */
   progress: number;
   /** Artifact đang probe (-1 = không) */
   probed: number;

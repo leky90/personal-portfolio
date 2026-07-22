@@ -1,8 +1,9 @@
-/** Seed = ngày mở tài khoản Freelancer.com (11/07/2012), mốc bắt đầu nghề. */
-export const DEFAULT_SEED = 20120711;
+/** Seed = 01/01/2014 — năm tốt nghiệp ĐH Khoa học Huế và bắt đầu đi làm.
+ * Tài khoản Freelancer mở 11/07/2012 thời sinh viên chỉ là chi tiết nguồn. */
+export const DEFAULT_SEED = 20140101;
 
-/** 2012 → 2026 ≈ 14 năm ≈ 730 tuần — mỗi tuần một mẫu hoạt động. */
-export const TOTAL_WEEKS = 730;
+/** 2014 → 2026 ≈ 12 năm ≈ 626 tuần — mỗi tuần một mẫu hoạt động. */
+export const TOTAL_WEEKS = 626;
 
 export interface CareerEra {
   year: number;
@@ -38,12 +39,12 @@ interface EraSeed {
  */
 const ERA_SEEDS: EraSeed[] = [
   {
-    year: 2012,
+    year: 2014,
     title: "Freelance, One Client At A Time",
     role: "Freelance Web Developer",
     description:
-      "Started on Freelancer.com in 2012 as a PHP developer: WordPress builds, HTML/CSS/JS client sites, cross-browser and mobile responsiveness. Four years of shipping directly to whoever paid — the fastest feedback loop I have ever had.",
-    metric: "Freelancer.com since 2012 · PHP + WordPress",
+      "Graduated in IT from Hue University of Sciences in 2014 and started freelancing full-time from Hue: PHP and WordPress builds, HTML/CSS/JS client sites, cross-browser and mobile responsiveness. Three years of shipping directly to whoever paid — the fastest feedback loop I have ever had.",
+    metric: "Freelance from Hue since 2014 · PHP + WordPress",
     peak: 0.45,
     timeU: 0.05,
     side: "left",
@@ -56,7 +57,7 @@ const ERA_SEEDS: EraSeed[] = [
       "Delivered web projects end to end in Ho Chi Minh City — turning designs into responsive interfaces, then building the dynamic, API-integrated back ends behind them. Business and eCommerce sites on jQuery, Laravel, CodeIgniter, WordPress and Magento.",
     metric: "Design → API · Laravel · Magento",
     peak: 0.6,
-    timeU: 0.38,
+    timeU: 0.29,
     side: "right",
   },
   {
@@ -67,7 +68,7 @@ const ERA_SEEDS: EraSeed[] = [
       "Owned end-to-end delivery of JavaScript/React applications across multiple client projects, remotely from Hue. Started leading: guiding teammates on workflow, modernising legacy codebases for performance and reliability, streamlining docs and releases with designers and management.",
     metric: "React · remote · multi-client delivery",
     peak: 0.72,
-    timeU: 0.55,
+    timeU: 0.46,
     side: "left",
   },
   {

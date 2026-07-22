@@ -90,7 +90,7 @@ export function DeskExperience() {
           data-testid="desk-year"
           className="font-mono text-4xl text-neutral-700 tabular-nums sm:text-6xl"
         >
-          2012
+          2014
         </p>
       </div>
 
@@ -115,21 +115,21 @@ export function DeskExperience() {
       {/* HERO */}
       <section className="mx-auto flex min-h-dvh w-full max-w-5xl flex-col justify-center px-4 pt-20 sm:px-6">
         <p className="font-mono text-[11px] tracking-[0.3em] text-[#fbbf24] uppercase">
-          git log của một chiếc bàn · 2012 → 2026
+          git log của một chiếc bàn · 2014 → 2026
         </p>
         <h2 className="mt-4 max-w-2xl text-4xl font-semibold tracking-tight text-neutral-50 sm:text-6xl">
           DESK, VERSION-CONTROLLED
         </h2>
         <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400">
-          Mười bốn năm sự nghiệp gói trong một góc bàn isometric. Cuộn
-          để scrub từng commit: cái laptop freelance PHP ở Huế năm 2012
+          Mười hai năm sự nghiệp gói trong một góc bàn isometric. Cuộn
+          để scrub từng commit: cái laptop freelance PHP ở Huế năm 2014
           nhường chỗ cho thẻ nhân viên văn phòng TP.HCM 2017, rồi setup
           remote dựng lại từ đầu 2019, và từ 2021 là màn dashboard
           on-chain cùng mic cho một đội 8 người. Rê lên từng đồ vật để
           đọc lý do — trưởng thành ở đây đọc được bằng số thứ bị remove.
         </p>
         <p className="mt-8 font-mono text-xs text-neutral-500 motion-safe:animate-pulse">
-          ↓ cuộn: commit đầu tiên năm 2012
+          ↓ cuộn: commit đầu tiên năm 2014
         </p>
       </section>
 

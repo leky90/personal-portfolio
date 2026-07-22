@@ -11,13 +11,14 @@ describe("EdgeMaterial", () => {
     material.dispose();
   });
 
-  it("đủ uniform, mặc định chưa focus hệ thống nào và năm ở trước 2016", () => {
+  it("đủ uniform, mặc định chưa focus hệ thống nào và năm khởi tạo ngay dưới 2014", () => {
     const material = new EdgeMaterial();
     for (const key of ["uYear", "uFocus", "uInk", "uAccent"]) {
       expect(Object.keys(material.uniforms)).toContain(key);
     }
     expect(material.uniforms.uFocus.value).toBe(-1);
-    expect(material.uniforms.uYear.value).toBeLessThan(2016);
+    expect(material.uniforms.uYear.value).toBeGreaterThan(2013);
+    expect(material.uniforms.uYear.value).toBeLessThan(2014);
     material.dispose();
   });
 });

@@ -93,7 +93,7 @@ export function TopologyScene({ topologyState }: TopologySceneProps) {
   const tmpMatrix = useRef(new THREE.Matrix4());
   const tmpVec = useRef(new THREE.Vector3());
   const tmpColor = useRef(new THREE.Color());
-  const smoothYear = useRef({ y: 2015.4 });
+  const smoothYear = useRef({ y: 2013.5 });
   const lastAppearance = useRef("");
 
   useFrame((root, delta) => {

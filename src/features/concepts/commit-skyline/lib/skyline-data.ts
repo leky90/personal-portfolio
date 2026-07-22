@@ -1,17 +1,17 @@
 /**
- * Thành phố commit: 15 block năm (2012 → 2026) × 365 ngày, mỗi toà một
+ * Thành phố commit: 13 block năm (2014 → 2026) × 365 ngày, mỗi toà một
  * ngày, cao theo số commit. Mốc thời gian và 6 landmark là sự nghiệp
- * thật: freelance từ 2012 ở Huế, Synova 2017, TESO 2019, Treehouse từ
- * 08/2021. Số commit mỗi ngày thì KHÔNG thật — demo dùng model
- * deterministic có nhịp tuần (cuối tuần thưa) + sóng cường độ theo năm;
- * bản chính thức thay bằng ETL GitHub GraphQL bake JSON ~8KB lúc build,
- * cùng schema — zero API call runtime.
+ * thật: tốt nghiệp ĐH Khoa học Huế rồi freelance từ 2014 ở Huế, Synova
+ * 2017, TESO 2019, Treehouse từ 08/2021. Số commit mỗi ngày thì KHÔNG
+ * thật — demo dùng model deterministic có nhịp tuần (cuối tuần thưa) +
+ * sóng cường độ theo năm; bản chính thức thay bằng ETL GitHub GraphQL
+ * bake JSON ~8KB lúc build, cùng schema — zero API call runtime.
  */
 
-/** Năm bắt đầu viết code lấy tiền: 11/07/2012, tài khoản Freelancer đầu tiên. */
-export const START_YEAR = 2012;
-/** 2012 → 2026 (block cuối là năm hiện tại). */
-export const YEAR_COUNT = 15;
+/** Năm bắt đầu đi làm: 2014, tốt nghiệp ĐH Khoa học Huế, freelance PHP/WordPress. */
+export const START_YEAR = 2014;
+/** 2014 → 2026 (block cuối là năm hiện tại). */
+export const YEAR_COUNT = 13;
 export const DAY_COUNT = YEAR_COUNT * 365;
 
 const COLUMN_STEP = 0.28;
@@ -47,7 +47,7 @@ export interface SkylineBuilding {
   intensity: number;
 }
 
-/** 15 block năm × (53 tuần × 7 thứ), đại lộ giữa các năm. */
+/** 13 block năm × (53 tuần × 7 thứ), đại lộ giữa các năm. */
 export function buildSkyline(): SkylineBuilding[] {
   const buildings: SkylineBuilding[] = [];
   for (let day = 0; day < DAY_COUNT; day += 1) {
@@ -82,10 +82,10 @@ function dayOf(year: number, dayOfYear: number): number {
 
 export const LANDMARKS: SkylineLandmark[] = [
   {
-    dayIndex: dayOf(2012, 192),
-    label: "bắt đầu freelance",
+    dayIndex: dayOf(2014, 192),
+    label: "tốt nghiệp, bắt đầu freelance",
     story:
-      "11/07/2012, mở tài khoản Freelancer ở Huế. Block đầu tiên là PHP, WordPress và những đêm gò cross-browser cho site khách.",
+      "2014, tốt nghiệp ĐH Khoa học Huế và bắt đầu freelance ở Huế. Block đầu tiên là PHP, WordPress và những đêm gò cross-browser cho site khách — tài khoản Freelancer thì đã mở từ 2012, thời còn sinh viên.",
   },
   {
     dayIndex: dayOf(2017, 14),
@@ -125,7 +125,7 @@ export interface DayInfo {
   weekday: number;
 }
 
-/** Ngày thứ i (model 365 ngày/năm, gốc 2012) → năm · tuần · thứ. */
+/** Ngày thứ i (model 365 ngày/năm, gốc 2014) → năm · tuần · thứ. */
 export function dayInfo(dayIndex: number): DayInfo {
   return {
     year: START_YEAR + Math.floor(dayIndex / 365),

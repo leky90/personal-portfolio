@@ -10,13 +10,13 @@ import {
 } from "@/features/concepts/gravity-toybox/lib/toybox-data";
 
 describe("toybox-data — khối lượng = số năm kinh nghiệm, không physics engine", () => {
-  // Miền năm thật: 3 (OpenAI API, ~2023) → 14 (JavaScript/PHP, từ 2012).
-  it("12 skill id không trùng, years 3..14, đĩa to dần theo năm", () => {
+  // Miền năm thật: 3 (OpenAI API, ~2023) → 12 (JavaScript/PHP, từ 2014).
+  it("12 skill id không trùng, years 3..12, đĩa to dần theo năm", () => {
     expect(SKILLS).toHaveLength(12);
     expect(new Set(SKILLS.map((s) => s.id)).size).toBe(12);
     for (const skill of SKILLS) {
       expect(skill.years).toBeGreaterThanOrEqual(3);
-      expect(skill.years).toBeLessThanOrEqual(14);
+      expect(skill.years).toBeLessThanOrEqual(12);
     }
     const sorted = [...SKILLS].sort((a, b) => a.years - b.years);
     for (let i = 1; i < sorted.length; i += 1) {
@@ -24,10 +24,10 @@ describe("toybox-data — khối lượng = số năm kinh nghiệm, không phys
     }
   });
 
-  it("restitution giảm theo khối lượng: 3 năm nảy tưng, 14 năm thịch", () => {
-    expect(restitutionOf(3)).toBeGreaterThan(restitutionOf(14));
+  it("restitution giảm theo khối lượng: 3 năm nảy tưng, 12 năm thịch", () => {
+    expect(restitutionOf(3)).toBeGreaterThan(restitutionOf(12));
     expect(restitutionOf(3)).toBeLessThanOrEqual(0.75);
-    expect(restitutionOf(14)).toBeGreaterThanOrEqual(0.15);
+    expect(restitutionOf(12)).toBeGreaterThanOrEqual(0.15);
   });
 
   it("massRatio nằm trong [0,1] cho cả bảng, nhẹ nhất 0 và nặng nhất 1", () => {

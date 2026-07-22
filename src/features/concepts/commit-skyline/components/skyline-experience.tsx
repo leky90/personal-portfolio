@@ -21,7 +21,7 @@ const SECTIONS = [
   {
     id: "rhythm",
     title: "nhịp tuần đọc được từ xa",
-    note: "Hai hàng nhà thấp cuối mỗi cột là thứ 7 và chủ nhật. Mười bốn năm nhìn từ đại lộ, điều dễ thấy nhất không phải cường độ mà là kỷ luật nghỉ.",
+    note: "Hai hàng nhà thấp cuối mỗi cột là thứ 7 và chủ nhật. Mười hai năm nhìn từ đại lộ, điều dễ thấy nhất không phải cường độ mà là kỷ luật nghỉ.",
   },
   {
     id: "landmarks",
@@ -118,15 +118,16 @@ export function SkylineExperience() {
           COMMIT SKYLINE
         </h2>
         <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400">
-          Mười bốn năm commit — từ job freelance đầu tiên năm 2012 tới
-          hôm nay — dựng thành một thành phố về đêm chìm trong sương.
+          Mười hai năm commit — từ ngày tốt nghiệp ĐH Khoa học Huế và
+          job freelance đầu tiên năm 2014 tới hôm nay — dựng thành một
+          thành phố về đêm chìm trong sương.
           Cuộn để bay thấp dọc đại lộ thời gian: mỗi block là một năm,
           nhà cao là ngày code nhiều, tháp xanh có beacon là những ngày
           đổi nghĩa cả sự nghiệp. Rê lên bất kỳ toà nào để đọc đúng ngày
           của nó.
         </p>
         <p className="mt-8 font-mono text-xs text-neutral-500 motion-safe:animate-pulse">
-          ↓ cuộn: cất cánh từ block 2012
+          ↓ cuộn: cất cánh từ block 2014
         </p>
       </section>
 
@@ -174,7 +175,7 @@ export function SkylineExperience() {
             được. Kỹ thuật: cả thành phố {DAY_COUNT} toà là MỘT
             InstancedMesh (matrix scale theo commit, instanceColor ấm
             dần theo cường độ), landmark + beacon mỗi loại một draw call
-            nữa — tổng ~6 draw call cho mười lăm block năm; fogExp2 làm mood thay
+            nữa — tổng ~6 draw call cho mười ba block năm; fogExp2 làm mood thay
             postprocessing; raycast instanceId → đúng ngày. Frameloop
             demand: thành phố đóng băng cho tới khi bạn cuộn, đứng yên
             là 0% GPU.

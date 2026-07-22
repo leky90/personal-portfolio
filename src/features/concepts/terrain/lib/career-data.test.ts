@@ -35,10 +35,27 @@ describe("mulberry32", () => {
   });
 });
 
+describe("mốc thời gian sự nghiệp (2014 → 2026)", () => {
+  it("seed mặc định gắn mốc 2014 — tốt nghiệp, bắt đầu đi làm", () => {
+    expect(DEFAULT_SEED).toBe(20140101);
+  });
+
+  it("trục thời gian 12 năm ≈ 626 tuần", () => {
+    expect(TOTAL_WEEKS).toBe(626);
+  });
+});
+
 describe("ERAS", () => {
-  it("có đúng 4 era theo thứ tự thời gian 2012 → 2021", () => {
+  it("có đúng 4 era theo thứ tự thời gian 2014 → 2021", () => {
     expect(ERAS).toHaveLength(4);
-    expect(ERAS.map((e) => e.year)).toEqual([2012, 2017, 2019, 2021]);
+    expect(ERAS.map((e) => e.year)).toEqual([2014, 2017, 2019, 2021]);
+  });
+
+  it("era đầu kể chuyện bắt đầu freelance 2014, không lấy 2012 làm mốc nghề", () => {
+    const first = ERAS[0];
+    expect(first.year).toBe(2014);
+    expect(first.metric).toContain("2014");
+    expect(first.metric).not.toContain("2012");
   });
 
   it("2021 (Treehouse, vai trò lead hiện tại) là peak cao nhất", () => {
@@ -63,7 +80,7 @@ describe("ERAS", () => {
 });
 
 describe("generateWeeklyActivity", () => {
-  it("trả về đúng số tuần của 10 năm", () => {
+  it("trả về đúng số tuần của 12 năm", () => {
     expect(generateWeeklyActivity()).toHaveLength(TOTAL_WEEKS);
   });
 
@@ -87,11 +104,11 @@ describe("generateWeeklyActivity", () => {
     }
   });
 
-  it("peak 2021 cao hơn hẳn baseline những tuần đầu 2012", () => {
+  it("peak 2021 cao hơn hẳn baseline những tuần đầu 2014", () => {
     const data = generateWeeklyActivity();
     const rebuild = ERAS.find((e) => e.year === 2021)!;
     const peak2021 = data[rebuild.week];
-    const baselineStart = data[0]; // tuần đầu 2012, trước peak đầu tiên
+    const baselineStart = data[0]; // tuần đầu 2014, trước peak đầu tiên
     expect(peak2021).toBeGreaterThan(baselineStart + 0.3);
   });
 

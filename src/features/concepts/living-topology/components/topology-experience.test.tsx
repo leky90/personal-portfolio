@@ -22,9 +22,9 @@ describe("TopologyExperience — layout DOM của trang concept", () => {
     expect(hud.textContent).toMatch(/node/i);
   });
 
-  it("timeline mọc theo 4 chặng nghề 2012 → 2021", () => {
+  it("timeline mọc theo 4 chặng nghề 2014 → 2021", () => {
     render(<TopologyExperience />);
-    for (const year of ["2012", "2017", "2019", "2021"]) {
+    for (const year of ["2014", "2017", "2019", "2021"]) {
       expect(screen.getByText(year)).toBeInTheDocument();
     }
   });

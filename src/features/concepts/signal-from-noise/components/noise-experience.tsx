@@ -91,7 +91,7 @@ export function NoiseExperience() {
         </h2>
         <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400">
           Một trường hạt duy nhất, lặp đi lặp lại đúng một động tác kể
-          từ 2012 tới nay: gom hỗn độn thành hình dạng chính xác. Cuộn
+          từ 2014 tới nay: gom hỗn độn thành hình dạng chính xác. Cuộn
           để nhiễu kết tinh lần lượt thành cái tên, quả cầu đội ngũ và
           lattice kiến trúc dApp; hạt lạnh màu cyan, hạt đã vào trật tự
           ấm dần thành amber.

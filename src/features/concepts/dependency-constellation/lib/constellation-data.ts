@@ -1,5 +1,5 @@
 /**
- * Chòm sao phụ thuộc: 14 năm nghề thật (2012 → 2026) resolve sẵn thành
+ * Chòm sao phụ thuộc: 12 năm nghề thật (2014 → 2026) resolve sẵn thành
  * một đồ thị (role → project → skill). Node lấy từ hồ sơ thật: 5 chặng
  * (freelance Huế → Synova → TESO → Treehouse), 10 dự án (6 cái công khai
  * trên Freelancer/Upwork + các mảng việc mô tả trong từng chặng) và 12
@@ -26,7 +26,7 @@ export const NODES: CareerNode[] = [
     id: "r-freelance",
     kind: "role",
     label: "Freelance Web Developer",
-    year: 2012,
+    year: 2014,
   },
   {
     id: "r-fullstack",
@@ -54,7 +54,7 @@ export const NODES: CareerNode[] = [
   },
 
   // 10 dự án — đặt tên kiểu package cho hợp ẩn dụ lockfile.
-  { id: "p-client-sites", kind: "project", label: "client-sites-wp", year: 2013 },
+  { id: "p-client-sites", kind: "project", label: "client-sites-wp", year: 2014 },
   { id: "p-responsive", kind: "project", label: "responsive-retrofit", year: 2015 },
   { id: "p-controllermodz", kind: "project", label: "controllermodz", year: 2017 },
   { id: "p-ciga", kind: "project", label: "ciga.fr", year: 2018 },
@@ -66,15 +66,15 @@ export const NODES: CareerNode[] = [
   { id: "p-standards", kind: "project", label: "frontend-standards", year: 2023 },
 
   // 12 công nghệ — năm là lúc bắt đầu dùng thật trong việc.
-  { id: "s-php", kind: "skill", label: "PHP", year: 2012 },
-  { id: "s-js", kind: "skill", label: "JavaScript", year: 2012 },
-  { id: "s-wordpress", kind: "skill", label: "WordPress", year: 2012 },
-  { id: "s-jquery", kind: "skill", label: "jQuery", year: 2013 },
+  { id: "s-php", kind: "skill", label: "PHP", year: 2014 },
+  { id: "s-js", kind: "skill", label: "JavaScript", year: 2014 },
+  { id: "s-wordpress", kind: "skill", label: "WordPress", year: 2014 },
+  { id: "s-jquery", kind: "skill", label: "jQuery", year: 2014 },
   { id: "s-magento", kind: "skill", label: "Magento", year: 2017 },
   { id: "s-laravel", kind: "skill", label: "Laravel", year: 2017 },
   { id: "s-react", kind: "skill", label: "React", year: 2019 },
   { id: "s-node", kind: "skill", label: "Node.js", year: 2019 },
-  { id: "s-ts", kind: "skill", label: "TypeScript", year: 2020 },
+  { id: "s-ts", kind: "skill", label: "TypeScript", year: 2021 },
   { id: "s-next", kind: "skill", label: "Next.js", year: 2021 },
   { id: "s-ethers", kind: "skill", label: "Ethers.js", year: 2021 },
   { id: "s-tailwind", kind: "skill", label: "Tailwind CSS", year: 2021 },
@@ -93,7 +93,7 @@ export const EDGES: [string, string][] = [
   ["r-lead", "p-teth"],
   ["r-lead", "p-standards"],
 
-  // Huế 2012–2016: site khách bằng WordPress, rồi kéo chúng về responsive.
+  // Huế 2014–2016: site khách bằng WordPress, rồi kéo chúng về responsive.
   ["p-client-sites", "s-php"],
   ["p-client-sites", "s-wordpress"],
   ["p-client-sites", "s-js"],

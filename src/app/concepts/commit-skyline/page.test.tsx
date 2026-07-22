@@ -15,6 +15,12 @@ describe("trang /concepts/commit-skyline", () => {
     expect(metadata.title).toBe("Commit Skyline — 3D Concept");
   });
 
+  it("metadata description neo 4745 ngày (2014 → 2026)", () => {
+    expect(metadata.description).toContain("4745 ngày");
+    expect(metadata.description).toContain("2014 → 2026");
+    expect(metadata.description).not.toContain("2012");
+  });
+
   it("render ConceptShell với rank + điểm từ registry", () => {
     render(<MemoryRouter><CommitSkylineConceptPage /></MemoryRouter>);
     const concept = getConcept("commit-skyline");

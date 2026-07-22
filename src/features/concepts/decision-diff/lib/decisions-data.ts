@@ -1,5 +1,5 @@
 /**
- * 6 ADR CÓ THẬT trong 14 năm nghề (2012 tới nay) — nguồn sự thật DUY NHẤT
+ * 6 ADR CÓ THẬT trong 12 năm nghề (2014 tới nay) — nguồn sự thật DUY NHẤT
  * sinh ra: hình học rail 3D, card diff DOM, và HUD chi phí.
  * 2019 ở TESO; 2021 trở đi ở Treehouse (nền tảng DeFi/RWA, sản phẩm tETH).
  * Giá nhánh bỏ viết định tính: không bịa con số đo được.

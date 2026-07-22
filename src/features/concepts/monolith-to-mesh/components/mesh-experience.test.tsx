@@ -16,9 +16,9 @@ describe("MeshExperience — layout DOM của trang concept", () => {
     expect(screen.getByText(/MONOLITH TO MESH/i)).toBeInTheDocument();
   });
 
-  it("5 chương theo năm 2012 → 2026, có nhịp gộp ngược 2021", () => {
+  it("5 chương theo năm 2014 → 2026, có nhịp gộp ngược 2021", () => {
     render(<MeshExperience />);
-    for (const year of ["2012", "2017", "2021", "2023", "2026"]) {
+    for (const year of ["2014", "2017", "2021", "2023", "2026"]) {
       expect(screen.getAllByText(new RegExp(year)).length).toBeGreaterThanOrEqual(1);
     }
     expect(screen.getAllByText(/gộp ngược/i).length).toBeGreaterThanOrEqual(1);
@@ -29,7 +29,7 @@ describe("MeshExperience — layout DOM của trang concept", () => {
     const hrefs = screen
       .getAllByRole("link")
       .map((link) => link.getAttribute("href"));
-    for (const anchor of ["#ch-2012", "#ch-2017", "#ch-2021", "#ch-2023", "#ch-2026"]) {
+    for (const anchor of ["#ch-2014", "#ch-2017", "#ch-2021", "#ch-2023", "#ch-2026"]) {
       expect(hrefs).toContain(anchor);
     }
   });

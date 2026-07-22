@@ -1,5 +1,5 @@
 /**
- * Sổ cái nghề thật của Ky Le Dinh: 14 năm (2012 → 2025) nén vào đúng 10
+ * Sổ cái nghề thật của Ky Le Dinh: 12 năm (2014 → 2025) nén vào đúng 10
  * tầng, mỗi tầng một chặng. Chặng ship sản phẩm cộng tải, chặng dọn nợ
  * (refactor) nhân nợ tích luỹ xuống. Hai đường cong nợ (thật / giả định
  * không bao giờ dọn) precompute lúc load module — runtime KHÔNG mô phỏng
@@ -12,7 +12,7 @@ export interface LedgerEvent {
   yearIndex: number;
   /** Năm bắt đầu của chặng */
   year: number;
-  /** Chỉ chặng kéo dài nhiều năm (2013–2016, 2023–2024) */
+  /** Chỉ chặng kéo dài nhiều năm (2015–2016, 2023–2024) */
   yearEnd?: number;
   kind: "feature" | "refactor";
   title: string;
@@ -26,25 +26,25 @@ export interface LedgerEvent {
 }
 
 export const FLOOR_COUNT = 10;
-/** uYear chạy 0..10: 0 = đất trống trước 2012, 10 = hôm nay 2026 */
+/** uYear chạy 0..10: 0 = đất trống trước 2014, 10 = hôm nay 2026 */
 export const YEAR_SPAN = 10;
 
 export const LEDGER: LedgerEvent[] = [
   {
     yearIndex: 0,
-    year: 2012,
+    year: 2014,
     kind: "feature",
-    title: "Dòng PHP đầu tiên",
-    metric: "mở hồ sơ Freelancer 11/07/2012 → làm việc từ Huế",
+    title: "Tốt nghiệp, dòng PHP đầu tiên",
+    metric: "BS CNTT Đại học Khoa học Huế → freelance PHP/WordPress từ Huế",
     load: 1.0,
-    note: "Móng đổ bằng PHP và một tài khoản freelance trống trơn. Mọi thói quen hình thành ở tầng này sẽ tính lãi suốt mười ba năm sau.",
+    note: "Móng đổ bằng PHP ngay năm ra trường, trên tài khoản Freelancer đã mở sẵn từ 2012 thời sinh viên. Mọi thói quen hình thành ở tầng này sẽ tính lãi suốt mười hai năm sau.",
   },
   {
     yearIndex: 1,
-    year: 2013,
+    year: 2015,
     yearEnd: 2016,
     kind: "feature",
-    title: "Bốn năm site khách",
+    title: "Hai năm site WordPress khách",
     metric: "HTML · CSS · JS · WordPress → cross-browser và responsive",
     load: 1.2,
     note: "Dựng rồi bảo trì hết site này tới site khác cho khách. Học chịu trách nhiệm dài hạn với code người khác vẫn đang dùng, chứ không chỉ bàn giao rồi thôi.",

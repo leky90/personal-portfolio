@@ -5,7 +5,7 @@ export function Hero() {
   return (
     <section className="mx-auto flex min-h-dvh w-full max-w-5xl flex-col justify-center px-4 pt-20 sm:px-6">
       <p className="font-mono text-[11px] tracking-[0.3em] text-[#ffb454] uppercase">
-        2012 — 2026 · {SITE.location}
+        2014 — 2026 · {SITE.location}
       </p>
       <h1 className="mt-4 text-5xl font-semibold tracking-tight text-neutral-50 sm:text-7xl">
         {SITE.name}
@@ -28,7 +28,7 @@ export function Hero() {
           variant="outline"
           className="border-[#ffb454]/40 font-mono text-[#ffb454] hover:bg-[#ffb454]/10 hover:text-[#ffb454]"
         >
-          <a href="#experience">Fly through fourteen years ↓</a>
+          <a href="#experience">Fly through twelve years ↓</a>
         </Button>
         <Button asChild variant="ghost" className="font-mono text-neutral-300">
           <a href={`mailto:${SITE.email}`}>Get in touch</a>

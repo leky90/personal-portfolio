@@ -1,12 +1,12 @@
 /**
- * Thiên hà 14 năm nghề (2012 → 2026): ~730 tuần làm việc nở thành 6000
+ * Thiên hà 12 năm nghề (2014 → 2026): ~626 tuần làm việc nở thành 6000
  * sao trên 4 cánh tay xoắn — 4 chặng CÓ THẬT: freelance ở Huế
- * (2012–2016), full-stack tại Synova (2017–2018), JavaScript/React tại
+ * (2014–2016), full-stack tại Synova (2017–2018), JavaScript/React tại
  * TESO (2019–2021), và Treehouse từ 08/2021 tới nay. 10 supernova là
  * milestone thật trong CV, không phải số bịa.
  *
  * Scope trung thực ghi ngay trong ADR note của trang: dữ liệu per-commit
- * 14 năm repo công ty không tồn tại để công khai, nên sao tổng hợp
+ * 12 năm repo công ty không tồn tại để công khai, nên sao tổng hợp
  * deterministic từ seed tuần — và mapping được GIẢI THÍCH, không giả vờ
  * là số đo tuyệt đối. Đó là điểm khác một particle field trang trí.
  */
@@ -26,29 +26,29 @@ export interface GalaxyEra {
 
 export const GALAXY_ERAS: GalaxyEra[] = [
   {
-    label: "lõi freelance 2012-2016",
+    label: "lõi freelance 2014-2016",
     from: 0,
-    to: 0.357,
+    to: 0.25,
     color: "#ffb454",
-    note: "Lõi ấm và dày đặc: ngồi ở Huế nhận job trên Freelancer từ 2012, khởi nghiệp bằng PHP rồi dựng và bảo trì site khách bằng HTML, CSS, JS, WordPress. Cross-browser và responsive mobile học bằng tay, từng trình duyệt một.",
+    note: "Lõi ấm và dày đặc: 2014 tốt nghiệp CNTT Đại học Khoa học Huế rồi ở lại Huế đi làm freelance — nhận job trên Freelancer (tài khoản mở từ 2012 thời sinh viên), khởi nghiệp bằng PHP rồi dựng và bảo trì site khách bằng HTML, CSS, JS, WordPress. Cross-browser và responsive mobile học bằng tay, từng trình duyệt một.",
   },
   {
     label: "cánh tay full-stack 2017-2018",
-    from: 0.357,
-    to: 0.5,
+    from: 0.25,
+    to: 0.4167,
     color: "#e8c547",
     note: "Vào TP.HCM làm on-site ở Synova Solutions: ôm dự án end-to-end, từ chuyển design thành giao diện tĩnh tới web động tích hợp API. jQuery, Laravel, CakePHP, CodeIgniter, Zend, Yii, WordPress, Drupal, Magento, OpenCart — site doanh nghiệp và eCommerce.",
   },
   {
     label: "cánh tay JavaScript 2019-2021",
-    from: 0.5,
-    to: 0.68,
+    from: 0.4167,
+    to: 0.64,
     color: "#2dd4bf",
     note: "Về Huế làm remote cho TESO: sở hữu end-to-end nhiều dự án khách bằng JavaScript/React, chủ trì tối ưu và bảo trì codebase legacy. Bắt đầu dẫn dắt — hướng dẫn đồng đội, chuẩn hoá quy trình và release cùng designer, management.",
   },
   {
     label: "vành Treehouse 2021-2026",
-    from: 0.68,
+    from: 0.64,
     to: 1,
     color: "#a78bfa",
     note: "Rìa thiên hà: từ 08/2021 kiến trúc và xây dApp DeFi/RWA bằng React, TypeScript, Next.js — wallet integration, đọc/ghi on-chain qua Ethers.js, dashboard giá/yield/TVL thời gian thực. Lead 8 kỹ sư; ít commit tay hơn, mỗi ngôi sao nặng hơn.",
@@ -124,19 +124,19 @@ export interface Supernova {
 }
 
 export const SUPERNOVAE: Supernova[] = [
-  { birth: 0.03, label: "job đầu tiên trên Freelancer", story: "11/07/2012, mở tài khoản Freelancer ở Huế: site khách đầu tiên viết bằng PHP, deploy tay qua FTP." },
-  { birth: 0.15, label: "tốt nghiệp CNTT Đại học Khoa học Huế", story: "2014 nhận bằng BS Information Technology sau 4 năm vừa học vừa nhận job thật." },
-  { birth: 0.3, label: "site khách chạy đúng trên mọi trình duyệt", story: "Cross-browser và responsive mobile thành phản xạ, không còn là việc phải nhớ." },
-  { birth: 0.38, label: "vào Synova, chuyển sang full-stack", story: "2017 vào TP.HCM làm on-site: hết đứng ở phần giao diện, bắt đầu ôm cả backend PHP." },
-  { birth: 0.47, label: "eCommerce và tích hợp API bên thứ ba", story: "Magento, OpenCart, Drupal cho site doanh nghiệp — dữ liệu bắt đầu đến từ hệ thống của người khác." },
-  { birth: 0.54, label: "remote với TESO từ Huế", story: "2019 về Huế: sở hữu end-to-end dự án khách bằng JavaScript/React, và tự chịu trách nhiệm cả vòng đời." },
-  { birth: 0.65, label: "lần đầu dẫn dắt đồng đội", story: "Thôi chỉ ship code: hướng dẫn quy trình, đưa giải pháp kỹ thuật, chủ trì tối ưu codebase legacy." },
-  { birth: 0.7, label: "gia nhập Treehouse, 08/2021", story: "Nền tảng DeFi/RWA cho tài sản token hoá — lần đầu đọc/ghi on-chain qua Ethers.js." },
-  { birth: 0.83, label: "lead 8 kỹ sư, sở hữu front-end stack", story: "Kiến trúc, coding standards, tài liệu onboarding; review code hằng ngày, workshop và pair programming." },
+  { birth: 0.02, label: "tốt nghiệp CNTT ĐH Khoa học Huế, bắt đầu đi làm", story: "2014 nhận bằng BS Information Technology và bắt đầu đi làm freelance toàn thời gian ở Huế — tài khoản Freelancer mở từ 2012 thời sinh viên giờ thành cần câu cơm." },
+  { birth: 0.1, label: "những site khách đầu tiên bằng PHP", story: "Job trên Freelancer những năm đầu: site khách viết bằng PHP, deploy tay qua FTP." },
+  { birth: 0.18, label: "site khách chạy đúng trên mọi trình duyệt", story: "Cross-browser và responsive mobile thành phản xạ, không còn là việc phải nhớ." },
+  { birth: 0.26, label: "vào Synova, chuyển sang full-stack", story: "2017 vào TP.HCM làm on-site: hết đứng ở phần giao diện, bắt đầu ôm cả backend PHP." },
+  { birth: 0.34, label: "eCommerce và tích hợp API bên thứ ba", story: "Magento, OpenCart, Drupal cho site doanh nghiệp — dữ liệu bắt đầu đến từ hệ thống của người khác." },
+  { birth: 0.43, label: "remote với TESO từ Huế", story: "2019 về Huế: sở hữu end-to-end dự án khách bằng JavaScript/React, và tự chịu trách nhiệm cả vòng đời." },
+  { birth: 0.55, label: "lần đầu dẫn dắt đồng đội", story: "Thôi chỉ ship code: hướng dẫn quy trình, đưa giải pháp kỹ thuật, chủ trì tối ưu codebase legacy." },
+  { birth: 0.65, label: "gia nhập Treehouse, 08/2021", story: "Nền tảng DeFi/RWA cho tài sản token hoá — lần đầu đọc/ghi on-chain qua Ethers.js." },
+  { birth: 0.8, label: "lead 8 kỹ sư, sở hữu front-end stack", story: "Kiến trúc, coding standards, tài liệu onboarding; review code hằng ngày, workshop và pair programming." },
   { birth: 0.94, label: "tETH — tAsset đầu tiên", story: "Gom các mức lãi suất ETH phân mảnh về một chỗ, kèm dashboard giá, yield, TVL chạy thời gian thực." },
 ];
 
-/** Ticker năm theo frontier: 0 → 2012 (job đầu tiên), 1 → 2026. */
+/** Ticker năm theo frontier: 0 → 2014 (bắt đầu đi làm), 1 → 2026. */
 export function galaxyYearAt(progress: number): number {
-  return 2012 + Math.round(Math.min(Math.max(progress, 0), 1) * 14);
+  return 2014 + Math.round(Math.min(Math.max(progress, 0), 1) * 12);
 }

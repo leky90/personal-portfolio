@@ -1,7 +1,7 @@
 /**
- * Lịch sử tách khối theo 14 năm nghề thật (2012 tới nay) — nguồn sự thật sinh
+ * Lịch sử tách khối theo 12 năm nghề thật (2014 tới nay) — nguồn sự thật sinh
  * ra thứ tự tách khối, lý do (ADR whisper khi hover) và nhịp "gộp ngược" 2021.
- * Bốn chặng có thật ánh xạ vào timeline: 2012-2016 freelance (PHP, WordPress),
+ * Bốn chặng có thật ánh xạ vào timeline: 2014-2016 freelance (PHP, WordPress),
  * 2017-2018 Synova (eCommerce, CMS), 2019-2021 TESO (React, dự án khách),
  * 2021 tới nay Treehouse (dApp DeFi/RWA, sản phẩm tETH).
  * 36 service, 5 ở lại core. Lý do viết định tính, không bịa số đo.
@@ -30,7 +30,7 @@ export const SERVICES: ServicePlan[] = [
   { id: "routing", name: "routing", splitYear: null, reason: CORE_REASON },
   { id: "state-store", name: "state-store", splitYear: null, reason: CORE_REASON },
   { id: "api-client", name: "api-client", splitYear: null, reason: CORE_REASON },
-  { id: "wp-theme", name: "wp-theme", splitYear: 2013, reason: "2013: client sites needed a theme layer instead of edited page copies" },
+  { id: "wp-theme", name: "wp-theme", splitYear: 2014, reason: "2014: client sites needed a theme layer instead of edited page copies" },
   { id: "responsive-grid", name: "responsive-grid", splitYear: 2015, reason: "2015: phone layouts outgrew the desktop stylesheet" },
   { id: "browser-shims", name: "browser-shims", splitYear: 2016, reason: "2016: cross browser fixes belong in one place, not in every page" },
   { id: "catalog", name: "catalog", splitYear: 2017, reason: "2017: product data left the page templates" },

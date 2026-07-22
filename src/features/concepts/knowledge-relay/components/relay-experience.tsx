@@ -22,7 +22,7 @@ const DASH_GLYPH: Record<BatonDash, string> = {
 
 /**
  * Layout DOM: hero + bộ đếm relay + 5 section baton. Cuộn scrub mười
- * bốn năm 2012→2026 (bốn chặng nghề thật); bộ đếm tính DOM-side từ
+ * hai năm 2014→2026 (bốn chặng nghề thật); bộ đếm tính DOM-side từ
  * cùng dữ liệu với canvas nên không cần roundtrip callback.
  */
 export function RelayExperience() {
@@ -78,7 +78,7 @@ export function RelayExperience() {
           aria-live="polite"
           className="font-mono text-[11px] text-neutral-300"
         >
-          năm 2012 · đã trao gậy 0 lần · {carriersAt(2012)} chặng đã mang
+          năm 2014 · đã trao gậy 0 lần · {carriersAt(2014)} chặng đã mang
           practice
         </p>
       </div>
@@ -92,16 +92,16 @@ export function RelayExperience() {
           KNOWLEDGE RELAY
         </h2>
         <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400">
-          Mười bốn năm nghề vẽ thành biểu đồ relay kiểu Marey: mỗi
+          Mười hai năm nghề vẽ thành biểu đồ relay kiểu Marey: mỗi
           practice là một cây gậy phát sáng trao qua các lane cộng tác
           theo dòng thời gian — khách freelance ở Huế, Synova, TESO, rồi
-          đội frontend Treehouse. Cuộn để chạy từ 2012 tới 2026: mỗi
+          đội frontend Treehouse. Cuộn để chạy từ 2014 tới 2026: mỗi
           chặng lần lượt khép lại và lane của nó nguội đi, nhưng những
           cây gậy vẫn chạy tiếp — vì thứ senior để lại sống lâu hơn
           codebase.
         </p>
         <p className="mt-8 font-mono text-xs text-neutral-500 motion-safe:animate-pulse">
-          ↓ cuộn: rèn cây gậy đầu tiên năm 2012
+          ↓ cuộn: rèn cây gậy đầu tiên năm 2014
         </p>
       </section>
 
@@ -145,7 +145,7 @@ export function RelayExperience() {
             ngữ timetable 140 năm tuổi. Kỹ thuật: mọi hành trình gậy
             merge vào 1 LineSegments duy nhất với aYear per vertex,
             fragment lộ vệt bằng step(aYear, uYear) — scrub trọn mười
-            bốn năm chỉ là một lần ghi uniform; 5 đầu gậy 1 InstancedMesh, lane
+            hai năm chỉ là một lần ghi uniform; 5 đầu gậy 1 InstancedMesh, lane
             1 LineSegments, ~4 draw call; frameloop demand, scrub-only,
             không ambient loop nên đứng yên là 0% GPU.
           </p>

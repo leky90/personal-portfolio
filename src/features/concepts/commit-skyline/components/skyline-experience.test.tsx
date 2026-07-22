@@ -17,6 +17,14 @@ describe("SkylineExperience — layout DOM của trang concept", () => {
     expect(screen.getByText(/COMMIT SKYLINE/i)).toBeInTheDocument();
   });
 
+  it("copy neo mốc thật: 4745 ngày, mười hai năm, block 2014", () => {
+    render(<SkylineExperience />);
+    expect(screen.getByText(/4745 ngày/)).toBeInTheDocument();
+    expect(screen.getAllByText(/Mười hai năm/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText(/block 2014/)).toBeInTheDocument();
+    expect(screen.queryByText(/Mười bốn năm/i)).not.toBeInTheDocument();
+  });
+
   it("HUD tooltip mặc định mời rê lên một toà nhà", () => {
     render(<SkylineExperience />);
     expect(screen.getByTestId("skyline-hud").textContent).toMatch(

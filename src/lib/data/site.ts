@@ -28,7 +28,7 @@ export const SITE: SiteConfig = {
   url: "https://leky90.github.io/personal-portfolio",
   title: "Senior Software Engineer · Frontend Lead",
   tagline:
-    "Fourteen years of shipped web, rendered as terrain — freelance PHP in 2012 to leading the frontend of a DeFi platform today.",
+    "Twelve years of shipped web, rendered as terrain — freelance PHP in 2014 to leading the frontend of a DeFi platform today.",
   email: "ldky90@gmail.com",
   location: "Hue, Vietnam · UTC+7",
   available: true,

@@ -28,8 +28,8 @@ export function yearFromProgress(progress: number): number {
 }
 
 /**
- * Nhãn năm hiển thị, tra thẳng bảng mốc thật: 0 → 2012, 10 → 2026.
- * Các mốc giữa không cách đều vì 14 năm nghề nén vào 10 tầng.
+ * Nhãn năm hiển thị, tra thẳng bảng mốc thật: 0 → 2014, 10 → 2026.
+ * Các mốc giữa không cách đều vì 12 năm nghề nén vào 10 tầng.
  */
 export function yearLabel(yearFloat: number): number {
   const index = Math.floor(Math.min(Math.max(yearFloat, 0), YEAR_SPAN));

@@ -2,7 +2,7 @@
  * Weight of Experience: khối lượng LÀ dữ liệu — mỗi công nghệ nặng đúng
  * số năm tôi đã dùng nó, tính đến 2026. Demo không chở physics engine:
  * rơi + nảy là mô hình ballistic closed-form thuần (test được),
- * restitution giảm theo khối lượng nên đĩa 14 năm rơi thịch còn đĩa 3
+ * restitution giảm theo khối lượng nên đĩa 12 năm rơi thịch còn đĩa 3
  * năm nảy tưng. Bản chính thức thay bằng Rapier bake replay ~70KB, giữ
  * nguyên schema.
  */
@@ -25,18 +25,20 @@ export interface SkillToken extends FallingBody {
 }
 
 /**
- * Số năm suy thẳng từ bốn chặng nghề (mốc chốt: 2026):
- *   2012–2016 freelance (Huế) · 2017–2018 Synova · 2019–2021 TESO ·
+ * Số năm suy thẳng từ bốn chặng nghề (mốc bắt đầu đi làm: 2014, mốc
+ * chốt: 2026):
+ *   2014–2016 freelance (Huế) · 2017–2018 Synova · 2019–2021 TESO ·
  *   08/2021–nay Treehouse.
- * Công nghệ còn dùng tính tới 2026; công nghệ đã gác lại tính tới năm
- * cuối cùng thực sự dùng nó. Nặng xếp trước (index 0 nằm giữa sàn).
+ * Quy tắc: years = 2026 − max(2014, năm bắt đầu dùng); công nghệ đã
+ * gác thì dừng đếm ở năm cuối thực sự dùng. Nặng xếp trước (index 0
+ * nằm giữa sàn).
  */
 const RAW: [id: string, name: string, years: number][] = [
-  // 2012→nay: viết JS từ ngày làm site khách bằng HTML/CSS/JS, chưa ngày nào bỏ.
-  ["javascript", "JavaScript", 14],
-  // 2012→nay: khởi nghiệp freelance bằng PHP, qua Synova, vẫn nằm trong stack backend.
-  ["php", "PHP", 14],
-  // 2014→nay: mốc mở tài khoản github.com/leky90 — từ đó mọi việc đều qua Git.
+  // 2014→nay: viết JS từ ngày đi làm, chưa ngày nào bỏ → 2026 − 2014 = 12.
+  ["javascript", "JavaScript", 12],
+  // 2014→nay: khởi nghiệp freelance bằng PHP, qua Synova, vẫn trong stack backend → 2026 − 2014 = 12.
+  ["php", "PHP", 12],
+  // 2014→nay: mốc mở tài khoản github.com/leky90 — từ đó mọi việc đều qua Git → 2026 − 2014 = 12.
   ["git", "Git", 12],
   // 2017→nay: vào Synova là bắt đầu Laravel, đến giờ vẫn giữ trong stack backend.
   ["laravel", "Laravel", 9],
@@ -44,10 +46,10 @@ const RAW: [id: string, name: string, years: number][] = [
   ["react", "React", 7],
   // 2019→nay: cùng nhịp với React — tooling, API service, Express/NestJS.
   ["node", "Node.js", 7],
-  // 2012–2018: xương sống mọi site freelance, dừng lại khi rời stack PHP ở Synova.
-  ["jquery", "jQuery", 7],
-  // 2012–2018: dựng và bảo trì site khách bằng WordPress, hết thời Synova là gác.
-  ["wordpress", "WordPress", 7],
+  // 2014–2018: xương sống mọi site freelance, gác khi rời stack PHP ở Synova → dừng đếm 2018, còn 5.
+  ["jquery", "jQuery", 5],
+  // 2014–2018: dựng và bảo trì site khách bằng WordPress, hết thời Synova là gác → dừng đếm 2018, còn 5.
+  ["wordpress", "WordPress", 5],
   // 08/2021→nay: Treehouse là nơi TypeScript thành mặc định, không quay lại JS trần.
   ["typescript", "TypeScript", 5],
   // 08/2021→nay: dApp tETH dựng trên Next.js ngay từ ngày đầu.
@@ -174,7 +176,7 @@ export interface LetterSpec extends FallingBody {
 }
 
 /** "KY LE" rơi trước các đĩa tạ — chữ lấy khối lượng của đĩa nặng nhất
- * trong bảng (14 năm) nên chạm sàn là nằm im, gần như không nảy. */
+ * trong bảng (12 năm) nên chạm sàn là nằm im, gần như không nảy. */
 export function buildLetters(): LetterSpec[] {
   const chars: LetterChar[] = ["K", "Y", "L", "E"];
   const offsets = [0, 6, 15, 21];
@@ -190,7 +192,7 @@ export function buildLetters(): LetterSpec[] {
       char,
       offsetX: offsets[index],
       cells,
-      years: 14,
+      years: 12,
       drop: { height: 7 + index * 0.3, delay: index * 0.14 },
       rest: [0, 0, 0],
     };

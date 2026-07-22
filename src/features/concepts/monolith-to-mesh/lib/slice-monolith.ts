@@ -18,7 +18,7 @@ export interface FragmentEntry {
   service: (typeof SERVICES)[number];
   home: { center: [number, number, number]; size: [number, number, number] };
   target: [number, number, number];
-  /** Cửa sổ tách [startU, endU] theo thang u = (năm-2012)/14 */
+  /** Cửa sổ tách [startU, endU] theo thang u = (năm-2014)/12 */
   phase: [number, number];
   /** Cửa sổ gộp ngược cho kind 2 (0,0 nếu không dùng) */
   phase2: [number, number];
@@ -37,7 +37,7 @@ function mulberry32(seed: number): () => number {
 }
 
 function yearToU(year: number): number {
-  return Math.min(Math.max((year - 2012) / 14, 0), 1);
+  return Math.min(Math.max((year - 2014) / 12, 0), 1);
 }
 
 interface Box {

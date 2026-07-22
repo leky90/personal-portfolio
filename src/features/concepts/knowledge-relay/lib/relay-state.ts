@@ -5,7 +5,7 @@ import {
 
 /** State chia sẻ DOM ↔ canvas của knowledge-relay (mutable ref). */
 export interface RelayState {
-  /** Năm mục tiêu [2012,2026] từ cuộn — canvas damp về giá trị này */
+  /** Năm mục tiêu [2014,2026] từ cuộn — canvas damp về giá trị này */
   year: number;
   /** Baton đang được chọn để đọc lineage (-1 = không) */
   selected: number;
@@ -22,7 +22,7 @@ export function createRelayState(): RelayState {
   };
 }
 
-/** Map tiến độ cuộn [0,1] → năm [2012,2026], clamp hai biên. */
+/** Map tiến độ cuộn [0,1] → năm [2014,2026], clamp hai biên. */
 export function relayYearFromProgress(progress: number): number {
   return (
     RELAY_YEAR_MIN + Math.min(Math.max(progress, 0), 1) * RELAY_YEAR_SPAN

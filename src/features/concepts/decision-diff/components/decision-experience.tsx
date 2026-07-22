@@ -99,7 +99,7 @@ export function DecisionExperience() {
           DECISION DIFF
         </h2>
         <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400">
-          Mười bốn năm nghề không được đo bằng số dự án, mà bằng những ngã rẽ.
+          Mười hai năm nghề không được đo bằng số dự án, mà bằng những ngã rẽ.
           Đường ray phía sau compile thẳng từ 6 ADR thật, từ lúc cứu một
           codebase legacy ở TESO tới lúc dựng dApp và dẫn đội 8 kỹ sư ở
           Treehouse: nhánh xanh là lựa chọn đã đi, nhánh đỏ nét đứt là con

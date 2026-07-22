@@ -14,7 +14,7 @@ export class EdgeMaterial extends THREE.ShaderMaterial {
       depthWrite: false,
       blending: THREE.AdditiveBlending,
       uniforms: {
-        uYear: { value: 2015.5 },
+        uYear: { value: 2013.5 },
         uFocus: { value: -1 },
         uInk: { value: new THREE.Color("#5a708f") },
         uAccent: { value: new THREE.Color("#4af2a1") },

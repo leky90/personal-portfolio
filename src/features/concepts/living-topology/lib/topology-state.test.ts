@@ -15,8 +15,9 @@ describe("topology state + ánh xạ scroll → năm", () => {
     expect(state.isMobile).toBe(false);
   });
 
-  it("yearForProgress: 0 → trước 2016, 1 → sau 2026, kẹp ngoài khoảng", () => {
-    expect(yearForProgress(0)).toBeLessThan(2016);
+  it("yearForProgress: 0 → ngay dưới 2014 (graph mọc từ 2014), 1 → sau 2026, kẹp ngoài khoảng", () => {
+    expect(yearForProgress(0)).toBeGreaterThan(2013);
+    expect(yearForProgress(0)).toBeLessThan(2014);
     expect(yearForProgress(1)).toBeGreaterThan(2026);
     expect(yearForProgress(0.5)).toBeGreaterThan(2019);
     expect(yearForProgress(0.5)).toBeLessThan(2023);

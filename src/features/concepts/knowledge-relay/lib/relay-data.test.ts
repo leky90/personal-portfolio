@@ -35,11 +35,11 @@ describe("relay-data — biểu đồ Marey: lane có thể chết, gậy vẫn 
     }
   });
 
-  it("xForYear tuyến tính: 2012 trái, 2026 phải, 2019 giữa", () => {
-    expect(xForYear(2012)).toBeLessThan(0);
+  it("xForYear tuyến tính: 2014 trái, 2026 phải, 2020 giữa", () => {
+    expect(xForYear(2014)).toBeLessThan(0);
     expect(xForYear(2026)).toBeGreaterThan(0);
-    expect(xForYear(2019)).toBeCloseTo(0, 5);
-    expect(xForYear(2026)).toBeCloseTo(-xForYear(2012), 5);
+    expect(xForYear(2020)).toBeCloseTo(0, 5);
+    expect(xForYear(2026)).toBeCloseTo(-xForYear(2014), 5);
   });
 
   it("buildBatonPath: x không giảm, năm không giảm, bắt đầu đúng lane rèn", () => {
@@ -78,13 +78,13 @@ describe("relay-data — biểu đồ Marey: lane có thể chết, gậy vẫn 
       0,
     );
     expect(handedOffCount(2026)).toBe(totalArcs);
-    expect(handedOffCount(2012)).toBe(0);
+    expect(handedOffCount(2014)).toBe(0);
     let previous = -1;
-    for (let year = 2012; year <= 2026; year += 1) {
+    for (let year = 2014; year <= 2026; year += 1) {
       const carriers = carriersAt(year);
       expect(carriers).toBeGreaterThanOrEqual(previous);
       previous = carriers;
     }
-    expect(carriersAt(2026)).toBeGreaterThan(carriersAt(2012));
+    expect(carriersAt(2026)).toBeGreaterThan(carriersAt(2014));
   });
 });

@@ -12,7 +12,7 @@ export interface TopologyState {
   isMobile: boolean;
 }
 
-const YEAR_START = 2015.4;
+const YEAR_START = 2013.5;
 const YEAR_END = 2026.4;
 
 /** Scroll [0,1] → năm timeline; kẹp ngoài khoảng. */

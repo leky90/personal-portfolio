@@ -12,7 +12,7 @@ vi.mock("@/features/concepts/ten-year-galaxy", () => ({
 
 describe("trang /concepts/ten-year-galaxy", () => {
   it("khai báo metadata title đúng chuẩn concept", () => {
-    expect(metadata.title).toBe("Fourteen-Year Galaxy — 3D Concept");
+    expect(metadata.title).toBe("Twelve-Year Galaxy — 3D Concept");
   });
 
   it("render ConceptShell với rank + điểm từ registry", () => {

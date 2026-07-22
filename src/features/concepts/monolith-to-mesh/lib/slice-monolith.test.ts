@@ -64,7 +64,7 @@ describe("sliceMonolith — kerf-cut thuần TS, không Blender", () => {
     }
   });
 
-  it("fragmentPositionAt: 2012 ở home, 2026 ở target (premature về lại home)", () => {
+  it("fragmentPositionAt: 2014 ở home, 2026 ở target (premature về lại home)", () => {
     const out = new THREE.Vector3();
     for (const e of entries) {
       fragmentPositionAt(e, 0, out);

@@ -19,6 +19,15 @@ describe("ConstellationExperience — layout DOM của trang concept", () => {
     ).toBeInTheDocument();
   });
 
+  it("hero neo đúng 12 năm sự nghiệp, 2014 → 2026", () => {
+    render(<ConstellationExperience />);
+    expect(
+      screen.getByText(/pnpm why trên 12 năm sự nghiệp/i),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/2014 → 2026/)).toBeInTheDocument();
+    expect(screen.queryByText(/2012/)).not.toBeInTheDocument();
+  });
+
   it("terminal HUD mặc định mời chạy pnpm why", () => {
     render(<ConstellationExperience />);
     expect(screen.getByTestId("why-terminal").textContent).toMatch(

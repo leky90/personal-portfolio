@@ -1,5 +1,5 @@
 /**
- * Địa tầng 14 năm nghề (2012 → 2026): 5 stratum, mới ở trên, cũ ở dưới.
+ * Địa tầng 12 năm nghề (2014 → 2026): 5 stratum, mới ở trên, cũ ở dưới.
  * Mốc năm, stack và ghi chú của từng tầng lấy đúng từ lịch sử làm việc thật:
  * freelance PHP/WordPress, Synova, TESO, rồi Treehouse.
  *
@@ -70,10 +70,10 @@ const STRATA_SEEDS: StratumSeed[] = [
   {
     id: "stratum-v",
     label: "STRATUM V · Đá gốc freelance",
-    fromYear: 2012,
+    fromYear: 2014,
     toYear: 2016,
     thickness: 0.24,
-    note: "Đá gốc terracotta: HTML, CSS, jQuery, WordPress làm cho khách trên Freelancer từ 2012. Cross-browser và responsive là cơm bữa. Đào tới đây thì dừng, có chủ đích.",
+    note: "Đá gốc terracotta: tốt nghiệp CNTT Đại học Khoa học Huế 2014 rồi vào nghề freelance tại Huế. HTML, CSS, jQuery, PHP và WordPress làm cho khách trên Freelancer; cross-browser và responsive là cơm bữa. Đào tới đây thì dừng, có chủ đích.",
   },
 ];
 
