@@ -21,9 +21,9 @@ const DASH_GLYPH: Record<BatonDash, string> = {
 };
 
 /**
- * Layout DOM: hero + bộ đếm relay + 5 section baton. Cuộn scrub thập
- * kỷ 2016→2026; bộ đếm tính DOM-side từ cùng dữ liệu với canvas nên
- * không cần roundtrip callback.
+ * Layout DOM: hero + bộ đếm relay + 5 section baton. Cuộn scrub mười
+ * bốn năm 2012→2026 (bốn chặng nghề thật); bộ đếm tính DOM-side từ
+ * cùng dữ liệu với canvas nên không cần roundtrip callback.
  */
 export function RelayExperience() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -50,7 +50,7 @@ export function RelayExperience() {
       relayState.year = relayYearFromProgress(progress);
       const counter = counterRef.current;
       if (counter) {
-        counter.textContent = `năm ${Math.floor(relayState.year)} · đã trao gậy ${handedOffCount(relayState.year)} lần · ${carriersAt(relayState.year)} kỹ sư đang mang practice`;
+        counter.textContent = `năm ${Math.floor(relayState.year)} · đã trao gậy ${handedOffCount(relayState.year)} lần · ${carriersAt(relayState.year)} chặng đã mang practice`;
       }
       relayState.invalidate?.();
     };
@@ -78,7 +78,7 @@ export function RelayExperience() {
           aria-live="polite"
           className="font-mono text-[11px] text-neutral-300"
         >
-          năm 2016 · đã trao gậy 0 lần · {carriersAt(2016)} kỹ sư đang mang
+          năm 2012 · đã trao gậy 0 lần · {carriersAt(2012)} chặng đã mang
           practice
         </p>
       </div>
@@ -92,14 +92,16 @@ export function RelayExperience() {
           KNOWLEDGE RELAY
         </h2>
         <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400">
-          Mười năm truyền nghề vẽ thành biểu đồ relay kiểu Marey: mỗi
-          practice là một cây gậy phát sáng trao qua các team lane theo
-          dòng thời gian. Cuộn để chạy thập kỷ: dự án lần lượt đóng lại
-          và lane của nó nguội đi, nhưng những cây gậy vẫn chạy tiếp —
-          vì thứ senior để lại sống lâu hơn codebase.
+          Mười bốn năm nghề vẽ thành biểu đồ relay kiểu Marey: mỗi
+          practice là một cây gậy phát sáng trao qua các lane cộng tác
+          theo dòng thời gian — khách freelance ở Huế, Synova, TESO, rồi
+          đội frontend Treehouse. Cuộn để chạy từ 2012 tới 2026: mỗi
+          chặng lần lượt khép lại và lane của nó nguội đi, nhưng những
+          cây gậy vẫn chạy tiếp — vì thứ senior để lại sống lâu hơn
+          codebase.
         </p>
         <p className="mt-8 font-mono text-xs text-neutral-500 motion-safe:animate-pulse">
-          ↓ cuộn: rèn cây gậy đầu tiên năm 2016
+          ↓ cuộn: rèn cây gậy đầu tiên năm 2012
         </p>
       </section>
 
@@ -142,8 +144,8 @@ export function RelayExperience() {
             và trùng living-topology): đây là biểu đồ Marey, thứ ngôn
             ngữ timetable 140 năm tuổi. Kỹ thuật: mọi hành trình gậy
             merge vào 1 LineSegments duy nhất với aYear per vertex,
-            fragment lộ vệt bằng step(aYear, uYear) — scrub cả thập kỷ
-            chỉ là một lần ghi uniform; 5 đầu gậy 1 InstancedMesh, lane
+            fragment lộ vệt bằng step(aYear, uYear) — scrub trọn mười
+            bốn năm chỉ là một lần ghi uniform; 5 đầu gậy 1 InstancedMesh, lane
             1 LineSegments, ~4 draw call; frameloop demand, scrub-only,
             không ambient loop nên đứng yên là 0% GPU.
           </p>

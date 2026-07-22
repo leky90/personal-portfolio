@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { SkylineCanvasLoader } from "@/features/concepts/commit-skyline/components/skyline-canvas-loader";
 import {
+  DAY_COUNT,
   LANDMARKS,
   dayCommits,
   dayInfo,
@@ -20,17 +21,17 @@ const SECTIONS = [
   {
     id: "rhythm",
     title: "nhịp tuần đọc được từ xa",
-    note: "Hai hàng nhà thấp cuối mỗi cột là thứ 7 và chủ nhật. Một thập kỷ nhìn từ đại lộ, điều dễ thấy nhất không phải cường độ mà là kỷ luật nghỉ.",
+    note: "Hai hàng nhà thấp cuối mỗi cột là thứ 7 và chủ nhật. Mười bốn năm nhìn từ đại lộ, điều dễ thấy nhất không phải cường độ mà là kỷ luật nghỉ.",
   },
   {
     id: "landmarks",
     title: "6 tháp landmark",
-    note: "Không phải ngày code nhiều nhất nào cũng quan trọng. Tháp xanh đánh dấu những ngày đổi nghĩa: đổi việc, go-live, release OSS, lên lead.",
+    note: "Không phải ngày code nhiều nhất nào cũng quan trọng. Tháp xanh đánh dấu những ngày đổi nghĩa: nhận job freelance đầu tiên, vào Synova, về Huế cùng TESO, sang DeFi ở Treehouse.",
   },
   {
     id: "honest-data",
     title: "vì sao phải là dữ liệu thật",
-    note: "Skyline chỉ có sức nặng khi từng toà nhà là một ngày có thật. Bản chính thức chạy ETL GitHub GraphQL lúc build, bake JSON ~8KB; demo này dùng model deterministic cùng schema.",
+    note: "Skyline chỉ có sức nặng khi từng toà nhà là một ngày có thật. Mốc năm và 6 landmark ở đây là sự nghiệp thật; riêng số commit mỗi ngày là model deterministic. Bản chính thức chạy ETL GitHub GraphQL lúc build, bake JSON ~8KB cùng schema.",
   },
 ];
 
@@ -111,20 +112,21 @@ export function SkylineExperience() {
       {/* HERO */}
       <section className="mx-auto flex min-h-dvh w-full max-w-5xl flex-col justify-center px-4 pt-20 sm:px-6">
         <p className="font-mono text-[11px] tracking-[0.3em] text-[#60a5fa] uppercase">
-          3650 ngày · mỗi toà nhà một ngày viết code
+          {DAY_COUNT} ngày · mỗi toà nhà một ngày viết code
         </p>
         <h2 className="mt-4 max-w-2xl text-4xl font-semibold tracking-tight text-neutral-50 sm:text-6xl">
           COMMIT SKYLINE
         </h2>
         <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400">
-          Mười năm commit dựng thành một thành phố về đêm chìm trong
-          sương. Cuộn để bay thấp dọc đại lộ thời gian: mỗi block là
-          một năm, nhà cao là ngày code nhiều, tháp xanh có beacon là
-          những ngày đổi nghĩa cả sự nghiệp. Rê lên bất kỳ toà nào để
-          đọc đúng ngày của nó.
+          Mười bốn năm commit — từ job freelance đầu tiên năm 2012 tới
+          hôm nay — dựng thành một thành phố về đêm chìm trong sương.
+          Cuộn để bay thấp dọc đại lộ thời gian: mỗi block là một năm,
+          nhà cao là ngày code nhiều, tháp xanh có beacon là những ngày
+          đổi nghĩa cả sự nghiệp. Rê lên bất kỳ toà nào để đọc đúng ngày
+          của nó.
         </p>
         <p className="mt-8 font-mono text-xs text-neutral-500 motion-safe:animate-pulse">
-          ↓ cuộn: cất cánh từ block 2016
+          ↓ cuộn: cất cánh từ block 2012
         </p>
       </section>
 
@@ -169,10 +171,10 @@ export function SkylineExperience() {
           </h4>
           <p className="mt-3 text-sm leading-relaxed text-neutral-400">
             Contribution graph là thứ ai cũng có nhưng hiếm ai bước vào
-            được. Kỹ thuật: cả thành phố 3650 toà là MỘT InstancedMesh
-            (matrix scale theo commit, instanceColor ấm dần theo cường
-            độ), landmark + beacon mỗi loại một draw call nữa — tổng ~6
-            draw call cho một thập kỷ; fogExp2 làm mood thay
+            được. Kỹ thuật: cả thành phố {DAY_COUNT} toà là MỘT
+            InstancedMesh (matrix scale theo commit, instanceColor ấm
+            dần theo cường độ), landmark + beacon mỗi loại một draw call
+            nữa — tổng ~6 draw call cho mười lăm block năm; fogExp2 làm mood thay
             postprocessing; raycast instanceId → đúng ngày. Frameloop
             demand: thành phố đóng băng cho tới khi bạn cuộn, đứng yên
             là 0% GPU.

@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { RELAY_YEAR_MIN } from "@/features/concepts/knowledge-relay/lib/relay-data";
 import {
   TRAIL_FRAGMENT_SHADER,
   TRAIL_VERTEX_SHADER,
@@ -14,7 +15,7 @@ export class TrailMaterial extends THREE.ShaderMaterial {
       depthWrite: false,
       blending: THREE.AdditiveBlending,
       uniforms: {
-        uYear: { value: 2016 },
+        uYear: { value: RELAY_YEAR_MIN },
         uColor: { value: new THREE.Color("#34d399") },
       },
     });

@@ -10,7 +10,7 @@ describe("badge-data — thẻ đeo với con lắc thuần, không physics engi
   it("mặt trước có tên + chức danh, mặt sau ≥5 dòng spec build-time", () => {
     expect(BADGE_FRONT.name.length).toBeGreaterThan(0);
     expect(BADGE_FRONT.title.length).toBeGreaterThan(0);
-    expect(BADGE_FRONT.est).toMatch(/2016/);
+    expect(BADGE_FRONT.est).toMatch(/2012/);
     expect(BADGE_SPECS.length).toBeGreaterThanOrEqual(5);
     for (const line of BADGE_SPECS) {
       expect(line.length).toBeGreaterThan(0);

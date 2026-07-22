@@ -5,6 +5,13 @@
  * hàng texture) là hàm thuần test được — canvas chỉ là nguồn pixel.
  */
 
+/**
+ * 4 heading của field. Tên giữ dạng ngắn "KY LE" chứ không phải họ tên
+ * đầy đủ "KY LE DINH": khung sample chỉ rộng SAMPLE_WIDTH = 512px, mà
+ * "KY LE DINH" ở bold 88px monospace cho vệt mực ~519px (Menlo) —
+ * tràn khung, chữ bị cắt cụt hai đầu. Họ tên đầy đủ nằm trong DOM hero
+ * của concept nên vẫn đọc được và vẫn vào SEO.
+ */
 export const HEADINGS = ["KY LE", "WORK", "LAB", "CONTACT"];
 
 /** Số hạt — bội của 64 để xếp vừa texture 64 cột (64 × 64 = 4096) */

@@ -13,10 +13,10 @@ import {
 } from "@/features/concepts/glyph-field/lib/glyph-state";
 
 const SECTION_NOTES = [
-  "Tên đứng thành hình từ 4096 hạt. Rê con trỏ xuyên qua: hạt tản ra theo wake rồi tự lành trong ~600ms, sau đó field ngủ hẳn.",
-  "Cuộn tiếp: chữ cũ thở ra, hạt bay tản theo pseudo-curl rồi ngưng tụ thành heading này. Không có hạt nào được sinh thêm hay huỷ đi.",
+  "Tên đứng thành hình từ 4096 hạt. Họ tên đầy đủ là Ky Le Dinh; field vẽ dạng ngắn vì khung sample chỉ rộng 512px, dài hơn là chữ bị cắt. Rê con trỏ xuyên qua: hạt tản ra theo wake rồi tự lành, sau đó field ngủ hẳn.",
+  "Cuộn tiếp: chữ cũ thở ra, hạt bay tản theo pseudo-curl rồi ngưng tụ thành heading này. Sau lưng nó là dApp DeFi ở Treehouse, các dự án khách thời TESO và Synova. Không có hạt nào được sinh thêm hay huỷ đi.",
   "Vẫn là đúng 4096 hạt đó. Toạ độ đích của mọi heading nằm sẵn trong một DataTexture float, đổi chữ chỉ là đổi hai chỉ số hàng.",
-  "Trạm cuối của field. DOM heading luôn là baseline nên không có WebGL thì trang vẫn nguyên vẹn — canvas chỉ là lớp không khí phía sau.",
+  "Trạm cuối của field: ldky90@gmail.com, github.com/leky90, ngồi ở Huế (UTC+7). DOM heading luôn là baseline nên không có WebGL thì trang vẫn nguyên vẹn — canvas chỉ là lớp không khí phía sau.",
 ];
 
 /**
@@ -83,8 +83,10 @@ export function GlyphExperience() {
           GLYPH FIELD
         </h2>
         <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400">
-          Tên tôi và mọi heading của trang là cùng một đám 4096 hạt
-          glyph sống trong đúng một draw call. Cuộn để chữ tan ra rồi tự
+          Ky Le Dinh — senior software engineer, lead frontend ở
+          Treehouse. Tên tôi và mọi heading của trang là cùng một đám
+          4096 hạt glyph sống trong đúng một draw call (field vẽ dạng
+          ngắn KY LE cho vừa khung sample). Cuộn để chữ tan ra rồi tự
           xếp lại thành tiêu đề kế tiếp; rê con trỏ để khắc một vệt wake
           vào hệ chữ và nhìn nó tự lành.
         </p>

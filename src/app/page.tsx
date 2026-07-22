@@ -11,7 +11,7 @@ import { ContactSection } from "@/components/sections/contact-section";
 import { jsonLdScript, personJsonLd } from "@/lib/json-ld";
 
 /**
- * Trang chủ portfolio — art direction: Ten Years of Terrain.
+ * Trang chủ portfolio — art direction: Fourteen Years of Terrain.
  * Mọi nội dung là DOM server-rendered (LCP = text hero); TerrainStage đặt
  * canvas fixed phía sau và ánh xạ scroll → camera, era card → dải contour.
  */

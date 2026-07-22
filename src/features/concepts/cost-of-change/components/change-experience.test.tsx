@@ -17,7 +17,7 @@ describe("ChangeExperience — layout DOM của trang concept", () => {
     expect(screen.getByText(/COST OF CHANGE/i)).toBeInTheDocument();
   });
 
-  it("đủ 10 thẻ sự kiện theo sổ cái, 3 thẻ đóng dấu REFACTOR", () => {
+  it("đủ 10 thẻ chặng nghề theo sổ cái, 3 thẻ đóng dấu REFACTOR", () => {
     render(<ChangeExperience />);
     for (const event of LEDGER) {
       expect(screen.getAllByText(event.title).length).toBeGreaterThanOrEqual(
@@ -42,9 +42,9 @@ describe("ChangeExperience — layout DOM của trang concept", () => {
     );
   });
 
-  it("HUD mặc định hiện năm 2016 và mời cuộn", () => {
+  it("HUD mặc định hiện năm 2012 và mời cuộn", () => {
     render(<ChangeExperience />);
-    expect(screen.getByTestId("change-hud").textContent).toMatch(/2016/);
+    expect(screen.getByTestId("change-hud").textContent).toMatch(/2012/);
   });
 
   it("core idea nhắc nợ kỹ thuật, instanced và draw call", () => {

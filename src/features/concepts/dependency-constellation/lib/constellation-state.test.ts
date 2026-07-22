@@ -19,14 +19,12 @@ describe("constellation-state — query pnpm-why qua cầu DOM ↔ canvas", () =
     const spy = vi.fn();
     state.setTerminal = spy;
 
-    queryNode(state, "s-kafka");
-    queryNode(state, "s-kafka");
+    queryNode(state, "s-ethers");
+    queryNode(state, "s-ethers");
     expect(spy).toHaveBeenCalledTimes(1);
     const lines = spy.mock.calls[0][0] as string[];
     expect(lines[0]).toMatch(/pnpm why/);
-    expect(lines.some((line) => line.includes("realtime-pipeline"))).toBe(
-      true,
-    );
+    expect(lines.some((line) => line.includes("treehouse-dapp"))).toBe(true);
   });
 
   it("queryNode(null) xoá query và gửi terminal rỗng", () => {

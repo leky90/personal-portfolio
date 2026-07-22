@@ -36,17 +36,17 @@ describe("mulberry32", () => {
 });
 
 describe("ERAS", () => {
-  it("có đúng 4 era theo thứ tự thời gian 2016 → 2024", () => {
+  it("có đúng 4 era theo thứ tự thời gian 2012 → 2021", () => {
     expect(ERAS).toHaveLength(4);
-    expect(ERAS.map((e) => e.year)).toEqual([2016, 2018, 2021, 2024]);
+    expect(ERAS.map((e) => e.year)).toEqual([2012, 2017, 2019, 2021]);
   });
 
-  it("2021 (platform rebuild) là peak cao nhất", () => {
-    const rebuild = ERAS.find((e) => e.year === 2021);
-    expect(rebuild).toBeDefined();
+  it("2021 (Treehouse, vai trò lead hiện tại) là peak cao nhất", () => {
+    const current = ERAS.find((e) => e.year === 2021);
+    expect(current).toBeDefined();
     for (const era of ERAS) {
       if (era.year !== 2021) {
-        expect(rebuild!.peak).toBeGreaterThan(era.peak);
+        expect(current!.peak).toBeGreaterThan(era.peak);
       }
     }
   });
@@ -87,12 +87,12 @@ describe("generateWeeklyActivity", () => {
     }
   });
 
-  it("peak 2021 cao hơn hẳn baseline 2016", () => {
+  it("peak 2021 cao hơn hẳn baseline những tuần đầu 2012", () => {
     const data = generateWeeklyActivity();
     const rebuild = ERAS.find((e) => e.year === 2021)!;
     const peak2021 = data[rebuild.week];
-    const baseline2016 = data[4]; // tuần đầu 2016, trước peak đầu tiên
-    expect(peak2021).toBeGreaterThan(baseline2016 + 0.3);
+    const baselineStart = data[0]; // tuần đầu 2012, trước peak đầu tiên
+    expect(peak2021).toBeGreaterThan(baselineStart + 0.3);
   });
 
   it("peak 2021 là giá trị lớn nhất toàn mảng (trong lân cận era)", () => {

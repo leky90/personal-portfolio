@@ -13,18 +13,18 @@ const TERMINAL_DEFAULT = "$ pnpm why <chạm một ngôi sao>";
 const GROUPS = [
   {
     kind: "role" as const,
-    title: "5 vai trò · lõi chòm sao",
-    note: "Mỗi vai trò là một ngôi sao ấm ở vành trong: nơi mọi dự án được kéo về.",
+    title: "5 chặng nghề · lõi chòm sao",
+    note: "Từ freelance ở Huế năm 2012 tới lead frontend cho một nền tảng DeFi/RWA — mỗi chặng là một ngôi sao ấm ở vành trong, nơi mọi dự án được kéo về.",
   },
   {
     kind: "project" as const,
     title: "10 dự án · vành giữa",
-    note: "Dự án là các gói đã publish của sự nghiệp: mỗi cái khai báo chính xác nó phụ thuộc kỹ năng nào.",
+    note: "Dự án là các gói đã publish của sự nghiệp: site WordPress khách, storefront eCommerce, marketplace nông sản, dApp staking tETH — mỗi cái khai báo chính xác nó phụ thuộc kỹ năng nào.",
   },
   {
     kind: "skill" as const,
-    title: "12 kỹ năng · vành ngoài",
-    note: "Chạm một kỹ năng trên canvas là chạy pnpm why: mọi dự án từng kéo nó vào sáng lên theo đúng cạnh thật.",
+    title: "12 công nghệ · vành ngoài",
+    note: "Chạm một công nghệ trên canvas là chạy pnpm why: từ PHP/WordPress thời đầu tới Ethers.js hôm nay, mọi dự án từng kéo nó vào sáng lên theo đúng cạnh thật.",
   },
 ];
 
@@ -101,15 +101,15 @@ export function ConstellationExperience() {
       {/* HERO */}
       <section className="mx-auto flex min-h-dvh w-full max-w-5xl flex-col justify-center px-4 pt-20 sm:px-6">
         <p className="font-mono text-[11px] tracking-[0.3em] text-[#38bdf8] uppercase">
-          pnpm why trên 10 năm sự nghiệp
+          pnpm why trên 14 năm sự nghiệp
         </p>
         <h2 className="mt-4 max-w-2xl text-4xl font-semibold tracking-tight text-neutral-50 sm:text-6xl">
           DEPENDENCY CONSTELLATION
         </h2>
         <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400">
-          Sự nghiệp render như một lockfile đã resolve: vai trò ở lõi, dự
-          án vành giữa, kỹ năng vành ngoài, nối bằng những cạnh phụ thuộc
-          thật. Chạm một ngôi sao để chạy query: ánh sáng lan theo BFS
+          2012 → 2026 render như một lockfile đã resolve: chặng nghề ở
+          lõi, dự án vành giữa, công nghệ vành ngoài, nối bằng những cạnh
+          phụ thuộc thật. Chạm một ngôi sao để chạy query: ánh sáng lan theo BFS
           từng tầng và terminal in đúng đường phân giải.
         </p>
         <p className="mt-8 font-mono text-xs text-neutral-500 motion-safe:animate-pulse">

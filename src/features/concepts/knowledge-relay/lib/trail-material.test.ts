@@ -3,9 +3,9 @@ import { describe, expect, it } from "vitest";
 import { TrailMaterial } from "@/features/concepts/knowledge-relay/lib/trail-material";
 
 describe("TrailMaterial — mọi vệt gậy trong 1 draw call additive", () => {
-  it("khởi tạo uYear = 2016, additive, transparent", () => {
+  it("khởi tạo uYear = 2012, additive, transparent", () => {
     const material = new TrailMaterial();
-    expect(material.uniforms.uYear.value).toBe(2016);
+    expect(material.uniforms.uYear.value).toBe(2012);
     expect(material.blending).toBe(THREE.AdditiveBlending);
     expect(material.transparent).toBe(true);
     material.dispose();

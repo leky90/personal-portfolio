@@ -99,9 +99,9 @@ export function ToyboxExperience() {
         </h2>
         <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400">
           Tên tôi rơi xuống sàn trước, rồi mười hai đĩa tạ công nghệ rơi
-          theo: mỗi đĩa nặng đúng số năm tôi đã dùng nó. Đĩa 9 năm rơi
-          thịch và nằm im; đĩa 1 năm nảy tưng và văng ra rìa. Hãy nắm
-          một đĩa kéo thử — bạn sẽ cảm được 9 năm lì tay hơn 1 năm thế nào.
+          theo: mỗi đĩa nặng đúng số năm tôi đã dùng nó. Đĩa 14 năm rơi
+          thịch và nằm im; đĩa 3 năm nảy tưng và văng ra rìa. Hãy nắm
+          một đĩa kéo thử — bạn sẽ cảm được 14 năm lì tay hơn 3 năm thế nào.
         </p>
         <p className="mt-8 font-mono text-xs text-neutral-500 motion-safe:animate-pulse">
           rê để cân · nắm kéo để cảm khối lượng · ném để tin
@@ -138,10 +138,11 @@ export function ToyboxExperience() {
           </p>
           <p className="mt-3 text-sm leading-relaxed text-neutral-400">
             CV nào cũng liệt kê logo; khối lượng thì không nói dối được.
-            TypeScript 9 năm không phải vì tôi thích con số, mà vì nó
-            gánh mọi dự án từ 2017. Zig 1 kg nằm chỏng chơ trên đỉnh
-            đống tạ, và điều đó cũng trung thực nốt: có thứ tôi mới chỉ
-            cầm lên xem.
+            JavaScript nặng 14 kg vì tôi viết nó từ 2012, hồi còn nhận
+            site khách ở Huế, và chưa năm nào bỏ. jQuery vẫn 7 kg dù tôi
+            gác nó lại sau Synova 2018 — năm đã dùng thì không trả lại
+            được. OpenAI API 3 kg nằm chỏng chơ trên đỉnh đống tạ, và
+            điều đó cũng trung thực nốt: có thứ tôi mới cầm lên gần đây.
           </p>
         </article>
       </section>

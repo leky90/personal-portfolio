@@ -23,27 +23,27 @@ interface EraStop {
 
 const ERA_STOPS: EraStop[] = [
   {
-    year: "2016",
-    title: "Monolith days",
-    copy: "Hai node đầu tiên: Monolith API và Postgres. Mọi thứ về sau đều mọc từ đây — cuộn để xem graph lớn lên.",
+    year: "2012",
+    title: "Freelance ở Huế",
+    copy: "Bắt đầu bằng PHP và WordPress: dựng rồi nuôi site cho khách trên Freelancer.com, lo cross-browser và responsive mobile. Hai cụm xa nhất bên trái là chỗ mọi thứ về sau mọc lên.",
     side: "left",
   },
   {
-    year: "2018",
-    title: "Những service đầu tiên tách ra",
-    copy: "Auth và Cache tách khỏi monolith — các cạnh mới nối về datastore chung, packet bắt đầu chạy nhiều đường hơn.",
+    year: "2017",
+    title: "Synova · full-stack PHP",
+    copy: "Vào TP.HCM làm dự án end-to-end: từ design thành giao diện tĩnh tới web động tích hợp API — Laravel, CakePHP, Drupal, rồi Magento và OpenCart cho eCommerce.",
     side: "right",
   },
   {
-    year: "2021",
-    title: "The Platform Rebuild",
-    copy: "Gateway đứng ra làm mặt tiền cho mọi service; Orders sinh ra từ CQRS. Đây là cụm dày nhất của cả bản đồ.",
+    year: "2019",
+    title: "TESO · chuyển sang JavaScript",
+    copy: "Sở hữu end-to-end các dự án React của khách và chủ trì tối ưu codebase legacy. Cũng là lúc bắt đầu dẫn dắt: hướng dẫn đồng đội, chuẩn hoá quy trình, tài liệu và release.",
     side: "left",
   },
   {
-    year: "2024",
-    title: "Leverage: ML & Edge",
-    copy: "ML Scoring ăn dữ liệu từ Analytics, Edge Workers đẩy compute ra 28 PoP — những node mới nhất, xa nhất bên phải.",
+    year: "2021",
+    title: "Treehouse · DeFi/RWA",
+    copy: "Dẫn đội 8 kỹ sư dựng dApp cho tài sản token hoá, sản phẩm đầu là tETH. Next.js và TypeScript ở trên, ví Web3 với Ethers.js ở dưới, dashboard giá – yield – TVL ở giữa: cụm mới nhất, xa nhất bên phải.",
     side: "right",
   },
 ];
@@ -56,19 +56,19 @@ interface ProjectCard {
 
 const PROJECT_CARDS: ProjectCard[] = [
   {
-    title: "Atlas Platform",
-    role: "Lead Engineer · 2021—2024",
-    systemId: "platform-gateway",
+    title: "Treehouse dApp",
+    role: "Lead Frontend Engineer · 2021—nay",
+    systemId: "treehouse-dapp",
   },
   {
-    title: "Pulse Analytics",
-    role: "Staff Engineer · 2019—2021",
-    systemId: "analytics",
+    title: "Build-to-Rent",
+    role: "React · Node.js · web app + admin",
+    systemId: "build-to-rent",
   },
   {
-    title: "Relay Payments",
-    role: "Senior Engineer · 2017—2019",
-    systemId: "payments-svc",
+    title: "FoodMap",
+    role: "React · marketplace nông sản",
+    systemId: "foodmap",
   },
 ];
 
@@ -152,18 +152,19 @@ export function TopologyExperience() {
       {/* HERO */}
       <section className="mx-auto flex min-h-dvh w-full max-w-5xl flex-col justify-center px-4 pt-20 sm:px-6">
         <p className="font-mono text-[11px] tracking-[0.3em] text-neutral-500 uppercase">
-          Mission control · 2016—2026
+          Mission control · 2012—2026
         </p>
         <h2 className="mt-4 max-w-2xl text-4xl font-semibold tracking-tight text-neutral-50 sm:text-6xl">
           LIVING TOPOLOGY
         </h2>
         <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400">
-          Mỗi node phía sau là một mảnh hệ thống từng xây; mỗi đốm xanh là một
-          request đang chạy qua kiến trúc. Cuộn để xem bản đồ mọc lên theo 10
-          năm — rê chuột lên node để query telemetry.
+          Mỗi node phía sau là một mảnh hệ thống tôi từng xây — từ site
+          WordPress cho khách tới dApp DeFi của Treehouse; mỗi đốm xanh là một
+          request đang chạy qua kiến trúc đó. Cuộn để xem bản đồ mọc lên theo
+          hơn 12 năm nghề — rê chuột lên node để query một hệ thống.
         </p>
         <p className="mt-8 animate-pulse font-mono text-xs text-neutral-600">
-          ↓ cuộn: 2016, hai node đầu tiên
+          ↓ cuộn: 2012, những site WordPress đầu tiên
         </p>
       </section>
 

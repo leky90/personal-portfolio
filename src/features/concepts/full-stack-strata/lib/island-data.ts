@@ -1,8 +1,10 @@
 /**
  * Hòn đảo nổi mà lát cắt chính là stack: thành phố sản phẩm trên mặt,
- * seam dịch vụ phát sáng ở giữa, đá dữ liệu kết tinh dưới đáy. Mọi hình
- * học + kịch bản trace đều là dữ liệu thuần test được; runtime chỉ lắp
- * ráp instanced mesh và trượt packet theo đường cong đã bake.
+ * seam dịch vụ phát sáng ở giữa, đá dữ liệu kết tinh dưới đáy. Lát cắt
+ * lấy đúng stack của dApp DeFi tôi đang dựng ở Treehouse (sản phẩm
+ * tETH). Mọi hình học + kịch bản trace đều là dữ liệu thuần test được;
+ * runtime chỉ lắp ráp instanced mesh và trượt packet theo đường cong đã
+ * bake.
  */
 
 export interface IslandLayer {
@@ -19,21 +21,21 @@ export const LAYERS: IslandLayer[] = [
     label: "tầng sản phẩm",
     yTop: 1.2,
     yBottom: 0.4,
-    note: "Thành phố người dùng nhìn thấy: UI, edge, những toà nhà sáng đèn mỗi đêm release. Đây là nơi mọi request bắt đầu rơi xuống.",
+    note: "Thành phố người dùng nhìn thấy: dApp frontend React + TypeScript + Next.js, dashboard giá / lợi suất / TVL, nút connect wallet. Đây là nơi mọi request bắt đầu rơi xuống.",
   },
   {
     id: "services",
     label: "seam dịch vụ",
     yTop: 0.4,
     yBottom: -0.2,
-    note: "Vành đai mỏng phát sáng giữa đảo: 8 service nói chuyện với nhau bằng hợp đồng. Mỏng là cố ý — tầng giữa càng dày càng khó nợ.",
+    note: "Vành đai mỏng phát sáng giữa đảo: 8 node nói chuyện với nhau bằng hợp đồng — ví, RPC qua Ethers.js, cache giá và lợi suất, indexer sự kiện, API nội bộ, bảng ops. Mỏng là cố ý — tầng giữa càng dày càng khó nợ.",
   },
   {
     id: "bedrock",
     label: "đá nền dữ liệu",
     yTop: -0.2,
     yBottom: -1.6,
-    note: "Tinh thể dữ liệu kết tủa mười năm: schema, index, backup. Mọi thứ phía trên có thể đập đi xây lại; tầng này thì không được phép sai.",
+    note: "Tinh thể dữ liệu kết tủa từ 2012 tới nay: schema MongoDB/Postgres/MySQL, index, backup, và dưới cùng là state on-chain không ai sửa được. Mọi thứ phía trên có thể đập đi xây lại; tầng này thì không được phép sai.",
   },
 ];
 
@@ -132,47 +134,53 @@ export interface RequestTrace {
   steps: TraceStep[];
 }
 
+/**
+ * 4 kịch bản có thật của dApp DeFi (tETH): mở dashboard khi cache lạnh,
+ * mở lại khi cache còn ấm, stake ETH đổi tETH, và nhịp đọc gặp RPC lỗi.
+ * Cố ý KHÔNG có con số ms — mỗi bước kể một việc thật đang xảy ra chứ
+ * không phải một benchmark bịa.
+ */
 export const TRACES: RequestTrace[] = [
   {
-    id: "cache-miss",
-    label: "GET /projects · cache MISS",
+    id: "cold-read",
+    label: "Mở dashboard tETH · cache lạnh",
     steps: [
-      { at: 0.05, text: "GET /projects → edge 38ms" },
-      { at: 0.3, text: "cache MISS → route projects-svc" },
-      { at: 0.55, text: "SELECT projects… 3.1ms · index hit" },
-      { at: 0.8, text: "hydrate + gzip 9.2kB" },
-      { at: 0.97, text: "200 in 61ms" },
+      { at: 0.05, text: "mở /dashboard · frontend dựng khung, chưa có số" },
+      { at: 0.3, text: "cache giá & lợi suất trống → phải xuống tận nguồn" },
+      { at: 0.55, text: "đọc on-chain qua RPC: totalAssets, exchangeRate" },
+      { at: 0.8, text: "quy ra APY và TVL, ghi kết quả lại vào cache" },
+      { at: 0.97, text: "dashboard thay skeleton bằng số thật" },
     ],
   },
   {
-    id: "cache-hit",
-    label: "GET /projects · cache HIT",
+    id: "warm-read",
+    label: "Mở lại dashboard · cache còn ấm",
     steps: [
-      { at: 0.08, text: "GET /projects → edge 12ms" },
-      { at: 0.45, text: "cache HIT tại seam · TTL còn 41s" },
-      { at: 0.75, text: "bedrock không bị đánh thức" },
-      { at: 0.97, text: "200 in 19ms" },
+      { at: 0.08, text: "mở lại /dashboard · frontend hỏi cache trước" },
+      { at: 0.45, text: "cache giá & lợi suất còn hạn → trả thẳng ở seam" },
+      { at: 0.75, text: "không đánh thức RPC, không chạm tầng dữ liệu" },
+      { at: 0.97, text: "số hiện ngay, nền vẫn lặng lẽ refetch cho vòng sau" },
     ],
   },
   {
-    id: "cold-start",
-    label: "POST /contact · cold start",
+    id: "stake-tx",
+    label: "Stake ETH → tETH · ghi on-chain",
     steps: [
-      { at: 0.05, text: "POST /contact → edge 40ms" },
-      { at: 0.3, text: "λ cold start +410ms (đắt nhất hoá đơn)" },
-      { at: 0.6, text: "INSERT message… 4.8ms" },
-      { at: 0.85, text: "queue email job · ack 2ms" },
-      { at: 0.97, text: "201 in 512ms · note: giữ warm pool" },
+      { at: 0.05, text: "bấm Stake · frontend dựng calldata cho hợp đồng" },
+      { at: 0.3, text: "ký giao dịch qua ví · dApp chỉ cầm được cái hash" },
+      { at: 0.6, text: "broadcast qua RPC rồi chờ block xác nhận" },
+      { at: 0.85, text: "indexer bắt event, cache lợi suất bị invalidate" },
+      { at: 0.97, text: "số dư tETH và TVL cập nhật, UI thoát pending" },
     ],
   },
   {
-    id: "n-plus-one",
-    label: "GET /dashboard · N+1 bị bắt",
+    id: "rpc-fallback",
+    label: "Đọc số dư · RPC hỏng, rơi sang dự phòng",
     steps: [
-      { at: 0.05, text: "GET /dashboard → edge 35ms" },
-      { at: 0.35, text: "⚠ 41 SELECT giống nhau (N+1)" },
-      { at: 0.65, text: "review nứt: gộp thành 1 JOIN + dataloader" },
-      { at: 0.97, text: "200 in 74ms sau khi vá (trước đó 1.9s)" },
+      { at: 0.05, text: "nhịp poll số dư · đọc on-chain qua RPC chính" },
+      { at: 0.35, text: "⚠ RPC trả lỗi giữa nhịp — chưa có số mới" },
+      { at: 0.65, text: "đổi sang RPC dự phòng, backoff, giữ số cũ dán nhãn stale" },
+      { at: 0.97, text: "số về lại · không màn hình trắng, không NaN trên dashboard" },
     ],
   },
 ];

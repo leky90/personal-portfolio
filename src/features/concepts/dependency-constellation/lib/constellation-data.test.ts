@@ -8,7 +8,7 @@ import {
   resolvePaths,
 } from "@/features/concepts/dependency-constellation/lib/constellation-data";
 
-describe("constellation-data — đồ thị phụ thuộc 10 năm đã resolve sẵn", () => {
+describe("constellation-data — đồ thị phụ thuộc 14 năm đã resolve sẵn", () => {
   it("27 node (5 role + 10 project + 12 skill), id không trùng", () => {
     expect(NODES).toHaveLength(27);
     expect(new Set(NODES.map((n) => n.id)).size).toBe(27);
@@ -42,9 +42,9 @@ describe("constellation-data — đồ thị phụ thuộc 10 năm đã resolve 
   });
 
   it("bfsFrom: skill → project sâu 1 → role sâu 2, chính nó sâu 0", () => {
-    const depths = bfsFrom("s-kafka");
-    expect(depths.get("s-kafka")).toBe(0);
-    expect(depths.get("p-realtime")).toBe(1);
+    const depths = bfsFrom("s-ethers");
+    expect(depths.get("s-ethers")).toBe(0);
+    expect(depths.get("p-treehouse")).toBe(1);
     expect(depths.get("r-senior")).toBe(2);
   });
 
@@ -55,12 +55,17 @@ describe("constellation-data — đồ thị phụ thuộc 10 năm đã resolve 
   });
 
   it("resolvePaths kiểu pnpm why: skill < project < role", () => {
-    const kafkaPaths = resolvePaths("s-kafka");
-    expect(kafkaPaths).toEqual(["Kafka < realtime-pipeline < Senior Engineer"]);
-    expect(resolvePaths("s-ts").length).toBeGreaterThanOrEqual(4);
-    expect(resolvePaths("p-checkout")).toEqual([
-      "checkout-platform < Full-stack Engineer",
+    const ethersPaths = resolvePaths("s-ethers");
+    expect(ethersPaths).toEqual([
+      "Ethers.js < teth-dashboard < Lead Frontend Engineer · Treehouse",
+      "Ethers.js < treehouse-dapp < Senior Software Engineer · Treehouse",
     ]);
-    expect(resolvePaths("r-staff")).toEqual(["Staff Engineer"]);
+    expect(resolvePaths("s-ts").length).toBeGreaterThanOrEqual(4);
+    expect(resolvePaths("p-build-to-rent")).toEqual([
+      "build-to-rent < Software Engineer · TESO",
+    ]);
+    expect(resolvePaths("r-lead")).toEqual([
+      "Lead Frontend Engineer · Treehouse",
+    ]);
   });
 });

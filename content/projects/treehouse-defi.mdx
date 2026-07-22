@@ -1,0 +1,52 @@
+## Bối cảnh
+
+Treehouse là nền tảng DeFi cho tài sản thực được token hoá — sản phẩm đầu
+tiên là **tETH**, một tAsset gom các mức lãi suất ETH đang phân mảnh trên
+chuỗi về một chỗ. Tôi vào từ tháng 8/2021 với vai trò Senior Software
+Engineer, rồi dẫn mảng frontend với một đội 8 kỹ sư.
+
+## Ràng buộc
+
+Frontend của một dApp khác web app thường ở vài điểm không thương lượng được:
+
+- **Ví là danh tính.** Không có phiên đăng nhập truyền thống; mọi hành động
+  ghi đều phải đi qua ví người dùng ký, và có thể bị từ chối giữa chừng.
+- **Nguồn dữ liệu là chuỗi.** Giá, lợi suất, TVL đến từ on-chain reads, có
+  độ trễ và có thể trả về trạng thái cũ. Giao diện phải nói thật về điều đó
+  thay vì giả vờ mọi thứ tức thời.
+- **Sai số là tiền.** Một con số hiển thị lệch không phải bug thẩm mỹ.
+
+## Cách làm
+
+Tôi kiến trúc phần frontend bằng **React, TypeScript và Next.js**, dùng
+**Ethers.js** cho toàn bộ đọc/ghi on-chain, và dựng lớp dashboard thời gian
+thực cho giá, lợi suất và TVL.
+
+Ba quyết định định hình phần còn lại:
+
+1. **Tách lớp đọc chuỗi khỏi lớp hiển thị.** Mọi lệnh gọi hợp đồng nằm sau
+   một lớp riêng có kiểu rõ ràng, để component không bao giờ tự suy diễn
+   dữ liệu chuỗi.
+2. **Mọi trạng thái ví là trạng thái hiển thị được.** Chưa kết nối, sai
+   mạng, đang chờ ký, giao dịch pending, thất bại — mỗi thứ có UI riêng chứ
+   không gộp thành một spinner.
+3. **Chuẩn hoá trước khi mở rộng đội.** Coding standards và tài liệu
+   onboarding được viết sớm, để người mới ship được trong tuần đầu.
+
+## Phần dẫn dắt
+
+Việc khó nhất không phải Web3 mà là giữ cho tám người ship cùng một hướng:
+
+- Quyết định stack và kiến trúc lõi để cả đội có khung chung mà theo.
+- **Code review hằng ngày**, kèm quy trình QA có cấu trúc để bản phát hành
+  ổn định và còn bảo trì được.
+- Điều phối giao tiếp hằng ngày với kỹ sư, designer và product manager.
+- Workshop chia sẻ kiến thức và pair coding định kỳ — thứ giúp người mới
+  bắt kịp nhanh hơn bất kỳ tài liệu nào.
+
+## Điều tôi rút ra
+
+Trong DeFi, phần lớn công sức frontend nằm ở việc trình bày trung thực sự
+không chắc chắn: dữ liệu đang cũ bao lâu, giao dịch đang ở bước nào, cái gì
+đã lên chuỗi và cái gì thì chưa. Giao diện đẹp mà nói dối về trạng thái là
+giao diện hỏng.

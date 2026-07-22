@@ -6,7 +6,7 @@ import { ChangeExperience } from "@/features/concepts/cost-of-change";
 export const metadata: PageMetadata = {
   title: "Cost of Change — 3D Concept",
   description:
-    "Concept demo: 10 năm của một codebase thành tháp truss chịu lực. Cuộn để xây từng năm, refactor giải phóng ứng suất; giữ toggle để xem timeline giả định nơi nợ không bao giờ được trả.",
+    "Concept demo: 14 năm nghề (2012 → hôm nay) nén thành tháp truss chịu lực mười tầng. Cuộn để xây từng chặng, ba lần dọn nợ giải phóng ứng suất; bật toggle để xem timeline giả định nơi nợ không bao giờ được trả.",
 };
 
 export default function CostOfChangeConceptPage() {

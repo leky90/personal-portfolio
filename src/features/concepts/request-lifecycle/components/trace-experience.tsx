@@ -13,7 +13,7 @@ import {
 } from "@/features/concepts/request-lifecycle/lib/trace-state";
 
 const HUD_DEFAULT =
-  "Chưa có gói tin nào bay. Cuộn để bắn request qua edge, mesh, hàng đợi và database.";
+  "Chưa có gói tin nào bay. Cuộn để bắn request qua CDN edge, app shell, API/BFF, job nền và RPC node.";
 
 /**
  * Layout DOM: hero kiểu terminal + rail waterfall Jaeger bên trái +
@@ -133,24 +133,26 @@ export function TraceExperience() {
       {/* HERO kiểu terminal */}
       <section className="mx-auto flex min-h-dvh w-full max-w-5xl flex-col justify-center px-4 pt-20 sm:px-6">
         <p className="font-mono text-[11px] text-neutral-500">
-          <span className="text-neutral-600">$</span> curl -i https://ky.le/
-          -H &apos;accept: engineer&apos;
+          <span className="text-neutral-600">$</span> curl -i /dashboard
+          -H &apos;wallet: chưa kết nối&apos;
           <span className="ml-1 inline-block h-3 w-[7px] translate-y-[2px] bg-[#4ade80] motion-safe:animate-pulse" />
         </p>
         <p className="mt-6 font-mono text-[11px] tracking-[0.3em] text-[#f59e0b] uppercase">
-          Một request duy nhất · 187ms · 6 span
+          Một request duy nhất · 6 span · trình duyệt → on-chain
         </p>
         <h2 className="mt-4 max-w-2xl text-4xl font-semibold tracking-tight text-neutral-50 sm:text-6xl">
           REQUEST LIFECYCLE
         </h2>
         <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400">
-          Cả trang này là một distributed trace. Cuộn để đẩy gói tin qua
-          edge PoP, load balancer, service mesh, hàng đợi async và
-          database; rail bên trái là waterfall lấp dần đúng như Jaeger,
-          và mỗi chặng kể một phần câu chuyện nghề của tôi.
+          Cả trang này là một distributed trace của dashboard dApp mà tôi
+          dựng ở Treehouse. Cuộn để đẩy gói tin qua CDN edge, app shell
+          đọc ví, API/BFF gom giá và yield, job nền nghe event on-chain,
+          rồi ra tới RPC node đọc chuỗi bằng Ethers.js; rail bên trái là
+          waterfall lấp dần đúng như Jaeger, và mỗi chặng kể một phần
+          câu chuyện nghề của tôi.
         </p>
         <p className="mt-8 font-mono text-xs text-neutral-500 motion-safe:animate-pulse">
-          ↓ cuộn: gói tin rời edge PoP
+          ↓ cuộn: request rời CDN edge
         </p>
       </section>
 
@@ -193,8 +195,11 @@ export function TraceExperience() {
           </h4>
           <p className="mt-3 text-sm leading-relaxed text-neutral-400">
             Portfolio dựng như một distributed trace vì đó là cách tôi tư
-            duy hệ thống: mọi tương tác đều là một request có chi phí đo
-            được ở từng chặng. Kỹ thuật: route là 1 tube 1 draw call với
+            duy hệ thống: mọi tương tác đều là một request có chi phí ở
+            từng chặng — và trong một dApp, chặng đắt nhất luôn nằm ngoài
+            tầm kiểm soát của mình, ở chuỗi. Trục ms ở đây là mô hình để
+            vẽ waterfall chứ không phải số đo APM. Kỹ thuật: route là 1
+            tube 1 draw call với
             xung packet tính trong fragment shader (không bloom), hạ tầng
             flat-grey gom về 2 InstancedMesh + 1 hex prism, camera dolly
             theo chính đường cong của route. Tổng ~8 draw call,

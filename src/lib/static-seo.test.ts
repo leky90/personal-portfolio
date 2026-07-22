@@ -11,13 +11,13 @@ describe("static-seo — sitemap/robots cho GH Pages (thay route handler Next)",
   it("entries: home, writing index, mọi case study + bài viết, URL tuyệt đối", () => {
     const urls = portfolioSitemapEntries(
       SITE_URL,
-      ["atlas-platform", "relay-payments"],
+      ["treehouse-defi", "controllermodz"],
       ["one-draw-call-terrain"],
     ).map((entry) => entry.url);
     expect(urls).toContain(SITE_URL);
     expect(urls).toContain(`${SITE_URL}/writing`);
-    expect(urls).toContain(`${SITE_URL}/projects/atlas-platform`);
-    expect(urls).toContain(`${SITE_URL}/projects/relay-payments`);
+    expect(urls).toContain(`${SITE_URL}/projects/treehouse-defi`);
+    expect(urls).toContain(`${SITE_URL}/projects/controllermodz`);
     expect(urls).toContain(`${SITE_URL}/writing/one-draw-call-terrain`);
   });
 

@@ -19,7 +19,7 @@ export function TowerCanvasLoader(props: TowerCanvasProps) {
       {prefersReduced ? (
         <ScenePoster note="Bản tĩnh — thiết bị đang bật giảm chuyển động, tháp truss hiển thị dạng poster năm cuối." />
       ) : (
-        <Suspense fallback={<ScenePoster note="Đang đổ móng năm 2016…" />}>
+        <Suspense fallback={<ScenePoster note="Đang đổ móng năm 2012…" />}>
           <TowerCanvasLazy {...props} />
         </Suspense>
       )}

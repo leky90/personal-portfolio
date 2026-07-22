@@ -1,6 +1,8 @@
 /**
- * Selected work — card trên trang chủ; case study MDX chi tiết vào ở Phase 3.
- * ⚠️ PLACEHOLDER — thay bằng 3–5 dự án thật (giữ đúng shape).
+ * Selected work — card trên trang chủ, case study MDX chi tiết ở
+ * content/projects/. Dữ liệu lấy từ portfolio công khai trên
+ * Freelancer.com (@Leky90) và Upwork; mô tả chỉ nêu vai trò, stack và
+ * phạm vi có thể đối chiếu được, không kèm số liệu tự bịa.
  */
 export interface ProjectMeta {
   slug: string;
@@ -16,36 +18,36 @@ export interface ProjectMeta {
 
 export const PROJECTS: ProjectMeta[] = [
   {
-    slug: "atlas-platform",
-    title: "Atlas Platform",
-    role: "Lead Engineer",
-    period: "2021 — 2024",
+    slug: "treehouse-defi",
+    title: "Treehouse — DeFi / RWA Platform",
+    role: "Lead Frontend Engineer",
+    period: "2021 — nay",
     summary:
-      "Led 12 engineers through a 14-month platform rebuild — one gateway, four teams, zero rewrites since.",
-    stack: ["Go", "gRPC", "Envoy", "PostgreSQL", "Kubernetes"],
-    metrics: ["40M req/day", "p99 38ms", "12 engineers"],
-    year: 2024,
+      "Frontend của một nền tảng DeFi cho tài sản token hoá như tETH: kết nối ví, đọc ghi on-chain, dashboard giá và lợi suất theo thời gian thực. Tôi dẫn 8 kỹ sư và sở hữu toàn bộ stack frontend.",
+    stack: ["React", "TypeScript", "Next.js", "Ethers.js", "Web3 wallet"],
+    metrics: ["Đội 8 kỹ sư", "tETH / tAssets", "Realtime TVL & yields"],
+    year: 2026,
   },
   {
-    slug: "pulse-analytics",
-    title: "Pulse Analytics",
-    role: "Staff Engineer",
-    period: "2019 — 2021",
+    slug: "build-to-rent",
+    title: "Build-to-Rent — Real Estate Web App",
+    role: "Full-stack Engineer",
+    period: "Freelance",
     summary:
-      "Near-real-time data pipeline feeding 200+ internal dashboards at half the previous infra cost.",
-    stack: ["Kafka", "Spark", "ClickHouse", "TypeScript"],
-    metrics: ["80M events/day", "-50% infra cost"],
-    year: 2021,
+      "Web app bất động sản cho thuê kèm trang quản trị: danh sách sản phẩm, luồng thuê và khu vực admin cho đội vận hành nhập liệu.",
+    stack: ["React", "Next.js", "Node.js", "REST API"],
+    metrics: ["Web app + admin", "Dự án freelance"],
+    year: 2023,
   },
   {
-    slug: "relay-payments",
-    title: "Relay Payments",
-    role: "Senior Engineer",
-    period: "2017 — 2019",
+    slug: "controllermodz",
+    title: "Controllermodz — Custom Controller eCommerce",
+    role: "Full-stack Engineer",
+    period: "Freelance",
     summary:
-      "The company's first multi-region payment system — idempotency, reconciliation, and quiet on-call nights.",
-    stack: ["Go", "PostgreSQL", "Redis"],
-    metrics: ["1.2M txn/month", "99.99% uptime"],
-    year: 2019,
+      "Cửa hàng thương mại điện tử bán tay cầm chơi game tuỳ biến: khách chọn cấu hình từng bộ phận rồi đặt hàng theo đúng cấu hình đó.",
+    stack: ["JavaScript", "PHP", "eCommerce", "REST API"],
+    metrics: ["Đặt hàng theo cấu hình", "Dự án freelance"],
+    year: 2022,
   },
 ];

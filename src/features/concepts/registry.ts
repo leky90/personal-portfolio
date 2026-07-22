@@ -63,9 +63,9 @@ export const CONCEPTS: ConceptMeta[] = [
     rank: 1,
     title: "Decision Diff",
     tagline:
-      "Mười năm quyết định kiến trúc nén thành một đường ray 3D: mỗi ngã rẽ là một diff sống, nhánh đã chọn đông đặc màu xanh, nhánh không đi treo lơ lửng dạng nét đứt đỏ kèm chi phí ước tính. Chạm vào bóng ma để nhìn thấy tương lai đã không xảy ra.",
+      "Mười bốn năm quyết định kiến trúc nén thành một đường ray 3D: mỗi ngã rẽ là một diff sống, nhánh đã chọn đông đặc màu xanh, nhánh không đi treo lơ lửng dạng nét đứt đỏ kèm chi phí ước tính. Chạm vào bóng ma để nhìn thấy tương lai đã không xảy ra.",
     pitch:
-      "A decade of architecture decisions compiled into a walkable 3D rail: at every fork the chosen path solidifies in diff-green while the road not taken hangs beside it as a dashed red ghost you can materialize, estimated cost and all.",
+      "Fourteen years of architecture decisions compiled into a walkable 3D rail: at every fork the chosen path solidifies in diff-green while the road not taken hangs beside it as a dashed red ghost you can materialize, estimated cost and all.",
     status: "ready",
     origin: "v2",
     difficulty: 4,
@@ -78,9 +78,9 @@ export const CONCEPTS: ConceptMeta[] = [
     rank: 2,
     title: "Monolith to Mesh",
     tagline:
-      "Khối kiến trúc nguyên khối bị cắt thành từng service mang tên thật, tách rời rồi tự đan lại thành service mesh khi bạn cuộn qua 10 năm quyết định kiến trúc. Có cả lần tách sai phải gộp ngược lại, vì lộ trình kiến trúc thật không bao giờ là chuyện thắng lợi một chiều.",
+      "Khối kiến trúc nguyên khối bị cắt thành từng service mang tên thật, tách rời rồi tự đan lại thành service mesh khi bạn cuộn qua 14 năm quyết định kiến trúc. Có cả lần tách sai phải gộp ngược lại, vì lộ trình kiến trúc thật không bao giờ là chuyện thắng lợi một chiều.",
     pitch:
-      "A graphite monolith kerf-cut into ~40 named services fractures apart and reweaves into a pulsing service mesh as you scroll a decade of real architecture decisions, including the premature split that visibly drifts back and fuses again.",
+      "A graphite monolith kerf-cut into ~40 named services fractures apart and reweaves into a pulsing service mesh as you scroll fourteen years of real architecture decisions, including the premature split that visibly drifts back and fuses again.",
     status: "ready",
     origin: "v2",
     difficulty: 4,
@@ -93,9 +93,9 @@ export const CONCEPTS: ConceptMeta[] = [
     rank: 3,
     title: "Incident Black Box",
     tagline:
-      "Tua lại một sự cố production như đọc hộp đen máy bay: từng tín hiệu, từng cảnh báo, từng quyết định lần lượt đi qua vạch đọc theo cuộn băng thời gian. Mười năm trực chiến được kể lại bằng một bản postmortem không đổ lỗi.",
+      "Tua lại một sự cố production như đọc hộp đen máy bay: từng tín hiệu, từng cảnh báo, từng quyết định lần lượt đi qua vạch đọc theo cuộn băng thời gian. Mười bốn năm trực chiến được kể lại bằng một bản postmortem không đổ lỗi, dựng theo kịch bản đã khử danh chứ không phải sự cố của một khách hàng cụ thể.",
     pitch:
-      "A real SEV-1 replayed as a physical flight-recorder tape: scroll scrubs glowing telemetry through a fixed playhead as alerts fire, decisions land, and the ending pulls back into the hindsight postmortem view where the whole incident's shape is visible at once.",
+      "An anonymised SEV-1 scenario replayed as a physical flight-recorder tape: scroll scrubs glowing telemetry through a fixed playhead as alerts fire, decisions land, and the ending pulls back into the hindsight postmortem view where the whole incident's shape is visible at once.",
     status: "ready",
     origin: "v2",
     difficulty: 3,
@@ -106,11 +106,11 @@ export const CONCEPTS: ConceptMeta[] = [
   {
     id: "terrain",
     rank: 4,
-    title: "Ten Years of Terrain",
+    title: "Fourteen Years of Terrain",
     tagline:
-      "10 năm sự nghiệp bake thành data texture rồi extrude thành địa hình ridgeline ~300 đường contour. Cuộn timeline là camera bay qua 10 năm địa hình.",
+      "14 năm sự nghiệp bake thành data texture rồi extrude thành địa hình ridgeline ~300 đường contour. Cuộn timeline là camera bay qua 14 năm địa hình.",
     pitch:
-      "A decade of real work encoded into a data texture and extruded into a monochrome ridgeline terrain; scrolling the timeline is a camera dolly across ten years of topography.",
+      "Fourteen years of real work encoded into a data texture and extruded into a monochrome ridgeline terrain; scrolling the timeline is a camera dolly across fourteen years of topography.",
     status: "ready",
     origin: "v1",
     difficulty: 4,
@@ -123,9 +123,9 @@ export const CONCEPTS: ConceptMeta[] = [
     rank: 5,
     title: "Maintenance Archaeology",
     tagline:
-      "Codebase lâu năm là một di chỉ khảo cổ, mỗi lớp trầm tích là một thời kỳ kiến trúc. Cuộn để đào sâu xuống mười năm, chạm vào từng mảnh module để định tuổi bằng chính lịch sử git và đọc ghi chú của những người bảo trì đi trước.",
+      "Mười bốn năm codebase là một di chỉ khảo cổ, mỗi lớp trầm tích là một chặng nghề. Cuộn để đào ngược từ 2026 về 2012, chạm vào từng mảnh module để định tuổi và đọc ghi chú của những người bảo trì đi trước.",
     pitch:
-      "A decade-old codebase excavated as a stratigraphic trench wall: scrolling descends through sediment layers of architectural eras while a carbon-dating probe reads the real git-history age of half-buried module artifacts and surfaces field notes from past maintainers.",
+      "Fourteen years of shipped codebases excavated as a stratigraphic trench wall: scrolling descends through sediment layers of architectural eras while a carbon-dating probe reads the real git-history age of half-buried module artifacts and surfaces field notes from past maintainers.",
     status: "ready",
     origin: "v2",
     difficulty: 3,
@@ -155,7 +155,7 @@ export const CONCEPTS: ConceptMeta[] = [
     tagline:
       "Nợ kỹ thuật hiện hình thành ứng suất vật lý: mỗi năm code là một tầng chịu lực, mỗi lần refactor là một lần kết cấu được giải phóng. Giữ để xem dòng thời gian giả định nếu khoản nợ đó không bao giờ được trả.",
     pitch:
-      "A decade of one codebase rendered as a load-bearing truss tower that visibly strains under each year of shipped features and springs back at each refactor the engineer led, with a press-and-hold counterfactual revealing the timeline where the debt was never paid.",
+      "Fourteen years of shipped work rendered as a load-bearing truss tower that visibly strains under each year of shipped features and springs back at each refactor the engineer led, with a press-and-hold counterfactual revealing the timeline where the debt was never paid.",
     status: "ready",
     origin: "v2",
     difficulty: 3,
@@ -213,9 +213,9 @@ export const CONCEPTS: ConceptMeta[] = [
     rank: 11,
     title: "Living Topology",
     tagline:
-      "Mission-control map: network graph 3D data-driven của mọi hệ thống từng xây. Packet pulse chạy qua kiến trúc 10 năm, hover là 'query' hệ thống.",
+      "Mission-control map: network graph 3D data-driven của mọi hệ thống từng xây. Packet pulse chạy qua kiến trúc 14 năm, hover là 'query' hệ thống.",
     pitch:
-      "A quiet mission-control map: a real, data-driven 3D network graph of every system the engineer has built, with packets pulsing through a decade of architecture.",
+      "A quiet mission-control map: a real, data-driven 3D network graph of every system the engineer has built, with packets pulsing through fourteen years of architecture.",
     status: "ready",
     origin: "v1",
     difficulty: 4,
@@ -228,9 +228,9 @@ export const CONCEPTS: ConceptMeta[] = [
     rank: 12,
     title: "Weight of Experience",
     tagline:
-      "Kinh nghiệm ở đây có khối lượng thật: mỗi công nghệ nặng đúng bằng số năm tôi đã dùng nó. Hãy kéo và ném thử để cảm nhận sự khác biệt giữa 9 năm và 1 năm.",
+      "Kinh nghiệm ở đây có khối lượng thật: mỗi công nghệ nặng đúng bằng số năm tôi đã dùng nó. Hãy kéo và ném thử để cảm nhận sự khác biệt giữa 14 năm và 3 năm.",
     pitch:
-      "A rigid-body hero where the engineer's name crashes in and every tech token carries physical mass equal to years of experience, so flicking TypeScript (9 yrs) literally feels heavier than flicking a 1-yr framework.",
+      "A rigid-body hero where the engineer's name crashes in and every tech token carries physical mass equal to years of experience, so flicking JavaScript (14 yrs) literally feels heavier than flicking a 3-yr API.",
     status: "ready",
     origin: "v1",
     difficulty: 4,
@@ -258,9 +258,9 @@ export const CONCEPTS: ConceptMeta[] = [
     rank: 14,
     title: "Dependency Constellation",
     tagline:
-      "Mười năm sự nghiệp được phân giải thành một chòm sao phụ thuộc. Chạm vào một kỹ năng để thấy mọi dự án từng kéo nó vào, theo đúng những liên kết thật.",
+      "Mười bốn năm sự nghiệp được phân giải thành một chòm sao phụ thuộc. Chạm vào một kỹ năng để thấy mọi dự án từng kéo nó vào, theo đúng những liên kết thật.",
     pitch:
-      "A senior career rendered as a fully resolved dependency graph: hover any skill and watch every project that ever pulled it in light up along its real edges, like running pnpm-why on ten years of work.",
+      "A senior career rendered as a fully resolved dependency graph: hover any skill and watch every project that ever pulled it in light up along its real edges, like running pnpm-why on fourteen years of work.",
     status: "ready",
     origin: "v1",
     difficulty: 3,
@@ -273,9 +273,9 @@ export const CONCEPTS: ConceptMeta[] = [
     rank: 15,
     title: "Knowledge Relay",
     tagline:
-      "Mười năm truyền nghề vẽ thành sơ đồ relay 3D: mỗi practice là một cây gậy phát sáng được trao qua các team lane theo dòng thời gian. Dự án có thể đóng lại nhưng gậy vẫn chạy tiếp, vì thứ senior để lại sống lâu hơn codebase.",
+      "Mười bốn năm nghề (2012 đến 2026) vẽ thành sơ đồ relay 3D: mỗi practice là một cây gậy phát sáng được trao qua các lane cộng tác theo dòng thời gian. Chặng cũ có thể khép lại nhưng gậy vẫn chạy tiếp, vì thứ senior để lại sống lâu hơn codebase.",
     pitch:
-      "A decade of mentorship drawn as a 3D Marey-style relay timetable: practices forged as glowing batons that keep passing between team lanes even after each project's lane goes dark, proving that what a senior teaches outlives what he ships.",
+      "Fourteen years of practice drawn as a 3D Marey-style relay timetable: code review, coding standards, onboarding docs, pairing and legacy rescue forged as glowing batons that keep passing between collaboration lanes even after each lane goes dark, proving that what a senior teaches outlives what he ships.",
     status: "ready",
     origin: "v2",
     difficulty: 4,
@@ -333,9 +333,9 @@ export const CONCEPTS: ConceptMeta[] = [
     rank: 19,
     title: "Desk, Version-Controlled",
     tagline:
-      "Mười năm sự nghiệp gói trong một chiếc bàn làm việc. Cuộn trang để xem từng commit biến góc bàn junior 2016 thành workstation senior 2026, nơi trưởng thành nghĩa là bớt đi chứ không phải thêm vào.",
+      "Mười bốn năm sự nghiệp gói trong một chiếc bàn làm việc. Cuộn trang để xem từng commit biến góc bàn freelance PHP ở Huế năm 2012 thành bàn lead frontend năm 2026, nơi trưởng thành nghĩa là bớt đi chứ không phải thêm vào.",
     pitch:
-      "An isometric desk diorama that scrubs through ten years of commit history as you scroll: every career step is a conventional commit, and seniority visibly reads as a refactor toward less clutter, not more gear.",
+      "An isometric desk diorama that scrubs through fourteen years of commit history as you scroll: every career step is a conventional commit, and seniority visibly reads as a refactor toward less clutter, not more gear.",
     status: "ready",
     origin: "v1",
     difficulty: 3,
@@ -348,9 +348,9 @@ export const CONCEPTS: ConceptMeta[] = [
     rank: 20,
     title: "Commit Skyline",
     tagline:
-      "Mười năm commit dựng thành một thành phố về đêm. Cuộn trang để bay dọc đại lộ thời gian, mỗi tòa nhà là một ngày viết code.",
+      "Mười bốn năm commit dựng thành một thành phố về đêm. Cuộn trang để bay dọc đại lộ thời gian, mỗi tòa nhà là một ngày viết code.",
     pitch:
-      "Ten years of real GitHub contribution data extruded into a fog-drenched instanced night city, and scrolling flies the camera down the decade boulevard one year-block at a time.",
+      "Fourteen years of career milestones extruded into a fog-drenched instanced night city, and scrolling flies the camera down the timeline boulevard one year-block at a time.",
     status: "ready",
     origin: "v1",
     difficulty: 3,
@@ -408,9 +408,9 @@ export const CONCEPTS: ConceptMeta[] = [
     rank: 24,
     title: "Signal From Noise",
     tagline:
-      "Tín hiệu giữa nhiễu. Mười năm biến hỗn độn thành những hệ thống vận hành chính xác.",
+      "Tín hiệu giữa nhiễu. Mười bốn năm biến hỗn độn thành những hệ thống vận hành chính xác.",
     pitch:
-      "One persistent GPGPU particle field that repeatedly collapses chaos into precise, data-driven engineered forms; the visitor's first scroll literally reenacts ten years of turning noise into systems.",
+      "One persistent GPGPU particle field that repeatedly collapses chaos into precise, data-driven engineered forms; the visitor's first scroll literally reenacts fourteen years of turning noise into systems.",
     status: "ready",
     origin: "v1",
     difficulty: 4,
@@ -423,7 +423,7 @@ export const CONCEPTS: ConceptMeta[] = [
     rank: 25,
     title: "The Credential",
     tagline:
-      "Tấm thẻ kỹ sư treo trên dây đeo thật sự cầm được, kéo được, búng được. Mười năm kinh nghiệm in thành dữ liệu sống ngay trên thẻ, kéo thẻ xuống để bước vào.",
+      "Tấm thẻ kỹ sư treo trên dây đeo thật sự cầm được, kéo được, búng được. Mười bốn năm kinh nghiệm in thành dữ liệu sống ngay trên thẻ, kéo thẻ xuống để bước vào.",
     pitch:
       "A physically simulated conference badge on a lanyard that you grab, flick, flip and finally pull down to enter the site; every line printed on the card is real, build-time engineer data.",
     status: "ready",
@@ -436,11 +436,11 @@ export const CONCEPTS: ConceptMeta[] = [
   {
     id: "ten-year-galaxy",
     rank: 26,
-    title: "Ten-Year Galaxy",
+    title: "Fourteen-Year Galaxy",
     tagline:
-      "Mười năm viết code kết tinh thành một dải ngân hà: mỗi tuần làm việc là một ngôi sao, mỗi chặng nghề là một cánh tay xoắn ốc. Cuộn trang để xem thiên hà tự lắp ráp theo đúng dòng thời gian sự nghiệp.",
+      "Mười bốn năm viết code kết tinh thành một dải ngân hà: mỗi tuần làm việc là một ngôi sao, mỗi chặng nghề là một cánh tay xoắn ốc. Cuộn trang để xem thiên hà tự lắp ráp theo đúng dòng thời gian sự nghiệp.",
     pitch:
-      "A decade of shipped work assembles into a data-driven spiral galaxy: every working week becomes a star cluster, every career era a spiral arm, and scroll is the arrow of time.",
+      "Fourteen years of shipped work assembles into a data-driven spiral galaxy: every working week becomes a star cluster, every career era a spiral arm, and scroll is the arrow of time.",
     status: "ready",
     origin: "v1",
     difficulty: 3,

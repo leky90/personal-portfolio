@@ -89,9 +89,11 @@ export function CabinetExperience() {
         </h2>
         <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400">
           Một tủ kính gỗ óc chó 4×2: bốn ô là thế giới thu nhỏ đang sống
-          của bốn sản phẩm thật, bốn ô còn phủ sương chờ trưng bày. Rê
-          lên một ô để sương tan và diorama thức dậy; click để camera
-          đưa bạn xuyên qua lớp kính vào bên trong. ESC để lùi ra.
+          của bốn sản phẩm tôi đã ship — một nền tảng DeFi/RWA, một
+          marketplace nông sản, một eCommerce tay cầm tuỳ biến và một
+          web app bất động sản cho thuê — bốn ô còn phủ sương chờ trưng
+          bày. Rê lên một ô để sương tan và diorama thức dậy; click để
+          camera đưa bạn xuyên qua lớp kính vào bên trong. ESC để lùi ra.
         </p>
         <p className="mt-8 font-mono text-xs text-neutral-500 motion-safe:animate-pulse">
           rê lên ô kính · click bước vào · ESC lùi ra
@@ -137,8 +139,8 @@ export function CabinetExperience() {
             plane + camera dolly (~45 draw call, chỉ ô được đánh thức
             mới invalidate — "frozen portal economy" đúng nghĩa demand);
             bản chính thức thay bằng drei MeshPortalMaterial với blend
-            0→1 render portal thành scene chính và Next intercepting
-            route để back/forward đảo ngược cú xuyên kính.
+            0→1 render portal thành scene chính và history của
+            react-router để back/forward đảo ngược cú xuyên kính.
           </p>
         </div>
       </section>

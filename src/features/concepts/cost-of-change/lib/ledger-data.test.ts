@@ -4,6 +4,7 @@ import {
   FLOOR_COUNT,
   LEDGER,
   REFACTOR_YEARS,
+  YEAR_LABELS,
   YEAR_SPAN,
   buildTruss,
   debtAt,
@@ -11,13 +12,26 @@ import {
   fillStrain,
 } from "@/features/concepts/cost-of-change/lib/ledger-data";
 
-describe("ledger-data — sổ cái 10 năm của một codebase", () => {
-  it("10 sự kiện, mỗi năm một tầng, yearIndex 0..9 tăng dần", () => {
+describe("ledger-data — sổ cái nghề thật 2012 → 2025 nén vào 10 tầng", () => {
+  it("10 chặng, yearIndex 0..9, năm tăng dần từ 2012 tới 2025", () => {
     expect(LEDGER).toHaveLength(FLOOR_COUNT);
     for (const [index, event] of LEDGER.entries()) {
       expect(event.yearIndex).toBe(index);
-      expect(event.year).toBe(2016 + index);
+      if (index > 0) {
+        expect(event.year).toBeGreaterThan(LEDGER[index - 1].year);
+      }
+      if (event.yearEnd !== undefined) {
+        expect(event.yearEnd).toBeGreaterThan(event.year);
+      }
     }
+    expect(LEDGER[0].year).toBe(2012);
+    expect(LEDGER[FLOOR_COUNT - 1].year).toBe(2025);
+  });
+
+  it("YEAR_LABELS: 11 mốc scrub, mốc cuối là hôm nay 2026", () => {
+    expect(YEAR_LABELS).toHaveLength(YEAR_SPAN + 1);
+    expect(YEAR_LABELS[0]).toBe(2012);
+    expect(YEAR_LABELS[YEAR_SPAN]).toBe(2026);
   });
 
   it("refactor có relief < 1, feature thì không; REFACTOR_YEARS khớp", () => {

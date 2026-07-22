@@ -12,17 +12,17 @@ const FORM_SECTIONS = [
   {
     id: "name",
     title: "form 1 · cái tên",
-    note: "Nhiễu lạnh kết tinh thành chữ đầu tiên. H1 thật của trang chỉ hiện outline SAU khi hạt đã xếp đúng raster của nó — progressive enhancement chính là màn reveal.",
+    note: "Nhiễu lạnh kết tinh thành chữ đầu tiên: KY LE DINH. H1 thật của trang chỉ hiện outline SAU khi hạt đã xếp đúng raster của nó — progressive enhancement chính là màn reveal.",
   },
   {
     id: "globe",
     title: "form 2 · quả cầu đội ngũ",
-    note: "Cùng đám hạt đó tan ra rồi hợp lại thành khung cầu lat/long: các thành phố từng có teammate. Không hạt nào được sinh thêm.",
+    note: "Cùng đám hạt đó tan ra rồi hợp lại thành khung cầu lat/long: đội 8 kỹ sư tôi đang dẫn, làm remote cho một công ty ở Singapore trong khi tôi ngồi Huế. Không hạt nào được sinh thêm.",
   },
   {
     id: "lattice",
     title: "form 3 · lattice kiến trúc",
-    note: "Kết tinh cuối: hạt xếp dọc cạnh của đồ thị kiến trúc thật. Beat lặp lại của cả sự nghiệp: nhiễu vào, hệ thống ra.",
+    note: "Kết tinh cuối: hạt xếp dọc cạnh của đồ thị kiến trúc dApp đang chạy thật — ví, frontend, RPC, hợp đồng tETH, cache lợi suất, indexer, dashboard TVL. Beat lặp lại của cả sự nghiệp: nhiễu vào, hệ thống ra.",
   },
 ];
 
@@ -90,11 +90,11 @@ export function NoiseExperience() {
           SIGNAL FROM NOISE
         </h2>
         <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400">
-          Một trường hạt duy nhất, lặp đi lặp lại đúng một động tác của
-          mười năm làm nghề: gom hỗn độn thành hình dạng chính xác. Cuộn
+          Một trường hạt duy nhất, lặp đi lặp lại đúng một động tác kể
+          từ 2012 tới nay: gom hỗn độn thành hình dạng chính xác. Cuộn
           để nhiễu kết tinh lần lượt thành cái tên, quả cầu đội ngũ và
-          lattice kiến trúc; hạt lạnh màu cyan, hạt đã vào trật tự ấm
-          dần thành amber.
+          lattice kiến trúc dApp; hạt lạnh màu cyan, hạt đã vào trật tự
+          ấm dần thành amber.
         </p>
         <p className="mt-8 font-mono text-xs text-neutral-500 motion-safe:animate-pulse">
           ↓ cuộn: kết tinh thứ nhất · rê con trỏ để trật tự nở sớm
@@ -132,8 +132,8 @@ export function NoiseExperience() {
           <p className="mt-3 text-sm leading-relaxed text-neutral-400">
             Ba lựa chọn chống particle-soup có chủ đích: blend thường
             thay vì additive, ordering lens ĐẢO chiều trope repel cũ, và
-            mọi form đều là dữ liệu thật (raster tên, toạ độ cầu, cạnh
-            đồ thị kiến trúc). Kỹ thuật: 4096 hạt trong đúng 1 draw
+            mọi form đều là dữ liệu thật (raster họ tên, toạ độ cầu,
+            cạnh đồ thị kiến trúc dApp DeFi). Kỹ thuật: 4096 hạt trong đúng 1 draw
             call, toạ độ 3 form bake một DataTexture, chaos là hàm thuần
             của seed nên demand ngủ hẳn khi form đã kết tinh. Bản chính
             thức nâng GPGPU ping-pong 131k hạt với spring-damper +

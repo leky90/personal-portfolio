@@ -17,9 +17,9 @@ describe("RelayExperience — layout DOM của trang concept", () => {
     expect(screen.getByText(/KNOWLEDGE RELAY/i)).toBeInTheDocument();
   });
 
-  it("bộ đếm HUD mặc định đứng ở năm 2016", () => {
+  it("bộ đếm HUD mặc định đứng ở năm 2012", () => {
     render(<RelayExperience />);
-    expect(screen.getByTestId("relay-counter").textContent).toMatch(/2016/);
+    expect(screen.getByTestId("relay-counter").textContent).toMatch(/2012/);
   });
 
   it("đủ 5 section baton với tên practice", () => {

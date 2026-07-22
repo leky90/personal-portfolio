@@ -1,7 +1,8 @@
-export const DEFAULT_SEED = 20160101;
+/** Seed = ngày mở tài khoản Freelancer.com (11/07/2012), mốc bắt đầu nghề. */
+export const DEFAULT_SEED = 20120711;
 
-/** 10 năm ≈ 522 tuần — mỗi tuần một mẫu hoạt động (giả lập GitHub contributions). */
-export const TOTAL_WEEKS = 522;
+/** 2012 → 2026 ≈ 14 năm ≈ 730 tuần — mỗi tuần một mẫu hoạt động. */
+export const TOTAL_WEEKS = 730;
 
 export interface CareerEra {
   year: number;
@@ -30,48 +31,53 @@ interface EraSeed {
   side: "left" | "right";
 }
 
+/**
+ * Bốn chặng nghề THẬT, đối chiếu từ LinkedIn (le-dinh-ky), Freelancer.com
+ * (@Leky90) và Upwork. Mỗi metric chỉ dùng con số có thể kiểm chứng trên
+ * hồ sơ công khai — không có số liệu tự bịa.
+ */
 const ERA_SEEDS: EraSeed[] = [
   {
-    year: 2016,
-    title: "First Production Systems",
-    role: "Software Engineer",
+    year: 2012,
+    title: "Freelance, One Client At A Time",
+    role: "Freelance Web Developer",
     description:
-      "First production services — learning to operate what I write: on-call, postmortems, and the humility that comes with both.",
-    metric: "3 services · 99.5% uptime",
-    peak: 0.5,
+      "Started on Freelancer.com in 2012 as a PHP developer: WordPress builds, HTML/CSS/JS client sites, cross-browser and mobile responsiveness. Four years of shipping directly to whoever paid — the fastest feedback loop I have ever had.",
+    metric: "Freelancer.com since 2012 · PHP + WordPress",
+    peak: 0.45,
     timeU: 0.05,
     side: "left",
   },
   {
-    year: 2018,
-    title: "Scaling The Data Layer",
-    role: "Senior Software Engineer",
+    year: 2017,
+    title: "Full Stack, End To End",
+    role: "Full Stack Engineer · Synova Solutions",
     description:
-      "Split the monolith, built the data pipeline and caching layer that absorbed 20× traffic — first time owning an architectural domain.",
-    metric: "20× traffic · p99 −64%",
-    peak: 0.68,
-    timeU: 0.25,
+      "Delivered web projects end to end in Ho Chi Minh City — turning designs into responsive interfaces, then building the dynamic, API-integrated back ends behind them. Business and eCommerce sites on jQuery, Laravel, CodeIgniter, WordPress and Magento.",
+    metric: "Design → API · Laravel · Magento",
+    peak: 0.6,
+    timeU: 0.38,
     side: "right",
   },
   {
-    year: 2021,
-    title: "The Platform Rebuild",
-    role: "Staff Engineer · Tech Lead",
+    year: 2019,
+    title: "Remote Delivery And Legacy Rescue",
+    role: "Software Engineer · TESO",
     description:
-      "Led 12 engineers through a 14-month platform rebuild — the decade's highest peak, and its biggest lesson in trade-offs.",
-    metric: "12 engineers · 14 months · 40M req/day",
-    peak: 1,
+      "Owned end-to-end delivery of JavaScript/React applications across multiple client projects, remotely from Hue. Started leading: guiding teammates on workflow, modernising legacy codebases for performance and reliability, streamlining docs and releases with designers and management.",
+    metric: "React · remote · multi-client delivery",
+    peak: 0.72,
     timeU: 0.55,
     side: "left",
   },
   {
-    year: 2024,
-    title: "Principal Scope",
-    role: "Principal Engineer",
+    year: 2021,
+    title: "Leading The Frontend Of A DeFi Platform",
+    role: "Senior Software Engineer · Lead Frontend Engineer · Treehouse",
     description:
-      "Shifted to leverage: platform tooling, mentoring, and architecture decisions that outlive any single team.",
-    metric: "4 teams · 1 platform · 0 rewrites since",
-    peak: 0.8,
+      "Lead Frontend Engineer on a DeFi / real-world-asset platform for tokenised assets such as tETH, leading a team of 8. Architected the dApp frontend in React, TypeScript and Next.js: wallet integration, on-chain reads and writes through Ethers.js, real-time dashboards for prices, yields and TVL. I own the front-end stack, the coding standards and the onboarding docs, run daily code reviews, and mentor through workshops and pair programming.",
+    metric: "Team of 8 · tETH / tAssets · React + Ethers.js",
+    peak: 1,
     timeU: 0.85,
     side: "right",
   },

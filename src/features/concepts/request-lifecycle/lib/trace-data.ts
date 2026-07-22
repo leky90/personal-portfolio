@@ -1,8 +1,11 @@
 /**
- * Dữ liệu một request 187ms trace từ edge tới database và quay về.
- * Trục thời gian (startMs/durationMs) là câu chuyện; trục cuộn (t0/t1)
- * là cửa sổ scroll mà packet đi qua chặng đó. Bản chính thức sẽ thay
- * bằng số đo thật từ APM; demo giữ nguyên schema.
+ * Hành trình thật của một request trong dApp DeFi/RWA mình dựng ở Treehouse:
+ * trình duyệt → CDN edge → app shell đọc ví → API/BFF (giá · yield · TVL)
+ * → job nền đồng bộ on-chain → RPC node đọc chuỗi bằng Ethers.js → dashboard.
+ * Thứ tự các chặng và tính chất của chúng (chặng ra chuỗi luôn chậm nhất,
+ * đúng một chặng chạy async) là có thật; trục ms chỉ là mô hình để vẽ
+ * waterfall — không phải số đo APM, nên không có con số nào được nêu như
+ * một phép đo. Trục cuộn (t0/t1) là cửa sổ scroll mà packet đi qua chặng đó.
  */
 
 export interface TraceSpan {
@@ -26,75 +29,75 @@ export interface TraceSpan {
 export const SPANS: TraceSpan[] = [
   {
     id: "edge",
-    label: "Edge PoP + TLS",
-    service: "edge-pop.fra1",
+    label: "Trình duyệt → CDN edge",
+    service: "cdn-edge",
     kind: "sync",
     startMs: 0,
     durationMs: 24,
     t0: 0,
     t1: 0.14,
-    log: "TLS handshake 14ms · cache MISS · route / → origin",
-    note: "Request chạm PoP gần người dùng nhất. Tôi từng cắt 400ms TTFB chỉ bằng cách chuyển termination TLS ra edge và sửa một cache key sai.",
+    log: "GET /dashboard · shell tĩnh trả từ edge · chưa biết ví nào",
+    note: "Người dùng chạm CDN trước khi chạm bất kỳ logic nào. Shell phải ra sớm dù lúc này chưa biết ví nào sẽ kết nối — nên tôi luôn tách rõ phần render được từ trước và phần buộc phải chờ trình duyệt.",
   },
   {
-    id: "lb",
-    label: "Load balancer",
-    service: "gateway-lb",
+    id: "shell",
+    label: "Hydrate + đọc trạng thái ví",
+    service: "dapp-shell",
     kind: "sync",
     startMs: 24,
     durationMs: 9,
     t0: 0.14,
     t1: 0.3,
-    log: "pool 12/12 healthy · least_conn → svc-07 · retry budget 3",
-    note: "Chín mili giây nhàm chán là chín mili giây đáng tự hào: health check, connection draining và retry budget để một node chết không ai nhận ra.",
+    log: "hydrate · dò provider của ví · chưa connect → CTA Connect Wallet",
+    note: "Một dApp luôn có hai thế giới sống song song: chưa kết nối ví và đã kết nối. Ở Treehouse tôi bắt mọi màn hình khai báo cả hai ngay từ bản thiết kế; quên một cái là người dùng nhìn khoảng trống mà không hiểu vì sao.",
   },
   {
-    id: "svc",
-    label: "Service mesh fan-out",
-    service: "profile-svc",
+    id: "api",
+    label: "API/BFF gom giá · yield · TVL",
+    service: "treehouse-api",
     kind: "sync",
     startMs: 33,
     durationMs: 58,
     t0: 0.3,
     t1: 0.52,
-    log: "fan-out 3: auth 11ms · profile 34ms · flags 6ms (parallel)",
-    note: "Một request cha đẻ ra ba request con chạy song song. Biết chặng nào được phép fan-out, chặng nào phải tuần tự là thứ phân biệt kiến trúc tốt và spaghetti.",
+    log: "một lượt gọi song song: giá tAsset · yield · TVL (bản đã cache)",
+    note: "Số liệu thị trường đi qua một lớp BFF thay vì để từng widget tự đi hỏi. Frontend chỉ nên chờ một lần, và các con số trên cùng màn hình phải cùng một mốc thời gian — nếu không, hai thẻ cạnh nhau sẽ kể hai câu chuyện khác nhau.",
   },
   {
     id: "queue",
-    label: "Hàng đợi async",
-    service: "job-queue",
+    label: "Job nền theo dõi on-chain",
+    service: "sync-worker",
     kind: "async",
     startMs: 91,
     durationMs: 31,
     t0: 0.52,
     t1: 0.7,
-    log: "enqueue analytics.pageview · ack 3ms · depth 1204 · DLQ 0",
-    note: "Việc gì không cần trả lời ngay thì đẩy sang hàng đợi. Ranh giới sync/async đặt đúng chỗ là quyết định kiến trúc rẻ nhất nhưng cứu nhiều đêm on-call nhất.",
+    log: "worker nền: nghe event on-chain · làm mới cache giá/yield",
+    note: "Dữ liệu on-chain không tới đúng lúc mình cần nó: worker chạy nền nghe event rồi làm mới cache. Đặt đúng ranh giới sync/async là thứ giữ dashboard mượt trong khi chuỗi vẫn đang xác nhận phía sau.",
   },
   {
-    id: "db",
-    label: "Database",
-    service: "postgres-primary",
+    id: "rpc",
+    label: "RPC node · đọc chuỗi qua Ethers.js",
+    service: "rpc-node",
     kind: "sync",
     startMs: 122,
     durationMs: 43,
     t0: 0.7,
     t1: 0.86,
-    log: "3 queries · index hit 99.2% · slowest 18ms · pool wait 0ms",
-    note: "Điểm dừng lâu nhất của mọi trace. EXPLAIN ANALYZE, index đúng cột và connection pool được đo đạc là lý do 43ms không phải 4.3 giây.",
+    log: "eth_call qua Ethers.js: balance · allowance của đúng ví đang kết nối",
+    note: "Chặng chậm nhất luôn là lần đi ra chuỗi: số dư và allowance gắn với từng ví nên không cache chung được. Đọc on-chain bằng Ethers.js dạy tôi thiết kế UI quanh độ trễ và lỗi RPC, thay vì giả vờ rằng mạng luôn trả lời.",
   },
   {
-    id: "resp",
-    label: "Response 200",
-    service: "edge-pop.fra1",
+    id: "render",
+    label: "Render dashboard",
+    service: "dapp-shell",
     kind: "sync",
     startMs: 165,
     durationMs: 22,
     t0: 0.86,
     t1: 1,
-    log: "render 12ms · gzip 8.1kB · 200 OK · total 187ms",
-    note: "Gói tin quay về với 200 OK. Toàn bộ trang bạn vừa cuộn là một request duy nhất được kể lại chậm 60 tỷ lần.",
+    log: "dashboard có số · phần vừa ký giữ nguyên trạng thái pending",
+    note: "Dashboard hiện số, nhưng thứ vừa được ký vẫn phải nằm ở trạng thái pending tới khi chuỗi xác nhận. Thành thật với người dùng về phần chưa chắc chắn là chỗ khó nhất của sản phẩm DeFi — và cũng là chỗ tôi soi kỹ nhất khi review code mỗi ngày.",
   },
 ];
 
@@ -129,7 +132,8 @@ export function elapsedMs(progress: number): number {
 
 /**
  * Hành lang route cho CatmullRomCurve3: tiến đều về -z với vài khúc cua
- * nhẹ (edge → LB → mesh → hàng đợi hơi nâng cao → DB → response).
+ * nhẹ (CDN edge → app shell → API/BFF → job nền hơi nâng cao → RPC node →
+ * render).
  */
 export function buildRoute(): [number, number, number][] {
   return [
@@ -160,15 +164,15 @@ export interface DioramaNodes {
 }
 
 /**
- * Diorama hạ tầng flat-grey quanh mỗi station: vòng edge 6 hộp, lưới
- * service mesh 5×3, rail hàng đợi 8 slot (đều là box → 1 InstancedMesh),
- * database 3 trụ chồng (1 InstancedMesh trụ). LB hex prism là mesh riêng.
+ * Diorama hạ tầng flat-grey quanh mỗi station: vòng CDN edge 6 hộp, lưới
+ * API/BFF 5×3, rail job nền 8 slot (đều là box → 1 InstancedMesh), RPC node
+ * 3 trụ chồng (1 InstancedMesh trụ). Hex prism app shell là mesh riêng.
  */
 export function buildNodes(): DioramaNodes {
   const boxes: DioramaNode[] = [];
   const cylinders: DioramaNode[] = [];
 
-  // Vòng edge PoP: 6 hộp xếp vòng tròn quanh station 0
+  // Vòng CDN edge: 6 hộp xếp vòng tròn quanh station 0
   for (let i = 0; i < 6; i += 1) {
     const angle = (i / 6) * Math.PI * 2;
     boxes.push({
@@ -179,7 +183,7 @@ export function buildNodes(): DioramaNodes {
     });
   }
 
-  // Lưới service mesh 5×3 quanh station 2
+  // Lưới API/BFF 5×3 quanh station 2
   for (let row = 0; row < 3; row += 1) {
     for (let col = 0; col < 5; col += 1) {
       boxes.push({
@@ -191,7 +195,7 @@ export function buildNodes(): DioramaNodes {
     }
   }
 
-  // Rail hàng đợi: 8 slot dẹt xếp hàng dọc trục x quanh station 3
+  // Rail job nền: 8 slot dẹt xếp hàng dọc trục x quanh station 3
   for (let i = 0; i < 8; i += 1) {
     boxes.push({
       spanIndex: 3,
@@ -201,7 +205,7 @@ export function buildNodes(): DioramaNodes {
     });
   }
 
-  // Database: 3 trụ chồng cổ điển tại station 4
+  // RPC node: 3 trụ chồng kiểu datastore tại station 4
   for (let i = 0; i < 3; i += 1) {
     cylinders.push({
       spanIndex: 4,

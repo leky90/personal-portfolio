@@ -1,9 +1,14 @@
 /**
- * Chòm sao phụ thuộc: 10 năm sự nghiệp resolve sẵn thành một đồ thị
- * (role → project → skill). Không mô phỏng lực client-side: layout là
- * ba vành đai bán kính cố định + jitter deterministic; BFS và các path
- * kiểu `pnpm why` đều tính từ dữ liệu thuần, test được. Bản chính thức
- * bake bằng d3-force-3d lúc build, cùng schema.
+ * Chòm sao phụ thuộc: 14 năm nghề thật (2012 → 2026) resolve sẵn thành
+ * một đồ thị (role → project → skill). Node lấy từ hồ sơ thật: 5 chặng
+ * (freelance Huế → Synova → TESO → Treehouse), 10 dự án (6 cái công khai
+ * trên Freelancer/Upwork + các mảng việc mô tả trong từng chặng) và 12
+ * công nghệ thực sự đã dùng. Cạnh phản ánh đúng ai kéo gì vào giai đoạn
+ * nào — không có dependency nào bịa.
+ *
+ * Không mô phỏng lực client-side: layout là ba vành đai bán kính cố định
+ * + jitter deterministic; BFS và các path kiểu `pnpm why` đều tính từ dữ
+ * liệu thuần, test được.
  */
 
 export type NodeKind = "role" | "project" | "skill";
@@ -16,80 +21,115 @@ export interface CareerNode {
 }
 
 export const NODES: CareerNode[] = [
-  { id: "r-backend", kind: "role", label: "Backend Engineer", year: 2016 },
-  { id: "r-fullstack", kind: "role", label: "Full-stack Engineer", year: 2018 },
-  { id: "r-senior", kind: "role", label: "Senior Engineer", year: 2020 },
-  { id: "r-lead", kind: "role", label: "Tech Lead", year: 2022 },
-  { id: "r-staff", kind: "role", label: "Staff Engineer", year: 2024 },
+  // 5 chặng nghề — năm là lúc bắt đầu chặng đó.
+  {
+    id: "r-freelance",
+    kind: "role",
+    label: "Freelance Web Developer",
+    year: 2012,
+  },
+  {
+    id: "r-fullstack",
+    kind: "role",
+    label: "Full Stack Engineer · Synova",
+    year: 2017,
+  },
+  {
+    id: "r-swe",
+    kind: "role",
+    label: "Software Engineer · TESO",
+    year: 2019,
+  },
+  {
+    id: "r-senior",
+    kind: "role",
+    label: "Senior Software Engineer · Treehouse",
+    year: 2021,
+  },
+  {
+    id: "r-lead",
+    kind: "role",
+    label: "Lead Frontend Engineer · Treehouse",
+    year: 2021,
+  },
 
-  { id: "p-billing", kind: "project", label: "billing-core", year: 2017 },
-  { id: "p-search", kind: "project", label: "search-svc", year: 2018 },
-  { id: "p-mobile-api", kind: "project", label: "mobile-api", year: 2018 },
-  { id: "p-checkout", kind: "project", label: "checkout-platform", year: 2019 },
-  { id: "p-obsv", kind: "project", label: "observability-kit", year: 2020 },
-  { id: "p-realtime", kind: "project", label: "realtime-pipeline", year: 2021 },
-  { id: "p-design", kind: "project", label: "design-system", year: 2022 },
-  { id: "p-multiregion", kind: "project", label: "multi-region", year: 2023 },
-  { id: "p-mlserve", kind: "project", label: "ml-serving", year: 2024 },
-  { id: "p-portfolio", kind: "project", label: "portfolio-2026", year: 2026 },
+  // 10 dự án — đặt tên kiểu package cho hợp ẩn dụ lockfile.
+  { id: "p-client-sites", kind: "project", label: "client-sites-wp", year: 2013 },
+  { id: "p-responsive", kind: "project", label: "responsive-retrofit", year: 2015 },
+  { id: "p-controllermodz", kind: "project", label: "controllermodz", year: 2017 },
+  { id: "p-ciga", kind: "project", label: "ciga.fr", year: 2018 },
+  { id: "p-foodmap", kind: "project", label: "foodmap", year: 2019 },
+  { id: "p-native", kind: "project", label: "native-travel", year: 2020 },
+  { id: "p-build-to-rent", kind: "project", label: "build-to-rent", year: 2021 },
+  { id: "p-treehouse", kind: "project", label: "treehouse-dapp", year: 2021 },
+  { id: "p-teth", kind: "project", label: "teth-dashboard", year: 2022 },
+  { id: "p-standards", kind: "project", label: "frontend-standards", year: 2023 },
 
-  { id: "s-ts", kind: "skill", label: "TypeScript", year: 2017 },
-  { id: "s-node", kind: "skill", label: "Node.js", year: 2016 },
-  { id: "s-react", kind: "skill", label: "React", year: 2018 },
-  { id: "s-pg", kind: "skill", label: "PostgreSQL", year: 2016 },
-  { id: "s-redis", kind: "skill", label: "Redis", year: 2018 },
-  { id: "s-kafka", kind: "skill", label: "Kafka", year: 2021 },
-  { id: "s-aws", kind: "skill", label: "AWS", year: 2019 },
-  { id: "s-k8s", kind: "skill", label: "Kubernetes", year: 2020 },
-  { id: "s-grafana", kind: "skill", label: "Grafana", year: 2020 },
-  { id: "s-go", kind: "skill", label: "Go", year: 2018 },
-  { id: "s-three", kind: "skill", label: "three.js", year: 2025 },
-  { id: "s-terraform", kind: "skill", label: "Terraform", year: 2022 },
+  // 12 công nghệ — năm là lúc bắt đầu dùng thật trong việc.
+  { id: "s-php", kind: "skill", label: "PHP", year: 2012 },
+  { id: "s-js", kind: "skill", label: "JavaScript", year: 2012 },
+  { id: "s-wordpress", kind: "skill", label: "WordPress", year: 2012 },
+  { id: "s-jquery", kind: "skill", label: "jQuery", year: 2013 },
+  { id: "s-magento", kind: "skill", label: "Magento", year: 2017 },
+  { id: "s-laravel", kind: "skill", label: "Laravel", year: 2017 },
+  { id: "s-react", kind: "skill", label: "React", year: 2019 },
+  { id: "s-node", kind: "skill", label: "Node.js", year: 2019 },
+  { id: "s-ts", kind: "skill", label: "TypeScript", year: 2020 },
+  { id: "s-next", kind: "skill", label: "Next.js", year: 2021 },
+  { id: "s-ethers", kind: "skill", label: "Ethers.js", year: 2021 },
+  { id: "s-tailwind", kind: "skill", label: "Tailwind CSS", year: 2021 },
 ];
 
 /** [từ, tới] — role sở hữu project, project kéo skill vào. */
 export const EDGES: [string, string][] = [
-  ["r-backend", "p-billing"],
-  ["r-fullstack", "p-search"],
-  ["r-fullstack", "p-mobile-api"],
-  ["r-fullstack", "p-checkout"],
-  ["r-senior", "p-obsv"],
-  ["r-senior", "p-realtime"],
-  ["r-lead", "p-design"],
-  ["r-lead", "p-multiregion"],
-  ["r-staff", "p-mlserve"],
-  ["r-staff", "p-portfolio"],
+  ["r-freelance", "p-client-sites"],
+  ["r-freelance", "p-responsive"],
+  ["r-fullstack", "p-controllermodz"],
+  ["r-fullstack", "p-ciga"],
+  ["r-swe", "p-foodmap"],
+  ["r-swe", "p-native"],
+  ["r-swe", "p-build-to-rent"],
+  ["r-senior", "p-treehouse"],
+  ["r-lead", "p-teth"],
+  ["r-lead", "p-standards"],
 
-  ["p-billing", "s-node"],
-  ["p-billing", "s-pg"],
-  ["p-search", "s-node"],
-  ["p-search", "s-redis"],
-  ["p-search", "s-go"],
-  ["p-mobile-api", "s-node"],
-  ["p-mobile-api", "s-ts"],
-  ["p-mobile-api", "s-pg"],
-  ["p-checkout", "s-ts"],
-  ["p-checkout", "s-react"],
-  ["p-checkout", "s-pg"],
-  ["p-checkout", "s-redis"],
-  ["p-obsv", "s-grafana"],
-  ["p-obsv", "s-k8s"],
-  ["p-obsv", "s-go"],
-  ["p-realtime", "s-kafka"],
-  ["p-realtime", "s-node"],
-  ["p-realtime", "s-aws"],
-  ["p-design", "s-react"],
-  ["p-design", "s-ts"],
-  ["p-multiregion", "s-aws"],
-  ["p-multiregion", "s-terraform"],
-  ["p-multiregion", "s-k8s"],
-  ["p-multiregion", "s-pg"],
-  ["p-mlserve", "s-aws"],
-  ["p-mlserve", "s-k8s"],
-  ["p-mlserve", "s-go"],
-  ["p-portfolio", "s-three"],
-  ["p-portfolio", "s-react"],
-  ["p-portfolio", "s-ts"],
+  // Huế 2012–2016: site khách bằng WordPress, rồi kéo chúng về responsive.
+  ["p-client-sites", "s-php"],
+  ["p-client-sites", "s-wordpress"],
+  ["p-client-sites", "s-js"],
+  ["p-responsive", "s-jquery"],
+  ["p-responsive", "s-js"],
+
+  // Synova 2017–2018: eCommerce PHP, design → giao diện → tích hợp API.
+  ["p-controllermodz", "s-php"],
+  ["p-controllermodz", "s-magento"],
+  ["p-controllermodz", "s-jquery"],
+  ["p-ciga", "s-php"],
+  ["p-ciga", "s-magento"],
+  ["p-ciga", "s-laravel"],
+
+  // TESO 2019–2021: dự án khách end-to-end bằng JavaScript/React.
+  ["p-foodmap", "s-js"],
+  ["p-foodmap", "s-react"],
+  ["p-foodmap", "s-node"],
+  ["p-native", "s-react"],
+  ["p-native", "s-node"],
+  ["p-build-to-rent", "s-react"],
+  ["p-build-to-rent", "s-ts"],
+  ["p-build-to-rent", "s-node"],
+
+  // Treehouse 2021→nay: dApp DeFi/RWA, dashboard tAsset, rồi chuẩn hoá stack.
+  ["p-treehouse", "s-react"],
+  ["p-treehouse", "s-ts"],
+  ["p-treehouse", "s-next"],
+  ["p-treehouse", "s-ethers"],
+  ["p-teth", "s-next"],
+  ["p-teth", "s-ts"],
+  ["p-teth", "s-ethers"],
+  ["p-teth", "s-tailwind"],
+  ["p-standards", "s-react"],
+  ["p-standards", "s-ts"],
+  ["p-standards", "s-tailwind"],
 ];
 
 const RING_RADIUS: Record<NodeKind, number> = {

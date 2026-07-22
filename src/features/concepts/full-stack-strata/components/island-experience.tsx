@@ -110,10 +110,12 @@ export function IslandExperience() {
         </h2>
         <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400">
           Thành phố sản phẩm trên bề mặt, seam dịch vụ phát sáng ở giữa,
-          đá dữ liệu kết tinh dưới đáy. Cuộn để khoan camera dọc lát
-          cắt; bấm nút để một request rơi từ nóc nhà xuyên qua cả ba
-          tầng rồi vòng lên trả 200, kèm trace log kể đúng chuyện hệ
-          thống.
+          đá dữ liệu kết tinh dưới đáy — đúng lát cắt của dApp DeFi tôi
+          đang dựng ở Treehouse. Cuộn để khoan camera dọc lát cắt; bấm
+          nút để một request rơi từ nóc nhà xuyên qua cả ba tầng rồi
+          vòng lên trả kết quả, kèm trace log kể đúng chuyện hệ thống:
+          cache lạnh, cache ấm, ký giao dịch qua ví, RPC hỏng phải rơi
+          sang dự phòng.
         </p>
         <p className="mt-8 font-mono text-xs text-neutral-500 motion-safe:animate-pulse">
           ↓ cuộn: khoan xuống tầng sản phẩm

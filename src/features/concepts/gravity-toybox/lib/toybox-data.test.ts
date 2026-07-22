@@ -4,17 +4,19 @@ import {
   buildLetters,
   heightAt,
   letterMatrix,
+  massRatio,
   restitutionOf,
   settleTime,
 } from "@/features/concepts/gravity-toybox/lib/toybox-data";
 
 describe("toybox-data — khối lượng = số năm kinh nghiệm, không physics engine", () => {
-  it("12 skill id không trùng, years 1..9, đĩa to dần theo năm", () => {
+  // Miền năm thật: 3 (OpenAI API, ~2023) → 14 (JavaScript/PHP, từ 2012).
+  it("12 skill id không trùng, years 3..14, đĩa to dần theo năm", () => {
     expect(SKILLS).toHaveLength(12);
     expect(new Set(SKILLS.map((s) => s.id)).size).toBe(12);
     for (const skill of SKILLS) {
-      expect(skill.years).toBeGreaterThanOrEqual(1);
-      expect(skill.years).toBeLessThanOrEqual(9);
+      expect(skill.years).toBeGreaterThanOrEqual(3);
+      expect(skill.years).toBeLessThanOrEqual(14);
     }
     const sorted = [...SKILLS].sort((a, b) => a.years - b.years);
     for (let i = 1; i < sorted.length; i += 1) {
@@ -22,10 +24,23 @@ describe("toybox-data — khối lượng = số năm kinh nghiệm, không phys
     }
   });
 
-  it("restitution giảm theo khối lượng: 1 năm nảy tưng, 9 năm thịch", () => {
-    expect(restitutionOf(1)).toBeGreaterThan(restitutionOf(9));
-    expect(restitutionOf(1)).toBeLessThanOrEqual(0.75);
-    expect(restitutionOf(9)).toBeGreaterThanOrEqual(0.15);
+  it("restitution giảm theo khối lượng: 3 năm nảy tưng, 14 năm thịch", () => {
+    expect(restitutionOf(3)).toBeGreaterThan(restitutionOf(14));
+    expect(restitutionOf(3)).toBeLessThanOrEqual(0.75);
+    expect(restitutionOf(14)).toBeGreaterThanOrEqual(0.15);
+  });
+
+  it("massRatio nằm trong [0,1] cho cả bảng, nhẹ nhất 0 và nặng nhất 1", () => {
+    const ratios = SKILLS.map((skill) => massRatio(skill.years));
+    for (const ratio of ratios) {
+      expect(ratio).toBeGreaterThanOrEqual(0);
+      expect(ratio).toBeLessThanOrEqual(1);
+    }
+    expect(Math.min(...ratios)).toBe(0);
+    expect(Math.max(...ratios)).toBe(1);
+    // Ngoài miền vẫn kẹp lại — thang màu scene không bao giờ tràn.
+    expect(massRatio(0)).toBe(0);
+    expect(massRatio(99)).toBe(1);
   });
 
   it("heightAt: treo ở độ cao thả trước delay, nằm yên sau settleTime", () => {

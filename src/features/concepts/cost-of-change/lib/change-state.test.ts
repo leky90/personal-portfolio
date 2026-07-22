@@ -4,6 +4,7 @@ import {
   yearFromProgress,
   yearLabel,
 } from "@/features/concepts/cost-of-change/lib/change-state";
+import { YEAR_LABELS } from "@/features/concepts/cost-of-change/lib/ledger-data";
 
 describe("change-state — cầu nối DOM ↔ canvas", () => {
   it("mặc định: năm 0, counterfactual tắt, chưa gắn invalidate", () => {
@@ -22,9 +23,12 @@ describe("change-state — cầu nối DOM ↔ canvas", () => {
     expect(yearFromProgress(1.4)).toBe(10);
   });
 
-  it("yearLabel: 0 → 2016, 10 → 2026", () => {
-    expect(yearLabel(0)).toBe(2016);
-    expect(yearLabel(4.7)).toBe(2020);
+  it("yearLabel tra bảng mốc thật: 0 → 2012, 10 → 2026", () => {
+    expect(yearLabel(0)).toBe(2012);
+    expect(yearLabel(4.7)).toBe(YEAR_LABELS[4]);
     expect(yearLabel(10)).toBe(2026);
+    for (let step = 1; step <= 10; step += 1) {
+      expect(yearLabel(step)).toBeGreaterThanOrEqual(yearLabel(step - 1));
+    }
   });
 });

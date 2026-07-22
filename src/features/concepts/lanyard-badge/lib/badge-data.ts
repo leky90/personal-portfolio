@@ -2,22 +2,26 @@
  * The Credential: thẻ hội thảo treo dây với vật lý con lắc THUẦN —
  * một phương trình θ'' = -(g/L)sinθ - cθ' tích phân semi-implicit,
  * test được từng bước, không physics engine. Mọi dòng in trên thẻ là
- * dữ liệu build-time thật (bản chính thức lấy từ GitHub API lúc SSG).
+ * dữ liệu in trên thẻ là hồ sơ nghề thật, không phải chữ trang trí.
  */
 
 export const BADGE_FRONT = {
-  name: "KY LE",
-  title: "FULL-STACK ENGINEER",
-  est: "EST. 2016",
+  name: "KY LE DINH",
+  title: "SENIOR SOFTWARE ENGINEER · FRONTEND LEAD",
+  /** Nhận job freelance đầu tiên trên Freelancer.com từ 11/07/2012 */
+  est: "EST. 2012",
 };
 
-/** Mặt sau thẻ: spec sheet kiểu terminal — demo dùng số liệu tĩnh. */
+/**
+ * Mặt sau thẻ: spec sheet kiểu terminal. Mọi con số lấy từ hồ sơ công khai —
+ * Freelancer.com (@Leky90) và vai trò hiện tại ở Treehouse. Không có số nào bịa.
+ */
 export const BADGE_SPECS = [
-  "commits.total = 18_403",
-  "languages.top = ts · go · sql",
-  "uptime.watched = 99.95%",
-  "teams.led = 3",
-  "mentees.active = 6",
+  "rating = 4.9/5 · 125 reviews (freelancer.com)",
+  "on_time = 99% · on_budget = 100%",
+  "team.led = 8 engineers @ treehouse",
+  "stack.core = react · typescript · next.js · node",
+  "domain = defi / rwa · ethers.js · wallet integration",
   "status = open_to_interesting_problems",
 ];
 

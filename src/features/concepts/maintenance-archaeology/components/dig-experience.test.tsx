@@ -27,12 +27,12 @@ describe("DigExperience — layout DOM của trang concept", () => {
     }
   });
 
-  it("thước độ sâu hiện 2026 ở mặt đất và 2016 ở đáy", () => {
+  it("thước độ sâu hiện 2026 ở mặt đất và 2012 ở đáy", () => {
     const { container } = render(<DigExperience />);
     const ruler = container.querySelector('[data-testid="depth-ruler"]');
     expect(ruler).not.toBeNull();
     expect(ruler!.textContent).toContain("2026");
-    expect(ruler!.textContent).toContain("2016");
+    expect(ruler!.textContent).toContain("2012");
   });
 
   it("HUD carbon-dating mặc định mời probe một mảnh", () => {

@@ -2,13 +2,15 @@ import { describe, expect, it } from "vitest";
 import {
   DAY_COUNT,
   LANDMARKS,
+  START_YEAR,
+  YEAR_COUNT,
   buildSkyline,
   cameraAlong,
   dayCommits,
   dayInfo,
 } from "@/features/concepts/commit-skyline/lib/skyline-data";
 
-describe("skyline-data — 3650 ngày commit dựng thành thành phố đêm", () => {
+describe("skyline-data — 15 năm commit (2012 → 2026) dựng thành phố đêm", () => {
   it("dayCommits deterministic, nằm trong [0,12]", () => {
     for (const day of [0, 100, 999, 2500, DAY_COUNT - 1]) {
       const commits = dayCommits(day);
@@ -19,7 +21,7 @@ describe("skyline-data — 3650 ngày commit dựng thành thành phố đêm", 
     }
   });
 
-  it("cuối tuần thưa hơn ngày thường (trung bình toàn thập kỷ)", () => {
+  it("cuối tuần thưa hơn ngày thường (trung bình toàn 15 năm)", () => {
     let weekendSum = 0;
     let weekendCount = 0;
     let weekdaySum = 0;
@@ -38,17 +40,18 @@ describe("skyline-data — 3650 ngày commit dựng thành thành phố đêm", 
     );
   });
 
-  it("buildSkyline: đủ 3650 toà, cao theo commit, x tiến theo năm", () => {
+  it("buildSkyline: đủ DAY_COUNT toà, cao theo commit, x tiến theo năm", () => {
     const skyline = buildSkyline();
+    expect(DAY_COUNT).toBe(YEAR_COUNT * 365);
     expect(skyline).toHaveLength(DAY_COUNT);
-    for (const building of [skyline[0], skyline[1200], skyline[3649]]) {
+    for (const building of [skyline[0], skyline[1200], skyline[DAY_COUNT - 1]]) {
       expect(building.height).toBeGreaterThan(0);
       expect(building.intensity).toBeGreaterThanOrEqual(0);
       expect(building.intensity).toBeLessThanOrEqual(1);
     }
     // Toà đầu năm sau luôn đứng xa hơn toà cuối năm trước (đại lộ giữa các block)
     expect(skyline[365].x).toBeGreaterThan(skyline[364].x);
-    expect(skyline[3649].x).toBeGreaterThan(skyline[0].x);
+    expect(skyline[DAY_COUNT - 1].x).toBeGreaterThan(skyline[0].x);
   });
 
   it("6 landmark trỏ ngày hợp lệ, không trùng, có story", () => {
@@ -62,10 +65,24 @@ describe("skyline-data — 3650 ngày commit dựng thành thành phố đêm", 
     }
   });
 
-  it("dayInfo: ngày 0 là đầu 2016, năm tăng mỗi 365 ngày", () => {
-    expect(dayInfo(0)).toEqual({ year: 2016, week: 0, weekday: 0 });
-    expect(dayInfo(365).year).toBe(2017);
-    expect(dayInfo(3649).year).toBe(2025);
+  it("landmark xếp theo thời gian, trải từ 2012 tới 2026", () => {
+    const years = LANDMARKS.map((l) => dayInfo(l.dayIndex).year);
+    expect(years[0]).toBe(2012);
+    expect(years.at(-1)).toBe(2026);
+    for (let i = 1; i < LANDMARKS.length; i += 1) {
+      expect(LANDMARKS[i].dayIndex).toBeGreaterThan(LANDMARKS[i - 1].dayIndex);
+    }
+    // Bốn chặng nghề đều có mặt: freelance, Synova, TESO, Treehouse
+    expect(years).toContain(2017);
+    expect(years).toContain(2019);
+    expect(years).toContain(2021);
+  });
+
+  it("dayInfo: ngày 0 là đầu 2012, năm tăng mỗi 365 ngày", () => {
+    expect(START_YEAR).toBe(2012);
+    expect(dayInfo(0)).toEqual({ year: 2012, week: 0, weekday: 0 });
+    expect(dayInfo(365).year).toBe(2013);
+    expect(dayInfo(DAY_COUNT - 1).year).toBe(2026);
     expect(dayInfo(10).week).toBe(1);
   });
 

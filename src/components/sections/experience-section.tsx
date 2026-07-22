@@ -10,7 +10,7 @@ export function ExperienceSection() {
     <section id="experience" className="scroll-mt-20">
       <div className="mx-auto w-full max-w-5xl px-4 pt-24 sm:px-6">
         <h2 className="font-mono text-xs tracking-[0.3em] text-neutral-500 uppercase">
-          Experience — a decade in terrain
+          Experience — fourteen years in terrain
         </h2>
         <p className="mt-3 max-w-md text-sm leading-relaxed text-neutral-400">
           Scroll to fly along the time axis. Peaks are the years the work

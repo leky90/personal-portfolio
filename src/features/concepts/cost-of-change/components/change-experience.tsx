@@ -16,9 +16,9 @@ import {
 } from "@/features/concepts/cost-of-change/lib/change-state";
 
 /**
- * Layout DOM: hero blueprint + 10 thẻ sự kiện sổ cái + thẻ 2026 + HUD
- * nợ tích luỹ + toggle counterfactual. Cuộn scrub năm 0→10; toggle
- * blend sang timeline chưa từng refactor (tháp đỏ, nghiêng, rung).
+ * Layout DOM: hero blueprint + 10 thẻ chặng nghề (2012→2025) + thẻ 2026
+ * + HUD nợ tích luỹ + toggle counterfactual. Cuộn scrub mốc 0→10; toggle
+ * blend sang timeline chưa từng dọn nợ (tháp đỏ, nghiêng, rung).
  */
 export function ChangeExperience() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -91,7 +91,7 @@ export function ChangeExperience() {
           data-testid="change-hud"
           className="line-clamp-2 font-mono text-[11px] text-neutral-400"
         >
-          năm 2016 · tầng 0/{FLOOR_COUNT} · nợ tích luỹ 0.0 · cuộn để xây
+          năm 2012 · tầng 0/{FLOOR_COUNT} · nợ tích luỹ 0.0 · cuộn để xây
         </p>
       </div>
 
@@ -116,23 +116,24 @@ export function ChangeExperience() {
       {/* HERO */}
       <section className="mx-auto flex min-h-dvh w-full max-w-5xl flex-col justify-center px-4 pt-20 sm:px-6">
         <p className="font-mono text-[11px] tracking-[0.3em] text-[#f2c94c] uppercase">
-          Một codebase 10 năm · nợ kỹ thuật là ứng suất vật lý
+          Mười bốn năm nghề · nợ kỹ thuật là ứng suất vật lý
         </p>
         <h2 className="mt-4 max-w-2xl text-4xl font-semibold tracking-tight text-neutral-50 sm:text-6xl">
           COST OF CHANGE
         </h2>
         <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400">
-          Mỗi năm ship feature là một tầng chất lên tháp truss; ứng suất
-          dồn xuống móng cho tới khi một lần refactor giải phóng kết cấu.
-          Cuộn để xây mười năm, và bấm nút bên dưới để xem dòng thời gian
-          giả định nơi khoản nợ đó không bao giờ được trả.
+          Sổ cái thật của tôi từ 2012 tới nay, nén vào mười tầng: mỗi chặng
+          ship sản phẩm là một tầng chất lên tháp truss, ứng suất dồn xuống
+          móng cho tới khi một lần dọn nợ giải phóng kết cấu. Cuộn để xây
+          hết mười tầng, và bấm nút bên dưới để xem dòng thời gian giả định
+          nơi ba lần dọn nợ đó không bao giờ xảy ra.
         </p>
         <p className="mt-8 font-mono text-xs text-neutral-500 motion-safe:animate-pulse">
-          ↓ cuộn: đổ móng năm 2016
+          ↓ cuộn: đổ móng năm 2012
         </p>
       </section>
 
-      {/* 10 THẺ SỰ KIỆN SỔ CÁI */}
+      {/* 10 THẺ CHẶNG NGHỀ THẬT */}
       {LEDGER.map((event, index) => (
         <section
           key={event.year}
@@ -145,7 +146,7 @@ export function ChangeExperience() {
           >
             <div className="flex items-baseline justify-between gap-4">
               <p className="font-mono text-2xl text-neutral-100">
-                {event.year}
+                {event.yearEnd ? `${event.year}–${event.yearEnd}` : event.year}
               </p>
               <p
                 className={`font-mono text-[10px] tracking-[0.25em] uppercase ${
@@ -176,9 +177,11 @@ export function ChangeExperience() {
           <p className="font-mono text-2xl text-neutral-100">2026 · hôm nay</p>
           <p className="mt-3 text-sm leading-relaxed text-neutral-400">
             Tháp đứng thẳng không phải vì chưa từng nghiêng, mà vì nợ được
-            trả ba lần đúng lúc. Đó là khác biệt giữa người viết code và
-            người chịu trách nhiệm cho một hệ thống sống lâu hơn mọi
-            framework nó từng dùng.
+            dọn ba lần đúng lúc: legacy năm 2020, chuẩn hoá năm 2022, và
+            quy trình review của một đội tám kỹ sư từ 2023. Sổ freelance
+            cùng quãng đó là 4.9/5 trên 125 review, đúng hạn 99%, đúng
+            ngân sách 100% — con số của việc chịu trách nhiệm lâu dài với
+            code mình viết, không phải của việc ship nhanh một lần.
           </p>
         </div>
         <div className="w-full max-w-2xl rounded-lg border border-neutral-900 bg-neutral-950/70 p-5">
@@ -187,8 +190,9 @@ export function ChangeExperience() {
           </h4>
           <p className="mt-3 text-sm leading-relaxed text-neutral-400">
             Nợ kỹ thuật thường vô hình với người ngoài nghề; demo này cho
-            nó một cơ thể chịu lực. Hai đường cong nợ (thật / giả định)
-            precompute từ sổ cái lúc build, runtime không mô phỏng gì.
+            nó một cơ thể chịu lực. Sổ cái là mười bốn năm nghề thật nén
+            vào mười tầng, hai đường cong nợ (thật / giả định) precompute
+            từ sổ cái lúc build, runtime không mô phỏng gì.
             Kỹ thuật: 120 thanh + 44 khớp gói trong đúng 2 instanced draw
             call chia một ShaderMaterial GLSL3, shear + sag + tremor tính
             trong vertex shader từ uStrain[12], không light không shadow;

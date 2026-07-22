@@ -93,19 +93,21 @@ export function DecisionExperience() {
       {/* HERO */}
       <section className="mx-auto flex min-h-dvh w-full max-w-5xl flex-col justify-center px-4 pt-20 sm:px-6">
         <p className="font-mono text-[11px] tracking-[0.3em] text-[#3fb950] uppercase">
-          Architecture decision log · 2016 2026
+          Architecture decision log · 2019 2024
         </p>
         <h2 className="mt-4 max-w-2xl font-mono text-4xl font-semibold tracking-tight text-neutral-50 sm:text-6xl">
           DECISION DIFF
         </h2>
         <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400">
-          Mười năm không được đo bằng số dự án, mà bằng những ngã rẽ. Đường ray
-          phía sau compile thẳng từ 6 ADR thật: nhánh xanh là lựa chọn đã đi,
-          nhánh đỏ nét đứt là con đường không đi kèm giá của nó. Hover vào bóng
-          ma để nhìn tương lai đã không xảy ra.
+          Mười bốn năm nghề không được đo bằng số dự án, mà bằng những ngã rẽ.
+          Đường ray phía sau compile thẳng từ 6 ADR thật, từ lúc cứu một
+          codebase legacy ở TESO tới lúc dựng dApp và dẫn đội 8 kỹ sư ở
+          Treehouse: nhánh xanh là lựa chọn đã đi, nhánh đỏ nét đứt là con
+          đường không đi kèm giá của nó. Hover vào bóng ma để nhìn tương lai
+          đã không xảy ra.
         </p>
         <p className="mt-8 font-mono text-xs text-neutral-500 motion-safe:animate-pulse">
-          ↓ cuộn: 2016, quyết định đầu tiên
+          ↓ cuộn: 2019, quyết định đầu tiên
         </p>
       </section>
 
@@ -169,9 +171,9 @@ export function DecisionExperience() {
             Core idea
           </h4>
           <p className="mt-3 text-sm leading-relaxed text-neutral-400">
-            Nội dung chính là tín hiệu: 6 ADR có ngày tháng, có phương án bị
-            từ chối kèm giá ước tính, đúng loại artifact mà hiring guide 2026
-            yêu cầu senior trưng ra. Kỹ thuật nói cùng một câu chuyện: một
+            Nội dung chính là tín hiệu: 6 ADR có năm, có phương án bị từ chối
+            kèm giá của nó, đúng loại artifact một senior nên trưng ra thay
+            cho danh sách công nghệ. Kỹ thuật nói cùng một câu chuyện: một
             dataset typed compile thành hình học (trunk = 1 TubeGeometry, 1
             draw call, dash thủ tục trong shader), 6 nhánh ma dashed
             materialize bằng damp, hit-test qua instanced proxy vô hình, và

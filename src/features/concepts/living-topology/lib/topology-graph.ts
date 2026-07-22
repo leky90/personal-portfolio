@@ -37,8 +37,8 @@ function mulberry32(seed: number): () => number {
   };
 }
 
-const YEAR_MIN = 2016;
-const YEAR_SPAN = 9.5; // 2016..2025.5
+const YEAR_MIN = 2012;
+const YEAR_SPAN = 11.5; // 2012..2023.5
 const X_SPREAD = 40; // trục thời gian trải -20..20 rồi co lại còn ±~19 sau jitter
 
 export function buildTopologyGraph(seed: number, density: number): TopologyGraph {

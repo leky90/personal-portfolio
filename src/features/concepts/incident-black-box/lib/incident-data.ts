@@ -1,50 +1,76 @@
 /**
- * Một SEV-1 ẩn danh làm nguồn sự thật duy nhất: băng WebGL, panel annotation
- * DOM và postmortem đều đọc từ đây. ⚠️ PLACEHOLDER — thay bằng sự cố thật
- * (đã khử danh) khi có; cấu trúc giữ nguyên.
+ * KỊCH BẢN MINH HOẠ, KHÔNG PHẢI SỰ CỐ CÓ THẬT.
+ *
+ * Portfolio này không công bố dữ liệu sự cố của bất kỳ công ty hay khách hàng
+ * nào (kể cả Treehouse). Những gì dưới đây là một kịch bản chung do chính chủ
+ * dựng ra để minh hoạ cách đọc telemetry và thứ tự ra quyết định khi trực sự
+ * cố: không tên hệ thống thật, không mốc giờ thật, không số đo thật.
+ *
+ * Mọi con số ở đây là số tròn của kịch bản (chọn cho dễ đọc), không phải phép
+ * đo. Trục thời gian dùng offset tương đối "T+phút" thay cho giờ tường để
+ * không ai nhầm nó với một dòng log có thật.
+ *
+ * Đây vẫn là nguồn sự thật duy nhất cho ba lớp render: băng WebGL, panel
+ * annotation DOM và phần postmortem.
  */
+
+/** Câu disclaimer bắt buộc hiển thị kèm concept này (hero + postmortem). */
+export const SCENARIO_DISCLAIMER =
+  "Kịch bản minh hoạ do tôi dựng, không phải sự cố có thật của Treehouse hay của bất kỳ khách hàng nào. Số liệu là số tròn của kịch bản, không phải phép đo.";
 
 export interface IncidentMeta {
   title: string;
   sev: string;
   date: string;
+  /** Độ dài kịch bản, phút. Số tròn tự đặt, không phải đo đạc. */
   durationMin: number;
+  /** Từ lúc pager kêu tới lúc mitigation có hiệu lực, trong kịch bản. */
   mttrMin: number;
+  /** Luôn true: nhắc mọi consumer rằng đây là dữ liệu dựng, không phải log. */
+  isScenario: boolean;
+  disclaimer: string;
 }
 
 export const INCIDENT: IncidentMeta = {
-  title: "Checkout p99 melts during flash sale",
-  sev: "SEV-1",
-  date: "2023-11 (anonymized)",
-  durationMin: 43,
-  mttrMin: 19,
+  title: "Kịch bản: p99 checkout leo thang trong giờ cao điểm",
+  sev: "SEV-1 (kịch bản)",
+  date: "Không gắn với công ty nào",
+  durationMin: 60,
+  mttrMin: 20,
+  isScenario: true,
+  disclaimer: SCENARIO_DISCLAIMER,
 };
 
 export type EventKind = "signal" | "alert" | "decision" | "deploy" | "resolve";
 
 export interface TapeEvent {
   id: string;
-  /** Vị trí trên băng [0,1] — trục thời gian của sự cố */
+  /** Vị trí trên băng [0,1] — trục thời gian của kịch bản */
   t: number;
   kind: EventKind;
   label: string;
   note: string;
 }
 
+/**
+ * 13 mốc của kịch bản. Nhãn dùng offset T+phút, không phải giờ tường.
+ * Cố ý không có ms, phần trăm hay số lần retry: kịch bản không cần giả vờ
+ * chính xác, thứ đáng kể là trình tự ra quyết định.
+ */
 export const EVENTS: TapeEvent[] = [
-  { id: "baseline", t: 0.05, kind: "signal", label: "14:02 baseline steady", note: "p99 180ms, err 0.02%: the shape of a normal Tuesday" },
-  { id: "early-drift", t: 0.16, kind: "signal", label: "14:11 connection pool drift", note: "checkouts per pod creeping up before any alert fired: the signal was already on tape" },
-  { id: "cache-miss", t: 0.24, kind: "signal", label: "14:19 cache hit-rate dips", note: "flash-sale SKUs bypassing the warm set" },
-  { id: "first-alert", t: 0.33, kind: "alert", label: "14:27 PAGE p99 > 800ms", note: "the pager fires 16 minutes after the first drift" },
-  { id: "sev-declared", t: 0.38, kind: "decision", label: "14:31 declare SEV-1", note: "declare early, shrink the blast radius of confusion" },
-  { id: "hypothesis-1", t: 0.44, kind: "decision", label: "14:36 hypothesis: pool exhaustion", note: "two graphs agree, one disagrees: hold the disagreement" },
-  { id: "mitigate-first", t: 0.5, kind: "decision", label: "14:41 mitigate before root cause", note: "shed 20% of read traffic to replicas: stop the bleeding first" },
-  { id: "shed-deploy", t: 0.55, kind: "deploy", label: "14:45 traffic shed live", note: "error rate bends within 90 seconds" },
-  { id: "root-cause", t: 0.64, kind: "decision", label: "14:52 root cause: retry storm", note: "a client library retried 5x on pool timeouts, amplifying itself" },
-  { id: "fix-deploy", t: 0.72, kind: "deploy", label: "14:58 cap retries + jitter", note: "one config line, reviewed by two people mid-incident" },
-  { id: "recovery", t: 0.81, kind: "signal", label: "15:06 p99 recovering", note: "tape cools: 240ms and falling" },
-  { id: "steady", t: 0.88, kind: "signal", label: "15:12 steady state", note: "pool utilization back under 60%" },
-  { id: "all-clear", t: 0.95, kind: "resolve", label: "15:19 all clear", note: "43 minutes end to end, 19 from page to mitigation" },
+  { id: "baseline", t: 0.05, kind: "signal", label: "T+00 nền ổn định", note: "hình dạng của một ngày bình thường, ghi lại để sau này có cái mà so" },
+  { id: "early-drift", t: 0.16, kind: "signal", label: "T+05 connection pool bắt đầu trôi", note: "số kết nối giữ mỗi pod nhích lên trước khi có bất kỳ cảnh báo nào: tín hiệu đã nằm trên băng rồi" },
+  { id: "cache-miss", t: 0.24, kind: "signal", label: "T+09 tỉ lệ cache hit tụt", note: "một nhóm request đi vòng qua tập cache ấm, không ai để ý vì chưa ai đau" },
+  { id: "first-alert", t: 0.33, kind: "alert", label: "T+15 PAGE p99 vượt ngưỡng", note: "pager kêu sau tín hiệu đầu tiên mười phút, vì ngưỡng canh giá trị chứ không canh độ dốc" },
+  { id: "sev-declared", t: 0.38, kind: "decision", label: "T+18 tuyên bố SEV-1", note: "tuyên bố sớm để thu hẹp bán kính của sự bối rối, hạ cấp sau vẫn rẻ hơn im lặng" },
+  { id: "hypothesis-1", t: 0.44, kind: "decision", label: "T+22 giả thuyết: cạn connection pool", note: "hai biểu đồ đồng ý, một biểu đồ không: giữ lấy chỗ không đồng ý đó, đừng vứt" },
+  { id: "mitigate-first", t: 0.5, kind: "decision", label: "T+28 chọn cầm máu trước", note: "chuyển bớt read traffic sang replica trước khi biết nguyên nhân: dừng chảy máu trước đã" },
+  { id: "shed-deploy", t: 0.55, kind: "deploy", label: "T+35 mitigation có hiệu lực", note: "error rate gãy xuống ngay sau khi đổi, đủ để cả phòng thở và nghĩ tiếp" },
+  { id: "root-cause", t: 0.64, kind: "decision", label: "T+41 nguyên nhân gốc: retry storm", note: "client tự thử lại khi pool timeout, không jitter, nên nó tự khuếch đại chính nó" },
+  { id: "fix-deploy", t: 0.72, kind: "deploy", label: "T+47 cap retry và thêm jitter", note: "một thay đổi config nhỏ, vẫn để hai người review giữa sự cố, vì đó là lúc dễ sai nhất" },
+  { id: "recovery", t: 0.81, kind: "signal", label: "T+52 p99 hạ nhiệt", note: "băng nguội dần: đường cong đi xuống và ở lại dưới" },
+  { id: "steady", t: 0.88, kind: "signal", label: "T+56 về trạng thái ổn định", note: "pool utilization trở lại mức thường ngày, không ai phải canh nữa" },
+  { id: "all-clear", t: 0.95, kind: "resolve", label: "T+60 all clear", note: "hết kịch bản, phần còn lại thuộc về postmortem chứ không thuộc về ca trực" },
 ];
 
 export const METRIC_SAMPLES = 128;
@@ -75,6 +101,8 @@ function smooth(edge0: number, edge1: number, x: number): number {
 /**
  * 3 metric × METRIC_SAMPLES mẫu [0,1], row-major theo metric:
  * hàng 0 = p99 latency, hàng 1 = error rate, hàng 2 = throughput.
+ * Đường cong sinh bằng hàm, không phải dữ liệu đo: nó chỉ cần đúng HÌNH DẠNG
+ * của một sự cố để người xem đọc được câu chuyện.
  */
 export function buildMetrics(): Float32Array {
   const rand = mulberry32(43);

@@ -6,7 +6,7 @@ import { DeskExperience } from "@/features/concepts/desk-version-controlled";
 export const metadata: PageMetadata = {
   title: "Desk, Version-Controlled — 3D Concept",
   description:
-    "Concept demo: mười năm sự nghiệp là git log của một chiếc bàn. Cuộn để scrub từng commit từ góc bàn junior 2016 tới workstation senior 2026 — trưởng thành đọc được bằng số đồ bị remove.",
+    "Concept demo: mười bốn năm sự nghiệp là git log của một chiếc bàn. Cuộn để scrub từng commit từ góc bàn freelance PHP ở Huế năm 2012 tới bàn lead frontend 2026 — trưởng thành đọc được bằng số đồ bị remove.",
 };
 
 export default function DeskVersionControlledConceptPage() {

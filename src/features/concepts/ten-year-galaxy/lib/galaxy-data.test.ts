@@ -70,10 +70,10 @@ describe("galaxy-data — mỗi tuần làm việc một cụm sao, 4 cánh tay 
     }
   });
 
-  it("galaxyYearAt: 0 → 2016, 1 → 2026", () => {
-    expect(galaxyYearAt(0)).toBe(2016);
+  it("galaxyYearAt: 0 → 2012 (job đầu tiên), 1 → 2026", () => {
+    expect(galaxyYearAt(0)).toBe(2012);
     expect(galaxyYearAt(1)).toBe(2026);
-    expect(galaxyYearAt(0.5)).toBeGreaterThanOrEqual(2020);
-    expect(galaxyYearAt(0.5)).toBeLessThanOrEqual(2022);
+    expect(galaxyYearAt(0.5)).toBeGreaterThanOrEqual(2018);
+    expect(galaxyYearAt(0.5)).toBeLessThanOrEqual(2020);
   });
 });

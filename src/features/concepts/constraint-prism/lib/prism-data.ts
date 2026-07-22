@@ -16,41 +16,47 @@ export interface Constraint {
   tradeoff: string;
 }
 
+/**
+ * Năm ràng buộc CÓ THẬT đã đi qua: ba cái đến từ dApp DeFi ở Treehouse
+ * (ví là danh tính, dữ liệu on-chain có độ trễ, đội 8 kỹ sư giữ cả stack
+ * front-end), hai cái đến từ giai đoạn trước (codebase legacy thời TESO,
+ * ngân sách khách thời freelance).
+ */
 export const CONSTRAINTS: Constraint[] = [
   {
-    id: "latency",
-    label: "LATENCY 120MS",
+    id: "wallet",
+    label: "WALLET IS IDENTITY",
     deflection: -0.52,
     tradeoff:
-      "Bỏ ngân sách độ trễ thì khỏi cần edge cache, nhưng người dùng xa server sẽ trả giá bằng mỗi cú click.",
+      "Có session server thì cứ email với cookie như mọi app; ở dApp, danh tính là địa chỉ ví — không đăng ký, không quên mật khẩu, và cũng không có ai khôi phục tài khoản hộ người dùng.",
+  },
+  {
+    id: "chain",
+    label: "ON-CHAIN LATENCY",
+    deflection: 0.44,
+    tradeoff:
+      "Dữ liệu nằm trong DB của mình thì đọc xong là xong; đọc qua Ethers.js thì mỗi giao dịch có quãng chờ block, và UI phải nói thật là đang chờ chứ không giả vờ đã xong.",
   },
   {
     id: "team",
-    label: "TEAM OF 3",
-    deflection: 0.44,
-    tradeoff:
-      "Đông người hơn thì chia service thoải mái, nhưng team 3 người mà chia 12 service là tự đeo gông vận hành.",
-  },
-  {
-    id: "deadline",
-    label: "SHIP IN 6 WEEKS",
+    label: "TEAM OF 8",
     deflection: -0.38,
     tradeoff:
-      "Không deadline thì kiến trúc nào cũng đẹp trên giấy; 6 tuần buộc mọi lựa chọn phải trả lời 'cắt được gì'.",
+      "Đội đông hơn thì mỗi người ôm riêng một mảng cũng chạy; tám người giữ cả một dApp thì phải chọn thứ ai cũng đọc được, không phải thứ chỉ tác giả hiểu.",
   },
   {
-    id: "pci",
-    label: "PCI SCOPE",
+    id: "legacy",
+    label: "LEGACY CODEBASE",
     deflection: 0.5,
     tradeoff:
-      "Không đụng dữ liệu thẻ thì khỏi audit log bất biến, nhưng đã cầm tiền của người khác thì không có lựa chọn.",
+      "Code mới tinh thì kiến trúc nào vẽ cũng được; nhận một codebase đang chạy cho khách thì mọi thay đổi phải sống chung với phần chưa ai dám đụng.",
   },
   {
     id: "budget",
-    label: "INFRA BUDGET",
+    label: "CLIENT BUDGET",
     deflection: -0.34,
     tradeoff:
-      "Ngân sách mở thì cứ managed-everything; ngân sách thật buộc phân biệt thứ đáng trả tiền và thứ tự vận hành.",
+      "Ngân sách mở thì cứ managed-everything; khách trả theo gói buộc mình phân biệt thứ đáng làm kỹ và thứ chỉ cần chạy đúng rồi bàn giao được.",
   },
 ];
 
@@ -61,20 +67,25 @@ export interface Decision {
   requires: string[];
 }
 
+/** Năm quyết định kỹ thuật đã thật sự ra, mỗi cái do ràng buộc ở trên ép. */
 export const DECISIONS: Decision[] = [
-  { id: "edge-cache", label: "edge cache", requires: ["latency"] },
+  { id: "wallet-session", label: "ví thay session", requires: ["wallet"] },
+  { id: "read-cache", label: "cache lớp đọc chain", requires: ["chain"] },
   {
-    id: "boring-postgres",
-    label: "postgres nhàm chán",
-    requires: ["team", "budget"],
+    id: "pending-state",
+    label: "pending là một trạng thái",
+    requires: ["wallet", "chain"],
   },
   {
-    id: "monolith-first",
-    label: "monolith trước",
-    requires: ["team", "deadline"],
+    id: "written-standards",
+    label: "chuẩn code thành tài liệu",
+    requires: ["team", "legacy"],
   },
-  { id: "audit-log", label: "audit log bất biến", requires: ["pci"] },
-  { id: "one-queue", label: "đúng một hàng đợi", requires: ["deadline", "budget"] },
+  {
+    id: "patch-not-rewrite",
+    label: "vá tại chỗ, không viết lại",
+    requires: ["legacy", "budget"],
+  },
 ];
 
 /** Ramp phổ amber → teal → violet (khớp token màu site, cố ý không cầu vồng). */

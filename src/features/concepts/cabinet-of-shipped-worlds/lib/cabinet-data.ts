@@ -3,6 +3,10 @@
  * (diorama primitive thuần, mỗi ô một bảng màu riêng), bốn ô phủ sương
  * "trong kho". Demo dùng frost plane + camera dolly thay cho
  * MeshPortalMaterial của bản chính thức — cùng choreography, rẻ hơn.
+ *
+ * Bốn ô live là dự án thật trong portfolio công khai (Treehouse trên
+ * treehouse.finance, phần còn lại từ portfolio Freelancer/Upwork).
+ * metric chỉ nêu phạm vi và vai trò đối chiếu được — không có số tự bịa.
  */
 
 export type CellWorld = "vault" | "port" | "terminal" | "observatory";
@@ -20,40 +24,44 @@ export interface CabinetCell {
 
 export const CELLS: CabinetCell[] = [
   {
+    // Két tài sản token hoá — hợp với vault (vàng, khối lưu trữ)
     id: "cell-vault",
     col: 0,
     row: 0,
     world: "vault",
-    title: "relay-payments",
-    years: "2018 · 2021",
-    metric: "99.99% uptime qua 3 mùa sale",
+    title: "treehouse",
+    years: "2021 · nay",
+    metric: "DeFi/RWA · tETH · dẫn đội 8 kỹ sư",
   },
   {
+    // Marketplace nông sản — luồng hàng qua cảng
     id: "cell-port",
     col: 1,
     row: 0,
     world: "port",
-    title: "atlas-logistics",
-    years: "2020 · 2023",
-    metric: "42k container tracked realtime",
+    title: "foodmap",
+    years: "Freelance",
+    metric: "marketplace nông sản · nối nhà vườn và người mua",
   },
   {
+    // eCommerce cấu hình tay cầm — bàn máy, màn hình, đồ chơi game
     id: "cell-terminal",
     col: 2,
     row: 0,
     world: "terminal",
-    title: "pulse-devtools",
-    years: "2021 · 2024",
-    metric: "1.2k sao OSS · 40 contributor",
+    title: "controllermodz",
+    years: "Freelance",
+    metric: "eCommerce tay cầm · đặt hàng theo cấu hình",
   },
   {
+    // Đài quan sát = khu admin nhìn toàn danh mục cho thuê
     id: "cell-observatory",
     col: 3,
     row: 0,
     world: "observatory",
-    title: "observability-kit",
-    years: "2020 · 2026",
-    metric: "MTTR 43m → 19m toàn công ty",
+    title: "build-to-rent",
+    years: "Freelance",
+    metric: "bất động sản cho thuê · web app + admin",
   },
   { id: "storage-1", col: 0, row: 1, world: null, title: "", years: "", metric: "" },
   { id: "storage-2", col: 1, row: 1, world: null, title: "", years: "", metric: "" },

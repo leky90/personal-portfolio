@@ -29,17 +29,17 @@ const SPECS: GearSpec[] = [
   { id: "coax-mentor", teeth: 40, coaxialWith: "mid-mentor" },
   { id: "out-mentor", teeth: 10, drivenBy: "coax-mentor", angleFromParent: 0.35 },
 
-  { id: "mid-design", teeth: 16, drivenBy: "crank", angleFromParent: 0.44 },
-  { id: "coax-design", teeth: 40, coaxialWith: "mid-design" },
-  { id: "out-design", teeth: 10, drivenBy: "coax-design", angleFromParent: 0 },
+  { id: "mid-docs", teeth: 16, drivenBy: "crank", angleFromParent: 0.44 },
+  { id: "coax-docs", teeth: 40, coaxialWith: "mid-docs" },
+  { id: "out-docs", teeth: 10, drivenBy: "coax-docs", angleFromParent: 0 },
 
-  { id: "mid-ci", teeth: 12, drivenBy: "crank", angleFromParent: -0.44 },
-  { id: "coax-ci", teeth: 40, coaxialWith: "mid-ci" },
-  { id: "out-ci", teeth: 10, drivenBy: "coax-ci", angleFromParent: -0.35 },
+  { id: "mid-standards", teeth: 12, drivenBy: "crank", angleFromParent: -0.44 },
+  { id: "coax-standards", teeth: 40, coaxialWith: "mid-standards" },
+  { id: "out-standards", teeth: 10, drivenBy: "coax-standards", angleFromParent: -0.35 },
 
-  { id: "mid-cli", teeth: 12, drivenBy: "crank", angleFromParent: -1.31 },
-  { id: "coax-cli", teeth: 60, coaxialWith: "mid-cli" },
-  { id: "out-cli", teeth: 10, drivenBy: "coax-cli", angleFromParent: -0.79 },
+  { id: "mid-review", teeth: 12, drivenBy: "crank", angleFromParent: -1.31 },
+  { id: "coax-review", teeth: 60, coaxialWith: "mid-review" },
+  { id: "out-review", teeth: 10, drivenBy: "coax-review", angleFromParent: -0.79 },
 ];
 
 export interface Gear {
@@ -118,34 +118,44 @@ export function buildTrain(): Gear[] {
 export interface EngineOutput {
   gearId: string;
   label: string;
-  /** Đòn bẩy đo thế nào — số liệu thật, không trang trí */
+  /**
+   * Đòn bẩy đó là gì và đo được tới đâu. Lưu ý: số ×N hiển thị trên
+   * trang là TỈ SỐ TRUYỀN của hộp số — động học của mô hình, không phải
+   * số đo hiệu quả. Chỗ nào không đo được thì detail nói thẳng là định
+   * tính, không dựng metric cho đẹp.
+   */
   detail: string;
 }
 
+/**
+ * Bốn đòn bẩy thật của vai trò lead front-end ở Treehouse (đội 8 kỹ sư,
+ * dApp DeFi/RWA): mentoring, tài liệu onboarding, coding standards dùng
+ * chung, code review hằng ngày.
+ */
 export const OUTPUTS: EngineOutput[] = [
   {
     gearId: "out-mentor",
-    label: "giờ mentoring",
+    label: "mentoring đội 8",
     detail:
-      "Một giờ pairing mỗi tuần trở thành tám giờ output của người được kèm. Đo bằng velocity của mentee hai quý trước và sau, không phải cảm tính.",
+      "Một buổi pair programming hay workshop chia sẻ chạm tới cả tám kỹ sư trong đội cùng lúc — tám là số người thật, không phải hệ số ước lượng. Sau đó họ đi nhanh hơn bao nhiêu thì mình không có công cụ nào đo, nên không dựng số.",
   },
   {
-    gearId: "out-design",
-    label: "design system",
+    gearId: "out-docs",
+    label: "tài liệu onboarding",
     detail:
-      "Một component chuẩn hoá được mười hai màn hình dùng lại. Đếm bằng import graph của monorepo, con số tự cập nhật mỗi lần build.",
+      "Viết một lần, mỗi người mới vào đội đọc lại một lần: kiến trúc front-end, chỗ cắm ví, cách chạy dApp ở local. Thứ thấy được là PR đầu tiên của họ đến sớm hơn hồi chưa có tài liệu — quan sát định tính, chưa bao giờ bấm giờ.",
   },
   {
-    gearId: "out-ci",
-    label: "ci pipeline",
+    gearId: "out-standards",
+    label: "coding standards",
     detail:
-      "Một lần đại tu pipeline nhân mười sáu lần deploy mỗi ngày cho cả đội. Số liệu từ log CI: lead time trung bình trước và sau.",
+      "Cấu trúc thư mục, cách đặt tên, chỗ để state, ranh giới component — thống nhất một lần rồi cả stack front-end đi theo. Đòn bẩy nằm ở những tranh luận không phải mở lại; không repo nào đếm được thứ đó.",
   },
   {
-    gearId: "out-cli",
-    label: "cli codegen",
+    gearId: "out-review",
+    label: "code review hằng ngày",
     detail:
-      "Một lệnh scaffold sinh hai mươi bốn file boilerplate đúng chuẩn. Đếm từ template registry; mỗi file là mười phút không ai phải gõ lại.",
+      "Review mỗi ngày thay vì dồn cuối sprint, kèm một quy trình QA có cấu trúc. Lỗi bị bắt lúc còn rẻ, và mỗi comment là một lần cách nghĩ được truyền sang người khác — giá trị thật, nhưng không có metric nào của mình đứng sau.",
   },
 ];
 

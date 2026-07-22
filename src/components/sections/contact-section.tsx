@@ -3,7 +3,7 @@ import { SITE } from "@/lib/data/site";
 
 /**
  * Cuối hành trình: sau ridge cuối, địa hình phẳng thành đường chân trời —
- * dấu chấm hết thị giác của 10 năm, và lời mời cho 10 năm tiếp theo.
+ * dấu chấm hết thị giác của 14 năm, và lời mời cho chặng tiếp theo.
  */
 export function ContactSection() {
   return (
@@ -15,7 +15,7 @@ export function ContactSection() {
         The next peak is your project.
       </h2>
       <p className="mt-4 max-w-md text-sm leading-relaxed text-neutral-400">
-        The terrain has flattened into a horizon — the next ten years start
+        The terrain has flattened into a horizon — the next chapter starts
         with a conversation.
       </p>
       <Button

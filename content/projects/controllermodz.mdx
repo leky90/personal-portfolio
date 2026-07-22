@@ -1,0 +1,38 @@
+## Bối cảnh
+
+Controllermodz bán tay cầm chơi game tuỳ biến: khách không mua một sản phẩm
+có sẵn mà tự chọn từng bộ phận — vỏ, nút, cần analog, màu — rồi đặt đúng cấu
+hình mình vừa dựng.
+
+## Ràng buộc
+
+- **Sản phẩm không tồn tại cho tới khi khách bấm đặt.** Không có SKU cố định
+  để hiển thị; giá và mã hàng phải suy ra từ tổ hợp lựa chọn.
+- **Tổ hợp lựa chọn không phải tổ hợp tự do.** Có những cặp bộ phận không
+  lắp được với nhau, và giao diện phải chặn từ lúc chọn chứ không đợi tới
+  lúc thanh toán mới báo lỗi.
+- **Khách phải luôn nhìn thấy thứ mình đang mua.** Cấu hình mà không có
+  phản hồi thị giác là cấu hình khách không dám chốt.
+
+## Cách làm
+
+Frontend là **JavaScript** trên nền cửa hàng **PHP**, với lớp cấu hình tách
+riêng: mỗi lựa chọn cập nhật cùng lúc ba thứ — hình xem trước, giá, và tập
+lựa chọn còn hợp lệ ở các bước sau.
+
+Điểm quan trọng nhất về mặt kỹ thuật là **giữ đúng một nguồn sự thật cho cấu
+hình**. Giá, ảnh và payload gửi lên giỏ hàng đều tính ra từ cùng một object
+cấu hình, nên không bao giờ xảy ra cảnh khách thấy một đằng mà đơn hàng ghi
+một nẻo.
+
+## Điều tôi rút ra
+
+Thương mại điện tử có cấu hình là bài toán ràng buộc đội lốt bài toán giao
+diện. Ai mô hình hoá ràng buộc rõ ràng từ đầu thì phần UI trở nên đơn giản;
+ai để ràng buộc rải rác trong component thì mỗi lần thêm một bộ phận mới là
+một lần sửa mười chỗ.
+
+---
+
+> Ghi chú: dự án freelance, chi tiết thương mại và số liệu vận hành thuộc về
+> khách hàng nên không công bố ở đây.

@@ -1,19 +1,24 @@
 /**
- * Sổ cái 10 năm của một codebase: mỗi năm một tầng, feature cộng tải,
- * refactor nhân nợ xuống. Hai đường cong nợ (thật / giả định không bao
- * giờ refactor) precompute lúc load module — runtime KHÔNG mô phỏng gì,
- * không physics engine. Bản chính thức thay bằng ledger sự nghiệp thật.
+ * Sổ cái nghề thật của Ky Le Dinh: 14 năm (2012 → 2025) nén vào đúng 10
+ * tầng, mỗi tầng một chặng. Chặng ship sản phẩm cộng tải, chặng dọn nợ
+ * (refactor) nhân nợ tích luỹ xuống. Hai đường cong nợ (thật / giả định
+ * không bao giờ dọn) precompute lúc load module — runtime KHÔNG mô phỏng
+ * gì, không physics engine. Không có số liệu bịa: tải và relief là thang
+ * tương đối của demo, còn mọi con số trong `metric` đều lấy từ hồ sơ thật.
  */
 
 export interface LedgerEvent {
   /** 0..9 — cũng là chỉ số tầng của tháp */
   yearIndex: number;
+  /** Năm bắt đầu của chặng */
   year: number;
+  /** Chỉ chặng kéo dài nhiều năm (2013–2016, 2023–2024) */
+  yearEnd?: number;
   kind: "feature" | "refactor";
   title: string;
-  /** Số liệu chiến tích, dùng → thay vì em-dash (quy tắc lab) */
+  /** Mô tả chặng, dùng → thay vì em-dash (quy tắc lab) */
   metric: string;
-  /** Nợ cộng thêm trong năm (refactor vẫn cộng một ít overhead) */
+  /** Nợ cộng thêm trong chặng (refactor vẫn cộng một ít overhead) */
   load: number;
   /** Chỉ refactor: hệ số nhân nợ tích luỹ xuống (< 1) */
   relief?: number;
@@ -21,103 +26,114 @@ export interface LedgerEvent {
 }
 
 export const FLOOR_COUNT = 10;
-/** uYear chạy 0..10: 0 = đất trống 2016, 10 = hôm nay 2026 */
+/** uYear chạy 0..10: 0 = đất trống trước 2012, 10 = hôm nay 2026 */
 export const YEAR_SPAN = 10;
 
 export const LEDGER: LedgerEvent[] = [
   {
     yearIndex: 0,
-    year: 2016,
+    year: 2012,
     kind: "feature",
-    title: "Khởi tạo monolith",
-    metric: "0 → 1: MVP ship trong 3 tháng",
+    title: "Dòng PHP đầu tiên",
+    metric: "mở hồ sơ Freelancer 11/07/2012 → làm việc từ Huế",
     load: 1.0,
-    note: "Tầng móng đổ vội để kịp thị trường. Mọi shortcut ở đây sẽ tính lãi kép suốt chín năm sau.",
+    note: "Móng đổ bằng PHP và một tài khoản freelance trống trơn. Mọi thói quen hình thành ở tầng này sẽ tính lãi suốt mười ba năm sau.",
   },
   {
     yearIndex: 1,
-    year: 2017,
+    year: 2013,
+    yearEnd: 2016,
     kind: "feature",
-    title: "Thanh toán + báo cáo",
-    metric: "doanh thu đầu tiên · 2 module lớn",
-    load: 1.3,
-    note: "Code thanh toán viết chồng lên model cũ vì deadline. Tháp bắt đầu nghiêng nhẹ, chưa ai để ý.",
+    title: "Bốn năm site khách",
+    metric: "HTML · CSS · JS · WordPress → cross-browser và responsive",
+    load: 1.2,
+    note: "Dựng rồi bảo trì hết site này tới site khác cho khách. Học chịu trách nhiệm dài hạn với code người khác vẫn đang dùng, chứ không chỉ bàn giao rồi thôi.",
   },
   {
     yearIndex: 2,
-    year: 2018,
+    year: 2017,
     kind: "feature",
-    title: "Mobile API v1",
-    metric: "endpoints x3 · client thứ hai",
+    title: "Vào Synova, làm full-stack",
+    metric: "TP.HCM · on-site → design tĩnh tới web động tích hợp API",
     load: 1.5,
-    note: "Một backend phục vụ hai client với hai nhịp release. Ứng suất dồn xuống các tầng dưới thấy rõ.",
+    note: "Lần đầu sở hữu dự án từ đầu tới cuối trong một đội thật: jQuery, Laravel, CakePHP, CodeIgniter, Zend, Yii. Tầng này rộng nhưng chưa gọn.",
   },
   {
     yearIndex: 3,
-    year: 2019,
-    kind: "refactor",
-    title: "Tách service + CI mới",
-    metric: "deploy 45m → 6m",
-    load: 0.2,
-    relief: 0.55,
-    note: "Lần đầu tiên tôi thuyết phục được business trả nợ: hai quý không feature mới. Kết cấu bật thẳng lại, deploy nhanh gấp bảy lần.",
+    year: 2018,
+    kind: "feature",
+    title: "Năm eCommerce",
+    metric: "Magento · OpenCart · Drupal → site doanh nghiệp + tích hợp bên thứ ba",
+    load: 1.6,
+    note: "Nền tảng thương mại điện tử nào cũng mang theo cách làm riêng của nó. Chồng chúng lên nhau trong một năm là chồng thêm ứng suất xuống móng.",
   },
   {
     yearIndex: 4,
-    year: 2020,
+    year: 2019,
     kind: "feature",
-    title: "Traffic x8",
-    metric: "peak 42k rps · 99.95% uptime",
-    load: 1.9,
-    note: "Năm tải nặng nhất lịch sử hệ thống. Sống sót được là nhờ khoản nợ vừa trả năm trước.",
+    title: "TESO remote, đổi sang React",
+    metric: "Huế · remote → sở hữu end-to-end nhiều dự án khách bằng JavaScript/React",
+    load: 1.4,
+    note: "Đổi hệ sinh thái giữa nghề: từ PHP render server sang JavaScript và React. Tầng mới xây nhanh, nhưng bốn tầng dưới vẫn nguyên nợ cũ.",
   },
   {
     yearIndex: 5,
-    year: 2021,
-    kind: "feature",
-    title: "Multi-region",
-    metric: "2 region · failover 40s",
-    load: 1.6,
-    note: "Mở region thứ hai kéo theo replication, split-brain, clock skew. Tầng nào cũng gánh thêm một ít.",
+    year: 2020,
+    kind: "refactor",
+    title: "Cứu các codebase legacy",
+    metric: "chủ trì tối ưu + bảo trì legacy → hiệu năng và độ tin cậy",
+    load: 0.2,
+    relief: 0.55,
+    note: "Lần đầu tôi được giao đúng việc trả nợ chứ không phải thêm feature. Đọc lại code cũ, đo, sửa cho nó chạy nhanh và ít vỡ hơn. Kết cấu bật thẳng lại lần thứ nhất.",
   },
   {
     yearIndex: 6,
-    year: 2022,
-    kind: "refactor",
-    title: "Dọn dead code + design system",
-    metric: "xoá 40% dead code · 1 UI kit",
-    load: 0.2,
-    relief: 0.6,
-    note: "Refactor lần hai: đo trước bằng coverage + churn map, xoá gần nửa codebase mà không ai mất ngủ.",
+    year: 2021,
+    kind: "feature",
+    title: "Vào Treehouse, dựng dApp",
+    metric: "DeFi/RWA · tETH → React + TypeScript + Next.js, ví Web3 qua Ethers.js",
+    load: 1.7,
+    note: "Tầng nặng nhất: sản phẩm on-chain không cho phép sai lặng lẽ. Kiến trúc frontend dựng từ đầu, và tôi ký tên vào nó.",
   },
   {
     yearIndex: 7,
-    year: 2023,
-    kind: "feature",
-    title: "Realtime pipeline",
-    metric: "p99 ingest 230ms",
-    load: 1.7,
-    note: "Stream processing đặt cạnh batch cũ. Feature đẹp nhưng tải kiến trúc cộng thẳng vào các tầng móng.",
+    year: 2022,
+    kind: "refactor",
+    title: "Chuẩn hoá stack và tài liệu",
+    metric: "coding standards + tài liệu onboarding → một cách làm chung",
+    load: 0.2,
+    relief: 0.6,
+    note: "Refactor lần hai không nằm trong code mà nằm quanh code: chuẩn frontend, quy ước, tài liệu onboarding. Nợ giảm vì người sau không phải đoán nữa.",
   },
   {
     yearIndex: 8,
-    year: 2024,
+    year: 2023,
+    yearEnd: 2024,
     kind: "refactor",
-    title: "TS strict + build lại deploy",
-    metric: "deploy 6m → 90s · 0 any",
-    load: 0.15,
-    relief: 0.62,
-    note: "Refactor lần ba nhắm vào vòng lặp dev: type-safe từ DB tới UI, deploy 90 giây. Tháp sáng màu thép mới.",
+    title: "Đội lên 8 người, review hằng ngày",
+    metric: "dẫn 8 kỹ sư → code review hằng ngày, QA có cấu trúc, workshop + pair programming",
+    load: 0.25,
+    relief: 0.65,
+    note: "Refactor lần ba là refactor con người: review mỗi ngày, QA thành quy trình, kiến thức truyền qua workshop và pair chứ không nằm trong đầu một người. Đây là lần trả nợ bền nhất.",
   },
   {
     yearIndex: 9,
     year: 2025,
     kind: "feature",
-    title: "Lớp AI",
-    metric: "3 model serving · eval hàng đêm",
+    title: "Dashboard realtime on-chain",
+    metric: "giá · yields · TVL → đọc/ghi on-chain qua Ethers.js",
     load: 1.8,
-    note: "Tầng mới nhất, tải mới kiểu mới: GPU, eval, drift. Nhưng móng đã ba lần được gia cố nên vẫn đứng thẳng.",
+    note: "Tầng mới nhất gánh dữ liệu chạy liên tục từ chain về. Nó đứng được là vì móng đã ba lần được gia cố, chứ không phải vì nó nhẹ.",
   },
+];
+
+/**
+ * Nhãn năm cho 11 mốc scrub 0..10: mốc i là năm bắt đầu của tầng i,
+ * mốc cuối là hôm nay. Không nội suy — nghề không chia đều theo năm.
+ */
+export const YEAR_LABELS: number[] = [
+  ...LEDGER.map((event) => event.year),
+  2026,
 ];
 
 export const REFACTOR_YEARS = LEDGER.filter(

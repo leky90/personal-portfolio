@@ -14,7 +14,8 @@ import {
 const FIND_HUD_DEFAULT =
   "Rê mũi probe lên một mảnh module để carbon-date bằng lịch sử git";
 
-const RULER_YEARS = [2026, 2024, 2022, 2020, 2018, 2016];
+/** Mốc thước độ sâu, khớp biên các stratum: mặt đất 2026, đá gốc 2012. */
+const RULER_YEARS = [2026, 2024, 2021, 2019, 2017, 2012];
 
 /**
  * Layout DOM: hero + 5 stake tag stratum + thước độ sâu (năm lùi dần) +
@@ -44,7 +45,8 @@ export function DigExperience() {
         hud.classList.remove("text-[#d97b53]");
       } else {
         const artifact = artifacts[artifactIndex];
-        hud.textContent = `${artifact.name} · sinh ${artifact.bornYear} · chạm lần cuối ${artifact.lastTouched} · ${artifact.commits} commits · ${artifact.note}`;
+        // Tên file và số commit là dataset demo; năm thì nằm đúng chặng thật.
+        hud.textContent = `${artifact.name} · sinh ${artifact.bornYear} · chạm lần cuối ${artifact.lastTouched} · ${artifact.commits} commit (demo) · ${artifact.note}`;
         hud.classList.add("text-[#d97b53]");
       }
     };
@@ -101,19 +103,21 @@ export function DigExperience() {
       {/* HERO */}
       <section className="mx-auto flex min-h-dvh w-full max-w-5xl flex-col justify-center px-4 pt-20 sm:px-6">
         <p className="font-mono text-[11px] tracking-[0.3em] text-[#d97b53] uppercase">
-          Di chỉ khai quật · một codebase 10 năm
+          Di chỉ khai quật · 14 năm nghề, 2012 tới 2026
         </p>
         <h2 className="mt-4 max-w-2xl text-4xl font-semibold tracking-tight text-neutral-50 sm:text-6xl">
           MAINTENANCE ARCHAEOLOGY
         </h2>
         <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400">
           Junior xây greenfield. Senior đọc và sửa an toàn những hệ thống
-          người khác để lại. Cuộn để đào xuyên 5 địa tầng của một codebase
-          thật, càng sâu càng ấm vì càng cũ; rê probe lên từng mảnh module để
-          carbon-date bằng chính lịch sử git.
+          người khác để lại. Cuộn để đào xuyên 5 địa tầng có thật của một
+          quãng nghề: freelance PHP và WordPress, PHP framework và eCommerce,
+          cứu hộ legacy bằng React, dApp TypeScript, rồi chuẩn hoá cho cả đội.
+          Càng sâu càng ấm vì càng cũ; rê probe lên từng mảnh module để
+          carbon-date.
         </p>
         <p className="mt-8 font-mono text-xs text-neutral-500 motion-safe:animate-pulse">
-          ↓ đào: mặt đất là 2026, đá gốc là 2016
+          ↓ đào: mặt đất là 2026, đá gốc là 2012
         </p>
       </section>
 
@@ -149,9 +153,11 @@ export function DigExperience() {
           </h4>
           <p className="mt-3 text-sm leading-relaxed text-neutral-400">
             Metaphor chính là tuyên bố seniority: đọc hệ thống cũ là kỹ năng
-            đắt nhất. Bản chính thức bake dữ liệu từ `git log --numstat` lúc
-            build (độ dày stratum = churn thật, tuổi mảnh = first/last
-            commit); demo dùng dataset seeded cùng schema. Kỹ thuật: vách hố
+            đắt nhất. Năm tháng và stack của 5 stratum lấy từ lịch sử làm việc
+            thật (2012 tới 2026); riêng các mảnh module chôn trong vách vẫn là
+            dataset seeded để render, bản chính thức sẽ bake từ `git log
+            --numstat` lúc build (độ dày stratum = churn thật, tuổi mảnh =
+            first/last commit). Kỹ thuật: vách hố
             1 draw call với era ramp bake CPU, 48 mảnh trong đúng 1 instanced
             draw call raycast theo instanceId, lưới trắc địa 1 LineSegments,
             tổng ~6 draw call và 0% GPU khi bạn ngừng đào.

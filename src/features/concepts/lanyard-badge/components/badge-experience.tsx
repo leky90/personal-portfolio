@@ -106,8 +106,9 @@ export function BadgeExperience() {
             ))}
           </ul>
           <p className="mt-3 text-sm leading-relaxed text-neutral-500">
-            Mọi dòng trên thẻ là dữ liệu build-time thật, không phải chữ
-            trang trí: bản chính thức đổ từ GitHub API lúc SSG.
+            Mọi dòng trên thẻ là hồ sơ nghề thật, không phải chữ trang
+            trí: rating và tỉ lệ đúng hạn lấy từ 125 review trên
+            Freelancer.com, phần còn lại là vai trò đang làm ở Treehouse.
           </p>
         </article>
       </section>

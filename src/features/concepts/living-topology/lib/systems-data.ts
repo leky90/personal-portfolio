@@ -1,53 +1,66 @@
 /**
- * Mô hình JSON của 10 năm kiến trúc — nguồn sự thật duy nhất cho graph.
- * Demo dùng dữ liệu giả lập hợp lý; bản chính thức thay bằng hệ thống thật
- * của bạn, cấu trúc giữ nguyên.
+ * Bản đồ những hệ thống mình thật sự đã dựng, từ site WordPress freelance ở
+ * Huế (2012) tới dApp DeFi/RWA của Treehouse hôm nay — nguồn sự thật duy nhất
+ * cho graph. Trường `year` là mốc của chặng nghề mà hệ thống thuộc về (trục x
+ * = trục thời gian), không phải ngày launch chính xác của từng dự án.
  */
 export interface SystemNode {
   id: string;
   name: string;
   stack: string;
-  /** Telemetry thật hiển thị trên HUD khi hover */
+  /** Dòng mô tả ngắn hiện trên HUD khi hover — định tính, không phải số bịa */
   metric: string;
   /** Năm hệ thống ra đời — trục x của graph là trục thời gian */
   year: number;
 }
 
 export const SYSTEMS: SystemNode[] = [
-  { id: "monolith-api", name: "Monolith API", stack: "Rails · Sidekiq", metric: "12 req/s · p95 480ms", year: 2016 },
-  { id: "postgres-core", name: "Postgres Core", stack: "PostgreSQL", metric: "40 GB · 300 conn", year: 2016 },
-  { id: "web-app", name: "Web App", stack: "React · Webpack", metric: "9k MAU", year: 2017 },
-  { id: "auth-svc", name: "Auth Service", stack: "Node · JWT", metric: "50k tokens/day", year: 2018 },
-  { id: "cache-layer", name: "Cache Layer", stack: "Redis", metric: "hit-rate 94%", year: 2018 },
-  { id: "payments-svc", name: "Payments Service", stack: "Go · Postgres", metric: "1.2M txn/tháng", year: 2019 },
-  { id: "data-pipeline", name: "Data Pipeline", stack: "Kafka · Spark", metric: "80M events/day", year: 2019 },
-  { id: "platform-gateway", name: "Platform Gateway", stack: "Envoy · gRPC", metric: "40M req/day", year: 2021 },
-  { id: "orders-svc", name: "Orders Service", stack: "Go · CQRS", metric: "p99 38ms", year: 2021 },
-  { id: "analytics", name: "Analytics", stack: "ClickHouse", metric: "2B rows", year: 2022 },
-  { id: "ml-scoring", name: "ML Scoring", stack: "Python · Triton", metric: "9k infer/s", year: 2024 },
-  { id: "edge-workers", name: "Edge Workers", stack: "WASM · CDN", metric: "28 PoP", year: 2025 },
+  // 2012–2016 · freelance ở Huế (Freelancer.com từ 11/07/2012)
+  { id: "wp-client-sites", name: "Site khách WordPress", stack: "PHP · WordPress", metric: "Freelancer 4.9/5 · 125 review", year: 2012 },
+  { id: "static-frontends", name: "Frontend tĩnh cho khách", stack: "HTML · CSS · JS · jQuery", metric: "cross-browser · responsive mobile", year: 2014 },
+
+  // 2017–2018 · Synova Solutions, TP.HCM — full-stack PHP end-to-end
+  { id: "php-cms-sites", name: "Site doanh nghiệp CMS", stack: "Laravel · CakePHP · Drupal", metric: "design → web động + tích hợp API", year: 2017 },
+  { id: "legacy-frameworks", name: "Dự án framework cũ", stack: "CodeIgniter · Zend · Yii", metric: "nhận và nuôi codebase có sẵn", year: 2017 },
+  { id: "ecommerce-php", name: "eCommerce PHP", stack: "Magento · OpenCart", metric: "cửa hàng cho khách doanh nghiệp", year: 2018 },
+  { id: "ciga-storefront", name: "Ciga.fr", stack: "eCommerce storefront", metric: "storefront bán hàng", year: 2018 },
+
+  // 2019–2021 · TESO, Huế remote — sang JavaScript/React, bắt đầu dẫn dắt
+  { id: "legacy-refactor", name: "Tối ưu codebase legacy", stack: "JavaScript · profiling", metric: "chủ trì hiệu năng + độ tin cậy", year: 2019 },
+  { id: "controllermodz", name: "Controllermodz", stack: "React · eCommerce", metric: "tay cầm game tuỳ biến", year: 2019 },
+  { id: "foodmap", name: "FoodMap", stack: "React · Node.js", metric: "marketplace nông sản", year: 2020 },
+  { id: "native-travel", name: "Native", stack: "React · REST API", metric: "du lịch & trải nghiệm", year: 2020 },
+  { id: "build-to-rent", name: "Build-to-Rent", stack: "React · Node.js · Admin", metric: "web app bất động sản + trang quản trị", year: 2021 },
+
+  // 08/2021–nay · Treehouse (Singapore, remote) — DeFi/RWA, lead frontend
+  { id: "treehouse-dapp", name: "Treehouse dApp", stack: "Next.js · TypeScript · React", metric: "DeFi/RWA · dẫn đội 8 kỹ sư", year: 2021 },
+  { id: "onchain-layer", name: "Lớp on-chain", stack: "Ethers.js · ví Web3", metric: "đọc/ghi on-chain theo từng ví", year: 2022 },
+  { id: "teth-dashboard", name: "Dashboard tETH", stack: "React · WebSocket", metric: "giá · yield · TVL thời gian thực", year: 2023 },
 ];
 
-/** Các đường gọi thật giữa hệ thống — cạnh liên-cụm của graph. */
+/**
+ * Cạnh liên-cụm: hệ thống sau kế thừa nền tảng, stack hoặc kinh nghiệm của hệ
+ * thống trước — đúng thứ tự nghề đã đi qua, không phải call graph runtime.
+ */
 export const ARCH_LINKS: [string, string][] = [
-  ["web-app", "monolith-api"],
-  ["monolith-api", "postgres-core"],
-  ["web-app", "auth-svc"],
-  ["auth-svc", "postgres-core"],
-  ["monolith-api", "cache-layer"],
-  ["payments-svc", "monolith-api"],
-  ["payments-svc", "postgres-core"],
-  ["data-pipeline", "postgres-core"],
-  ["data-pipeline", "analytics"],
-  ["platform-gateway", "monolith-api"],
-  ["platform-gateway", "auth-svc"],
-  ["platform-gateway", "payments-svc"],
-  ["platform-gateway", "orders-svc"],
-  ["orders-svc", "postgres-core"],
-  ["orders-svc", "cache-layer"],
-  ["analytics", "ml-scoring"],
-  ["ml-scoring", "platform-gateway"],
-  ["edge-workers", "platform-gateway"],
+  ["static-frontends", "wp-client-sites"],
+  ["php-cms-sites", "wp-client-sites"],
+  ["legacy-frameworks", "php-cms-sites"],
+  ["ecommerce-php", "php-cms-sites"],
+  ["ciga-storefront", "ecommerce-php"],
+  ["ciga-storefront", "static-frontends"],
+  ["legacy-refactor", "legacy-frameworks"],
+  ["controllermodz", "ecommerce-php"],
+  ["controllermodz", "legacy-refactor"],
+  ["foodmap", "legacy-refactor"],
+  ["native-travel", "foodmap"],
+  ["build-to-rent", "foodmap"],
+  ["build-to-rent", "native-travel"],
+  ["treehouse-dapp", "build-to-rent"],
+  ["treehouse-dapp", "static-frontends"],
+  ["onchain-layer", "treehouse-dapp"],
+  ["teth-dashboard", "treehouse-dapp"],
+  ["teth-dashboard", "onchain-layer"],
 ];
 
 export function systemIndexById(id: string): number {

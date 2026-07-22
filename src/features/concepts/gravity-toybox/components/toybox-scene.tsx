@@ -7,6 +7,7 @@ import {
   SKILLS,
   buildLetters,
   heightAt,
+  massRatio,
   restitutionOf,
   settleTime,
 } from "@/features/concepts/gravity-toybox/lib/toybox-data";
@@ -32,7 +33,7 @@ const FLY = 3;
  * Sân tạ: 12 đĩa 1 InstancedMesh + toàn bộ chữ "KY LE" (dot-matrix) 1
  * InstancedMesh + bóng blob 1 InstancedMesh — 3 instanced draw call cho
  * mọi thứ chuyển động. Rơi/nảy là heightAt closed-form; nắm kéo lag theo
- * khối lượng (λ = k/năm) nên 9 năm lì tay hơn 1 năm thấy rõ.
+ * khối lượng (λ = k/năm) nên 14 năm lì tay hơn 3 năm thấy rõ.
  */
 export function ToyboxScene({ toyboxState }: ToyboxSceneProps) {
   const camera = useThree((three) => three.camera);
@@ -46,7 +47,7 @@ export function ToyboxScene({ toyboxState }: ToyboxSceneProps) {
       greys: SKILLS.map((skill) =>
         color
           .set("#d3d7dd")
-          .lerp(new THREE.Color("#676d78"), (skill.years - 1) / 8)
+          .lerp(new THREE.Color("#676d78"), massRatio(skill.years))
           .clone(),
       ),
     };

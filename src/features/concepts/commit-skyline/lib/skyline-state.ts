@@ -1,6 +1,6 @@
 /** State chia sẻ DOM ↔ canvas của commit-skyline (mutable ref). */
 export interface SkylineState {
-  /** Tiến độ cuộn [0,1] — camera bay dọc đại lộ thập kỷ */
+  /** Tiến độ cuộn [0,1] — camera bay dọc đại lộ sự nghiệp (2012 → 2026) */
   progress: number;
   /** Toà nhà (ngày) đang hover (-1 = không) */
   hover: number;

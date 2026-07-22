@@ -1,6 +1,6 @@
 /** State chia sẻ DOM ↔ canvas của monolith-to-mesh (mutable ref). */
 export interface MeshState {
-  /** Tiến độ cuộn [0,1] — trục thời gian 2016→2026 của cả transformation */
+  /** Tiến độ cuộn [0,1] — trục thời gian 2012→2026 của cả transformation */
   progress: number;
   /** Index entry đang hover (-1 = không) */
   hover: number;

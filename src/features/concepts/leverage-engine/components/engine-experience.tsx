@@ -124,8 +124,9 @@ export function EngineExperience() {
         <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400">
           Việc của senior không phải là quay nhanh hơn, mà là dựng hộp
           số. Kéo tay quay tím: một vòng công sức truyền qua bốn chuỗi
-          bánh răng compound thành sáu mươi vòng đầu ra của cả đội, và
-          từng tỷ số truyền đều lấy từ số liệu đo được thật.
+          bánh răng compound thành sáu mươi vòng đầu ra của cả đội. Tỉ
+          số ở đây là tỉ số của hộp số, không phải số đo hiệu quả — con
+          số thật duy nhất là đội tám kỹ sư ở trục ra đầu tiên.
         </p>
         <p className="mt-8 font-mono text-xs text-neutral-500 motion-safe:animate-pulse">
           kéo tay quay theo cung tròn rồi thả cho nó trôi ↓

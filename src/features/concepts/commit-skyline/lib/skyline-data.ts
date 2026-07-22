@@ -1,12 +1,18 @@
 /**
- * Thành phố commit: 3650 ngày (10 năm × 365) dựng thành phố đêm, mỗi
- * toà một ngày, cao theo số commit. Demo dùng model deterministic có
- * nhịp tuần thật (cuối tuần thưa) + sóng cường độ sự nghiệp; bản chính
- * thức thay bằng ETL GitHub GraphQL bake JSON ~8KB lúc build, cùng
- * schema — zero API call runtime.
+ * Thành phố commit: 15 block năm (2012 → 2026) × 365 ngày, mỗi toà một
+ * ngày, cao theo số commit. Mốc thời gian và 6 landmark là sự nghiệp
+ * thật: freelance từ 2012 ở Huế, Synova 2017, TESO 2019, Treehouse từ
+ * 08/2021. Số commit mỗi ngày thì KHÔNG thật — demo dùng model
+ * deterministic có nhịp tuần (cuối tuần thưa) + sóng cường độ theo năm;
+ * bản chính thức thay bằng ETL GitHub GraphQL bake JSON ~8KB lúc build,
+ * cùng schema — zero API call runtime.
  */
 
-export const DAY_COUNT = 3650;
+/** Năm bắt đầu viết code lấy tiền: 11/07/2012, tài khoản Freelancer đầu tiên. */
+export const START_YEAR = 2012;
+/** 2012 → 2026 (block cuối là năm hiện tại). */
+export const YEAR_COUNT = 15;
+export const DAY_COUNT = YEAR_COUNT * 365;
 
 const COLUMN_STEP = 0.28;
 const ROW_STEP = 0.36;
@@ -26,7 +32,7 @@ export function dayCommits(dayIndex: number): number {
   const weekday = dayIndex % 7;
   const base = weekday >= 5 ? 0.9 : 3.4;
   const year = Math.floor(dayIndex / 365);
-  const careerWave = 0.55 + year * 0.08;
+  const careerWave = 0.55 + year * 0.055;
   const noise = hash01(dayIndex + 13) * 5.5 - 1.2;
   const burst = hash01(dayIndex * 31 + 7) > 0.94 ? 4 : 0;
   const commits = Math.round(base * careerWave + noise + burst);
@@ -41,7 +47,7 @@ export interface SkylineBuilding {
   intensity: number;
 }
 
-/** 10 block năm × (53 tuần × 7 thứ), đại lộ giữa các năm. */
+/** 15 block năm × (53 tuần × 7 thứ), đại lộ giữa các năm. */
 export function buildSkyline(): SkylineBuilding[] {
   const buildings: SkylineBuilding[] = [];
   for (let day = 0; day < DAY_COUNT; day += 1) {
@@ -66,36 +72,50 @@ export interface SkylineLandmark {
   story: string;
 }
 
+/**
+ * Ngày thứ n của một năm → dayIndex trong model 365 ngày/năm. Năm là thứ
+ * được khẳng định; ngày trong năm chỉ để toà landmark đứng đúng chỗ.
+ */
+function dayOf(year: number, dayOfYear: number): number {
+  return (year - START_YEAR) * 365 + dayOfYear;
+}
+
 export const LANDMARKS: SkylineLandmark[] = [
   {
-    dayIndex: 385,
-    label: "gia nhập fintech",
-    story: "Đổi việc đầu tiên: từ outsourcing sang product. Block 2017 sáng hẳn lên từ đây.",
+    dayIndex: dayOf(2012, 192),
+    label: "bắt đầu freelance",
+    story:
+      "11/07/2012, mở tài khoản Freelancer ở Huế. Block đầu tiên là PHP, WordPress và những đêm gò cross-browser cho site khách.",
   },
   {
-    dayIndex: 1128,
-    label: "launch checkout",
-    story: "Tuần go-live checkout-platform: toà cao nhất của 2019, và tuần ngủ ít nhất thập kỷ.",
+    dayIndex: dayOf(2017, 14),
+    label: "on-site tại Synova",
+    story:
+      "Vào TP.HCM làm full stack: nhận dự án từ design tĩnh tới web động ghép API — Laravel, CakePHP, Magento, site doanh nghiệp và eCommerce.",
   },
   {
-    dayIndex: 1770,
-    label: "OSS release đầu tiên",
-    story: "Thư viện observability nhỏ được 1k sao. Commit công khai bắt đầu chen vào skyline.",
+    dayIndex: dayOf(2019, 20),
+    label: "về Huế cùng TESO",
+    story:
+      "Remote từ Huế, sở hữu end-to-end nhiều dự án khách bằng JavaScript và React. Bắt đầu dẫn dắt: hướng dẫn đồng đội, dọn codebase legacy.",
   },
   {
-    dayIndex: 2245,
-    label: "lên tech lead",
-    story: "Nghịch lý dễ thấy: từ mốc này chiều cao trung bình GIẢM — code ít đi, ảnh hưởng nhiều lên.",
+    dayIndex: dayOf(2021, 212),
+    label: "vào Treehouse",
+    story:
+      "08/2021, bước hẳn sang DeFi và tài sản token hoá: kiến trúc dApp bằng React, TypeScript, Next.js, đọc ghi on-chain qua Ethers.js.",
   },
   {
-    dayIndex: 2930,
-    label: "multi-region go-live",
-    story: "Đêm cutover hai region: một toà đơn độc cao vọt giữa quãng bằng phẳng của người làm lead.",
+    dayIndex: dayOf(2024, 244),
+    label: "tETH lên sóng",
+    story:
+      "tAsset đầu tiên của Treehouse, gom các mức lãi suất ETH phân mảnh về một chỗ. Cũng là quãng dẫn đội 8 kỹ sư: code review hằng ngày, workshop, pair programming.",
   },
   {
-    dayIndex: 3510,
+    dayIndex: dayOf(2026, 202),
     label: "ship portfolio này",
-    story: "Toà gần cuối đại lộ: chính trang web bạn đang xem, commit bằng đúng bàn phím ở demo #8.",
+    story:
+      "Toà gần cuối đại lộ: chính trang web bạn đang xem, commit bằng đúng bàn phím ở demo #8.",
   },
 ];
 
@@ -105,16 +125,16 @@ export interface DayInfo {
   weekday: number;
 }
 
-/** Ngày thứ i (model 365 ngày/năm) → năm · tuần · thứ. */
+/** Ngày thứ i (model 365 ngày/năm, gốc 2012) → năm · tuần · thứ. */
 export function dayInfo(dayIndex: number): DayInfo {
   return {
-    year: 2016 + Math.floor(dayIndex / 365),
+    year: START_YEAR + Math.floor(dayIndex / 365),
     week: Math.floor((dayIndex % 365) / 7),
     weekday: dayIndex % 7,
   };
 }
 
-const LAST_X = 9 * YEAR_WIDTH + 52 * COLUMN_STEP;
+const LAST_X = (YEAR_COUNT - 1) * YEAR_WIDTH + 52 * COLUMN_STEP;
 /** Z của đại lộ camera chạy dọc (bên cạnh hàng thứ 7) */
 const BOULEVARD_Z = 7 * ROW_STEP + 1.7;
 
@@ -123,7 +143,7 @@ export interface SkylinePose {
   target: [number, number, number];
 }
 
-/** Bay dọc đại lộ thập kỷ: thấp, sát phố, dutch drift nhẹ. */
+/** Bay dọc đại lộ sự nghiệp: thấp, sát phố, dutch drift nhẹ. */
 export function cameraAlong(progress: number): SkylinePose {
   const p = Math.min(Math.max(progress, 0), 1);
   const x = -3 + p * (LAST_X + 8);

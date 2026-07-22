@@ -73,9 +73,16 @@ Source: GitHub Actions** một lần.
 Gắn custom domain: đổi `SITE.url` trong `src/lib/data/site.ts` và bỏ `VITE_BASE`
 trong workflow.
 
-## Trạng thái nội dung
+## Nội dung
 
-> Số liệu, tên dự án và case study hiện tại là **dữ liệu mẫu** dùng để dựng và kiểm
-> thử giao diện, chưa phải hồ sơ nghề nghiệp thật. Chúng sống tập trung trong
-> `src/lib/data/*.ts` và `content/*.mdx` để thay bằng dữ liệu thật mà không đụng
-> tới code.
+Dữ liệu nghề nghiệp trên site được đối chiếu từ hồ sơ công khai:
+[LinkedIn](https://www.linkedin.com/in/le-dinh-ky),
+[Freelancer.com](https://www.freelancer.com/u/Leky90) và
+[Upwork](https://www.upwork.com/freelancers/~01539b007b5baff014).
+
+Nguyên tắc: **chỉ dùng số liệu kiểm chứng được** trên các hồ sơ đó (rating, số
+review, tỉ lệ đúng hạn, quy mô đội). Chỗ nào không có số đo công khai thì mô tả
+định tính thay vì bịa con số. Toàn bộ sống trong `src/lib/data/*.ts`,
+`src/features/concepts/terrain/lib/career-data.ts` và `content/*.mdx`.
+
+Chi tiết thương mại của các dự án freelance thuộc về khách hàng nên không công bố.

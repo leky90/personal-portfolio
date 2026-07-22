@@ -20,40 +20,40 @@ interface Chapter {
 
 const CHAPTERS: Chapter[] = [
   {
-    year: "2016",
-    title: "Một khối, một deploy",
-    copy: "Toàn bộ sản phẩm là một slab graphite: một codebase, một database, một chuyến deploy. Đó là lựa chọn đúng cho một đội ba người.",
+    year: "2012",
+    title: "Một khối, một người",
+    copy: "Nghề bắt đầu bằng freelance ở Huế: PHP, WordPress, HTML và CSS nằm gọn trong một khối. Một codebase, một database, một lần upload. Với một người làm hết, đó là kiến trúc đúng.",
     side: "left",
   },
   {
-    year: "2018",
+    year: "2017",
     title: "Những lát cắt đầu tiên",
-    copy: "Auth và cache tách ra vì lý do vận hành thật. Search cũng tách, và đó là vết cắt sai: hai team chung một index, ranh giới vẽ theo sơ đồ tổ chức chứ không theo dữ liệu.",
+    copy: "Vào công ty làm eCommerce: catalog, checkout và CMS tách ra vì chúng đổi theo những nhịp khác nhau. Một năm sau search cũng tách, và đó là vết cắt sai: ranh giới vẽ theo cảm giác chứ không theo dữ liệu.",
     side: "right",
   },
   {
     year: "2021",
     title: "Nhịp gộp ngược",
-    copy: "Search-svc bay trở lại khối và hàn liền vết kerf. Tách non là một khoản nợ, và trả nợ công khai là quyết định kiến trúc trưởng thành nhất của giai đoạn này. Gateway ra đời cùng năm mở đường cho mọi lát cắt về sau.",
+    copy: "Search-index bay trở lại khối và hàn liền vết kerf. Tách non là một khoản nợ, trả nợ công khai là quyết định kiến trúc trưởng thành nhất giai đoạn này. Cùng năm, wallet-connect ra đời và mở đường cho mọi lát cắt DeFi về sau.",
     side: "left",
   },
   {
     year: "2023",
     title: "Mesh thành hình",
-    copy: "Filament cyan đan giữa các service: sync RPC cho đường nóng, event bus cho phần còn lại. Traffic pulse chạy dọc các cạnh như nhịp thở của hệ thống.",
+    copy: "Filament cyan đan giữa các service: price feed, yield, TVL và tx queue đọc chung một lớp on-chain thay vì mỗi màn hình tự gọi contract. Traffic pulse chạy dọc các cạnh như nhịp thở của hệ thống.",
     side: "right",
   },
   {
     year: "2026",
     title: "Hợp nhất, không phình to",
-    copy: "Core co cụm lại thay vì tách vụn tiếp: cohesion thắng org chart. Mesh cuối thập kỷ thở trong không gian âm, không phải một mạng nhện rối.",
+    copy: "Core co cụm lại thay vì tách vụn tiếp: app shell, design system, routing, store và api client ở lại vì chúng gắn chặt với nhau. Mesh cuối chặng thở trong không gian âm, không phải một mạng nhện rối.",
     side: "left",
   },
 ];
 
 /**
- * Layout DOM: hero + 5 chương thập kỷ + era stepper (anchor a11y) + HUD ADR
- * whisper. Cuộn cả trang là timeline 2016→2026 của transformation.
+ * Layout DOM: hero + 5 chương theo bốn chặng nghề + era stepper (anchor a11y)
+ * + HUD ADR whisper. Cuộn cả trang là timeline 2012→2026 của transformation.
  */
 export function MeshExperience() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -120,7 +120,7 @@ export function MeshExperience() {
 
       {/* Era stepper — anchor nav a11y, mirror 5 chương */}
       <nav
-        aria-label="Điều hướng thập kỷ"
+        aria-label="Điều hướng theo năm"
         className="fixed top-1/2 right-5 z-40 hidden -translate-y-1/2 flex-col gap-2 sm:flex"
       >
         {CHAPTERS.map((chapter) => (
@@ -148,19 +148,20 @@ export function MeshExperience() {
       {/* HERO */}
       <section className="mx-auto flex min-h-dvh w-full max-w-5xl flex-col justify-center px-4 pt-20 sm:px-6">
         <p className="font-mono text-[11px] tracking-[0.3em] text-[#6ce0ff] uppercase">
-          Một thập kỷ kiến trúc · 36 services
+          Mười bốn năm kiến trúc · 36 services
         </p>
         <h2 className="mt-4 max-w-2xl text-4xl font-semibold tracking-tight text-neutral-50 sm:text-6xl">
           MONOLITH TO MESH
         </h2>
         <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400">
-          Khối graphite phía sau là hệ thống năm 2016. Cuộn để xem nó bị
-          kerf-cut thành 36 service theo đúng thứ tự lịch sử, đan lại thành
-          mesh, và một lần duy nhất: bay ngược trở về. Hover một mảnh để đọc
-          lý do tách.
+          Khối graphite phía sau là hệ thống năm 2012: một mình, một codebase
+          PHP. Cuộn để xem nó bị kerf-cut thành 36 service theo đúng thứ tự
+          lịch sử, từ catalog và checkout thời eCommerce tới wallet, staking
+          và price feed thời DeFi, đan lại thành mesh, và một lần duy nhất:
+          bay ngược trở về. Hover một mảnh để đọc lý do tách.
         </p>
         <p className="mt-8 font-mono text-xs text-neutral-500 motion-safe:animate-pulse">
-          ↓ cuộn: bắt đầu cắt 2017
+          ↓ cuộn: bắt đầu cắt 2013
         </p>
       </section>
 

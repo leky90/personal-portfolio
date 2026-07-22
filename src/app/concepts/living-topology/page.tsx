@@ -6,7 +6,7 @@ import { TopologyExperience } from "@/features/concepts/living-topology";
 export const metadata: PageMetadata = {
   title: "Living Topology — 3D Concept",
   description:
-    "Concept demo: bản đồ mission-control của 10 năm kiến trúc — network graph 3D data-driven, packet pulse chạy qua hệ thống, hover để query telemetry.",
+    "Concept demo: bản đồ mission-control của hơn 12 năm nghề — từ site WordPress freelance tới dApp DeFi của Treehouse. Network graph 3D data-driven, packet pulse chạy qua hệ thống, hover để query một hệ thống.",
 };
 
 export default function LivingTopologyConceptPage() {

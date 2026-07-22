@@ -9,7 +9,7 @@ import {
   elapsedMs,
 } from "@/features/concepts/request-lifecycle/lib/trace-data";
 
-describe("trace-data — một request 187ms chia thành 6 span", () => {
+describe("trace-data — một request trong dApp Treehouse chia thành 6 span", () => {
   it("6 span nối tiếp nhau kín trục thời gian, tổng đúng TOTAL_MS", () => {
     expect(SPANS).toHaveLength(6);
     expect(SPANS[0].startMs).toBe(0);

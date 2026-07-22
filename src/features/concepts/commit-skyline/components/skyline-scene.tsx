@@ -22,7 +22,7 @@ const WARM = new THREE.Color("#ffb45c");
 const LANDMARK_BLUE = "#60a5fa";
 
 /**
- * 3650 toà nhà = MỘT InstancedMesh (matrix scale theo commit,
+ * Toàn bộ ngày (2012 → 2026) = MỘT InstancedMesh (matrix scale theo commit,
  * instanceColor ấm dần theo cường độ), 6 tháp landmark + 6 beacon mỗi
  * loại một draw call, fogExp2 nuốt thành phố vào sương xanh đen.
  * Camera bay thấp dọc đại lộ theo scroll — trang đứng yên là 0% GPU.
@@ -125,7 +125,7 @@ export function SkylineScene({ skylineState }: SkylineSceneProps) {
         <hemisphereLight args={["#31404f", "#05070a", 0.9]} />
         <directionalLight position={[30, 20, 10]} intensity={0.35} />
 
-        {/* 3650 ngày commit: MỘT draw call */}
+        {/* Mọi ngày commit của 15 block năm: MỘT draw call */}
         <instancedMesh
           ref={buildingsRef}
           args={[undefined, undefined, skyline.length]}
@@ -159,9 +159,9 @@ export function SkylineScene({ skylineState }: SkylineSceneProps) {
           />
         </instancedMesh>
 
-        {/* Mặt phố ướt tối */}
-        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[85, -0.01, 1.5]}>
-          <planeGeometry args={[260, 40]} />
+        {/* Mặt phố ướt tối — dài đủ 15 block năm */}
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[130, -0.01, 1.5]}>
+          <planeGeometry args={[400, 40]} />
           <meshLambertMaterial color="#0b1016" />
         </mesh>
       </group>

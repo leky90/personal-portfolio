@@ -1,4 +1,7 @@
-import { YEAR_SPAN } from "@/features/concepts/cost-of-change/lib/ledger-data";
+import {
+  YEAR_LABELS,
+  YEAR_SPAN,
+} from "@/features/concepts/cost-of-change/lib/ledger-data";
 
 /** State chia sẻ DOM ↔ canvas của cost-of-change (mutable ref). */
 export interface ChangeState {
@@ -24,7 +27,11 @@ export function yearFromProgress(progress: number): number {
   return Math.min(Math.max(progress, 0), 1) * YEAR_SPAN;
 }
 
-/** Nhãn năm hiển thị: 0 → 2016, 10 → 2026. */
+/**
+ * Nhãn năm hiển thị, tra thẳng bảng mốc thật: 0 → 2012, 10 → 2026.
+ * Các mốc giữa không cách đều vì 14 năm nghề nén vào 10 tầng.
+ */
 export function yearLabel(yearFloat: number): number {
-  return 2016 + Math.floor(Math.min(Math.max(yearFloat, 0), YEAR_SPAN));
+  const index = Math.floor(Math.min(Math.max(yearFloat, 0), YEAR_SPAN));
+  return YEAR_LABELS[index];
 }

@@ -6,6 +6,8 @@ import { useFrame, useThree } from "@react-three/fiber";
 import {
   BATONS,
   LANES,
+  RELAY_YEAR_MIN,
+  RELAY_YEAR_SPAN,
   buildBatonPath,
   xForYear,
 } from "@/features/concepts/knowledge-relay/lib/relay-data";
@@ -102,7 +104,7 @@ export function RelayScene({ relayState }: RelaySceneProps) {
   }, [laneGeometry, trailGeometry, trailMaterial]);
 
   const batonsRef = useRef<THREE.InstancedMesh>(null);
-  const smooth = useRef({ year: 2016 });
+  const smooth = useRef({ year: RELAY_YEAR_MIN });
   const lastYearInt = useRef(-1);
   const tmpMatrix = useRef(new THREE.Matrix4());
   const tmpQuat = useRef(new THREE.Quaternion());
@@ -180,8 +182,8 @@ export function RelayScene({ relayState }: RelaySceneProps) {
       batons.instanceMatrix.needsUpdate = true;
     }
 
-    // Camera: 2016 nhìn xiên thấp → 2026 nhìn tổng quan từ trên
-    const p = (year - 2016) / 10;
+    // Camera: 2012 nhìn xiên thấp → 2026 nhìn tổng quan từ trên
+    const p = (year - RELAY_YEAR_MIN) / RELAY_YEAR_SPAN;
     camera.position.set(
       -3 + p * 5.5,
       1.2 + p * 5.3,

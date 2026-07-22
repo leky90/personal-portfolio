@@ -1,6 +1,6 @@
 /**
  * Tín hiệu giữa nhiễu: MỘT trường hạt lần lượt kết tinh thành 3 form
- * (tên → globe → lattice kiến trúc). Toạ độ đích của cả 3 form bake
+ * (tên → globe → lattice kiến trúc dApp DeFi). Toạ độ đích của cả 3 form bake
  * vào một DataTexture; các builder là hàm thuần test được, form tên có
  * fallback khi headless. Demo 4096 hạt CPU-bake; bản chính thức nâng
  * GPGPU ping-pong 131k hạt cùng schema.
@@ -54,7 +54,20 @@ export function buildGlobePoints(n: number): Point3[] {
   return points;
 }
 
-/** Đồ thị kiến trúc nhỏ: 8 node, 12 cạnh — form 3 rải hạt dọc cạnh. */
+/**
+ * Đồ thị kiến trúc dApp DeFi đang chạy thật (nền tảng RWA ở Treehouse,
+ * sản phẩm tETH): 8 node, 12 cạnh — form 3 rải hạt dọc cạnh.
+ *
+ * Node theo đúng thứ tự index:
+ *   0 ví người dùng (wallet connect)
+ *   1 dApp frontend (React + TypeScript + Next.js)
+ *   2 lớp đọc on-chain qua RPC (Ethers.js provider)
+ *   3 hợp đồng tETH / tAsset trên chain
+ *   4 luồng ký & broadcast giao dịch
+ *   5 cache giá và lợi suất
+ *   6 indexer sự kiện on-chain + API nội bộ
+ *   7 dashboard TVL / yield thời gian thực
+ */
 const LATTICE_NODES: Point3[] = [
   [-1.4, 0.7, 0],
   [-0.6, 1.1, 0.5],
@@ -66,22 +79,23 @@ const LATTICE_NODES: Point3[] = [
   [1.5, -0.9, 0.1],
 ];
 
+/** Cạnh = đường dữ liệu thật giữa hai node ở trên (xem chú thích index). */
 const LATTICE_EDGES: [number, number][] = [
-  [0, 1],
-  [1, 2],
-  [2, 3],
-  [0, 4],
-  [1, 5],
-  [2, 6],
-  [3, 7],
-  [4, 5],
-  [5, 6],
-  [6, 7],
-  [1, 6],
-  [4, 2],
+  [0, 1], // ví ↔ frontend: connect wallet, đọc address
+  [1, 2], // frontend → provider RPC
+  [2, 3], // RPC → hợp đồng tETH: đọc totalAssets, exchangeRate
+  [0, 4], // ví → luồng ký giao dịch
+  [1, 5], // frontend ↔ cache giá & lợi suất
+  [2, 6], // RPC → indexer bắt event
+  [3, 7], // hợp đồng → dashboard TVL/yield
+  [4, 5], // ký xong thì cache lợi suất bị invalidate
+  [5, 6], // indexer nạp lại cache
+  [6, 7], // API nội bộ → dashboard
+  [1, 6], // frontend hỏi indexer lịch sử giao dịch
+  [4, 2], // broadcast giao dịch đã ký qua RPC
 ];
 
-/** Form 3: hạt rải đều dọc các cạnh của đồ thị kiến trúc. */
+/** Form 3: hạt rải đều dọc các cạnh của đồ thị kiến trúc dApp. */
 export function buildLatticePoints(n: number): Point3[] {
   const rand = mulberry32(97);
   const points: Point3[] = [];
@@ -99,8 +113,9 @@ export function buildLatticePoints(n: number): Point3[] {
 }
 
 /**
- * Form 1: chữ "KY LE" sample từ canvas 2D lúc runtime; môi trường
- * headless (jsdom/SSR) rơi về sóng sin đọc được — không bao giờ rỗng.
+ * Form 1: họ tên đầy đủ "KY LE DINH" sample từ canvas 2D lúc runtime;
+ * môi trường headless (jsdom/SSR) rơi về sóng sin đọc được — không bao
+ * giờ rỗng.
  */
 export function buildNamePoints(n: number): Point3[] {
   const sampled = sampleNameFromCanvas();
@@ -135,11 +150,14 @@ function sampleNameFromCanvas(): [number, number][] {
   canvas.height = 96;
   const ctx = canvas.getContext("2d", { willReadFrequently: true });
   if (!ctx) return [];
-  ctx.font = "bold 64px ui-monospace, Menlo, monospace";
+  // 48px chứ không phải 64px: "KY LE DINH" (10 ký tự) ở bold 64px cho
+  // vệt mực ~377px, gần như chạm hai mép raster 384px; 48px cho ~283px,
+  // còn dư lề an toàn cho mọi font monospace trong stack.
+  ctx.font = "bold 48px ui-monospace, Menlo, monospace";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   ctx.fillStyle = "#fff";
-  ctx.fillText("KY LE", 192, 48);
+  ctx.fillText("KY LE DINH", 192, 48);
   const image = ctx.getImageData(0, 0, 384, 96);
   const points: [number, number][] = [];
   for (let y = 0; y < 96; y += 1) {

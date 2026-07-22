@@ -1,0 +1,35 @@
+## Bối cảnh
+
+Build-to-Rent là dự án bất động sản cho thuê: người thuê tìm và xem sản
+phẩm ở mặt tiền, còn đội vận hành cập nhật danh mục và theo dõi yêu cầu ở
+trang quản trị. Tôi làm end-to-end cả hai mặt.
+
+## Ràng buộc
+
+- **Hai loại người dùng, hai nhịp hoàn toàn khác nhau.** Khách vào ngắm rồi
+  đi; nhân viên vận hành ngồi trong admin cả ngày. Cùng một dữ liệu nhưng
+  không thể cùng một giao diện.
+- **Nội dung do người không phải kỹ sư nhập.** Nếu form khó dùng, dữ liệu
+  sẽ bẩn — và không có bug nào ở frontend cứu được điều đó.
+
+## Cách làm
+
+Mặt tiền dựng bằng **React và Next.js**, tối ưu cho việc duyệt danh sách và
+xem chi tiết nhanh. Backend là **Node.js với REST API**, chia rõ hai nhóm
+endpoint: đọc công khai cho mặt tiền, và nhóm có xác thực cho admin.
+
+Trang quản trị được thiết kế quanh đúng một câu hỏi: *người vận hành cần
+bao nhiêu cú click để đăng một sản phẩm mới?* Mọi thứ khác xếp sau câu hỏi
+đó — trường nào bắt buộc, trường nào để sau, thứ tự tab, và chỗ nào cần
+xác nhận trước khi lưu.
+
+## Điều tôi rút ra
+
+Phần "admin" của một dự án hay bị coi là phụ, nhưng chất lượng dữ liệu mà
+người dùng cuối nhìn thấy được quyết định hoàn toàn ở đó. Làm admin tử tế
+là cách rẻ nhất để mặt tiền trông chuyên nghiệp.
+
+---
+
+> Ghi chú: dự án freelance, chi tiết thương mại và số liệu vận hành thuộc về
+> khách hàng nên không công bố ở đây.

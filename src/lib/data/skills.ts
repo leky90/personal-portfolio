@@ -1,6 +1,6 @@
 /**
  * Kỹ năng theo nhóm — hiển thị badge, không dùng progress bar (điểm trừ
- * với hiring manager). ⚠️ PLACEHOLDER — chỉnh theo stack thật.
+ * với hiring manager). Danh sách khớp stack khai trên Upwork/LinkedIn.
  */
 export interface SkillGroup {
   label: string;
@@ -9,19 +9,54 @@ export interface SkillGroup {
 
 export const SKILL_GROUPS: SkillGroup[] = [
   {
-    label: "Languages",
-    items: ["TypeScript", "Go", "Python", "SQL"],
+    label: "Frontend",
+    items: [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "JavaScript",
+      "Redux",
+      "Tailwind CSS",
+    ],
   },
   {
     label: "Backend & Data",
-    items: ["Node.js", "PostgreSQL", "Kafka", "Redis", "ClickHouse"],
+    items: [
+      "Node.js",
+      "Express",
+      "NestJS",
+      "Laravel / PHP",
+      "REST API",
+      "GraphQL",
+      "WebSockets",
+      "PostgreSQL",
+      "MySQL",
+      "MongoDB",
+    ],
   },
   {
-    label: "Frontend",
-    items: ["React", "Next.js", "Three.js / R3F", "Tailwind CSS"],
+    label: "Web3 & AI",
+    items: [
+      "Ethers.js",
+      "Wallet integration",
+      "DeFi dApp frontend",
+      "OpenAI API",
+      "Anthropic API",
+      "RAG",
+    ],
   },
   {
-    label: "Infra & Practice",
-    items: ["Kubernetes", "AWS", "Terraform", "Observability", "Incident response"],
+    label: "Mobile & Tooling",
+    items: ["React Native", "Git", "CI/CD", "Vercel", "AWS"],
+  },
+  {
+    label: "Dẫn dắt",
+    items: [
+      "Lead đội 8 người",
+      "Code review hằng ngày",
+      "Chuẩn hoá kiến trúc",
+      "Tài liệu onboarding",
+      "Pair programming & workshop",
+    ],
   },
 ];

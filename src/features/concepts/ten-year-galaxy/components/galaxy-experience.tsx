@@ -69,27 +69,28 @@ export function GalaxyExperience() {
           aria-live="polite"
           className="font-mono text-[11px] text-neutral-300"
         >
-          frontier 2016
+          frontier 2012
         </p>
       </div>
 
       {/* HERO */}
       <section className="mx-auto flex min-h-dvh w-full max-w-5xl flex-col justify-center px-4 pt-20 sm:px-6">
         <p className="font-mono text-[11px] tracking-[0.3em] text-[#a78bfa] uppercase">
-          520 tuần · 4 cánh tay · cuộn là mũi tên thời gian
+          2012 → 2026 · 4 cánh tay · cuộn là mũi tên thời gian
         </p>
         <h2 className="mt-4 max-w-2xl text-4xl font-semibold tracking-tight text-neutral-50 sm:text-6xl">
-          TEN-YEAR GALAXY
+          FOURTEEN-YEAR GALAXY
         </h2>
         <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400">
-          Mười năm viết code kết tinh thành một dải ngân hà: mỗi tuần
-          làm việc là một cụm sao, mỗi chặng nghề một cánh tay xoắn.
-          Cuộn để frontier hình thành sao quét qua từng tuần theo đúng
-          dòng thời gian; camera kéo dần ra và chỉ ở "hôm nay" cả hình
-          xoắn ốc mới đọc được.
+          Mười bốn năm viết code kết tinh thành một dải ngân hà: mỗi
+          tuần làm việc là một cụm sao, mỗi chặng nghề một cánh tay
+          xoắn — freelance ở Huế, full-stack ở Synova, JavaScript ở
+          TESO, DeFi ở Treehouse. Cuộn để frontier hình thành sao quét
+          qua từng tuần theo đúng dòng thời gian; camera kéo dần ra và
+          chỉ ở "hôm nay" cả hình xoắn ốc mới đọc được.
         </p>
         <p className="mt-8 font-mono text-xs text-neutral-500 motion-safe:animate-pulse">
-          ↓ cuộn: thắp tuần đầu tiên của 2016
+          ↓ cuộn: thắp tuần đầu tiên của 2012
         </p>
       </section>
 
@@ -127,13 +128,13 @@ export function GalaxyExperience() {
             ADR · mapping dữ liệu, nói thẳng
           </h4>
           <p className="mt-3 text-sm leading-relaxed text-neutral-400">
-            Dữ liệu per-commit 10 năm của repo công ty không tồn tại để
-            công khai, nên mỗi ngôi sao đại diện một phần của ~520 tuần
-            làm việc, nở thành {STAR_COUNT} sao theo trọng số tuần; 10
-            supernova là milestone thật ({SUPERNOVAE[0].label},{" "}
-            {SUPERNOVAE[6].label}…). Mapping được giải thích thay vì giả
-            vờ chính xác tuyệt đối — đó là ranh giới giữa data-viz và
-            particle field trang trí.
+            Dữ liệu per-commit 14 năm của repo công ty không tồn tại để
+            công khai, nên mỗi ngôi sao đại diện một phần của ~730 tuần
+            làm việc từ 2012 tới 2026, nở thành {STAR_COUNT} sao theo
+            trọng số tuần; 10 supernova là milestone thật trong CV (
+            {SUPERNOVAE[0].label}, {SUPERNOVAE[6].label}…). Mapping được
+            giải thích thay vì giả vờ chính xác tuyệt đối — đó là ranh
+            giới giữa data-viz và particle field trang trí.
           </p>
         </div>
         <div className="w-full max-w-2xl rounded-lg border border-neutral-900 bg-neutral-950/70 p-5">

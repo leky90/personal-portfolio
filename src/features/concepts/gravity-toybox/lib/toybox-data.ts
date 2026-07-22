@@ -1,9 +1,10 @@
 /**
  * Weight of Experience: khối lượng LÀ dữ liệu — mỗi công nghệ nặng đúng
- * số năm đã dùng. Demo không chở physics engine: rơi + nảy là mô hình
- * ballistic closed-form thuần (test được), restitution giảm theo khối
- * lượng nên đĩa 9 năm rơi thịch còn đĩa 1 năm nảy tưng. Bản chính thức
- * thay bằng Rapier bake replay ~70KB, giữ nguyên schema.
+ * số năm tôi đã dùng nó, tính đến 2026. Demo không chở physics engine:
+ * rơi + nảy là mô hình ballistic closed-form thuần (test được),
+ * restitution giảm theo khối lượng nên đĩa 14 năm rơi thịch còn đĩa 3
+ * năm nảy tưng. Bản chính thức thay bằng Rapier bake replay ~70KB, giữ
+ * nguyên schema.
  */
 
 const GRAVITY = 14;
@@ -23,33 +24,56 @@ export interface SkillToken extends FallingBody {
   thickness: number;
 }
 
+/**
+ * Số năm suy thẳng từ bốn chặng nghề (mốc chốt: 2026):
+ *   2012–2016 freelance (Huế) · 2017–2018 Synova · 2019–2021 TESO ·
+ *   08/2021–nay Treehouse.
+ * Công nghệ còn dùng tính tới 2026; công nghệ đã gác lại tính tới năm
+ * cuối cùng thực sự dùng nó. Nặng xếp trước (index 0 nằm giữa sàn).
+ */
 const RAW: [id: string, name: string, years: number][] = [
-  ["typescript", "TypeScript", 9],
-  ["node", "Node.js", 9],
-  ["react", "React", 8],
-  ["postgres", "PostgreSQL", 8],
-  ["aws", "AWS", 7],
-  ["docker", "Docker", 7],
-  ["redis", "Redis", 6],
-  ["kafka", "Kafka", 5],
-  ["go", "Go", 4],
-  ["k8s", "Kubernetes", 4],
-  ["rust", "Rust", 2],
-  ["zig", "Zig", 1],
+  // 2012→nay: viết JS từ ngày làm site khách bằng HTML/CSS/JS, chưa ngày nào bỏ.
+  ["javascript", "JavaScript", 14],
+  // 2012→nay: khởi nghiệp freelance bằng PHP, qua Synova, vẫn nằm trong stack backend.
+  ["php", "PHP", 14],
+  // 2014→nay: mốc mở tài khoản github.com/leky90 — từ đó mọi việc đều qua Git.
+  ["git", "Git", 12],
+  // 2017→nay: vào Synova là bắt đầu Laravel, đến giờ vẫn giữ trong stack backend.
+  ["laravel", "Laravel", 9],
+  // 2019→nay: TESO chuyển hẳn sang JavaScript/React, rồi thành dApp ở Treehouse.
+  ["react", "React", 7],
+  // 2019→nay: cùng nhịp với React — tooling, API service, Express/NestJS.
+  ["node", "Node.js", 7],
+  // 2012–2018: xương sống mọi site freelance, dừng lại khi rời stack PHP ở Synova.
+  ["jquery", "jQuery", 7],
+  // 2012–2018: dựng và bảo trì site khách bằng WordPress, hết thời Synova là gác.
+  ["wordpress", "WordPress", 7],
+  // 08/2021→nay: Treehouse là nơi TypeScript thành mặc định, không quay lại JS trần.
+  ["typescript", "TypeScript", 5],
+  // 08/2021→nay: dApp tETH dựng trên Next.js ngay từ ngày đầu.
+  ["nextjs", "Next.js", 5],
+  // 08/2021→nay: wallet integration + đọc/ghi on-chain cho tAssets đều qua Ethers.
+  ["ethers", "Ethers.js", 5],
+  // Hồ sơ không ghi mốc; ước lượng từ 2023 — giai đoạn API LLM vào việc thật.
+  ["openai", "OpenAI API", 3],
 ];
 
 const GOLDEN_ANGLE = 2.39996;
 
-/** 12 đĩa tạ, nặng xếp giữa sàn (spiral golden-angle), nhẹ văng rìa. */
+/**
+ * 12 đĩa tạ, nặng xếp giữa sàn (spiral golden-angle), nhẹ văng rìa.
+ * Hệ số radius/thickness ánh xạ miền năm thật 3..14 về đúng khoảng
+ * kích thước cũ (~0.41..0.83 và ~0.15..0.34) để khung hình không đổi.
+ */
 export const SKILLS: SkillToken[] = RAW.map(([id, name, years], index) => {
-  const thickness = 0.14 + years * 0.022;
+  const thickness = 0.1 + years * 0.017;
   const spiralRadius = 0.55 + index * 0.33;
   const angle = index * GOLDEN_ANGLE;
   return {
     id,
     name,
     years,
-    radius: 0.34 + years * 0.055,
+    radius: 0.3 + years * 0.038,
     thickness,
     drop: {
       height: 5.2 + (index % 3) * 0.9,
@@ -63,9 +87,27 @@ export const SKILLS: SkillToken[] = RAW.map(([id, name, years], index) => {
   };
 });
 
-/** Hệ số nảy: nhẹ nảy tưng (0.5+), nặng rơi thịch (~0.23). */
+const MIN_YEARS = Math.min(...SKILLS.map((skill) => skill.years));
+const MAX_YEARS = Math.max(...SKILLS.map((skill) => skill.years));
+
+/**
+ * Vị trí của một khối lượng trong bảng: 0 = nhẹ nhất, 1 = nặng nhất.
+ * Thang màu xám của scene ăn số này thay vì hằng số miền cứng, nên
+ * miền năm thật (3..14) đổi thế nào cũng không tràn khỏi dải màu.
+ */
+export function massRatio(years: number): number {
+  const span = MAX_YEARS - MIN_YEARS;
+  if (span <= 0) return 0;
+  return Math.min(Math.max((years - MIN_YEARS) / span, 0), 1);
+}
+
+/**
+ * Hệ số nảy: nhẹ nảy tưng (~0.5 ở 3 năm), nặng rơi thịch (~0.25 ở 14
+ * năm). Hằng số căn lại theo miền năm thật 3..14 để giữ nguyên độ
+ * tương phản nảy như khi miền còn là 1..9.
+ */
 export function restitutionOf(years: number): number {
-  return Math.min(Math.max(0.18 + 0.5 / (years + 0.5), 0.15), 0.75);
+  return Math.min(Math.max(0.15 + 1.6 / (years + 1.6), 0.15), 0.75);
 }
 
 /**
@@ -131,7 +173,8 @@ export interface LetterSpec extends FallingBody {
   cells: [number, number][];
 }
 
-/** "KY LE" rơi trước các đĩa tạ — chữ nặng 10 năm, gần như không nảy. */
+/** "KY LE" rơi trước các đĩa tạ — chữ lấy khối lượng của đĩa nặng nhất
+ * trong bảng (14 năm) nên chạm sàn là nằm im, gần như không nảy. */
 export function buildLetters(): LetterSpec[] {
   const chars: LetterChar[] = ["K", "Y", "L", "E"];
   const offsets = [0, 6, 15, 21];
@@ -147,7 +190,7 @@ export function buildLetters(): LetterSpec[] {
       char,
       offsetX: offsets[index],
       cells,
-      years: 10,
+      years: 14,
       drop: { height: 7 + index * 0.3, delay: index * 0.14 },
       rest: [0, 0, 0],
     };

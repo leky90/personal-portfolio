@@ -5,18 +5,18 @@ import {
   systemIndexById,
 } from "@/features/concepts/living-topology/lib/systems-data";
 
-describe("dữ liệu hệ thống 10 năm kiến trúc", () => {
+describe("dữ liệu hệ thống — 12+ năm nghề, từ WordPress tới dApp DeFi", () => {
   it("có ≥ 10 hệ thống, id không trùng", () => {
     expect(SYSTEMS.length).toBeGreaterThanOrEqual(10);
     expect(new Set(SYSTEMS.map((s) => s.id)).size).toBe(SYSTEMS.length);
   });
 
-  it("mỗi hệ thống đủ name / stack / metric, năm trong 2016..2026", () => {
+  it("mỗi hệ thống đủ name / stack / metric, năm trong 2012..2026", () => {
     for (const system of SYSTEMS) {
       expect(system.name.length).toBeGreaterThan(0);
       expect(system.stack.length).toBeGreaterThan(0);
       expect(system.metric.length).toBeGreaterThan(0);
-      expect(system.year).toBeGreaterThanOrEqual(2016);
+      expect(system.year).toBeGreaterThanOrEqual(2012);
       expect(system.year).toBeLessThanOrEqual(2026);
     }
   });

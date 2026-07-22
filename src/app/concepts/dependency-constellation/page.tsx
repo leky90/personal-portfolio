@@ -6,7 +6,7 @@ import { ConstellationExperience } from "@/features/concepts/dependency-constell
 export const metadata: PageMetadata = {
   title: "Dependency Constellation — 3D Concept",
   description:
-    "Concept demo: 10 năm sự nghiệp resolve thành chòm sao phụ thuộc. Chạm một kỹ năng để chạy pnpm why: mọi dự án từng kéo nó vào sáng lên theo cạnh thật, terminal in đúng đường phân giải.",
+    "Concept demo: 14 năm sự nghiệp (2012 → 2026) resolve thành chòm sao phụ thuộc. Chạm một công nghệ để chạy pnpm why: mọi dự án từng kéo nó vào sáng lên theo cạnh thật, terminal in đúng đường phân giải.",
 };
 
 export default function DependencyConstellationConceptPage() {
